@@ -1,0 +1,7 @@
+".\output\SyncoCmd.obj",
+".\output\sio.obj",
+".\output\cmddict.obj",
+".\output\piolib.obj" 
+TO ".\output\SyncoCmd-1c" 
+PRINT(".\output\SyncoCmd-1c.m51") RAMSIZE(256) 
+XDATA( 0X0000-0X03FF )

@@ -1,0 +1,465 @@
+C51 COMPILER V8.04   SYNCOCMD                                                              11/17/2006 13:18:48 PAGE 1   
+
+
+C51 COMPILER V8.04, COMPILATION OF MODULE SYNCOCMD
+OBJECT MODULE PLACED IN .\output\SyncoCmd.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE SyncoCmd.c COMPACT ROM(COMPACT) BROWSE MODP2 DEBUG OBJECTEXTEND PRINT(.\out
+                    -put\SyncoCmd.lst) OBJECT(.\output\SyncoCmd.obj)
+
+line level    source
+
+   1          /*==========================================================================* 
+   2           * SyncoCmd.c                                                                                                                           * 
+   3           * main() and  command io routines.                                                                             * 
+   4           *==========================================================================* 
+   5           * First Version for SC2: SyncoCmd-V1a RHJ 1-May-06
+   6           * SyncoCmd-V1b RHJ 17-Aug-06   - minor cosmetic changes and additions.
+   7           * 22-Oct-06 RHJ                                - added pwr_status() command function.
+   8           *
+   9           *
+  10           */
+  11           
+  12          #define  SYNCOMAIN
+  13          
+  14          #include <AT89c5131.h>
+  15          #include <stdio.h>
+  16          #include <intrins.h>
+  17          #include "SyncoCmd.h"
+  18          
+  19          
+  20          
+  21          /*---------- Function prototypes */
+  22          
+  23          void prt_toosmall(int i);
+  24          void prt_toobig(int i);
+  25          void prt_minsync(void);
+  26          void chk_switches(void);
+  27          //
+  28          void do_ResetAll(void);
+  29          void set_Enable(void);
+  30          void set_Disable(void);
+  31          void get_Status(void);
+  32          void set_Row_Len(void);
+  33          void set_Num_Rows(void);
+  34          void set_FR_Mode(void);
+  35          void set_RTS_Mode(void);
+  36          void set_Frame_Num(void);
+  37          void pwr_enable(void);
+  38          void pwr_disable(void);
+  39          void pwr_status(void);
+  40          
+  41          
+  42          /*=============================================================================================*/
+  43          /*---------- Variable Value Defines */
+  44          #define  FRUN_DV                (unsigned char)1
+  45          #define  RTS_DV                 (unsigned char)0
+  46          //
+  47          // Default values for start & reset
+  48          //#define  FRUN_COUNT           3       // This group for test.
+  49          //#define  ROWLEN                       64
+  50          //#define  NUMROW                       2
+  51          //
+  52          //#define  FRUN_COUNT           30      // This group for Princeton.
+  53          //#define  ROWLEN                       50  // 100 cycles of 50MHz
+  54          //#define  NUMROW                       41
+C51 COMPILER V8.04   SYNCOCMD                                                              11/17/2006 13:18:48 PAGE 2   
+
+  55          //
+  56          #define  FRUN_COUNT             47      // about 200 Hz DV rate
+  57          #define  ROWLEN                 64
+  58          #define  NUMROW                 41
+  59          
+  60          // min-max values for cmd input
+  61          #define  MINROWLEN               1      // rowlen setable 50 -> 4095
+  62          #define  MAXROWLEN        4095
+  63          #define  MINNUMROW               1      // numrow setable 1 -> 63
+  64          #define  MAXNUMROW              63
+  65          #define  MINSYNCLEN             250     // rowlen * numrow must be > 250
+  66          #define  MINFRCNT                1      // DV_FRUN output 1 to 4095 occurances of AddrZero
+  67          #define  MAXFRCNT         4095
+  68          
+  69          
+  70          /*=============================================================================================*/
+  71          /*---------- Global variables---------------*/
+  72          /*  FOR STARTUP DEFAULTS, SEE: do_ResetAll() */
+  73          bit sc_mancho_enable;                   // flag bit for whether manchester output is running or not
+  74          int sc_FRun_Count;                              // AddrZero count for output of a DV_FreeRun
+  75          int sc_row_len;                                 // Default Row_Length
+  76          unsigned char sc_num_row;               // Default SyncLength = (num_row * row_len) - 1
+  77          unsigned char sc_mancho_mode;   // mode control byte; is DV source DV_FreeRun or DV_RTS
+  78          unsigned char sc_ACDCU_onoff = 0;       // all ACDCCU off
+  79          
+  80          
+  81          char code version[] =  "\r\tSyncoCmd-V1c\r";
+  82          char code prompt[] = "\rSynco> ";
+  83          
+  84          /*=============================================================================================*/
+  85          //-------- 
+  86          void do_ResetAll(void)
+  87          {
+  88   1      //sc_mancho_mode = RTS_DV;
+  89   1      sc_mancho_mode = FRUN_DV;
+  90   1      sc_FRun_Count = FRUN_COUNT;
+  91   1      sc_row_len = ROWLEN;
+  92   1      sc_num_row = NUMROW;
+  93   1      sc_mancho_enable = TRUE;        //
+  94   1      //
+  95   1      pio_nEnable(OFF);       //
+  96   1      pio_Reset((bit)ON);
+  97   1      pio_Reset((bit)OFF);
+  98   1      pio_SyncLength((sc_row_len*sc_num_row)-1); 
+  99   1      pio_FRun_Count(sc_FRun_Count-1);
+ 100   1      pio_DV_Mode(sc_mancho_mode);
+ 101   1      pio_FrameNum((unsigned long)0); 
+ 102   1      pio_nEnable(sc_mancho_enable);  //
+ 103   1      }
+ 104          
+ 105          /*=============================================================================================*/
+ 106          
+ 107          void main (void) 
+ 108          {
+ 109   1      
+ 110   1      sio_Init_9600();
+ 111   1      TI = 1 ;
+ 112   1      //Timer0_Init();        // not used. code is in sio.c
+ 113   1      //
+ 114   1      printf("%s", version);
+ 115   1      cd_help();
+ 116   1      printf("%s", prompt);
+C51 COMPILER V8.04   SYNCOCMD                                                              11/17/2006 13:18:48 PAGE 3   
+
+ 117   1      do_ResetAll();
+ 118   1      
+ 119   1      while(1)                        // endless
+ 120   1              {
+ 121   2      //      testxx();               // test & debug stuff.
+ 122   2                      
+ 123   2              if(sio_rx_gotcl == TRUE) 
+ 124   2                      {                                                                       // got a cmd line
+ 125   3                      sio_rx_gotcl = FALSE;
+ 126   3                      ES = OFF;                                                       // disable serial interrupt
+ 127   3                      cd_tokenize(sio_rxbuf);                         // parse a command line
+ 128   3                      cd_parse(cmd_dict, dict_size);
+ 129   3                      sio_rx_idx = 0;                                         // reset message pointer
+ 130   3                      ES = ON;                                                        // Enable serial interrupt
+ 131   3                      printf("%s", prompt) ;
+ 132   3                      }
+ 133   2      //      chk_switches();
+ 134   2              }
+ 135   1      }               
+ 136          
+ 137          
+ 138          /*========== Utility Functions for command variable range errors =====================*/
+ 139          
+ 140          //--------
+ 141          void prt_needarg(void)
+ 142          { printf("\tARGUMENT REQUIRED"); }
+ 143          
+ 144          //--------
+ 145          void prt_toosmall(int i)
+ 146          { printf("\tTOO SMALL \"%d\"", i); }
+ 147          
+ 148          //--------
+ 149          void prt_toobig(int i)
+ 150          { printf("\tTOO BIG \"%d\"", i); }
+ 151          
+ 152          //--------
+ 153          void prt_minsync(void)
+ 154          { int i = MINSYNCLEN; printf("\tROWLEN * NUMROW MUST BE >= %d", i); }
+ 155          
+ 156          
+ 157          /*========== Command Dictionary Functions  ===============================*/
+ 158          
+ 159          
+ 160          //--------
+ 161          void set_Enable(void)
+ 162          {
+ 163   1      sc_mancho_enable = TRUE;
+ 164   1      pio_nEnable(ON);
+ 165   1      }
+ 166          
+ 167          //--------
+ 168          void set_Disable(void)
+ 169          {
+ 170   1      sc_mancho_enable = FALSE;
+ 171   1      pio_nEnable(OFF);
+ 172   1      }
+ 173          
+ 174          //--------
+ 175          void get_Status(void)
+ 176          {
+ 177   1      code char fr_str[] = "FreeRun_DV";
+ 178   1      code char rt_str[] = "RTS_DV";
+C51 COMPILER V8.04   SYNCOCMD                                                              11/17/2006 13:18:48 PAGE 4   
+
+ 179   1      char *dvm;
+ 180   1      code char ena_str[] = "ON";
+ 181   1      code char dis_str[] = "OFF";
+ 182   1      char *is_run;
+ 183   1      
+ 184   1      if(sc_mancho_enable == TRUE) 
+ 185   1              is_run = ena_str;
+ 186   1      else 
+ 187   1              is_run = dis_str;
+ 188   1              
+ 189   1      if(sc_mancho_mode == FRUN_DV) 
+ 190   1              dvm = fr_str;
+ 191   1      else 
+ 192   1              dvm = rt_str;
+ 193   1              
+ 194   1      putchar('\r');
+ 195   1      printf("\tMancho_Enable\t= %s\r", is_run);
+ 196   1      printf("\tDV_Mode\t\t= %s\r", dvm);
+ 197   1      if(sc_mancho_mode == FRUN_DV) 
+ 198   1              printf("\tFRun_Count\t= %d\r", sc_FRun_Count);
+ 199   1      printf("\tRow_Len\t\t= %d\r", sc_row_len);
+ 200   1      printf("\tNum_Row\t\t= %d\r", (int)sc_num_row);
+ 201   1      printf("\tACDCU_onoff\t= %#2.2X\r", (int)sc_ACDCU_onoff);
+ 202   1      
+ 203   1      }
+ 204          
+ 205          //--------
+ 206          void set_Row_Len(void)
+ 207          {
+ 208   1      int rl;
+ 209   1      unsigned long sl;
+ 210   1      
+ 211   1      rl = cd_arg_i();
+ 212   1      if(rl == -2 ) {prt_needarg(); return;}  // if rl = -2 [= no arg], then error msg
+ 213   1      if(rl < 0 ) {return;}                                   // if rl = -1 [= not a digit arg], then just ignor
+ 214   1      if(rl < MINROWLEN ) {prt_toosmall(rl); return;}
+ 215   1      if(rl > MAXROWLEN ) {prt_toobig(rl); return;}
+ 216   1      sl = (long)rl * (long)sc_num_row;
+ 217   1      if(sl < MINSYNCLEN ) {prt_minsync(); return;}
+ 218   1      
+ 219   1      sc_row_len = rl;                                        // everything ok, set as the new row_len
+ 220   1      pio_nEnable(OFF);                                       //
+ 221   1      pio_SyncLength(sl - 1);                         // minus 1 because counter includes zero
+ 222   1      pio_nEnable(sc_mancho_enable);          //
+ 223   1      }
+ 224          
+ 225          //--------
+ 226          void set_Num_Rows(void)
+ 227          {
+ 228   1      int nr;
+ 229   1      unsigned long sl;
+ 230   1      
+ 231   1      nr = cd_arg_i();
+ 232   1      if(nr == -2 ) {prt_needarg(); return;}
+ 233   1      if(nr < 0 ) {return;}
+ 234   1      if(nr < MINNUMROW ) {prt_toosmall(nr); return;}
+ 235   1      if(nr > MAXNUMROW ) {prt_toobig(nr); return;}
+ 236   1      sl = (long)nr * (long)sc_row_len;
+ 237   1      if(sl < MINSYNCLEN ) {prt_minsync(); return;}
+ 238   1      
+ 239   1      sc_num_row = (unsigned char)nr; //
+ 240   1      pio_nEnable(OFF);                               //
+C51 COMPILER V8.04   SYNCOCMD                                                              11/17/2006 13:18:48 PAGE 5   
+
+ 241   1      pio_SyncLength(sl - 1);                 // minus 1 because counter includes zero 
+ 242   1      pio_nEnable(sc_mancho_enable);  //
+ 243   1      }
+ 244          
+ 245          //--------
+ 246          void set_FR_Mode(void)
+ 247          {
+ 248   1      int frc;
+ 249   1      
+ 250   1      frc = cd_arg_i();
+ 251   1      //printf("\targ = %d\r", frc);
+ 252   1      if(frc >= 0)    
+ 253   1              {
+ 254   2              if(frc < MINFRCNT ) {prt_toosmall(frc); return;}
+ 255   2              if(frc > MAXFRCNT ) {prt_toobig(frc); return;}
+ 256   2              sc_FRun_Count = frc;
+ 257   2              }
+ 258   1              
+ 259   1      // if arg = -1 [= not a digit arg], then just ignor
+ 260   1      // if arg = -2 [= no arg], then use previous sc_FRUN_COUNT
+ 261   1      if(frc < 0)     
+ 262   1              {
+ 263   2              if(frc == -1) 
+ 264   2                      return;
+ 265   2              else
+ 266   2                      frc = sc_FRun_Count;
+ 267   2              }
+ 268   1              
+ 269   1      sc_mancho_mode = FRUN_DV;                       //
+ 270   1      pio_nEnable(OFF);                                       //
+ 271   1      pio_FRun_Count(frc-1);                          // minus 1 because counter includes zero
+ 272   1      //pio_DV_Mode(sc_mancho_mode);          // maybe sometime use the other mode bits for extra functions
+ 273   1      pio_DV_Mode((unsigned char)0xff);       // but for now we will flip all bits
+ 274   1      pio_nEnable(sc_mancho_enable);          //
+ 275   1      }
+ 276          
+ 277          //-------- switch to RTS_DV mode
+ 278          void set_RTS_Mode(void)
+ 279          {
+ 280   1      sc_mancho_mode = RTS_DV;
+ 281   1      pio_nEnable(OFF);                                       //
+ 282   1      //pio_DV_Mode(sc_mancho_mode);          //
+ 283   1      pio_DV_Mode((unsigned char)0x00);       //
+ 284   1      pio_nEnable(sc_mancho_enable);          //
+ 285   1      }
+ 286          
+ 287          //-------- set the Frame_Number/DV_Count
+ 288          void set_Frame_Num(void)
+ 289          {
+ 290   1      int r;
+ 291   1      unsigned long fn;
+ 292   1      
+ 293   1      r = cd_arg_ul(&fn);
+ 294   1      if(r == -2 ) {prt_needarg(); return;}
+ 295   1      if(r < 0) return;
+ 296   1      
+ 297   1      //printf("\tfn = %lu", fn);
+ 298   1      pio_nEnable(OFF);                               //
+ 299   1      pio_FrameNum(fn); 
+ 300   1      pio_nEnable(sc_mancho_enable);  //
+ 301   1      }
+ 302          
+C51 COMPILER V8.04   SYNCOCMD                                                              11/17/2006 13:18:48 PAGE 6   
+
+ 303          
+ 304          //-------- enable a particular ACDCU [sequencing all units on is left up to the user]
+ 305          void pwr_enable_unit(void)
+ 306          {
+ 307   1      int unit_num;
+ 308   1      unsigned char unit_bit = 1;
+ 309   1      unsigned char f;
+ 310   1      
+ 311   1      unit_num = cd_arg_i();
+ 312   1      if(unit_num == -2 ) {prt_needarg(); return;}
+ 313   1      if(unit_num < 0 ) return;
+ 314   1      if(unit_num > 7 ) {prt_toobig(unit_num); return;}
+ 315   1      
+ 316   1      unit_bit = (unit_bit<<unit_num);        // shift bit into the proper position
+ 317   1      f = (sc_ACDCU_onoff & unit_bit);
+ 318   1      //printf("\r\tonoff = %#2.2X, ub = %#2.2X, f = %#2.2X\r", (int)sc_ACDCU_onoff, (int)unit_bit, (int)f);
+ 319   1      if( f > 0 ) {printf("\tALREADY ON"); return;}
+ 320   1      
+ 321   1      sc_ACDCU_onoff |= unit_bit;                             //  & save it
+ 322   1      pio_pwr_onoff(sc_ACDCU_onoff);
+ 323   1      }
+ 324          
+ 325          //-------- disable all ACDCU
+ 326          void pwr_disable_all(void)
+ 327          {
+ 328   1      sc_ACDCU_onoff = 0x00;
+ 329   1      pio_pwr_onoff(sc_ACDCU_onoff);
+ 330   1      }
+ 331          
+ 332          //-------- disable a particular ACDCU 
+ 333          void pwr_disable_unit(void)
+ 334          {
+ 335   1      int unit_num;
+ 336   1      unsigned char unit_bit = 1;
+ 337   1      unsigned char f;
+ 338   1      
+ 339   1      unit_num = cd_arg_i();
+ 340   1      if(unit_num == -2 ) {prt_needarg(); return;}
+ 341   1      if(unit_num < 0 ) return;
+ 342   1      if(unit_num > 7 ) {prt_toobig(unit_num); return;}
+ 343   1      
+ 344   1      unit_bit = (unit_bit<<unit_num);                // shift & clear bit in the proper position
+ 345   1      f = (sc_ACDCU_onoff & unit_bit);
+ 346   1      if(f == 0 ) {printf("\tALREADY OFF"); return;}
+ 347   1      
+ 348   1      sc_ACDCU_onoff &= ~unit_bit;                            //  & save it
+ 349   1      pio_pwr_onoff(sc_ACDCU_onoff);
+ 350   1      }
+ 351          
+ 352          //-------- output the current ACDCU onoff control byte.
+ 353          void pwr_onoff(void)
+ 354          {
+ 355   1      printf("\r\tACDCU_onoff\t= %#2.2X\r", (int)sc_ACDCU_onoff);
+ 356   1      }
+ 357          
+ 358          //-------- read and output the ACDCU status byte.
+ 359          void pwr_status(void)
+ 360          {
+ 361   1      unsigned char pwr_stat;
+ 362   1      
+ 363   1      pwr_stat = pio_pwr_status();
+ 364   1      printf("\r\tACDCU_Status = %#2.2X\r", (int)pwr_stat);
+C51 COMPILER V8.04   SYNCOCMD                                                              11/17/2006 13:18:48 PAGE 7   
+
+ 365   1      }
+ 366          
+ 367          /*====Unused and test code ============================================================*/
+ 368          
+ 369          /*
+ 370          //--------
+ 371          void ResetOn(void)
+ 372          {
+ 373          pio_Reset((bit)ON);
+ 374          }
+ 375          
+ 376          //--------
+ 377          void ResetOff(void)
+ 378          {
+ 379          pio_Reset((bit)OFF);
+ 380          }
+ 381          */
+ 382          
+ 383          /*
+ 384          //--------
+ 385          void chk_switches()
+ 386          {
+ 387          pio_RdSwitches();
+ 388          }
+ 389          */
+ 390          
+ 391          /* 
+ 392          void testxx(void )      // assorted code bits & variables for testing 
+ 393          {
+ 394                  static unsigned char ub;
+ 395          //      static int i;
+ 396          //      static unsigned long ul;
+ 397                  
+ 398                  ES = OFF;       // serial interrupts off for speed.
+ 399                  
+ 400          //  pio_Reset((bit)OFF);
+ 401          //  pio_Reset((bit)ON);
+ 402          //  pio_Reset((bit)OFF);
+ 403          //  pio_Reset((bit)ON);
+ 404          //  pio_nEnable((bit)OFF);
+ 405          //  pio_nEnable((bit)ON);
+ 406          //  pio_nEnable((bit)OFF);
+ 407          //  pio_nEnable((bit)ON);
+ 408          //
+ 409          //      pio_Frun_Count(i++);
+ 410          //      pio_FrameNum(ul++);
+ 411          //      pio_SyncLength(ul++);
+ 412          pio_DV_Mode(ub++);
+ 413          //      pio_pwr_onoff(ub++);
+ 414          //      ub = pio_pwr_status();
+ 415          
+ 416                  ES = ON;
+ 417          //
+ 418          }
+ 419          */
+ 420          
+ 421          /*===================== EOF ==========================================*/
+ 422          
+ 423          
+ 424          
+ 425          
+ 426          
+C51 COMPILER V8.04   SYNCOCMD                                                              11/17/2006 13:18:48 PAGE 8   
+
+ 427          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1403    ----
+   CONSTANT SIZE    =    317    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =      7      32
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      1    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

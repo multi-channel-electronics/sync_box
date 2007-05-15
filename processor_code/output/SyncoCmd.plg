@@ -1,0 +1,181 @@
+<html>
+<body>
+<pre>
+<h1>µVision3 Build Log</h1>
+<h2>Project:</h2>
+D:\ZZ-Scuba2\SyncBox\SyncBox-Design\CMD-Software\SyncoCmd-1c\Synco-1c.uv2
+Project File Date:  11/16/2006
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling SyncoCmd.c...
+compiling sio.c...
+compiling cmddict.c...
+compiling piolib.c...
+linking...
+*** WARNING L13: RECURSIVE CALL TO SEGMENT
+    SEGMENT: ?PR?CD_HELP?CMDDICT
+    CALLER:  ?CO?CMDDICT
+*** WARNING L13: RECURSIVE CALL TO SEGMENT
+    SEGMENT: ?CO?CMDDICT
+    CALLER:  ?PR?CD_ARG_I?CMDDICT
+*** WARNING L13: RECURSIVE CALL TO SEGMENT
+    SEGMENT: ?CO?CMDDICT
+    CALLER:  ?PR?_CD_ARG_UL?CMDDICT
+Program Size: data=15.3 xdata=178 code=6720
+creating hex file from ".\output\SyncoCmd-1c"...
+".\output\SyncoCmd-1c" - 0 Error(s), 3 Warning(s).
+Build target 'Target 1'
+compiling SyncoCmd.c...
+linking...
+*** WARNING L13: RECURSIVE CALL TO SEGMENT
+    SEGMENT: ?PR?CD_HELP?CMDDICT
+    CALLER:  ?CO?CMDDICT
+*** WARNING L13: RECURSIVE CALL TO SEGMENT
+    SEGMENT: ?CO?CMDDICT
+    CALLER:  ?PR?CD_ARG_I?CMDDICT
+*** WARNING L13: RECURSIVE CALL TO SEGMENT
+    SEGMENT: ?CO?CMDDICT
+    CALLER:  ?PR?_CD_ARG_UL?CMDDICT
+Program Size: data=15.3 xdata=178 code=6744
+creating hex file from ".\output\SyncoCmd-1c"...
+".\output\SyncoCmd-1c" - 0 Error(s), 3 Warning(s).
+Build target 'Target 1'
+compiling SyncoCmd.c...
+compiling sio.c...
+compiling cmddict.c...
+compiling piolib.c...
+linking...
+*** WARNING L13: RECURSIVE CALL TO SEGMENT
+    SEGMENT: ?PR?CD_HELP?CMDDICT
+    CALLER:  ?CO?CMDDICT
+*** WARNING L13: RECURSIVE CALL TO SEGMENT
+    SEGMENT: ?CO?CMDDICT
+    CALLER:  ?PR?CD_ARG_I?CMDDICT
+*** WARNING L13: RECURSIVE CALL TO SEGMENT
+    SEGMENT: ?CO?CMDDICT
+    CALLER:  ?PR?_CD_ARG_UL?CMDDICT
+Program Size: data=15.3 xdata=178 code=6744
+creating hex file from ".\output\SyncoCmd-1c"...
+".\output\SyncoCmd-1c" - 0 Error(s), 3 Warning(s).
+Build target 'Target 1'
+compiling SyncoCmd.c...
+linking...
+*** WARNING L13: RECURSIVE CALL TO SEGMENT
+    SEGMENT: ?PR?CD_HELP?CMDDICT
+    CALLER:  ?CO?CMDDICT
+*** WARNING L13: RECURSIVE CALL TO SEGMENT
+    SEGMENT: ?CO?CMDDICT
+    CALLER:  ?PR?CD_ARG_I?CMDDICT
+*** WARNING L13: RECURSIVE CALL TO SEGMENT
+    SEGMENT: ?CO?CMDDICT
+    CALLER:  ?PR?_CD_ARG_UL?CMDDICT
+Program Size: data=15.3 xdata=178 code=6815
+creating hex file from ".\output\SyncoCmd-1c"...
+".\output\SyncoCmd-1c" - 0 Error(s), 3 Warning(s).
+Build target 'Target 1'
+compiling SyncoCmd.c...
+linking...
+*** WARNING L13: RECURSIVE CALL TO SEGMENT
+    SEGMENT: ?PR?CD_HELP?CMDDICT
+    CALLER:  ?CO?CMDDICT
+*** WARNING L13: RECURSIVE CALL TO SEGMENT
+    SEGMENT: ?CO?CMDDICT
+    CALLER:  ?PR?CD_ARG_I?CMDDICT
+*** WARNING L13: RECURSIVE CALL TO SEGMENT
+    SEGMENT: ?CO?CMDDICT
+    CALLER:  ?PR?_CD_ARG_UL?CMDDICT
+Program Size: data=15.3 xdata=178 code=6822
+creating hex file from ".\output\SyncoCmd-1c"...
+".\output\SyncoCmd-1c" - 0 Error(s), 3 Warning(s).
+Build target 'Target 1'
+compiling SyncoCmd.c...
+linking...
+*** WARNING L13: RECURSIVE CALL TO SEGMENT
+    SEGMENT: ?PR?CD_HELP?CMDDICT
+    CALLER:  ?CO?CMDDICT
+*** WARNING L13: RECURSIVE CALL TO SEGMENT
+    SEGMENT: ?CO?CMDDICT
+    CALLER:  ?PR?CD_ARG_I?CMDDICT
+*** WARNING L13: RECURSIVE CALL TO SEGMENT
+    SEGMENT: ?CO?CMDDICT
+    CALLER:  ?PR?_CD_ARG_UL?CMDDICT
+Program Size: data=15.3 xdata=178 code=6809
+creating hex file from ".\output\SyncoCmd-1c"...
+".\output\SyncoCmd-1c" - 0 Error(s), 3 Warning(s).
+Build target 'Target 1'
+linking...
+*** WARNING L13: RECURSIVE CALL TO SEGMENT
+    SEGMENT: ?PR?CD_HELP?CMDDICT
+    CALLER:  ?CO?CMDDICT
+*** WARNING L13: RECURSIVE CALL TO SEGMENT
+    SEGMENT: ?CO?CMDDICT
+    CALLER:  ?PR?CD_ARG_I?CMDDICT
+*** WARNING L13: RECURSIVE CALL TO SEGMENT
+    SEGMENT: ?CO?CMDDICT
+    CALLER:  ?PR?_CD_ARG_UL?CMDDICT
+Program Size: data=15.3 xdata=178 code=6809
+creating hex file from ".\output\SyncoCmd-1c"...
+".\output\SyncoCmd-1c" - 0 Error(s), 3 Warning(s).
+Build target 'Target 1'
+linking...
+*** WARNING L13: RECURSIVE CALL TO SEGMENT
+    SEGMENT: ?PR?CD_HELP?CMDDICT
+    CALLER:  ?CO?CMDDICT
+*** WARNING L13: RECURSIVE CALL TO SEGMENT
+    SEGMENT: ?CO?CMDDICT
+    CALLER:  ?PR?CD_ARG_I?CMDDICT
+*** WARNING L13: RECURSIVE CALL TO SEGMENT
+    SEGMENT: ?CO?CMDDICT
+    CALLER:  ?PR?_CD_ARG_UL?CMDDICT
+Program Size: data=15.3 xdata=178 code=6809
+creating hex file from ".\output\SyncoCmd-1c"...
+".\output\SyncoCmd-1c" - 0 Error(s), 3 Warning(s).
+Build target 'Target 1'
+compiling SyncoCmd.c...
+linking...
+*** WARNING L13: RECURSIVE CALL TO SEGMENT
+    SEGMENT: ?PR?CD_HELP?CMDDICT
+    CALLER:  ?CO?CMDDICT
+*** WARNING L13: RECURSIVE CALL TO SEGMENT
+    SEGMENT: ?CO?CMDDICT
+    CALLER:  ?PR?CD_ARG_I?CMDDICT
+*** WARNING L13: RECURSIVE CALL TO SEGMENT
+    SEGMENT: ?CO?CMDDICT
+    CALLER:  ?PR?_CD_ARG_UL?CMDDICT
+Program Size: data=15.3 xdata=178 code=6708
+creating hex file from ".\output\SyncoCmd-1c"...
+".\output\SyncoCmd-1c" - 0 Error(s), 3 Warning(s).
+Build target 'Target 1'
+compiling SyncoCmd.c...
+linking...
+*** WARNING L13: RECURSIVE CALL TO SEGMENT
+    SEGMENT: ?PR?CD_HELP?CMDDICT
+    CALLER:  ?CO?CMDDICT
+*** WARNING L13: RECURSIVE CALL TO SEGMENT
+    SEGMENT: ?CO?CMDDICT
+    CALLER:  ?PR?CD_ARG_I?CMDDICT
+*** WARNING L13: RECURSIVE CALL TO SEGMENT
+    SEGMENT: ?CO?CMDDICT
+    CALLER:  ?PR?_CD_ARG_UL?CMDDICT
+Program Size: data=15.3 xdata=178 code=6672
+creating hex file from ".\output\SyncoCmd-1c"...
+".\output\SyncoCmd-1c" - 0 Error(s), 3 Warning(s).
+Build target 'Target 1'
+compiling SyncoCmd.c...
+compiling sio.c...
+compiling cmddict.c...
+compiling piolib.c...
+linking...
+*** WARNING L13: RECURSIVE CALL TO SEGMENT
+    SEGMENT: ?PR?CD_HELP?CMDDICT
+    CALLER:  ?CO?CMDDICT
+*** WARNING L13: RECURSIVE CALL TO SEGMENT
+    SEGMENT: ?CO?CMDDICT
+    CALLER:  ?PR?CD_ARG_I?CMDDICT
+*** WARNING L13: RECURSIVE CALL TO SEGMENT
+    SEGMENT: ?CO?CMDDICT
+    CALLER:  ?PR?_CD_ARG_UL?CMDDICT
+Program Size: data=15.3 xdata=180 code=6728
+creating hex file from ".\output\SyncoCmd-1c"...
+".\output\SyncoCmd-1c" - 0 Error(s), 3 Warning(s).

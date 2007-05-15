@@ -1,0 +1,160 @@
+C51 COMPILER V8.04   SIO                                                                   11/17/2006 13:18:48 PAGE 1   
+
+
+C51 COMPILER V8.04, COMPILATION OF MODULE SIO
+OBJECT MODULE PLACED IN .\output\sio.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE sio.c COMPACT ROM(COMPACT) BROWSE MODP2 DEBUG OBJECTEXTEND PRINT(.\output\s
+                    -io.lst) OBJECT(.\output\sio.obj)
+
+line level    source
+
+   1          /*******************************************************************************
+   2           * RS232 serial IO routines
+   3           ******************************************************************************
+   4           * original version: RHJ 1-May-06
+   5           *
+   6           *
+   7           */
+   8          
+   9          #define  SIO
+  10          
+  11          #include <AT89c5131.h>
+  12          #include <stdio.h>
+  13          #include <ctype.h>
+  14          #include <intrins.h>
+  15          
+  16          #include "SyncoCmd.h"
+  17          
+  18          
+  19          /*---------- Global variables */
+  20          char sio_rx_data = 'r';
+  21          char sio_rxbuf[RXBUFSIZ];
+  22          char sio_rx_idx = 0;
+  23          bit      sio_rx_gotcl = 0;
+  24          
+  25          /*------------------------------------------------------------------------*/
+  26          
+  27          /*----- putchar (mini version): outputs charcter only */
+  28          char 
+  29          putchar(char c)  
+  30          {
+  31   1              while (!TI);            // wait for any current tx to end; until TI goes high
+  32   1              TI = 0;
+  33   1              return (SBUF = c);
+  34   1      }
+  35          
+  36          
+  37          /** Version 2
+  38           * FUNCTION_PURPOSE: serial interrupt, echo received data.
+  39           * FUNCTION_INPUTS: P3.0(RXD) serial input
+  40           * FUNCTION_OUTPUTS: P3.1(TXD) serial output
+  41           */
+  42          void serial_IT(void) interrupt 4 
+  43          {
+  44   1      if ( RI == 1 ) 
+  45   1              {
+  46   2              RI = 0;                                                                         // Clears RI Interrupts
+  47   2              sio_rx_data = SBUF;                                                     // Read receive data
+  48   2              
+  49   2              if ( isprint(sio_rx_data) )
+  50   2                      {
+  51   3                      TI = 0;                                                                 // clear tx flag for next emission 
+  52   3                      SBUF = sio_rx_data;                                             // echo rx data on tx
+  53   3                      sio_rxbuf[sio_rx_idx++] = sio_rx_data;  // add it to the buffer
+  54   3                      }
+C51 COMPILER V8.04   SIO                                                                   11/17/2006 13:18:48 PAGE 2   
+
+  55   2                      
+  56   2              if (sio_rx_idx >= (RXBUFSIZ-1))                         // prevent buffer overrun
+  57   2                      {       --sio_rx_idx; }
+  58   2              if (sio_rx_data == '\b' && sio_rx_idx > 0)      // if 'backspace' go back 1
+  59   2                      { 
+  60   3                      TI = 0;                                                                 // clear tx flag for next emission 
+  61   3                      SBUF = sio_rx_data;                                             // echo the backspace   
+  62   3                      sio_rxbuf[sio_rx_idx] = 0;                              // delete previous char from buffer
+  63   3                      sio_rx_idx -= 1;                                                // and change the index
+  64   3                      }
+  65   2              else if (sio_rx_data == '\r')                           // if EOL
+  66   2                      {
+  67   3                      sio_rxbuf[sio_rx_idx] = 0;                              // reset stuff
+  68   3                      sio_rx_idx = 0;
+  69   3                      sio_rx_gotcl = 1;                                               // set flag that we have a cmd line
+  70   3                      }
+  71   2              }   
+  72   1              else    // if Tx interrupt
+  73   1                      {
+  74   2                      ;
+  75   2                      }                                                               
+  76   1      }
+  77          
+  78          
+  79          
+  80          
+  81          /* FUNCTION_PURPOSE: This file set up uart in mode 1 (8 bits uart) with
+  82           * internal baud rate generator.
+  83           */
+  84          void 
+  85          sio_Init_9600(void)
+  86          {
+  87   1              SCON    = 0x50;                         // uart in mode 1 (8 bit), REN=1
+  88   1              BDRCON &= 0xEC;                         // BRR=0; SRC=0;
+  89   1              BDRCON |= 0x0e;                         // TBCK=1; RBCK=1; SPD=1
+  90   1              PCON   |= 0x80;                         // SMOD1 = 1, double baud rate
+  91   1              BRL     = 0x64;                                 // 9600 Bds at 24.00MHz
+  92   1              CKCON0 = 0x7f;
+  93   1              ES = 1;                                         // Enable serial interrupt
+  94   1              EA = 1;                                         // Enable global interrupt
+  95   1              BDRCON |= 0x10;                         // BRR=1; Baud rate generator run
+  96   1              TI = 1 ;
+  97   1      }
+  98          
+  99          /*======================================================================================*/
+ 100          
+ 101          
+ 102          /*----- Timer0 Setup 
+ 103          // Interrupt occurs every ... when enabled
+ 104          void 
+ 105          Timer0_Init(void)
+ 106          {
+ 107                  TMOD = 0x01;
+ 108                  ET0 = ON;                               // Enable Timer0 Interrupts
+ 109                  TR0 = ON;                                       // Timer0 Run
+ 110          }
+ 111          */
+ 112          
+ 113          //sbit PIO_TST =        P1^6;                   // output for testing
+ 114          
+ 115          /*----- Timer0 Service Routine 
+ 116          // Interrupt occurs every 25 ms when enabled
+C51 COMPILER V8.04   SIO                                                                   11/17/2006 13:18:48 PAGE 3   
+
+ 117          void 
+ 118          Timer0_isr (void) interrupt 1 using 3
+ 119          {
+ 120          int i;
+ 121          
+ 122          TH0 = 0x3C;
+ 123          TL0 = 0xC2;
+ 124          // stretched output for test
+ 125          PIO_TST = (bit)0;
+ 126          for(i=0; i<33; i++);
+ 127          PIO_TST = (bit)1;
+ 128          }
+ 129          */
+ 130          
+ 131          /************************** EOF **********************************************/
+ 132          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    207    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =     84    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      1    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
