@@ -1,0 +1,3727 @@
+-- Copyright (C) 1991-2005 Altera Corporation
+-- Your use of Altera Corporation's design tools, logic functions 
+-- and other software and tools, and its AMPP partner logic 
+-- functions, and any output files any of the foregoing 
+-- (including device programming or simulation files), and any 
+-- associated documentation or information are expressly subject 
+-- to the terms and conditions of the Altera Program License 
+-- Subscription Agreement, Altera MegaCore Function License 
+-- Agreement, or other applicable license agreement, including, 
+-- without limitation, that your use is for the sole purpose of 
+-- programming logic devices manufactured by Altera and sold by 
+-- Altera or its authorized distributors.  Please refer to the 
+-- applicable agreement for further details.
+--D1_ManchOut1 is ManchEncode:mancho|ManchOut1 at LC_X10_Y2_N9
+--operation mode is normal
+
+D1_ManchOut1_lut_out = B1_Clk25M $ !D1_ShiftBits[39];
+D1_ManchOut1 = DFFEAS(D1_ManchOut1_lut_out, !B1_clk_cntr1[0], VCC, , , , , , );
+
+
+--B1_Clk25M is ClkDiv:clkd|Clk25M at LC_X10_Y3_N4
+--operation mode is normal
+
+B1_Clk25M_lut_out = B1_clk_cntr1[1];
+B1_Clk25M = DFFEAS(B1_Clk25M_lut_out, GLOBAL(Clk100M), VCC, , , , , , );
+
+
+--D1_ShiftBits[39] is ManchEncode:mancho|ShiftBits[39] at LC_X10_Y2_N2
+--operation mode is normal
+
+D1_ShiftBits[39]_lut_out = F1_isAddr_Zero # D1_ShiftBits[38];
+D1_ShiftBits[39] = DFFEAS(D1_ShiftBits[39]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_DV_out is ManchEncode:mancho|DV_out at LC_X11_Y5_N7
+--operation mode is normal
+
+D1_DV_out_lut_out = D1L94 & (!D1_DV_Buf # !F1_isAddr_Zero) # !D1L94 & D1_DV_out & (!D1_DV_Buf # !F1_isAddr_Zero);
+D1_DV_out = DFFEAS(D1_DV_out_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , , , , , );
+
+
+--B1_Clk5M is ClkDiv:clkd|Clk5M at LC_X10_Y7_N3
+--operation mode is normal
+
+B1_Clk5M_lut_out = B1_clk_cntr2[4] # B1_clk_cntr2[3] & (B1_clk_cntr2[1] # B1_clk_cntr2[2]);
+B1_Clk5M = DFFEAS(B1_Clk5M_lut_out, GLOBAL(Clk100M), VCC, , , , , , );
+
+
+--D1_Shift5Bits[39] is ManchEncode:mancho|Shift5Bits[39] at LC_X11_Y6_N0
+--operation mode is normal
+
+D1_Shift5Bits[39]_lut_out = D1_Shift5Rdy & D1_Shift5Bits[38] # !D1_Shift5Rdy & (D1_Shift5Load[39]);
+D1_Shift5Bits[39] = DFFEAS(D1_Shift5Bits[39]_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--E1_ModeReg[0] is PIO_Interface:pio|ModeReg[0] at LC_X9_Y7_N5
+--operation mode is normal
+
+E1_ModeReg[0]_lut_out = A1L79 & (A1L78 & (A1L62) # !A1L78 & E1_ModeReg[0]) # !A1L79 & (E1_ModeReg[0]);
+E1_ModeReg[0] = DFFEAS(E1_ModeReg[0]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , , , , , );
+
+
+--F1_isAddr_Zero is Sync_Len:synco|isAddr_Zero at LC_X10_Y5_N6
+--operation mode is normal
+
+F1_isAddr_Zero_lut_out = F1L1 & A1L71 # !F1L1 & (F1_isAddr_Zero);
+F1_isAddr_Zero = DFFEAS(F1_isAddr_Zero_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , , , , , );
+
+
+--D1_DV_Buf is ManchEncode:mancho|DV_Buf at LC_X10_Y5_N7
+--operation mode is normal
+
+D1_DV_Buf_lut_out = !F1_isAddr_Zero & (D1_DV_Buf # !D1L91);
+D1_DV_Buf = DFFEAS(D1_DV_Buf_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , , , , , );
+
+
+--D1L98 is ManchEncode:mancho|reg~0 at LC_X10_Y5_N9
+--operation mode is normal
+
+D1L98 = !F1_isAddr_Zero # !D1_DV_Buf;
+
+
+--C1_DV_FreeRun is FreeRun:freerun|DV_FreeRun at LC_X3_Y5_N1
+--operation mode is normal
+
+C1_DV_FreeRun_lut_out = C1L2 & A1L94 & A1L92 & A1L93;
+C1_DV_FreeRun = DFFEAS(C1_DV_FreeRun_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , , , , , );
+
+
+--D1_sDV_Err is ManchEncode:mancho|sDV_Err at LC_X10_Y5_N8
+--operation mode is normal
+
+D1_sDV_Err_lut_out = D1_sDV_Err & (D1_DV_Buf # !F1_isAddr_Zero) # !D1_sDV_Err & D1_DV_Buf & (!D1L91);
+D1_sDV_Err = DFFEAS(D1_sDV_Err_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , , , , , );
+
+
+--E1_AuxOut[8] is PIO_Interface:pio|AuxOut[8] at LC_X6_Y5_N9
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+E1_AuxOut[8]_lut_out = GND;
+E1_AuxOut[8] = DFFEAS(E1_AuxOut[8]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , A1L72, A1L55, , , VCC);
+
+
+--E1_AuxOut[7] is PIO_Interface:pio|AuxOut[7] at LC_X6_Y5_N5
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+E1_AuxOut[7]_lut_out = GND;
+E1_AuxOut[7] = DFFEAS(E1_AuxOut[7]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , A1L72, A1L56, , , VCC);
+
+
+--E1_AuxOut[6] is PIO_Interface:pio|AuxOut[6] at LC_X6_Y5_N4
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+E1_AuxOut[6]_lut_out = GND;
+E1_AuxOut[6] = DFFEAS(E1_AuxOut[6]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , A1L72, A1L57, , , VCC);
+
+
+--E1_AuxOut[5] is PIO_Interface:pio|AuxOut[5] at LC_X6_Y5_N2
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+E1_AuxOut[5]_lut_out = GND;
+E1_AuxOut[5] = DFFEAS(E1_AuxOut[5]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , A1L72, A1L58, , , VCC);
+
+
+--E1_AuxOut[4] is PIO_Interface:pio|AuxOut[4] at LC_X6_Y5_N0
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+E1_AuxOut[4]_lut_out = GND;
+E1_AuxOut[4] = DFFEAS(E1_AuxOut[4]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , A1L72, A1L59, , , VCC);
+
+
+--E1_AuxOut[3] is PIO_Interface:pio|AuxOut[3] at LC_X4_Y7_N9
+--operation mode is normal
+
+E1_AuxOut[3]_lut_out = A1L60;
+E1_AuxOut[3] = DFFEAS(E1_AuxOut[3]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , A1L72, , , , );
+
+
+--E1_AuxOut[2] is PIO_Interface:pio|AuxOut[2] at LC_X4_Y7_N4
+--operation mode is normal
+
+E1_AuxOut[2]_lut_out = A1L61;
+E1_AuxOut[2] = DFFEAS(E1_AuxOut[2]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , A1L72, , , , );
+
+
+--E1_AuxOut[1] is PIO_Interface:pio|AuxOut[1] at LC_X4_Y7_N2
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+E1_AuxOut[1]_lut_out = GND;
+E1_AuxOut[1] = DFFEAS(E1_AuxOut[1]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , A1L72, A1L62, , , VCC);
+
+
+--D1_rrDV_RTS is ManchEncode:mancho|rrDV_RTS at LC_X9_Y7_N6
+--operation mode is normal
+
+D1_rrDV_RTS_lut_out = !D1_rDV_RTS;
+D1_rrDV_RTS = DFFEAS(D1_rrDV_RTS_lut_out, GLOBAL(B1_Clk25M), VCC, , !PIO_Reset, , , , );
+
+
+--D1_rDV_RTS is ManchEncode:mancho|rDV_RTS at LC_X5_Y4_N5
+--operation mode is normal
+
+D1_rDV_RTS_lut_out = !DV_RTS;
+D1_rDV_RTS = DFFEAS(D1_rDV_RTS_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , , , , , );
+
+
+--D1L95 is ManchEncode:mancho|eDV_RTS~0 at LC_X9_Y7_N2
+--operation mode is normal
+
+D1L95 = !D1_rrDV_RTS # !D1_rDV_RTS;
+
+
+--B1_clk_cntr1[0] is ClkDiv:clkd|clk_cntr1[0] at LC_X10_Y3_N8
+--operation mode is normal
+
+B1_clk_cntr1[0]_lut_out = !B1_clk_cntr1[0];
+B1_clk_cntr1[0] = DFFEAS(B1_clk_cntr1[0]_lut_out, GLOBAL(Clk100M), VCC, , , , , , );
+
+
+--B1_clk_cntr1[1] is ClkDiv:clkd|clk_cntr1[1] at LC_X10_Y3_N2
+--operation mode is normal
+
+B1_clk_cntr1[1]_lut_out = B1_clk_cntr1[0] $ (B1_clk_cntr1[1]);
+B1_clk_cntr1[1] = DFFEAS(B1_clk_cntr1[1]_lut_out, GLOBAL(Clk100M), VCC, , , , , , );
+
+
+--D1_ShiftBits[38] is ManchEncode:mancho|ShiftBits[38] at LC_X10_Y2_N8
+--operation mode is normal
+
+D1_ShiftBits[38]_lut_out = F1_isAddr_Zero & D1_DV_Buf # !F1_isAddr_Zero & (D1_ShiftBits[37]);
+D1_ShiftBits[38] = DFFEAS(D1_ShiftBits[38]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_stout[0] is ManchEncode:mancho|stout[0] at LC_X11_Y2_N1
+--operation mode is arithmetic
+
+D1_stout[0]_lut_out = !D1_stout[0];
+D1_stout[0] = DFFEAS(D1_stout[0]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L246, VCC, , , !D1L98);
+
+--D1L227 is ManchEncode:mancho|stout[0]~204 at LC_X11_Y2_N1
+--operation mode is arithmetic
+
+D1L227_cout_0 = D1_stout[0];
+D1L227 = CARRY(D1L227_cout_0);
+
+--D1L228 is ManchEncode:mancho|stout[0]~204COUT1_233 at LC_X11_Y2_N1
+--operation mode is arithmetic
+
+D1L228_cout_1 = D1_stout[0];
+D1L228 = CARRY(D1L228_cout_1);
+
+
+--D1_stout[1] is ManchEncode:mancho|stout[1] at LC_X11_Y2_N2
+--operation mode is arithmetic
+
+D1_stout[1]_lut_out = D1_stout[1] $ !D1L227;
+D1_stout[1] = DFFEAS(D1_stout[1]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L246, ~GND, , , !D1L98);
+
+--D1L230 is ManchEncode:mancho|stout[1]~208 at LC_X11_Y2_N2
+--operation mode is arithmetic
+
+D1L230_cout_0 = !D1_stout[1] & !D1L227;
+D1L230 = CARRY(D1L230_cout_0);
+
+--D1L231 is ManchEncode:mancho|stout[1]~208COUT1_234 at LC_X11_Y2_N2
+--operation mode is arithmetic
+
+D1L231_cout_1 = !D1_stout[1] & !D1L228;
+D1L231 = CARRY(D1L231_cout_1);
+
+
+--D1_stout[2] is ManchEncode:mancho|stout[2] at LC_X11_Y2_N3
+--operation mode is arithmetic
+
+D1_stout[2]_lut_out = D1_stout[2] $ (D1L230);
+D1_stout[2] = DFFEAS(D1_stout[2]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L246, ~GND, , , !D1L98);
+
+--D1L233 is ManchEncode:mancho|stout[2]~212 at LC_X11_Y2_N3
+--operation mode is arithmetic
+
+D1L233_cout_0 = D1_stout[2] # !D1L230;
+D1L233 = CARRY(D1L233_cout_0);
+
+--D1L234 is ManchEncode:mancho|stout[2]~212COUT1 at LC_X11_Y2_N3
+--operation mode is arithmetic
+
+D1L234_cout_1 = D1_stout[2] # !D1L231;
+D1L234 = CARRY(D1L234_cout_1);
+
+
+--D1_stout[3] is ManchEncode:mancho|stout[3] at LC_X11_Y2_N4
+--operation mode is arithmetic
+
+D1_stout[3]_lut_out = D1_stout[3] $ (!D1L233);
+D1_stout[3] = DFFEAS(D1_stout[3]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L246, VCC, , , !D1L98);
+
+--D1L236 is ManchEncode:mancho|stout[3]~216 at LC_X11_Y2_N4
+--operation mode is arithmetic
+
+D1L236 = D1L237;
+
+
+--D1L93 is ManchEncode:mancho|DV_out~87 at LC_X11_Y2_N8
+--operation mode is normal
+
+D1L93 = !D1_stout[2] & !D1_stout[0] & !D1_stout[3] & !D1_stout[1];
+
+
+--D1_stout[4] is ManchEncode:mancho|stout[4] at LC_X11_Y2_N5
+--operation mode is arithmetic
+
+D1_stout[4]_carry_eqn = (!D1L236 & GND) # (D1L236 & VCC);
+D1_stout[4]_lut_out = D1_stout[4] $ (D1_stout[4]_carry_eqn);
+D1_stout[4] = DFFEAS(D1_stout[4]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L246, VCC, , , !D1L98);
+
+--D1L240 is ManchEncode:mancho|stout[4]~220 at LC_X11_Y2_N5
+--operation mode is arithmetic
+
+D1L240_cout_0 = D1_stout[4] # !D1L236;
+D1L240 = CARRY(D1L240_cout_0);
+
+--D1L241 is ManchEncode:mancho|stout[4]~220COUT1_235 at LC_X11_Y2_N5
+--operation mode is arithmetic
+
+D1L241_cout_1 = D1_stout[4] # !D1L236;
+D1L241 = CARRY(D1L241_cout_1);
+
+
+--D1_stout[5] is ManchEncode:mancho|stout[5] at LC_X11_Y2_N6
+--operation mode is arithmetic
+
+D1_stout[5]_carry_eqn = (!D1L236 & D1L240) # (D1L236 & D1L241);
+D1_stout[5]_lut_out = D1_stout[5] $ (!D1_stout[5]_carry_eqn);
+D1_stout[5] = DFFEAS(D1_stout[5]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L246, ~GND, , , !D1L98);
+
+--D1L243 is ManchEncode:mancho|stout[5]~224 at LC_X11_Y2_N6
+--operation mode is arithmetic
+
+D1L243_cout_0 = !D1_stout[5] & (!D1L240);
+D1L243 = CARRY(D1L243_cout_0);
+
+--D1L244 is ManchEncode:mancho|stout[5]~224COUT1_236 at LC_X11_Y2_N6
+--operation mode is arithmetic
+
+D1L244_cout_1 = !D1_stout[5] & (!D1L241);
+D1L244 = CARRY(D1L244_cout_1);
+
+
+--D1_stout[6] is ManchEncode:mancho|stout[6] at LC_X11_Y2_N7
+--operation mode is normal
+
+D1_stout[6]_carry_eqn = (!D1L236 & D1L243) # (D1L236 & D1L244);
+D1_stout[6]_lut_out = D1_stout[6] $ D1_stout[6]_carry_eqn;
+D1_stout[6] = DFFEAS(D1_stout[6]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L246, ~GND, , , !D1L98);
+
+
+--D1L94 is ManchEncode:mancho|DV_out~88 at LC_X11_Y2_N0
+--operation mode is normal
+
+D1L94 = !D1_stout[5] & !D1_stout[6] & !D1_stout[4] & D1L93;
+
+
+--B1_clk_cntr2[1] is ClkDiv:clkd|clk_cntr2[1] at LC_X10_Y7_N6
+--operation mode is arithmetic
+
+B1_clk_cntr2[1]_lut_out = B1_clk_cntr2[1] $ (B1L8);
+B1_clk_cntr2[1] = DFFEAS(B1_clk_cntr2[1]_lut_out, GLOBAL(Clk100M), VCC, , , , , B1L21, );
+
+--B1L11 is ClkDiv:clkd|clk_cntr2[1]~91 at LC_X10_Y7_N6
+--operation mode is arithmetic
+
+B1L11_cout_0 = !B1L8 # !B1_clk_cntr2[1];
+B1L11 = CARRY(B1L11_cout_0);
+
+--B1L12 is ClkDiv:clkd|clk_cntr2[1]~91COUT1 at LC_X10_Y7_N6
+--operation mode is arithmetic
+
+B1L12_cout_1 = !B1L9 # !B1_clk_cntr2[1];
+B1L12 = CARRY(B1L12_cout_1);
+
+
+--B1_clk_cntr2[2] is ClkDiv:clkd|clk_cntr2[2] at LC_X10_Y7_N7
+--operation mode is arithmetic
+
+B1_clk_cntr2[2]_lut_out = B1_clk_cntr2[2] $ !B1L11;
+B1_clk_cntr2[2] = DFFEAS(B1_clk_cntr2[2]_lut_out, GLOBAL(Clk100M), VCC, , , , , B1L21, );
+
+--B1L14 is ClkDiv:clkd|clk_cntr2[2]~95 at LC_X10_Y7_N7
+--operation mode is arithmetic
+
+B1L14_cout_0 = B1_clk_cntr2[2] & !B1L11;
+B1L14 = CARRY(B1L14_cout_0);
+
+--B1L15 is ClkDiv:clkd|clk_cntr2[2]~95COUT1_112 at LC_X10_Y7_N7
+--operation mode is arithmetic
+
+B1L15_cout_1 = B1_clk_cntr2[2] & !B1L12;
+B1L15 = CARRY(B1L15_cout_1);
+
+
+--B1_clk_cntr2[3] is ClkDiv:clkd|clk_cntr2[3] at LC_X10_Y7_N8
+--operation mode is arithmetic
+
+B1_clk_cntr2[3]_lut_out = B1_clk_cntr2[3] $ (B1L14);
+B1_clk_cntr2[3] = DFFEAS(B1_clk_cntr2[3]_lut_out, GLOBAL(Clk100M), VCC, , , , , B1L21, );
+
+--B1L17 is ClkDiv:clkd|clk_cntr2[3]~99 at LC_X10_Y7_N8
+--operation mode is arithmetic
+
+B1L17_cout_0 = !B1L14 # !B1_clk_cntr2[3];
+B1L17 = CARRY(B1L17_cout_0);
+
+--B1L18 is ClkDiv:clkd|clk_cntr2[3]~99COUT1_113 at LC_X10_Y7_N8
+--operation mode is arithmetic
+
+B1L18_cout_1 = !B1L15 # !B1_clk_cntr2[3];
+B1L18 = CARRY(B1L18_cout_1);
+
+
+--B1_clk_cntr2[4] is ClkDiv:clkd|clk_cntr2[4] at LC_X10_Y7_N9
+--operation mode is normal
+
+B1_clk_cntr2[4]_lut_out = B1L17 $ !B1_clk_cntr2[4];
+B1_clk_cntr2[4] = DFFEAS(B1_clk_cntr2[4]_lut_out, GLOBAL(Clk100M), VCC, , , , , B1L21, );
+
+
+--D1_Shift5Rdy is ManchEncode:mancho|Shift5Rdy at LC_X5_Y4_N2
+--operation mode is normal
+
+D1_Shift5Rdy_lut_out = !D1L161 & (D1_Shift5Rdy # !D1L183 & !F1_isAddr_Zero);
+D1_Shift5Rdy = DFFEAS(D1_Shift5Rdy_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , , , , , );
+
+
+--D1_Shift5Load[39] is ManchEncode:mancho|Shift5Load[39] at LC_X11_Y6_N3
+--operation mode is normal
+
+D1_Shift5Load[39]_lut_out = VCC;
+D1_Shift5Load[39] = DFFEAS(D1_Shift5Load[39]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , C1L2, , , , );
+
+
+--D1_Shift5Bits[38] is ManchEncode:mancho|Shift5Bits[38] at LC_X11_Y6_N6
+--operation mode is normal
+
+D1_Shift5Bits[38]_lut_out = D1_Shift5Rdy & D1_Shift5Bits[37] # !D1_Shift5Rdy & (D1_Shift5Load[38]);
+D1_Shift5Bits[38] = DFFEAS(D1_Shift5Bits[38]_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--E1_AddrReg[6] is PIO_Interface:pio|AddrReg[6] at LC_X6_Y6_N9
+--operation mode is normal
+
+E1_AddrReg[6]_lut_out = PIO_ADR[6];
+E1_AddrReg[6] = DFFEAS(E1_AddrReg[6]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , , , , , );
+
+
+--E1_AddrReg[3] is PIO_Interface:pio|AddrReg[3] at LC_X6_Y6_N6
+--operation mode is normal
+
+E1_AddrReg[3]_lut_out = PIO_ADR[3];
+E1_AddrReg[3] = DFFEAS(E1_AddrReg[3]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , , , , , );
+
+
+--E1_AddrReg[2] is PIO_Interface:pio|AddrReg[2] at LC_X6_Y6_N8
+--operation mode is normal
+
+E1_AddrReg[2]_lut_out = PIO_ADR[2];
+E1_AddrReg[2] = DFFEAS(E1_AddrReg[2]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , , , , , );
+
+
+--A1L77 is rtl~479 at LC_X6_Y6_N2
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+E1_AddrReg[7]_qfbk = E1_AddrReg[7];
+A1L77 = !E1_AddrReg[3] & !E1_AddrReg[6] & !E1_AddrReg[7]_qfbk & !E1_AddrReg[2];
+
+--E1_AddrReg[7] is PIO_Interface:pio|AddrReg[7] at LC_X6_Y6_N2
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+E1_AddrReg[7] = DFFEAS(A1L77, GLOBAL(B1_Clk25M), !PIO_Reset, , , PIO_ADR[7], , , VCC);
+
+
+--A1L78 is rtl~480 at LC_X6_Y6_N4
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+E1_AddrReg[5]_qfbk = E1_AddrReg[5];
+A1L78 = !E1_AddrReg[5]_qfbk & A1L77;
+
+--E1_AddrReg[5] is PIO_Interface:pio|AddrReg[5] at LC_X6_Y6_N4
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+E1_AddrReg[5] = DFFEAS(A1L78, GLOBAL(B1_Clk25M), !PIO_Reset, , , PIO_ADR[5], , , VCC);
+
+
+--A1L79 is rtl~481 at LC_X6_Y6_N3
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+E1_AddrReg[1]_qfbk = E1_AddrReg[1];
+A1L79 = !E1_AddrReg[0] & (E1_AddrReg[1]_qfbk & !E1_AddrReg[4]);
+
+--E1_AddrReg[1] is PIO_Interface:pio|AddrReg[1] at LC_X6_Y6_N3
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+E1_AddrReg[1] = DFFEAS(A1L79, GLOBAL(B1_Clk25M), !PIO_Reset, , , PIO_ADR[1], , , VCC);
+
+
+--F1_SL_LoadReg[18] is Sync_Len:synco|SL_LoadReg[18] at LC_X7_Y6_N3
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+F1_SL_LoadReg[18]_lut_out = GND;
+F1_SL_LoadReg[18] = DFFEAS(F1_SL_LoadReg[18]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , E1_SL_Load, E1_CmdData[18], , , VCC);
+
+
+--F1_SL_LoadReg[17] is Sync_Len:synco|SL_LoadReg[17] at LC_X7_Y6_N8
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+F1_SL_LoadReg[17]_lut_out = GND;
+F1_SL_LoadReg[17] = DFFEAS(F1_SL_LoadReg[17]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , E1_SL_Load, E1_CmdData[17], , , VCC);
+
+
+--F1_SL_LoadReg[16] is Sync_Len:synco|SL_LoadReg[16] at LC_X7_Y6_N7
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+F1_SL_LoadReg[16]_lut_out = GND;
+F1_SL_LoadReg[16] = DFFEAS(F1_SL_LoadReg[16]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , E1_SL_Load, E1_CmdData[16], , , VCC);
+
+
+--A1L80 is rtl~482 at LC_X7_Y6_N4
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+F1_SL_LoadReg[19]_qfbk = F1_SL_LoadReg[19];
+A1L80 = !F1_SL_LoadReg[17] & !F1_SL_LoadReg[16] & !F1_SL_LoadReg[19]_qfbk & !F1_SL_LoadReg[18];
+
+--F1_SL_LoadReg[19] is Sync_Len:synco|SL_LoadReg[19] at LC_X7_Y6_N4
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+F1_SL_LoadReg[19] = DFFEAS(A1L80, GLOBAL(B1_Clk25M), !PIO_Reset, , E1_SL_Load, E1_CmdData[19], , , VCC);
+
+
+--F1_SL_LoadReg[14] is Sync_Len:synco|SL_LoadReg[14] at LC_X8_Y6_N8
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+F1_SL_LoadReg[14]_lut_out = GND;
+F1_SL_LoadReg[14] = DFFEAS(F1_SL_LoadReg[14]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , E1_SL_Load, E1_CmdData[14], , , VCC);
+
+
+--F1_SL_LoadReg[13] is Sync_Len:synco|SL_LoadReg[13] at LC_X8_Y6_N3
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+F1_SL_LoadReg[13]_lut_out = GND;
+F1_SL_LoadReg[13] = DFFEAS(F1_SL_LoadReg[13]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , E1_SL_Load, E1_CmdData[13], , , VCC);
+
+
+--F1_SL_LoadReg[12] is Sync_Len:synco|SL_LoadReg[12] at LC_X8_Y6_N9
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+F1_SL_LoadReg[12]_lut_out = GND;
+F1_SL_LoadReg[12] = DFFEAS(F1_SL_LoadReg[12]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , E1_SL_Load, E1_CmdData[12], , , VCC);
+
+
+--A1L81 is rtl~483 at LC_X8_Y6_N1
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+F1_SL_LoadReg[15]_qfbk = F1_SL_LoadReg[15];
+A1L81 = !F1_SL_LoadReg[14] & !F1_SL_LoadReg[12] & !F1_SL_LoadReg[15]_qfbk & !F1_SL_LoadReg[13];
+
+--F1_SL_LoadReg[15] is Sync_Len:synco|SL_LoadReg[15] at LC_X8_Y6_N1
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+F1_SL_LoadReg[15] = DFFEAS(A1L81, GLOBAL(B1_Clk25M), !PIO_Reset, , E1_SL_Load, E1_CmdData[15], , , VCC);
+
+
+--F1_SL_LoadReg[11] is Sync_Len:synco|SL_LoadReg[11] at LC_X5_Y6_N7
+--operation mode is normal
+
+F1_SL_LoadReg[11]_lut_out = !E1_CmdData[11];
+F1_SL_LoadReg[11] = DFFEAS(F1_SL_LoadReg[11]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , E1_SL_Load, , , , );
+
+
+--F1_SL_LoadReg[9] is Sync_Len:synco|SL_LoadReg[9] at LC_X5_Y6_N6
+--operation mode is normal
+
+F1_SL_LoadReg[9]_lut_out = !E1_CmdData[9];
+F1_SL_LoadReg[9] = DFFEAS(F1_SL_LoadReg[9]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , E1_SL_Load, , , , );
+
+
+--F1_SL_LoadReg[8] is Sync_Len:synco|SL_LoadReg[8] at LC_X5_Y6_N9
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+F1_SL_LoadReg[8]_lut_out = GND;
+F1_SL_LoadReg[8] = DFFEAS(F1_SL_LoadReg[8]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , E1_SL_Load, E1_CmdData[8], , , VCC);
+
+
+--A1L82 is rtl~484 at LC_X5_Y6_N0
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+F1_SL_LoadReg[10]_qfbk = F1_SL_LoadReg[10];
+A1L82 = F1_SL_LoadReg[9] & F1_SL_LoadReg[11] & !F1_SL_LoadReg[10]_qfbk & !F1_SL_LoadReg[8];
+
+--F1_SL_LoadReg[10] is Sync_Len:synco|SL_LoadReg[10] at LC_X5_Y6_N0
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+F1_SL_LoadReg[10] = DFFEAS(A1L82, GLOBAL(B1_Clk25M), !PIO_Reset, , E1_SL_Load, E1_CmdData[10], , , VCC);
+
+
+--F1_SL_LoadReg[6] is Sync_Len:synco|SL_LoadReg[6] at LC_X5_Y6_N3
+--operation mode is normal
+
+F1_SL_LoadReg[6]_lut_out = !E1_CmdData[6];
+F1_SL_LoadReg[6] = DFFEAS(F1_SL_LoadReg[6]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , E1_SL_Load, , , , );
+
+
+--F1_SL_LoadReg[5] is Sync_Len:synco|SL_LoadReg[5] at LC_X4_Y6_N7
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+F1_SL_LoadReg[5]_lut_out = GND;
+F1_SL_LoadReg[5] = DFFEAS(F1_SL_LoadReg[5]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , E1_SL_Load, E1_CmdData[5], , , VCC);
+
+
+--F1_SL_LoadReg[4] is Sync_Len:synco|SL_LoadReg[4] at LC_X5_Y6_N8
+--operation mode is normal
+
+F1_SL_LoadReg[4]_lut_out = E1_CmdData[4];
+F1_SL_LoadReg[4] = DFFEAS(F1_SL_LoadReg[4]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , E1_SL_Load, , , , );
+
+
+--A1L83 is rtl~485 at LC_X5_Y6_N2
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+F1_SL_LoadReg[7]_qfbk = F1_SL_LoadReg[7];
+A1L83 = F1_SL_LoadReg[6] & !F1_SL_LoadReg[5] & !F1_SL_LoadReg[7]_qfbk & !F1_SL_LoadReg[4];
+
+--F1_SL_LoadReg[7] is Sync_Len:synco|SL_LoadReg[7] at LC_X5_Y6_N2
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+F1_SL_LoadReg[7] = DFFEAS(A1L83, GLOBAL(B1_Clk25M), !PIO_Reset, , E1_SL_Load, E1_CmdData[7], , , VCC);
+
+
+--A1L84 is rtl~486 at LC_X5_Y6_N4
+--operation mode is normal
+
+A1L84 = A1L80 & A1L82 & A1L81 & A1L83;
+
+
+--F1_SL_LoadReg[2] is Sync_Len:synco|SL_LoadReg[2] at LC_X7_Y6_N6
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+F1_SL_LoadReg[2]_lut_out = GND;
+F1_SL_LoadReg[2] = DFFEAS(F1_SL_LoadReg[2]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , E1_SL_Load, E1_CmdData[2], , , VCC);
+
+
+--F1_SL_LoadReg[1] is Sync_Len:synco|SL_LoadReg[1] at LC_X4_Y6_N5
+--operation mode is normal
+
+F1_SL_LoadReg[1]_lut_out = E1_CmdData[1];
+F1_SL_LoadReg[1] = DFFEAS(F1_SL_LoadReg[1]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , E1_SL_Load, , , , );
+
+
+--F1_SL_LoadReg[0] is Sync_Len:synco|SL_LoadReg[0] at LC_X4_Y6_N4
+--operation mode is normal
+
+F1_SL_LoadReg[0]_lut_out = E1_CmdData[0];
+F1_SL_LoadReg[0] = DFFEAS(F1_SL_LoadReg[0]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , E1_SL_Load, , , , );
+
+
+--A1L85 is rtl~487 at LC_X5_Y6_N1
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+F1_SL_LoadReg[3]_qfbk = F1_SL_LoadReg[3];
+A1L85 = !F1_SL_LoadReg[1] & !F1_SL_LoadReg[2] & !F1_SL_LoadReg[3]_qfbk & !F1_SL_LoadReg[0];
+
+--F1_SL_LoadReg[3] is Sync_Len:synco|SL_LoadReg[3] at LC_X5_Y6_N1
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+F1_SL_LoadReg[3] = DFFEAS(A1L85, GLOBAL(B1_Clk25M), !PIO_Reset, , E1_SL_Load, E1_CmdData[3], , , VCC);
+
+
+--F1L1 is Sync_Len:synco|dwncnt~0 at LC_X5_Y6_N5
+--operation mode is normal
+
+F1L1 = !PIO_nEnable & (!A1L85 # !A1L84);
+
+
+--F1_SLCntr[0] is Sync_Len:synco|SLCntr[0] at LC_X5_Y7_N0
+--operation mode is arithmetic
+
+F1_SLCntr[0]_lut_out = !F1_SLCntr[0];
+F1_SLCntr[0] = DFFEAS(F1_SLCntr[0]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , F1L1, F1_SL_LoadReg[0], , , A1L71);
+
+--F1L29 is Sync_Len:synco|SLCntr[0]~301 at LC_X5_Y7_N0
+--operation mode is arithmetic
+
+F1L29_cout_0 = F1_SLCntr[0];
+F1L29 = CARRY(F1L29_cout_0);
+
+--F1L30 is Sync_Len:synco|SLCntr[0]~301COUT1_381 at LC_X5_Y7_N0
+--operation mode is arithmetic
+
+F1L30_cout_1 = F1_SLCntr[0];
+F1L30 = CARRY(F1L30_cout_1);
+
+
+--F1_SLCntr[1] is Sync_Len:synco|SLCntr[1] at LC_X5_Y7_N1
+--operation mode is arithmetic
+
+F1_SLCntr[1]_lut_out = F1_SLCntr[1] $ !F1L29;
+F1_SLCntr[1] = DFFEAS(F1_SLCntr[1]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , F1L1, F1_SL_LoadReg[1], , , A1L71);
+
+--F1L32 is Sync_Len:synco|SLCntr[1]~305 at LC_X5_Y7_N1
+--operation mode is arithmetic
+
+F1L32_cout_0 = !F1_SLCntr[1] & !F1L29;
+F1L32 = CARRY(F1L32_cout_0);
+
+--F1L33 is Sync_Len:synco|SLCntr[1]~305COUT1_382 at LC_X5_Y7_N1
+--operation mode is arithmetic
+
+F1L33_cout_1 = !F1_SLCntr[1] & !F1L30;
+F1L33 = CARRY(F1L33_cout_1);
+
+
+--A1L86 is rtl~488 at LC_X7_Y7_N5
+--operation mode is normal
+
+A1L86 = !F1_SLCntr[1] & !F1_SLCntr[0];
+
+
+--F1_SLCntr[4] is Sync_Len:synco|SLCntr[4] at LC_X5_Y7_N4
+--operation mode is arithmetic
+
+F1_SLCntr[4]_lut_out = F1_SLCntr[4] $ (F1L38);
+F1_SLCntr[4] = DFFEAS(F1_SLCntr[4]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , F1L1, F1_SL_LoadReg[4], , , A1L71);
+
+--F1L41 is Sync_Len:synco|SLCntr[4]~309 at LC_X5_Y7_N4
+--operation mode is arithmetic
+
+F1L41 = CARRY(F1_SLCntr[4] # !F1L39);
+
+
+--F1_SLCntr[5] is Sync_Len:synco|SLCntr[5] at LC_X5_Y7_N5
+--operation mode is arithmetic
+
+F1_SLCntr[5]_carry_eqn = F1L41;
+F1_SLCntr[5]_lut_out = F1_SLCntr[5] $ (!F1_SLCntr[5]_carry_eqn);
+F1_SLCntr[5] = DFFEAS(F1_SLCntr[5]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , F1L1, F1_SL_LoadReg[5], , , A1L71);
+
+--F1L43 is Sync_Len:synco|SLCntr[5]~313 at LC_X5_Y7_N5
+--operation mode is arithmetic
+
+F1L43_cout_0 = !F1_SLCntr[5] & (!F1L41);
+F1L43 = CARRY(F1L43_cout_0);
+
+--F1L44 is Sync_Len:synco|SLCntr[5]~313COUT1_385 at LC_X5_Y7_N5
+--operation mode is arithmetic
+
+F1L44_cout_1 = !F1_SLCntr[5] & (!F1L41);
+F1L44 = CARRY(F1L44_cout_1);
+
+
+--F1_SLCntr[6] is Sync_Len:synco|SLCntr[6] at LC_X5_Y7_N6
+--operation mode is arithmetic
+
+F1_SLCntr[6]_carry_eqn = (!F1L41 & F1L43) # (F1L41 & F1L44);
+F1_SLCntr[6]_lut_out = F1_SLCntr[6] $ (F1_SLCntr[6]_carry_eqn);
+F1_SLCntr[6] = DFFEAS(F1_SLCntr[6]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , F1L1, F1L11, , , A1L71);
+
+--F1L46 is Sync_Len:synco|SLCntr[6]~317 at LC_X5_Y7_N6
+--operation mode is arithmetic
+
+F1L46_cout_0 = F1_SLCntr[6] # !F1L43;
+F1L46 = CARRY(F1L46_cout_0);
+
+--F1L47 is Sync_Len:synco|SLCntr[6]~317COUT1_386 at LC_X5_Y7_N6
+--operation mode is arithmetic
+
+F1L47_cout_1 = F1_SLCntr[6] # !F1L44;
+F1L47 = CARRY(F1L47_cout_1);
+
+
+--F1_SLCntr[7] is Sync_Len:synco|SLCntr[7] at LC_X5_Y7_N7
+--operation mode is arithmetic
+
+F1_SLCntr[7]_carry_eqn = (!F1L41 & F1L46) # (F1L41 & F1L47);
+F1_SLCntr[7]_lut_out = F1_SLCntr[7] $ !F1_SLCntr[7]_carry_eqn;
+F1_SLCntr[7] = DFFEAS(F1_SLCntr[7]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , F1L1, F1_SL_LoadReg[7], , , A1L71);
+
+--F1L49 is Sync_Len:synco|SLCntr[7]~321 at LC_X5_Y7_N7
+--operation mode is arithmetic
+
+F1L49_cout_0 = !F1_SLCntr[7] & !F1L46;
+F1L49 = CARRY(F1L49_cout_0);
+
+--F1L50 is Sync_Len:synco|SLCntr[7]~321COUT1_387 at LC_X5_Y7_N7
+--operation mode is arithmetic
+
+F1L50_cout_1 = !F1_SLCntr[7] & !F1L47;
+F1L50 = CARRY(F1L50_cout_1);
+
+
+--A1L87 is rtl~489 at LC_X7_Y7_N0
+--operation mode is normal
+
+A1L87 = !F1_SLCntr[5] & !F1_SLCntr[4] & !F1_SLCntr[7] & !F1_SLCntr[6];
+
+
+--F1_SLCntr[2] is Sync_Len:synco|SLCntr[2] at LC_X5_Y7_N2
+--operation mode is arithmetic
+
+F1_SLCntr[2]_lut_out = F1_SLCntr[2] $ F1L32;
+F1_SLCntr[2] = DFFEAS(F1_SLCntr[2]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , F1L1, F1_SL_LoadReg[2], , , A1L71);
+
+--F1L35 is Sync_Len:synco|SLCntr[2]~325 at LC_X5_Y7_N2
+--operation mode is arithmetic
+
+F1L35_cout_0 = F1_SLCntr[2] # !F1L32;
+F1L35 = CARRY(F1L35_cout_0);
+
+--F1L36 is Sync_Len:synco|SLCntr[2]~325COUT1_383 at LC_X5_Y7_N2
+--operation mode is arithmetic
+
+F1L36_cout_1 = F1_SLCntr[2] # !F1L33;
+F1L36 = CARRY(F1L36_cout_1);
+
+
+--F1_SLCntr[3] is Sync_Len:synco|SLCntr[3] at LC_X5_Y7_N3
+--operation mode is arithmetic
+
+F1_SLCntr[3]_lut_out = F1_SLCntr[3] $ (!F1L35);
+F1_SLCntr[3] = DFFEAS(F1_SLCntr[3]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , F1L1, F1_SL_LoadReg[3], , , A1L71);
+
+--F1L38 is Sync_Len:synco|SLCntr[3]~329 at LC_X5_Y7_N3
+--operation mode is arithmetic
+
+F1L38_cout_0 = !F1_SLCntr[3] & (!F1L35);
+F1L38 = CARRY(F1L38_cout_0);
+
+--F1L39 is Sync_Len:synco|SLCntr[3]~329COUT1_384 at LC_X5_Y7_N3
+--operation mode is arithmetic
+
+F1L39_cout_1 = !F1_SLCntr[3] & (!F1L36);
+F1L39 = CARRY(F1L39_cout_1);
+
+
+--A1L88 is rtl~490 at LC_X7_Y7_N6
+--operation mode is normal
+
+A1L88 = !F1_SLCntr[2] & !F1_SLCntr[3] & A1L87 & A1L86;
+
+
+--F1_SLCntr[8] is Sync_Len:synco|SLCntr[8] at LC_X5_Y7_N8
+--operation mode is arithmetic
+
+F1_SLCntr[8]_carry_eqn = (!F1L41 & F1L49) # (F1L41 & F1L50);
+F1_SLCntr[8]_lut_out = F1_SLCntr[8] $ (F1_SLCntr[8]_carry_eqn);
+F1_SLCntr[8] = DFFEAS(F1_SLCntr[8]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , F1L1, F1_SL_LoadReg[8], , , A1L71);
+
+--F1L52 is Sync_Len:synco|SLCntr[8]~333 at LC_X5_Y7_N8
+--operation mode is arithmetic
+
+F1L52_cout_0 = F1_SLCntr[8] # !F1L49;
+F1L52 = CARRY(F1L52_cout_0);
+
+--F1L53 is Sync_Len:synco|SLCntr[8]~333COUT1_388 at LC_X5_Y7_N8
+--operation mode is arithmetic
+
+F1L53_cout_1 = F1_SLCntr[8] # !F1L50;
+F1L53 = CARRY(F1L53_cout_1);
+
+
+--F1_SLCntr[9] is Sync_Len:synco|SLCntr[9] at LC_X5_Y7_N9
+--operation mode is arithmetic
+
+F1_SLCntr[9]_carry_eqn = (!F1L41 & F1L52) # (F1L41 & F1L53);
+F1_SLCntr[9]_lut_out = F1_SLCntr[9] $ !F1_SLCntr[9]_carry_eqn;
+F1_SLCntr[9] = DFFEAS(F1_SLCntr[9]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , F1L1, F1L15, , , A1L71);
+
+--F1L55 is Sync_Len:synco|SLCntr[9]~337 at LC_X5_Y7_N9
+--operation mode is arithmetic
+
+F1L55 = CARRY(!F1_SLCntr[9] & !F1L53);
+
+
+--F1_SLCntr[10] is Sync_Len:synco|SLCntr[10] at LC_X6_Y7_N0
+--operation mode is arithmetic
+
+F1_SLCntr[10]_carry_eqn = F1L55;
+F1_SLCntr[10]_lut_out = F1_SLCntr[10] $ F1_SLCntr[10]_carry_eqn;
+F1_SLCntr[10] = DFFEAS(F1_SLCntr[10]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , F1L1, F1_SL_LoadReg[10], , , A1L71);
+
+--F1L57 is Sync_Len:synco|SLCntr[10]~341 at LC_X6_Y7_N0
+--operation mode is arithmetic
+
+F1L57_cout_0 = F1_SLCntr[10] # !F1L55;
+F1L57 = CARRY(F1L57_cout_0);
+
+--F1L58 is Sync_Len:synco|SLCntr[10]~341COUT1_389 at LC_X6_Y7_N0
+--operation mode is arithmetic
+
+F1L58_cout_1 = F1_SLCntr[10] # !F1L55;
+F1L58 = CARRY(F1L58_cout_1);
+
+
+--F1_SLCntr[11] is Sync_Len:synco|SLCntr[11] at LC_X6_Y7_N1
+--operation mode is arithmetic
+
+F1_SLCntr[11]_carry_eqn = (!F1L55 & F1L57) # (F1L55 & F1L58);
+F1_SLCntr[11]_lut_out = F1_SLCntr[11] $ !F1_SLCntr[11]_carry_eqn;
+F1_SLCntr[11] = DFFEAS(F1_SLCntr[11]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , F1L1, F1L18, , , A1L71);
+
+--F1L60 is Sync_Len:synco|SLCntr[11]~345 at LC_X6_Y7_N1
+--operation mode is arithmetic
+
+F1L60_cout_0 = !F1_SLCntr[11] & !F1L57;
+F1L60 = CARRY(F1L60_cout_0);
+
+--F1L61 is Sync_Len:synco|SLCntr[11]~345COUT1_390 at LC_X6_Y7_N1
+--operation mode is arithmetic
+
+F1L61_cout_1 = !F1_SLCntr[11] & !F1L58;
+F1L61 = CARRY(F1L61_cout_1);
+
+
+--A1L89 is rtl~491 at LC_X7_Y7_N9
+--operation mode is normal
+
+A1L89 = !F1_SLCntr[8] & !F1_SLCntr[9] & !F1_SLCntr[11] & !F1_SLCntr[10];
+
+
+--F1_SLCntr[12] is Sync_Len:synco|SLCntr[12] at LC_X6_Y7_N2
+--operation mode is arithmetic
+
+F1_SLCntr[12]_carry_eqn = (!F1L55 & F1L60) # (F1L55 & F1L61);
+F1_SLCntr[12]_lut_out = F1_SLCntr[12] $ F1_SLCntr[12]_carry_eqn;
+F1_SLCntr[12] = DFFEAS(F1_SLCntr[12]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , F1L1, F1_SL_LoadReg[12], , , A1L71);
+
+--F1L63 is Sync_Len:synco|SLCntr[12]~349 at LC_X6_Y7_N2
+--operation mode is arithmetic
+
+F1L63_cout_0 = F1_SLCntr[12] # !F1L60;
+F1L63 = CARRY(F1L63_cout_0);
+
+--F1L64 is Sync_Len:synco|SLCntr[12]~349COUT1_391 at LC_X6_Y7_N2
+--operation mode is arithmetic
+
+F1L64_cout_1 = F1_SLCntr[12] # !F1L61;
+F1L64 = CARRY(F1L64_cout_1);
+
+
+--F1_SLCntr[13] is Sync_Len:synco|SLCntr[13] at LC_X6_Y7_N3
+--operation mode is arithmetic
+
+F1_SLCntr[13]_carry_eqn = (!F1L55 & F1L63) # (F1L55 & F1L64);
+F1_SLCntr[13]_lut_out = F1_SLCntr[13] $ (!F1_SLCntr[13]_carry_eqn);
+F1_SLCntr[13] = DFFEAS(F1_SLCntr[13]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , F1L1, F1_SL_LoadReg[13], , , A1L71);
+
+--F1L66 is Sync_Len:synco|SLCntr[13]~353 at LC_X6_Y7_N3
+--operation mode is arithmetic
+
+F1L66_cout_0 = !F1_SLCntr[13] & (!F1L63);
+F1L66 = CARRY(F1L66_cout_0);
+
+--F1L67 is Sync_Len:synco|SLCntr[13]~353COUT1_392 at LC_X6_Y7_N3
+--operation mode is arithmetic
+
+F1L67_cout_1 = !F1_SLCntr[13] & (!F1L64);
+F1L67 = CARRY(F1L67_cout_1);
+
+
+--F1_SLCntr[14] is Sync_Len:synco|SLCntr[14] at LC_X6_Y7_N4
+--operation mode is arithmetic
+
+F1_SLCntr[14]_carry_eqn = (!F1L55 & F1L66) # (F1L55 & F1L67);
+F1_SLCntr[14]_lut_out = F1_SLCntr[14] $ (F1_SLCntr[14]_carry_eqn);
+F1_SLCntr[14] = DFFEAS(F1_SLCntr[14]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , F1L1, F1_SL_LoadReg[14], , , A1L71);
+
+--F1L69 is Sync_Len:synco|SLCntr[14]~357 at LC_X6_Y7_N4
+--operation mode is arithmetic
+
+F1L69 = CARRY(F1_SLCntr[14] # !F1L67);
+
+
+--F1_SLCntr[15] is Sync_Len:synco|SLCntr[15] at LC_X6_Y7_N5
+--operation mode is arithmetic
+
+F1_SLCntr[15]_carry_eqn = F1L69;
+F1_SLCntr[15]_lut_out = F1_SLCntr[15] $ (!F1_SLCntr[15]_carry_eqn);
+F1_SLCntr[15] = DFFEAS(F1_SLCntr[15]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , F1L1, F1_SL_LoadReg[15], , , A1L71);
+
+--F1L71 is Sync_Len:synco|SLCntr[15]~361 at LC_X6_Y7_N5
+--operation mode is arithmetic
+
+F1L71_cout_0 = !F1_SLCntr[15] & (!F1L69);
+F1L71 = CARRY(F1L71_cout_0);
+
+--F1L72 is Sync_Len:synco|SLCntr[15]~361COUT1_393 at LC_X6_Y7_N5
+--operation mode is arithmetic
+
+F1L72_cout_1 = !F1_SLCntr[15] & (!F1L69);
+F1L72 = CARRY(F1L72_cout_1);
+
+
+--A1L90 is rtl~492 at LC_X7_Y7_N4
+--operation mode is normal
+
+A1L90 = !F1_SLCntr[14] & !F1_SLCntr[12] & !F1_SLCntr[13] & !F1_SLCntr[15];
+
+
+--F1_SLCntr[16] is Sync_Len:synco|SLCntr[16] at LC_X6_Y7_N6
+--operation mode is arithmetic
+
+F1_SLCntr[16]_carry_eqn = (!F1L69 & F1L71) # (F1L69 & F1L72);
+F1_SLCntr[16]_lut_out = F1_SLCntr[16] $ (F1_SLCntr[16]_carry_eqn);
+F1_SLCntr[16] = DFFEAS(F1_SLCntr[16]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , F1L1, F1_SL_LoadReg[16], , , A1L71);
+
+--F1L74 is Sync_Len:synco|SLCntr[16]~365 at LC_X6_Y7_N6
+--operation mode is arithmetic
+
+F1L74_cout_0 = F1_SLCntr[16] # !F1L71;
+F1L74 = CARRY(F1L74_cout_0);
+
+--F1L75 is Sync_Len:synco|SLCntr[16]~365COUT1_394 at LC_X6_Y7_N6
+--operation mode is arithmetic
+
+F1L75_cout_1 = F1_SLCntr[16] # !F1L72;
+F1L75 = CARRY(F1L75_cout_1);
+
+
+--F1_SLCntr[17] is Sync_Len:synco|SLCntr[17] at LC_X6_Y7_N7
+--operation mode is arithmetic
+
+F1_SLCntr[17]_carry_eqn = (!F1L69 & F1L74) # (F1L69 & F1L75);
+F1_SLCntr[17]_lut_out = F1_SLCntr[17] $ !F1_SLCntr[17]_carry_eqn;
+F1_SLCntr[17] = DFFEAS(F1_SLCntr[17]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , F1L1, F1_SL_LoadReg[17], , , A1L71);
+
+--F1L77 is Sync_Len:synco|SLCntr[17]~369 at LC_X6_Y7_N7
+--operation mode is arithmetic
+
+F1L77_cout_0 = !F1_SLCntr[17] & !F1L74;
+F1L77 = CARRY(F1L77_cout_0);
+
+--F1L78 is Sync_Len:synco|SLCntr[17]~369COUT1_395 at LC_X6_Y7_N7
+--operation mode is arithmetic
+
+F1L78_cout_1 = !F1_SLCntr[17] & !F1L75;
+F1L78 = CARRY(F1L78_cout_1);
+
+
+--F1_SLCntr[18] is Sync_Len:synco|SLCntr[18] at LC_X6_Y7_N8
+--operation mode is arithmetic
+
+F1_SLCntr[18]_carry_eqn = (!F1L69 & F1L77) # (F1L69 & F1L78);
+F1_SLCntr[18]_lut_out = F1_SLCntr[18] $ (F1_SLCntr[18]_carry_eqn);
+F1_SLCntr[18] = DFFEAS(F1_SLCntr[18]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , F1L1, F1_SL_LoadReg[18], , , A1L71);
+
+--F1L80 is Sync_Len:synco|SLCntr[18]~373 at LC_X6_Y7_N8
+--operation mode is arithmetic
+
+F1L80_cout_0 = F1_SLCntr[18] # !F1L77;
+F1L80 = CARRY(F1L80_cout_0);
+
+--F1L81 is Sync_Len:synco|SLCntr[18]~373COUT1_396 at LC_X6_Y7_N8
+--operation mode is arithmetic
+
+F1L81_cout_1 = F1_SLCntr[18] # !F1L78;
+F1L81 = CARRY(F1L81_cout_1);
+
+
+--F1_SLCntr[19] is Sync_Len:synco|SLCntr[19] at LC_X6_Y7_N9
+--operation mode is normal
+
+F1_SLCntr[19]_carry_eqn = (!F1L69 & F1L80) # (F1L69 & F1L81);
+F1_SLCntr[19]_lut_out = F1_SLCntr[19]_carry_eqn $ !F1_SLCntr[19];
+F1_SLCntr[19] = DFFEAS(F1_SLCntr[19]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , F1L1, F1_SL_LoadReg[19], , , A1L71);
+
+
+--A1L91 is rtl~493 at LC_X7_Y7_N7
+--operation mode is normal
+
+A1L91 = !F1_SLCntr[18] & !F1_SLCntr[16] & !F1_SLCntr[19] & !F1_SLCntr[17];
+
+
+--A1L71 is rtl~1 at LC_X7_Y7_N8
+--operation mode is normal
+
+A1L71 = A1L90 & A1L89 & A1L88 & A1L91;
+
+
+--D1L91 is ManchEncode:mancho|DV_in~58 at LC_X9_Y7_N7
+--operation mode is normal
+
+D1L91 = E1_ModeReg[0] & (!C1_DV_FreeRun) # !E1_ModeReg[0] & (!D1_rDV_RTS # !D1_rrDV_RTS);
+
+
+--C1_FRCntr[0] is FreeRun:freerun|FRCntr[0] at LC_X3_Y5_N4
+--operation mode is arithmetic
+
+C1_FRCntr[0]_lut_out = !C1_FRCntr[0];
+C1_FRCntr[0] = DFFEAS(C1_FRCntr[0]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , C1L2, C1L37, , , A1L96);
+
+--C1L5 is FreeRun:freerun|FRCntr[0]~181 at LC_X3_Y5_N4
+--operation mode is arithmetic
+
+C1L5 = CARRY(C1_FRCntr[0]);
+
+
+--C1_FRCntr[1] is FreeRun:freerun|FRCntr[1] at LC_X3_Y5_N5
+--operation mode is arithmetic
+
+C1_FRCntr[1]_carry_eqn = C1L5;
+C1_FRCntr[1]_lut_out = C1_FRCntr[1] $ (!C1_FRCntr[1]_carry_eqn);
+C1_FRCntr[1] = DFFEAS(C1_FRCntr[1]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , C1L2, C1L39, , , A1L96);
+
+--C1L7 is FreeRun:freerun|FRCntr[1]~185 at LC_X3_Y5_N5
+--operation mode is arithmetic
+
+C1L7_cout_0 = !C1_FRCntr[1] & (!C1L5);
+C1L7 = CARRY(C1L7_cout_0);
+
+--C1L8 is FreeRun:freerun|FRCntr[1]~185COUT1_229 at LC_X3_Y5_N5
+--operation mode is arithmetic
+
+C1L8_cout_1 = !C1_FRCntr[1] & (!C1L5);
+C1L8 = CARRY(C1L8_cout_1);
+
+
+--C1_FRCntr[2] is FreeRun:freerun|FRCntr[2] at LC_X3_Y5_N6
+--operation mode is arithmetic
+
+C1_FRCntr[2]_carry_eqn = (!C1L5 & C1L7) # (C1L5 & C1L8);
+C1_FRCntr[2]_lut_out = C1_FRCntr[2] $ (C1_FRCntr[2]_carry_eqn);
+C1_FRCntr[2] = DFFEAS(C1_FRCntr[2]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , C1L2, C1L41, , , A1L96);
+
+--C1L10 is FreeRun:freerun|FRCntr[2]~189 at LC_X3_Y5_N6
+--operation mode is arithmetic
+
+C1L10_cout_0 = C1_FRCntr[2] # !C1L7;
+C1L10 = CARRY(C1L10_cout_0);
+
+--C1L11 is FreeRun:freerun|FRCntr[2]~189COUT1_230 at LC_X3_Y5_N6
+--operation mode is arithmetic
+
+C1L11_cout_1 = C1_FRCntr[2] # !C1L8;
+C1L11 = CARRY(C1L11_cout_1);
+
+
+--C1_FRCntr[3] is FreeRun:freerun|FRCntr[3] at LC_X3_Y5_N7
+--operation mode is arithmetic
+
+C1_FRCntr[3]_carry_eqn = (!C1L5 & C1L10) # (C1L5 & C1L11);
+C1_FRCntr[3]_lut_out = C1_FRCntr[3] $ !C1_FRCntr[3]_carry_eqn;
+C1_FRCntr[3] = DFFEAS(C1_FRCntr[3]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , C1L2, C1L43, , , A1L96);
+
+--C1L13 is FreeRun:freerun|FRCntr[3]~193 at LC_X3_Y5_N7
+--operation mode is arithmetic
+
+C1L13_cout_0 = !C1_FRCntr[3] & !C1L10;
+C1L13 = CARRY(C1L13_cout_0);
+
+--C1L14 is FreeRun:freerun|FRCntr[3]~193COUT1_231 at LC_X3_Y5_N7
+--operation mode is arithmetic
+
+C1L14_cout_1 = !C1_FRCntr[3] & !C1L11;
+C1L14 = CARRY(C1L14_cout_1);
+
+
+--A1L92 is rtl~494 at LC_X3_Y5_N0
+--operation mode is normal
+
+A1L92 = !C1_FRCntr[2] & !C1_FRCntr[3] & !C1_FRCntr[1] & !C1_FRCntr[0];
+
+
+--C1_FRCntr[4] is FreeRun:freerun|FRCntr[4] at LC_X3_Y5_N8
+--operation mode is arithmetic
+
+C1_FRCntr[4]_carry_eqn = (!C1L5 & C1L13) # (C1L5 & C1L14);
+C1_FRCntr[4]_lut_out = C1_FRCntr[4] $ (C1_FRCntr[4]_carry_eqn);
+C1_FRCntr[4] = DFFEAS(C1_FRCntr[4]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , C1L2, C1_FRLoadReg[4], , , A1L96);
+
+--C1L16 is FreeRun:freerun|FRCntr[4]~197 at LC_X3_Y5_N8
+--operation mode is arithmetic
+
+C1L16_cout_0 = C1_FRCntr[4] # !C1L13;
+C1L16 = CARRY(C1L16_cout_0);
+
+--C1L17 is FreeRun:freerun|FRCntr[4]~197COUT1_232 at LC_X3_Y5_N8
+--operation mode is arithmetic
+
+C1L17_cout_1 = C1_FRCntr[4] # !C1L14;
+C1L17 = CARRY(C1L17_cout_1);
+
+
+--C1_FRCntr[5] is FreeRun:freerun|FRCntr[5] at LC_X3_Y5_N9
+--operation mode is arithmetic
+
+C1_FRCntr[5]_carry_eqn = (!C1L5 & C1L16) # (C1L5 & C1L17);
+C1_FRCntr[5]_lut_out = C1_FRCntr[5] $ !C1_FRCntr[5]_carry_eqn;
+C1_FRCntr[5] = DFFEAS(C1_FRCntr[5]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , C1L2, C1L46, , , A1L96);
+
+--C1L19 is FreeRun:freerun|FRCntr[5]~201 at LC_X3_Y5_N9
+--operation mode is arithmetic
+
+C1L19 = CARRY(!C1_FRCntr[5] & !C1L17);
+
+
+--C1_FRCntr[6] is FreeRun:freerun|FRCntr[6] at LC_X4_Y5_N0
+--operation mode is arithmetic
+
+C1_FRCntr[6]_carry_eqn = C1L19;
+C1_FRCntr[6]_lut_out = C1_FRCntr[6] $ C1_FRCntr[6]_carry_eqn;
+C1_FRCntr[6] = DFFEAS(C1_FRCntr[6]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , C1L2, C1_FRLoadReg[6], , , A1L96);
+
+--C1L21 is FreeRun:freerun|FRCntr[6]~205 at LC_X4_Y5_N0
+--operation mode is arithmetic
+
+C1L21_cout_0 = C1_FRCntr[6] # !C1L19;
+C1L21 = CARRY(C1L21_cout_0);
+
+--C1L22 is FreeRun:freerun|FRCntr[6]~205COUT1_233 at LC_X4_Y5_N0
+--operation mode is arithmetic
+
+C1L22_cout_1 = C1_FRCntr[6] # !C1L19;
+C1L22 = CARRY(C1L22_cout_1);
+
+
+--C1_FRCntr[7] is FreeRun:freerun|FRCntr[7] at LC_X4_Y5_N1
+--operation mode is arithmetic
+
+C1_FRCntr[7]_carry_eqn = (!C1L19 & C1L21) # (C1L19 & C1L22);
+C1_FRCntr[7]_lut_out = C1_FRCntr[7] $ !C1_FRCntr[7]_carry_eqn;
+C1_FRCntr[7] = DFFEAS(C1_FRCntr[7]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , C1L2, C1_FRLoadReg[7], , , A1L96);
+
+--C1L24 is FreeRun:freerun|FRCntr[7]~209 at LC_X4_Y5_N1
+--operation mode is arithmetic
+
+C1L24_cout_0 = !C1_FRCntr[7] & !C1L21;
+C1L24 = CARRY(C1L24_cout_0);
+
+--C1L25 is FreeRun:freerun|FRCntr[7]~209COUT1_234 at LC_X4_Y5_N1
+--operation mode is arithmetic
+
+C1L25_cout_1 = !C1_FRCntr[7] & !C1L22;
+C1L25 = CARRY(C1L25_cout_1);
+
+
+--A1L93 is rtl~495 at LC_X3_Y5_N2
+--operation mode is normal
+
+A1L93 = !C1_FRCntr[7] & !C1_FRCntr[5] & !C1_FRCntr[6] & !C1_FRCntr[4];
+
+
+--C1_FRCntr[8] is FreeRun:freerun|FRCntr[8] at LC_X4_Y5_N2
+--operation mode is arithmetic
+
+C1_FRCntr[8]_carry_eqn = (!C1L19 & C1L24) # (C1L19 & C1L25);
+C1_FRCntr[8]_lut_out = C1_FRCntr[8] $ C1_FRCntr[8]_carry_eqn;
+C1_FRCntr[8] = DFFEAS(C1_FRCntr[8]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , C1L2, C1_FRLoadReg[8], , , A1L96);
+
+--C1L27 is FreeRun:freerun|FRCntr[8]~213 at LC_X4_Y5_N2
+--operation mode is arithmetic
+
+C1L27_cout_0 = C1_FRCntr[8] # !C1L24;
+C1L27 = CARRY(C1L27_cout_0);
+
+--C1L28 is FreeRun:freerun|FRCntr[8]~213COUT1_235 at LC_X4_Y5_N2
+--operation mode is arithmetic
+
+C1L28_cout_1 = C1_FRCntr[8] # !C1L25;
+C1L28 = CARRY(C1L28_cout_1);
+
+
+--C1_FRCntr[9] is FreeRun:freerun|FRCntr[9] at LC_X4_Y5_N3
+--operation mode is arithmetic
+
+C1_FRCntr[9]_carry_eqn = (!C1L19 & C1L27) # (C1L19 & C1L28);
+C1_FRCntr[9]_lut_out = C1_FRCntr[9] $ (!C1_FRCntr[9]_carry_eqn);
+C1_FRCntr[9] = DFFEAS(C1_FRCntr[9]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , C1L2, C1_FRLoadReg[9], , , A1L96);
+
+--C1L30 is FreeRun:freerun|FRCntr[9]~217 at LC_X4_Y5_N3
+--operation mode is arithmetic
+
+C1L30_cout_0 = !C1_FRCntr[9] & (!C1L27);
+C1L30 = CARRY(C1L30_cout_0);
+
+--C1L31 is FreeRun:freerun|FRCntr[9]~217COUT1_236 at LC_X4_Y5_N3
+--operation mode is arithmetic
+
+C1L31_cout_1 = !C1_FRCntr[9] & (!C1L28);
+C1L31 = CARRY(C1L31_cout_1);
+
+
+--C1_FRCntr[10] is FreeRun:freerun|FRCntr[10] at LC_X4_Y5_N4
+--operation mode is arithmetic
+
+C1_FRCntr[10]_carry_eqn = (!C1L19 & C1L30) # (C1L19 & C1L31);
+C1_FRCntr[10]_lut_out = C1_FRCntr[10] $ (C1_FRCntr[10]_carry_eqn);
+C1_FRCntr[10] = DFFEAS(C1_FRCntr[10]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , C1L2, C1_FRLoadReg[10], , , A1L96);
+
+--C1L33 is FreeRun:freerun|FRCntr[10]~221 at LC_X4_Y5_N4
+--operation mode is arithmetic
+
+C1L33 = CARRY(C1_FRCntr[10] # !C1L31);
+
+
+--C1_FRCntr[11] is FreeRun:freerun|FRCntr[11] at LC_X4_Y5_N5
+--operation mode is normal
+
+C1_FRCntr[11]_carry_eqn = C1L33;
+C1_FRCntr[11]_lut_out = C1_FRCntr[11] $ (!C1_FRCntr[11]_carry_eqn);
+C1_FRCntr[11] = DFFEAS(C1_FRCntr[11]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , C1L2, C1_FRLoadReg[11], , , A1L96);
+
+
+--A1L94 is rtl~496 at LC_X4_Y5_N8
+--operation mode is normal
+
+A1L94 = !C1_FRCntr[11] & !C1_FRCntr[8] & !C1_FRCntr[10] & !C1_FRCntr[9];
+
+
+--C1L2 is FreeRun:freerun|dwncnt~13 at LC_X4_Y5_N6
+--operation mode is normal
+
+C1L2 = F1_isAddr_Zero & !PIO_nEnable;
+
+
+--A1L95 is rtl~497 at LC_X6_Y6_N0
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+E1_AddrReg[4]_qfbk = E1_AddrReg[4];
+A1L95 = A1L77 & !E1_AddrReg[4]_qfbk & !E1_AddrReg[1];
+
+--E1_AddrReg[4] is PIO_Interface:pio|AddrReg[4] at LC_X6_Y6_N0
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+E1_AddrReg[4] = DFFEAS(A1L95, GLOBAL(B1_Clk25M), !PIO_Reset, , , PIO_ADR[4], , , VCC);
+
+
+--A1L72 is rtl~4 at LC_X6_Y6_N7
+--operation mode is normal
+
+A1L72 = E1_AddrReg[5] & (A1L95 & !E1_AddrReg[0]);
+
+
+--D1_ShiftBits[37] is ManchEncode:mancho|ShiftBits[37] at LC_X10_Y2_N3
+--operation mode is normal
+
+D1_ShiftBits[37]_lut_out = F1_isAddr_Zero & (D1_DV_Buf) # !F1_isAddr_Zero & D1_ShiftBits[36];
+D1_ShiftBits[37] = DFFEAS(D1_ShiftBits[37]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--B1_clk_cntr2[0] is ClkDiv:clkd|clk_cntr2[0] at LC_X10_Y7_N5
+--operation mode is arithmetic
+
+B1_clk_cntr2[0]_lut_out = !B1_clk_cntr2[0];
+B1_clk_cntr2[0] = DFFEAS(B1_clk_cntr2[0]_lut_out, GLOBAL(Clk100M), VCC, , , , , B1L21, );
+
+--B1L8 is ClkDiv:clkd|clk_cntr2[0]~107 at LC_X10_Y7_N5
+--operation mode is arithmetic
+
+B1L8_cout_0 = B1_clk_cntr2[0];
+B1L8 = CARRY(B1L8_cout_0);
+
+--B1L9 is ClkDiv:clkd|clk_cntr2[0]~107COUT1_111 at LC_X10_Y7_N5
+--operation mode is arithmetic
+
+B1L9_cout_1 = B1_clk_cntr2[0];
+B1L9 = CARRY(B1L9_cout_1);
+
+
+--B1L20 is ClkDiv:clkd|LessThan~128 at LC_X10_Y7_N2
+--operation mode is normal
+
+B1L20 = !B1_clk_cntr2[0] # !B1_clk_cntr2[1];
+
+
+--B1L21 is ClkDiv:clkd|LessThan~129 at LC_X10_Y7_N4
+--operation mode is normal
+
+B1L21 = B1_clk_cntr2[4] & (B1_clk_cntr2[3] # B1_clk_cntr2[2] # !B1L20);
+
+
+--D1_Shift5Got is ManchEncode:mancho|Shift5Got at LC_X5_Y4_N6
+--operation mode is normal
+
+D1_Shift5Got_lut_out = GND;
+D1_Shift5Got = DFFEAS(D1_Shift5Got_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, VCC, , , !D1_Shift5Rdy);
+
+
+--D1L183 is ManchEncode:mancho|Shift5Rdy~143 at LC_X5_Y4_N8
+--operation mode is normal
+
+D1L183 = PIO_nEnable # !D1_Shift5Got;
+
+
+--D1L161 is ManchEncode:mancho|Shift5Load[16]~23 at LC_X7_Y4_N6
+--operation mode is normal
+
+D1L161 = !PIO_nEnable & F1_isAddr_Zero & D1_DV_Buf;
+
+
+--D1_Shift5Load[38] is ManchEncode:mancho|Shift5Load[38] at LC_X11_Y6_N8
+--operation mode is normal
+
+D1_Shift5Load[38]_lut_out = D1_DV_Buf;
+D1_Shift5Load[38] = DFFEAS(D1_Shift5Load[38]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , C1L2, , , , );
+
+
+--D1_Shift5Bits[37] is ManchEncode:mancho|Shift5Bits[37] at LC_X11_Y6_N5
+--operation mode is normal
+
+D1_Shift5Bits[37]_lut_out = D1_Shift5Rdy & D1_Shift5Bits[36] # !D1_Shift5Rdy & (D1_Shift5Load[37]);
+D1_Shift5Bits[37] = DFFEAS(D1_Shift5Bits[37]_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--E1_CmdData[19] is PIO_Interface:pio|CmdData[19] at LC_X9_Y6_N2
+--operation mode is normal
+
+E1_CmdData[19]_lut_out = A1L59;
+E1_CmdData[19] = DFFEAS(E1_CmdData[19]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , A1L73, , , , );
+
+
+--E1L60 is PIO_Interface:pio|SL_Load~78 at LC_X8_Y6_N4
+--operation mode is normal
+
+E1L60 = !A1L57 & !A1L58 & !A1L56 & !A1L55;
+
+
+--E1_rrPIO_nWR is PIO_Interface:pio|rrPIO_nWR at LC_X6_Y6_N1
+--operation mode is normal
+
+E1_rrPIO_nWR_lut_out = !E1_rPIO_nWR;
+E1_rrPIO_nWR = DFFEAS(E1_rrPIO_nWR_lut_out, GLOBAL(B1_Clk25M), VCC, , !PIO_Reset, , , , );
+
+
+--E1L61 is PIO_Interface:pio|SL_Load~79 at LC_X6_Y6_N5
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+E1_AddrReg[0]_qfbk = E1_AddrReg[0];
+E1L61 = !E1_AddrReg[5] & !E1_rrPIO_nWR & E1_AddrReg[0]_qfbk & !A1L59;
+
+--E1_AddrReg[0] is PIO_Interface:pio|AddrReg[0] at LC_X6_Y6_N5
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+E1_AddrReg[0] = DFFEAS(E1L61, GLOBAL(B1_Clk25M), !PIO_Reset, , , PIO_ADR[0], , , VCC);
+
+
+--E1_rPIO_nWR is PIO_Interface:pio|rPIO_nWR at LC_X5_Y4_N4
+--operation mode is normal
+
+E1_rPIO_nWR_lut_out = !PIO_nWR;
+E1_rPIO_nWR = DFFEAS(E1_rPIO_nWR_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , , , , , );
+
+
+--E1L62 is PIO_Interface:pio|SL_Load~80 at LC_X7_Y6_N1
+--operation mode is normal
+
+E1L62 = E1L61 & E1L60 & !E1_rPIO_nWR & A1L95;
+
+
+--E1_SL_Load is PIO_Interface:pio|SL_Load at LC_X7_Y6_N9
+--operation mode is normal
+
+E1_SL_Load = !A1L61 & A1L62 & !A1L60 & E1L62;
+
+
+--E1_CmdData[18] is PIO_Interface:pio|CmdData[18] at LC_X9_Y6_N8
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+E1_CmdData[18]_lut_out = GND;
+E1_CmdData[18] = DFFEAS(E1_CmdData[18]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , A1L73, A1L60, , , VCC);
+
+
+--E1_CmdData[17] is PIO_Interface:pio|CmdData[17] at LC_X9_Y6_N6
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+E1_CmdData[17]_lut_out = GND;
+E1_CmdData[17] = DFFEAS(E1_CmdData[17]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , A1L73, A1L61, , , VCC);
+
+
+--E1_CmdData[16] is PIO_Interface:pio|CmdData[16] at LC_X9_Y6_N0
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+E1_CmdData[16]_lut_out = GND;
+E1_CmdData[16] = DFFEAS(E1_CmdData[16]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , A1L73, A1L62, , , VCC);
+
+
+--E1_CmdData[15] is PIO_Interface:pio|CmdData[15] at LC_X8_Y6_N2
+--operation mode is normal
+
+E1_CmdData[15]_lut_out = A1L55;
+E1_CmdData[15] = DFFEAS(E1_CmdData[15]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , A1L74, , , , );
+
+
+--E1_CmdData[14] is PIO_Interface:pio|CmdData[14] at LC_X8_Y6_N5
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+E1_CmdData[14]_lut_out = GND;
+E1_CmdData[14] = DFFEAS(E1_CmdData[14]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , A1L74, A1L56, , , VCC);
+
+
+--E1_CmdData[13] is PIO_Interface:pio|CmdData[13] at LC_X8_Y6_N7
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+E1_CmdData[13]_lut_out = GND;
+E1_CmdData[13] = DFFEAS(E1_CmdData[13]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , A1L74, A1L57, , , VCC);
+
+
+--E1_CmdData[12] is PIO_Interface:pio|CmdData[12] at LC_X8_Y6_N6
+--operation mode is normal
+
+E1_CmdData[12]_lut_out = A1L58;
+E1_CmdData[12] = DFFEAS(E1_CmdData[12]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , A1L74, , , , );
+
+
+--E1_CmdData[11] is PIO_Interface:pio|CmdData[11] at LC_X3_Y6_N5
+--operation mode is normal
+
+E1_CmdData[11]_lut_out = A1L59;
+E1_CmdData[11] = DFFEAS(E1_CmdData[11]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , A1L74, , , , );
+
+
+--E1_CmdData[9] is PIO_Interface:pio|CmdData[9] at LC_X3_Y6_N4
+--operation mode is normal
+
+E1_CmdData[9]_lut_out = A1L61;
+E1_CmdData[9] = DFFEAS(E1_CmdData[9]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , A1L74, , , , );
+
+
+--E1_CmdData[10] is PIO_Interface:pio|CmdData[10] at LC_X3_Y6_N6
+--operation mode is normal
+
+E1_CmdData[10]_lut_out = A1L60;
+E1_CmdData[10] = DFFEAS(E1_CmdData[10]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , A1L74, , , , );
+
+
+--E1_CmdData[8] is PIO_Interface:pio|CmdData[8] at LC_X3_Y6_N9
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+E1_CmdData[8]_lut_out = GND;
+E1_CmdData[8] = DFFEAS(E1_CmdData[8]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , A1L74, A1L62, , , VCC);
+
+
+--E1_CmdData[6] is PIO_Interface:pio|CmdData[6] at LC_X6_Y5_N7
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+E1_CmdData[6]_lut_out = GND;
+E1_CmdData[6] = DFFEAS(E1_CmdData[6]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , A1L75, A1L56, , , VCC);
+
+
+--E1_CmdData[7] is PIO_Interface:pio|CmdData[7] at LC_X6_Y5_N3
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+E1_CmdData[7]_lut_out = GND;
+E1_CmdData[7] = DFFEAS(E1_CmdData[7]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , A1L75, A1L55, , , VCC);
+
+
+--E1_CmdData[5] is PIO_Interface:pio|CmdData[5] at LC_X6_Y5_N6
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+E1_CmdData[5]_lut_out = GND;
+E1_CmdData[5] = DFFEAS(E1_CmdData[5]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , A1L75, A1L57, , , VCC);
+
+
+--E1_CmdData[4] is PIO_Interface:pio|CmdData[4] at LC_X6_Y5_N8
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+E1_CmdData[4]_lut_out = GND;
+E1_CmdData[4] = DFFEAS(E1_CmdData[4]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , A1L75, A1L58, , , VCC);
+
+
+--E1_CmdData[3] is PIO_Interface:pio|CmdData[3] at LC_X6_Y5_N1
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+E1_CmdData[3]_lut_out = GND;
+E1_CmdData[3] = DFFEAS(E1_CmdData[3]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , A1L75, A1L59, , , VCC);
+
+
+--E1_CmdData[2] is PIO_Interface:pio|CmdData[2] at LC_X4_Y7_N5
+--operation mode is normal
+
+E1_CmdData[2]_lut_out = A1L60;
+E1_CmdData[2] = DFFEAS(E1_CmdData[2]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , A1L75, , , , );
+
+
+--E1_CmdData[1] is PIO_Interface:pio|CmdData[1] at LC_X4_Y7_N7
+--operation mode is normal
+
+E1_CmdData[1]_lut_out = A1L61;
+E1_CmdData[1] = DFFEAS(E1_CmdData[1]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , A1L75, , , , );
+
+
+--E1_CmdData[0] is PIO_Interface:pio|CmdData[0] at LC_X4_Y7_N6
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+E1_CmdData[0]_lut_out = GND;
+E1_CmdData[0] = DFFEAS(E1_CmdData[0]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , A1L75, A1L62, , , VCC);
+
+
+--C1_FRLoadReg[0] is FreeRun:freerun|FRLoadReg[0] at LC_X4_Y6_N8
+--operation mode is normal
+
+C1_FRLoadReg[0]_lut_out = !E1_CmdData[0];
+C1_FRLoadReg[0] = DFFEAS(C1_FRLoadReg[0]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , E1_FR_Load, , , , );
+
+
+--A1L96 is rtl~498 at LC_X3_Y5_N3
+--operation mode is normal
+
+A1L96 = A1L94 & A1L92 & A1L93;
+
+
+--C1_FRLoadReg[1] is FreeRun:freerun|FRLoadReg[1] at LC_X4_Y6_N1
+--operation mode is normal
+
+C1_FRLoadReg[1]_lut_out = !E1_CmdData[1];
+C1_FRLoadReg[1] = DFFEAS(C1_FRLoadReg[1]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , E1_FR_Load, , , , );
+
+
+--C1_FRLoadReg[2] is FreeRun:freerun|FRLoadReg[2] at LC_X5_Y5_N8
+--operation mode is normal
+
+C1_FRLoadReg[2]_lut_out = !E1_CmdData[2];
+C1_FRLoadReg[2] = DFFEAS(C1_FRLoadReg[2]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , E1_FR_Load, , , , );
+
+
+--C1_FRLoadReg[3] is FreeRun:freerun|FRLoadReg[3] at LC_X5_Y5_N5
+--operation mode is normal
+
+C1_FRLoadReg[3]_lut_out = !E1_CmdData[3];
+C1_FRLoadReg[3] = DFFEAS(C1_FRLoadReg[3]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , E1_FR_Load, , , , );
+
+
+--C1_FRLoadReg[4] is FreeRun:freerun|FRLoadReg[4] at LC_X5_Y5_N7
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+C1_FRLoadReg[4]_lut_out = GND;
+C1_FRLoadReg[4] = DFFEAS(C1_FRLoadReg[4]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , E1_FR_Load, E1_CmdData[4], , , VCC);
+
+
+--C1_FRLoadReg[5] is FreeRun:freerun|FRLoadReg[5] at LC_X4_Y6_N2
+--operation mode is normal
+
+C1_FRLoadReg[5]_lut_out = !E1_CmdData[5];
+C1_FRLoadReg[5] = DFFEAS(C1_FRLoadReg[5]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , E1_FR_Load, , , , );
+
+
+--C1_FRLoadReg[6] is FreeRun:freerun|FRLoadReg[6] at LC_X5_Y5_N9
+--operation mode is normal
+
+C1_FRLoadReg[6]_lut_out = E1_CmdData[6];
+C1_FRLoadReg[6] = DFFEAS(C1_FRLoadReg[6]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , E1_FR_Load, , , , );
+
+
+--C1_FRLoadReg[7] is FreeRun:freerun|FRLoadReg[7] at LC_X5_Y5_N6
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+C1_FRLoadReg[7]_lut_out = GND;
+C1_FRLoadReg[7] = DFFEAS(C1_FRLoadReg[7]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , E1_FR_Load, E1_CmdData[7], , , VCC);
+
+
+--C1_FRLoadReg[8] is FreeRun:freerun|FRLoadReg[8] at LC_X3_Y6_N1
+--operation mode is normal
+
+C1_FRLoadReg[8]_lut_out = E1_CmdData[8];
+C1_FRLoadReg[8] = DFFEAS(C1_FRLoadReg[8]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , E1_FR_Load, , , , );
+
+
+--C1_FRLoadReg[9] is FreeRun:freerun|FRLoadReg[9] at LC_X3_Y6_N2
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+C1_FRLoadReg[9]_lut_out = GND;
+C1_FRLoadReg[9] = DFFEAS(C1_FRLoadReg[9]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , E1_FR_Load, E1_CmdData[9], , , VCC);
+
+
+--C1_FRLoadReg[10] is FreeRun:freerun|FRLoadReg[10] at LC_X3_Y6_N7
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+C1_FRLoadReg[10]_lut_out = GND;
+C1_FRLoadReg[10] = DFFEAS(C1_FRLoadReg[10]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , E1_FR_Load, E1_CmdData[10], , , VCC);
+
+
+--C1_FRLoadReg[11] is FreeRun:freerun|FRLoadReg[11] at LC_X7_Y6_N5
+--operation mode is normal
+
+C1_FRLoadReg[11]_lut_out = E1_CmdData[11];
+C1_FRLoadReg[11] = DFFEAS(C1_FRLoadReg[11]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , E1_FR_Load, , , , );
+
+
+--E1L10 is PIO_Interface:pio|AuxInGet~0 at LC_X2_Y7_N2
+--operation mode is normal
+
+E1L10 = !PIO_nRD & E1_AddrReg[5] & A1L95 & E1_AddrReg[0];
+
+
+--D1_ShiftBits[36] is ManchEncode:mancho|ShiftBits[36] at LC_X10_Y2_N5
+--operation mode is normal
+
+D1_ShiftBits[36]_lut_out = F1_isAddr_Zero & D1_DV_Buf & (!E1_ModeReg[0]) # !F1_isAddr_Zero & (D1_ShiftBits[35]);
+D1_ShiftBits[36] = DFFEAS(D1_ShiftBits[36]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_Shift5Load[37] is ManchEncode:mancho|Shift5Load[37] at LC_X10_Y6_N4
+--operation mode is normal
+
+D1_Shift5Load[37]_lut_out = VCC;
+D1_Shift5Load[37] = DFFEAS(D1_Shift5Load[37]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L161, , , , );
+
+
+--D1_Shift5Bits[36] is ManchEncode:mancho|Shift5Bits[36] at LC_X11_Y6_N9
+--operation mode is normal
+
+D1_Shift5Bits[36]_lut_out = D1_Shift5Rdy & D1_Shift5Bits[35] # !D1_Shift5Rdy & (D1_Shift5Load[36]);
+D1_Shift5Bits[36] = DFFEAS(D1_Shift5Bits[36]_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--A1L73 is rtl~5 at LC_X8_Y7_N3
+--operation mode is normal
+
+A1L73 = !E1_AddrReg[0] & E1_AddrReg[1] & A1L78 & E1_AddrReg[4];
+
+
+--A1L74 is rtl~6 at LC_X8_Y7_N7
+--operation mode is normal
+
+A1L74 = E1_AddrReg[0] & !E1_AddrReg[1] & A1L78 & E1_AddrReg[4];
+
+
+--A1L75 is rtl~7 at LC_X8_Y7_N8
+--operation mode is normal
+
+A1L75 = !E1_AddrReg[0] & !E1_AddrReg[1] & A1L78 & E1_AddrReg[4];
+
+
+--E1_FR_Load is PIO_Interface:pio|FR_Load at LC_X7_Y6_N2
+--operation mode is normal
+
+E1_FR_Load = A1L61 & !A1L62 & !A1L60 & E1L62;
+
+
+--D1_ShiftBits[35] is ManchEncode:mancho|ShiftBits[35] at LC_X10_Y2_N7
+--operation mode is normal
+
+D1_ShiftBits[35]_lut_out = F1_isAddr_Zero & D1_DV_Buf & (!D1_sDV_Err) # !F1_isAddr_Zero & (D1_ShiftBits[34]);
+D1_ShiftBits[35] = DFFEAS(D1_ShiftBits[35]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_Shift5Load[36] is ManchEncode:mancho|Shift5Load[36] at LC_X10_Y6_N5
+--operation mode is normal
+
+D1_Shift5Load[36]_lut_out = !E1_ModeReg[0];
+D1_Shift5Load[36] = DFFEAS(D1_Shift5Load[36]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L161, , , , );
+
+
+--D1_Shift5Bits[35] is ManchEncode:mancho|Shift5Bits[35] at LC_X11_Y6_N2
+--operation mode is normal
+
+D1_Shift5Bits[35]_lut_out = D1_Shift5Rdy & (D1_Shift5Bits[34]) # !D1_Shift5Rdy & D1_Shift5Load[35];
+D1_Shift5Bits[35] = DFFEAS(D1_Shift5Bits[35]_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_ShiftBits[34] is ManchEncode:mancho|ShiftBits[34] at LC_X10_Y2_N4
+--operation mode is normal
+
+D1_ShiftBits[34]_lut_out = F1_isAddr_Zero & (D1_DV_Buf) # !F1_isAddr_Zero & D1_ShiftBits[33];
+D1_ShiftBits[34] = DFFEAS(D1_ShiftBits[34]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_Shift5Load[35] is ManchEncode:mancho|Shift5Load[35] at LC_X11_Y3_N5
+--operation mode is normal
+
+D1_Shift5Load[35]_lut_out = !D1_sDV_Err;
+D1_Shift5Load[35] = DFFEAS(D1_Shift5Load[35]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L161, , , , );
+
+
+--D1_Shift5Bits[34] is ManchEncode:mancho|Shift5Bits[34] at LC_X11_Y6_N1
+--operation mode is normal
+
+D1_Shift5Bits[34]_lut_out = D1_Shift5Rdy & D1_Shift5Bits[33] # !D1_Shift5Rdy & (D1_Shift5Load[37]);
+D1_Shift5Bits[34] = DFFEAS(D1_Shift5Bits[34]_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_ShiftBits[33] is ManchEncode:mancho|ShiftBits[33] at LC_X10_Y2_N6
+--operation mode is normal
+
+D1_ShiftBits[33]_lut_out = F1_isAddr_Zero & D1_DV_Buf # !F1_isAddr_Zero & (D1_ShiftBits[32]);
+D1_ShiftBits[33] = DFFEAS(D1_ShiftBits[33]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_Shift5Bits[33] is ManchEncode:mancho|Shift5Bits[33] at LC_X11_Y6_N4
+--operation mode is normal
+
+D1_Shift5Bits[33]_lut_out = D1_Shift5Rdy & D1_Shift5Bits[32] # !D1_Shift5Rdy & (D1_Shift5Load[37]);
+D1_Shift5Bits[33] = DFFEAS(D1_Shift5Bits[33]_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_ShiftBits[32] is ManchEncode:mancho|ShiftBits[32] at LC_X10_Y4_N5
+--operation mode is normal
+
+D1_ShiftBits[32]_lut_out = F1_isAddr_Zero & D1_DV_Buf # !F1_isAddr_Zero & (D1_ShiftBits[31]);
+D1_ShiftBits[32] = DFFEAS(D1_ShiftBits[32]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_Shift5Bits[32] is ManchEncode:mancho|Shift5Bits[32] at LC_X11_Y6_N7
+--operation mode is normal
+
+D1_Shift5Bits[32]_lut_out = D1_Shift5Rdy & D1_Shift5Bits[31] # !D1_Shift5Rdy & (D1_Shift5Load[37]);
+D1_Shift5Bits[32] = DFFEAS(D1_Shift5Bits[32]_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_ShiftBits[31] is ManchEncode:mancho|ShiftBits[31] at LC_X10_Y4_N3
+--operation mode is normal
+
+D1_ShiftBits[31]_lut_out = F1_isAddr_Zero & D1_DV_Buf & (!D1_DV_Cntr[31]) # !F1_isAddr_Zero & (D1_ShiftBits[30]);
+D1_ShiftBits[31] = DFFEAS(D1_ShiftBits[31]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_Shift5Bits[31] is ManchEncode:mancho|Shift5Bits[31] at LC_X11_Y4_N5
+--operation mode is normal
+
+D1_Shift5Bits[31]_lut_out = D1_Shift5Rdy & (D1_Shift5Bits[30]) # !D1_Shift5Rdy & D1_Shift5Load[31];
+D1_Shift5Bits[31] = DFFEAS(D1_Shift5Bits[31]_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_DV_Cntr[31] is ManchEncode:mancho|DV_Cntr[31] at LC_X10_Y5_N5
+--operation mode is normal
+
+D1_DV_Cntr[31]_carry_eqn = D1L89;
+D1_DV_Cntr[31]_lut_out = D1_DV_Cntr[31] $ (D1_DV_Cntr[31]_carry_eqn);
+D1_DV_Cntr[31] = DFFEAS(D1_DV_Cntr[31]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L60, E1_CmdData[31], , , D1L98);
+
+
+--D1_ShiftBits[30] is ManchEncode:mancho|ShiftBits[30] at LC_X10_Y4_N6
+--operation mode is normal
+
+D1_ShiftBits[30]_lut_out = F1_isAddr_Zero & !D1_DV_Cntr[30] & (D1_DV_Buf) # !F1_isAddr_Zero & (D1_ShiftBits[29]);
+D1_ShiftBits[30] = DFFEAS(D1_ShiftBits[30]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_Shift5Load[31] is ManchEncode:mancho|Shift5Load[31] at LC_X10_Y6_N2
+--operation mode is normal
+
+D1_Shift5Load[31]_lut_out = !D1_DV_Cntr[31];
+D1_Shift5Load[31] = DFFEAS(D1_Shift5Load[31]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L161, , , , );
+
+
+--D1_Shift5Bits[30] is ManchEncode:mancho|Shift5Bits[30] at LC_X11_Y4_N8
+--operation mode is normal
+
+D1_Shift5Bits[30]_lut_out = D1_Shift5Rdy & (D1_Shift5Bits[29]) # !D1_Shift5Rdy & D1_Shift5Load[30];
+D1_Shift5Bits[30] = DFFEAS(D1_Shift5Bits[30]_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--E1_CmdData[31] is PIO_Interface:pio|CmdData[31] at LC_X9_Y6_N7
+--operation mode is normal
+
+E1_CmdData[31]_lut_out = A1L55;
+E1_CmdData[31] = DFFEAS(E1_CmdData[31]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , A1L76, , , , );
+
+
+--E1L53 is PIO_Interface:pio|DV_Cntr_Load~35 at LC_X4_Y7_N8
+--operation mode is normal
+
+E1L53 = A1L62 # A1L61;
+
+
+--D1L60 is ManchEncode:mancho|DV_Cntr[20]~690 at LC_X7_Y6_N0
+--operation mode is normal
+
+D1L60 = !E1L53 & A1L60 & E1L62 # !D1L98;
+
+
+--D1_DV_Cntr[30] is ManchEncode:mancho|DV_Cntr[30] at LC_X10_Y5_N4
+--operation mode is arithmetic
+
+D1_DV_Cntr[30]_carry_eqn = (!D1L75 & D1L86) # (D1L75 & D1L87);
+D1_DV_Cntr[30]_lut_out = D1_DV_Cntr[30] $ (!D1_DV_Cntr[30]_carry_eqn);
+D1_DV_Cntr[30] = DFFEAS(D1_DV_Cntr[30]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L60, E1_CmdData[30], , , D1L98);
+
+--D1L89 is ManchEncode:mancho|DV_Cntr[30]~692 at LC_X10_Y5_N4
+--operation mode is arithmetic
+
+D1L89 = CARRY(D1_DV_Cntr[30] & (!D1L87));
+
+
+--D1_ShiftBits[29] is ManchEncode:mancho|ShiftBits[29] at LC_X10_Y4_N4
+--operation mode is normal
+
+D1_ShiftBits[29]_lut_out = F1_isAddr_Zero & (!D1_DV_Cntr[29] & D1_DV_Buf) # !F1_isAddr_Zero & D1_ShiftBits[28];
+D1_ShiftBits[29] = DFFEAS(D1_ShiftBits[29]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_Shift5Load[30] is ManchEncode:mancho|Shift5Load[30] at LC_X11_Y3_N6
+--operation mode is normal
+
+D1_Shift5Load[30]_lut_out = !D1_DV_Cntr[30];
+D1_Shift5Load[30] = DFFEAS(D1_Shift5Load[30]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L161, , , , );
+
+
+--D1_Shift5Bits[29] is ManchEncode:mancho|Shift5Bits[29] at LC_X11_Y4_N0
+--operation mode is normal
+
+D1_Shift5Bits[29]_lut_out = D1_Shift5Rdy & D1_Shift5Bits[28] # !D1_Shift5Rdy & (D1_Shift5Load[29]);
+D1_Shift5Bits[29] = DFFEAS(D1_Shift5Bits[29]_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--A1L76 is rtl~8 at LC_X8_Y7_N0
+--operation mode is normal
+
+A1L76 = E1_AddrReg[0] & E1_AddrReg[1] & A1L78 & E1_AddrReg[4];
+
+
+--E1_CmdData[30] is PIO_Interface:pio|CmdData[30] at LC_X8_Y7_N4
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+E1_CmdData[30]_lut_out = GND;
+E1_CmdData[30] = DFFEAS(E1_CmdData[30]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , A1L76, A1L56, , , VCC);
+
+
+--D1_DV_Cntr[29] is ManchEncode:mancho|DV_Cntr[29] at LC_X10_Y5_N3
+--operation mode is arithmetic
+
+D1_DV_Cntr[29]_carry_eqn = (!D1L75 & D1L83) # (D1L75 & D1L84);
+D1_DV_Cntr[29]_lut_out = D1_DV_Cntr[29] $ (D1_DV_Cntr[29]_carry_eqn);
+D1_DV_Cntr[29] = DFFEAS(D1_DV_Cntr[29]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L60, E1_CmdData[29], , , D1L98);
+
+--D1L86 is ManchEncode:mancho|DV_Cntr[29]~696 at LC_X10_Y5_N3
+--operation mode is arithmetic
+
+D1L86_cout_0 = !D1L83 # !D1_DV_Cntr[29];
+D1L86 = CARRY(D1L86_cout_0);
+
+--D1L87 is ManchEncode:mancho|DV_Cntr[29]~696COUT1_839 at LC_X10_Y5_N3
+--operation mode is arithmetic
+
+D1L87_cout_1 = !D1L84 # !D1_DV_Cntr[29];
+D1L87 = CARRY(D1L87_cout_1);
+
+
+--D1_ShiftBits[28] is ManchEncode:mancho|ShiftBits[28] at LC_X10_Y4_N0
+--operation mode is normal
+
+D1_ShiftBits[28]_lut_out = F1_isAddr_Zero & D1_DV_Buf & !D1_DV_Cntr[28] # !F1_isAddr_Zero & (D1_ShiftBits[27]);
+D1_ShiftBits[28] = DFFEAS(D1_ShiftBits[28]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_Shift5Load[29] is ManchEncode:mancho|Shift5Load[29] at LC_X11_Y4_N3
+--operation mode is normal
+
+D1_Shift5Load[29]_lut_out = !D1_DV_Cntr[29];
+D1_Shift5Load[29] = DFFEAS(D1_Shift5Load[29]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L161, , , , );
+
+
+--D1_Shift5Bits[28] is ManchEncode:mancho|Shift5Bits[28] at LC_X11_Y4_N7
+--operation mode is normal
+
+D1_Shift5Bits[28]_lut_out = D1_Shift5Rdy & (D1_Shift5Bits[27]) # !D1_Shift5Rdy & D1_Shift5Load[28];
+D1_Shift5Bits[28] = DFFEAS(D1_Shift5Bits[28]_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--E1_CmdData[29] is PIO_Interface:pio|CmdData[29] at LC_X8_Y7_N2
+--operation mode is normal
+
+E1_CmdData[29]_lut_out = A1L57;
+E1_CmdData[29] = DFFEAS(E1_CmdData[29]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , A1L76, , , , );
+
+
+--D1_DV_Cntr[28] is ManchEncode:mancho|DV_Cntr[28] at LC_X10_Y5_N2
+--operation mode is arithmetic
+
+D1_DV_Cntr[28]_carry_eqn = (!D1L75 & D1L80) # (D1L75 & D1L81);
+D1_DV_Cntr[28]_lut_out = D1_DV_Cntr[28] $ !D1_DV_Cntr[28]_carry_eqn;
+D1_DV_Cntr[28] = DFFEAS(D1_DV_Cntr[28]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L60, E1_CmdData[28], , , D1L98);
+
+--D1L83 is ManchEncode:mancho|DV_Cntr[28]~700 at LC_X10_Y5_N2
+--operation mode is arithmetic
+
+D1L83_cout_0 = D1_DV_Cntr[28] & !D1L80;
+D1L83 = CARRY(D1L83_cout_0);
+
+--D1L84 is ManchEncode:mancho|DV_Cntr[28]~700COUT1_838 at LC_X10_Y5_N2
+--operation mode is arithmetic
+
+D1L84_cout_1 = D1_DV_Cntr[28] & !D1L81;
+D1L84 = CARRY(D1L84_cout_1);
+
+
+--D1_ShiftBits[27] is ManchEncode:mancho|ShiftBits[27] at LC_X10_Y4_N8
+--operation mode is normal
+
+D1_ShiftBits[27]_lut_out = F1_isAddr_Zero & D1_DV_Buf & (!D1_DV_Cntr[27]) # !F1_isAddr_Zero & (D1_ShiftBits[26]);
+D1_ShiftBits[27] = DFFEAS(D1_ShiftBits[27]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_Shift5Load[28] is ManchEncode:mancho|Shift5Load[28] at LC_X11_Y4_N6
+--operation mode is normal
+
+D1_Shift5Load[28]_lut_out = !D1_DV_Cntr[28];
+D1_Shift5Load[28] = DFFEAS(D1_Shift5Load[28]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L161, , , , );
+
+
+--D1_Shift5Bits[27] is ManchEncode:mancho|Shift5Bits[27] at LC_X11_Y4_N2
+--operation mode is normal
+
+D1_Shift5Bits[27]_lut_out = D1_Shift5Rdy & (D1_Shift5Bits[26]) # !D1_Shift5Rdy & D1_Shift5Load[27];
+D1_Shift5Bits[27] = DFFEAS(D1_Shift5Bits[27]_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--E1_CmdData[28] is PIO_Interface:pio|CmdData[28] at LC_X8_Y7_N9
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+E1_CmdData[28]_lut_out = GND;
+E1_CmdData[28] = DFFEAS(E1_CmdData[28]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , A1L76, A1L58, , , VCC);
+
+
+--D1_DV_Cntr[27] is ManchEncode:mancho|DV_Cntr[27] at LC_X10_Y5_N1
+--operation mode is arithmetic
+
+D1_DV_Cntr[27]_carry_eqn = (!D1L75 & D1L77) # (D1L75 & D1L78);
+D1_DV_Cntr[27]_lut_out = D1_DV_Cntr[27] $ D1_DV_Cntr[27]_carry_eqn;
+D1_DV_Cntr[27] = DFFEAS(D1_DV_Cntr[27]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L60, E1_CmdData[27], , , D1L98);
+
+--D1L80 is ManchEncode:mancho|DV_Cntr[27]~704 at LC_X10_Y5_N1
+--operation mode is arithmetic
+
+D1L80_cout_0 = !D1L77 # !D1_DV_Cntr[27];
+D1L80 = CARRY(D1L80_cout_0);
+
+--D1L81 is ManchEncode:mancho|DV_Cntr[27]~704COUT1_837 at LC_X10_Y5_N1
+--operation mode is arithmetic
+
+D1L81_cout_1 = !D1L78 # !D1_DV_Cntr[27];
+D1L81 = CARRY(D1L81_cout_1);
+
+
+--D1_ShiftBits[26] is ManchEncode:mancho|ShiftBits[26] at LC_X10_Y4_N7
+--operation mode is normal
+
+D1_ShiftBits[26]_lut_out = F1_isAddr_Zero & D1_DV_Buf & !D1_DV_Cntr[26] # !F1_isAddr_Zero & (D1_ShiftBits[25]);
+D1_ShiftBits[26] = DFFEAS(D1_ShiftBits[26]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_Shift5Load[27] is ManchEncode:mancho|Shift5Load[27] at LC_X11_Y3_N2
+--operation mode is normal
+
+D1_Shift5Load[27]_lut_out = !D1_DV_Cntr[27];
+D1_Shift5Load[27] = DFFEAS(D1_Shift5Load[27]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L161, , , , );
+
+
+--D1_Shift5Bits[26] is ManchEncode:mancho|Shift5Bits[26] at LC_X11_Y4_N1
+--operation mode is normal
+
+D1_Shift5Bits[26]_lut_out = D1_Shift5Rdy & (D1_Shift5Bits[25]) # !D1_Shift5Rdy & D1_Shift5Load[26];
+D1_Shift5Bits[26] = DFFEAS(D1_Shift5Bits[26]_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--E1_CmdData[27] is PIO_Interface:pio|CmdData[27] at LC_X9_Y6_N5
+--operation mode is normal
+
+E1_CmdData[27]_lut_out = A1L59;
+E1_CmdData[27] = DFFEAS(E1_CmdData[27]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , A1L76, , , , );
+
+
+--D1_DV_Cntr[26] is ManchEncode:mancho|DV_Cntr[26] at LC_X10_Y5_N0
+--operation mode is arithmetic
+
+D1_DV_Cntr[26]_carry_eqn = D1L75;
+D1_DV_Cntr[26]_lut_out = D1_DV_Cntr[26] $ !D1_DV_Cntr[26]_carry_eqn;
+D1_DV_Cntr[26] = DFFEAS(D1_DV_Cntr[26]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L60, E1_CmdData[26], , , D1L98);
+
+--D1L77 is ManchEncode:mancho|DV_Cntr[26]~708 at LC_X10_Y5_N0
+--operation mode is arithmetic
+
+D1L77_cout_0 = D1_DV_Cntr[26] & !D1L75;
+D1L77 = CARRY(D1L77_cout_0);
+
+--D1L78 is ManchEncode:mancho|DV_Cntr[26]~708COUT1_836 at LC_X10_Y5_N0
+--operation mode is arithmetic
+
+D1L78_cout_1 = D1_DV_Cntr[26] & !D1L75;
+D1L78 = CARRY(D1L78_cout_1);
+
+
+--D1_ShiftBits[25] is ManchEncode:mancho|ShiftBits[25] at LC_X10_Y4_N1
+--operation mode is normal
+
+D1_ShiftBits[25]_lut_out = F1_isAddr_Zero & D1_DV_Buf & !D1_DV_Cntr[25] # !F1_isAddr_Zero & (D1_ShiftBits[24]);
+D1_ShiftBits[25] = DFFEAS(D1_ShiftBits[25]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_Shift5Load[26] is ManchEncode:mancho|Shift5Load[26] at LC_X11_Y4_N4
+--operation mode is normal
+
+D1_Shift5Load[26]_lut_out = !D1_DV_Cntr[26];
+D1_Shift5Load[26] = DFFEAS(D1_Shift5Load[26]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L161, , , , );
+
+
+--D1_Shift5Bits[25] is ManchEncode:mancho|Shift5Bits[25] at LC_X11_Y4_N9
+--operation mode is normal
+
+D1_Shift5Bits[25]_lut_out = D1_Shift5Rdy & D1_Shift5Bits[24] # !D1_Shift5Rdy & (D1_Shift5Load[25]);
+D1_Shift5Bits[25] = DFFEAS(D1_Shift5Bits[25]_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--E1_CmdData[26] is PIO_Interface:pio|CmdData[26] at LC_X9_Y6_N9
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+E1_CmdData[26]_lut_out = GND;
+E1_CmdData[26] = DFFEAS(E1_CmdData[26]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , A1L76, A1L60, , , VCC);
+
+
+--D1_DV_Cntr[25] is ManchEncode:mancho|DV_Cntr[25] at LC_X9_Y5_N9
+--operation mode is arithmetic
+
+D1_DV_Cntr[25]_carry_eqn = (!D1L61 & D1L72) # (D1L61 & D1L73);
+D1_DV_Cntr[25]_lut_out = D1_DV_Cntr[25] $ D1_DV_Cntr[25]_carry_eqn;
+D1_DV_Cntr[25] = DFFEAS(D1_DV_Cntr[25]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L60, E1_CmdData[25], , , D1L98);
+
+--D1L75 is ManchEncode:mancho|DV_Cntr[25]~712 at LC_X9_Y5_N9
+--operation mode is arithmetic
+
+D1L75 = CARRY(!D1L73 # !D1_DV_Cntr[25]);
+
+
+--D1_ShiftBits[24] is ManchEncode:mancho|ShiftBits[24] at LC_X10_Y4_N9
+--operation mode is normal
+
+D1_ShiftBits[24]_lut_out = F1_isAddr_Zero & D1_DV_Buf & !D1_DV_Cntr[24] # !F1_isAddr_Zero & (D1_ShiftBits[23]);
+D1_ShiftBits[24] = DFFEAS(D1_ShiftBits[24]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_Shift5Load[25] is ManchEncode:mancho|Shift5Load[25] at LC_X11_Y3_N8
+--operation mode is normal
+
+D1_Shift5Load[25]_lut_out = !D1_DV_Cntr[25];
+D1_Shift5Load[25] = DFFEAS(D1_Shift5Load[25]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L161, , , , );
+
+
+--D1_Shift5Bits[24] is ManchEncode:mancho|Shift5Bits[24] at LC_X12_Y5_N7
+--operation mode is normal
+
+D1_Shift5Bits[24]_lut_out = D1_Shift5Rdy & D1_Shift5Bits[23] # !D1_Shift5Rdy & (D1_Shift5Load[24]);
+D1_Shift5Bits[24] = DFFEAS(D1_Shift5Bits[24]_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--E1_CmdData[25] is PIO_Interface:pio|CmdData[25] at LC_X9_Y6_N3
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+E1_CmdData[25]_lut_out = GND;
+E1_CmdData[25] = DFFEAS(E1_CmdData[25]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , A1L76, A1L61, , , VCC);
+
+
+--D1_DV_Cntr[24] is ManchEncode:mancho|DV_Cntr[24] at LC_X9_Y5_N8
+--operation mode is arithmetic
+
+D1_DV_Cntr[24]_carry_eqn = (!D1L61 & D1L69) # (D1L61 & D1L70);
+D1_DV_Cntr[24]_lut_out = D1_DV_Cntr[24] $ (!D1_DV_Cntr[24]_carry_eqn);
+D1_DV_Cntr[24] = DFFEAS(D1_DV_Cntr[24]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L60, E1_CmdData[24], , , D1L98);
+
+--D1L72 is ManchEncode:mancho|DV_Cntr[24]~716 at LC_X9_Y5_N8
+--operation mode is arithmetic
+
+D1L72_cout_0 = D1_DV_Cntr[24] & (!D1L69);
+D1L72 = CARRY(D1L72_cout_0);
+
+--D1L73 is ManchEncode:mancho|DV_Cntr[24]~716COUT1_835 at LC_X9_Y5_N8
+--operation mode is arithmetic
+
+D1L73_cout_1 = D1_DV_Cntr[24] & (!D1L70);
+D1L73 = CARRY(D1L73_cout_1);
+
+
+--D1_ShiftBits[23] is ManchEncode:mancho|ShiftBits[23] at LC_X10_Y4_N2
+--operation mode is normal
+
+D1_ShiftBits[23]_lut_out = F1_isAddr_Zero & !D1_DV_Cntr[23] & (D1_DV_Buf) # !F1_isAddr_Zero & (D1_ShiftBits[22]);
+D1_ShiftBits[23] = DFFEAS(D1_ShiftBits[23]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_Shift5Load[24] is ManchEncode:mancho|Shift5Load[24] at LC_X12_Y5_N3
+--operation mode is normal
+
+D1_Shift5Load[24]_lut_out = !D1_DV_Cntr[24];
+D1_Shift5Load[24] = DFFEAS(D1_Shift5Load[24]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L161, , , , );
+
+
+--D1_Shift5Bits[23] is ManchEncode:mancho|Shift5Bits[23] at LC_X12_Y5_N9
+--operation mode is normal
+
+D1_Shift5Bits[23]_lut_out = D1_Shift5Rdy & (D1_Shift5Bits[22]) # !D1_Shift5Rdy & D1_Shift5Load[23];
+D1_Shift5Bits[23] = DFFEAS(D1_Shift5Bits[23]_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--E1_CmdData[24] is PIO_Interface:pio|CmdData[24] at LC_X9_Y6_N4
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+E1_CmdData[24]_lut_out = GND;
+E1_CmdData[24] = DFFEAS(E1_CmdData[24]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , A1L76, A1L62, , , VCC);
+
+
+--D1_DV_Cntr[23] is ManchEncode:mancho|DV_Cntr[23] at LC_X9_Y5_N7
+--operation mode is arithmetic
+
+D1_DV_Cntr[23]_carry_eqn = (!D1L61 & D1L66) # (D1L61 & D1L67);
+D1_DV_Cntr[23]_lut_out = D1_DV_Cntr[23] $ D1_DV_Cntr[23]_carry_eqn;
+D1_DV_Cntr[23] = DFFEAS(D1_DV_Cntr[23]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L60, E1_CmdData[23], , , D1L98);
+
+--D1L69 is ManchEncode:mancho|DV_Cntr[23]~720 at LC_X9_Y5_N7
+--operation mode is arithmetic
+
+D1L69_cout_0 = !D1L66 # !D1_DV_Cntr[23];
+D1L69 = CARRY(D1L69_cout_0);
+
+--D1L70 is ManchEncode:mancho|DV_Cntr[23]~720COUT1_834 at LC_X9_Y5_N7
+--operation mode is arithmetic
+
+D1L70_cout_1 = !D1L67 # !D1_DV_Cntr[23];
+D1L70 = CARRY(D1L70_cout_1);
+
+
+--D1_ShiftBits[22] is ManchEncode:mancho|ShiftBits[22] at LC_X11_Y5_N3
+--operation mode is normal
+
+D1_ShiftBits[22]_lut_out = F1_isAddr_Zero & (!D1_DV_Cntr[22] & D1_DV_Buf) # !F1_isAddr_Zero & D1_ShiftBits[21];
+D1_ShiftBits[22] = DFFEAS(D1_ShiftBits[22]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_Shift5Load[23] is ManchEncode:mancho|Shift5Load[23] at LC_X12_Y5_N5
+--operation mode is normal
+
+D1_Shift5Load[23]_lut_out = !D1_DV_Cntr[23];
+D1_Shift5Load[23] = DFFEAS(D1_Shift5Load[23]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L161, , , , );
+
+
+--D1_Shift5Bits[22] is ManchEncode:mancho|Shift5Bits[22] at LC_X12_Y5_N2
+--operation mode is normal
+
+D1_Shift5Bits[22]_lut_out = D1_Shift5Rdy & (D1_Shift5Bits[21]) # !D1_Shift5Rdy & D1_Shift5Load[22];
+D1_Shift5Bits[22] = DFFEAS(D1_Shift5Bits[22]_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--E1_CmdData[23] is PIO_Interface:pio|CmdData[23] at LC_X9_Y6_N1
+--operation mode is normal
+
+E1_CmdData[23]_lut_out = A1L55;
+E1_CmdData[23] = DFFEAS(E1_CmdData[23]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , A1L73, , , , );
+
+
+--D1_DV_Cntr[22] is ManchEncode:mancho|DV_Cntr[22] at LC_X9_Y5_N6
+--operation mode is arithmetic
+
+D1_DV_Cntr[22]_carry_eqn = (!D1L61 & D1L63) # (D1L61 & D1L64);
+D1_DV_Cntr[22]_lut_out = D1_DV_Cntr[22] $ (!D1_DV_Cntr[22]_carry_eqn);
+D1_DV_Cntr[22] = DFFEAS(D1_DV_Cntr[22]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L60, E1_CmdData[22], , , D1L98);
+
+--D1L66 is ManchEncode:mancho|DV_Cntr[22]~724 at LC_X9_Y5_N6
+--operation mode is arithmetic
+
+D1L66_cout_0 = D1_DV_Cntr[22] & (!D1L63);
+D1L66 = CARRY(D1L66_cout_0);
+
+--D1L67 is ManchEncode:mancho|DV_Cntr[22]~724COUT1_833 at LC_X9_Y5_N6
+--operation mode is arithmetic
+
+D1L67_cout_1 = D1_DV_Cntr[22] & (!D1L64);
+D1L67 = CARRY(D1L67_cout_1);
+
+
+--D1_ShiftBits[21] is ManchEncode:mancho|ShiftBits[21] at LC_X11_Y5_N6
+--operation mode is normal
+
+D1_ShiftBits[21]_lut_out = F1_isAddr_Zero & !D1_DV_Cntr[21] & (D1_DV_Buf) # !F1_isAddr_Zero & (D1_ShiftBits[20]);
+D1_ShiftBits[21] = DFFEAS(D1_ShiftBits[21]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_Shift5Load[22] is ManchEncode:mancho|Shift5Load[22] at LC_X12_Y5_N4
+--operation mode is normal
+
+D1_Shift5Load[22]_lut_out = !D1_DV_Cntr[22];
+D1_Shift5Load[22] = DFFEAS(D1_Shift5Load[22]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L161, , , , );
+
+
+--D1_Shift5Bits[21] is ManchEncode:mancho|Shift5Bits[21] at LC_X12_Y5_N1
+--operation mode is normal
+
+D1_Shift5Bits[21]_lut_out = D1_Shift5Rdy & (D1_Shift5Bits[20]) # !D1_Shift5Rdy & D1_Shift5Load[21];
+D1_Shift5Bits[21] = DFFEAS(D1_Shift5Bits[21]_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--E1_CmdData[22] is PIO_Interface:pio|CmdData[22] at LC_X8_Y7_N5
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+E1_CmdData[22]_lut_out = GND;
+E1_CmdData[22] = DFFEAS(E1_CmdData[22]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , A1L73, A1L56, , , VCC);
+
+
+--D1_DV_Cntr[21] is ManchEncode:mancho|DV_Cntr[21] at LC_X9_Y5_N5
+--operation mode is arithmetic
+
+D1_DV_Cntr[21]_carry_eqn = D1L61;
+D1_DV_Cntr[21]_lut_out = D1_DV_Cntr[21] $ (D1_DV_Cntr[21]_carry_eqn);
+D1_DV_Cntr[21] = DFFEAS(D1_DV_Cntr[21]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L60, E1_CmdData[21], , , D1L98);
+
+--D1L63 is ManchEncode:mancho|DV_Cntr[21]~728 at LC_X9_Y5_N5
+--operation mode is arithmetic
+
+D1L63_cout_0 = !D1L61 # !D1_DV_Cntr[21];
+D1L63 = CARRY(D1L63_cout_0);
+
+--D1L64 is ManchEncode:mancho|DV_Cntr[21]~728COUT1_832 at LC_X9_Y5_N5
+--operation mode is arithmetic
+
+D1L64_cout_1 = !D1L61 # !D1_DV_Cntr[21];
+D1L64 = CARRY(D1L64_cout_1);
+
+
+--D1_ShiftBits[20] is ManchEncode:mancho|ShiftBits[20] at LC_X11_Y5_N0
+--operation mode is normal
+
+D1_ShiftBits[20]_lut_out = F1_isAddr_Zero & !D1_DV_Cntr[20] & D1_DV_Buf # !F1_isAddr_Zero & (D1_ShiftBits[19]);
+D1_ShiftBits[20] = DFFEAS(D1_ShiftBits[20]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_Shift5Load[21] is ManchEncode:mancho|Shift5Load[21] at LC_X12_Y5_N6
+--operation mode is normal
+
+D1_Shift5Load[21]_lut_out = !D1_DV_Cntr[21];
+D1_Shift5Load[21] = DFFEAS(D1_Shift5Load[21]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L161, , , , );
+
+
+--D1_Shift5Bits[20] is ManchEncode:mancho|Shift5Bits[20] at LC_X12_Y5_N0
+--operation mode is normal
+
+D1_Shift5Bits[20]_lut_out = D1_Shift5Rdy & D1_Shift5Bits[19] # !D1_Shift5Rdy & (D1_Shift5Load[20]);
+D1_Shift5Bits[20] = DFFEAS(D1_Shift5Bits[20]_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--E1_CmdData[21] is PIO_Interface:pio|CmdData[21] at LC_X8_Y7_N1
+--operation mode is normal
+
+E1_CmdData[21]_lut_out = A1L57;
+E1_CmdData[21] = DFFEAS(E1_CmdData[21]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , A1L73, , , , );
+
+
+--D1_DV_Cntr[20] is ManchEncode:mancho|DV_Cntr[20] at LC_X9_Y5_N4
+--operation mode is arithmetic
+
+D1_DV_Cntr[20]_carry_eqn = (!D1L46 & D1L57) # (D1L46 & D1L58);
+D1_DV_Cntr[20]_lut_out = D1_DV_Cntr[20] $ (!D1_DV_Cntr[20]_carry_eqn);
+D1_DV_Cntr[20] = DFFEAS(D1_DV_Cntr[20]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L60, E1_CmdData[20], , , D1L98);
+
+--D1L61 is ManchEncode:mancho|DV_Cntr[20]~732 at LC_X9_Y5_N4
+--operation mode is arithmetic
+
+D1L61 = CARRY(D1_DV_Cntr[20] & (!D1L58));
+
+
+--D1_ShiftBits[19] is ManchEncode:mancho|ShiftBits[19] at LC_X11_Y5_N9
+--operation mode is normal
+
+D1_ShiftBits[19]_lut_out = F1_isAddr_Zero & !D1_DV_Cntr[19] & D1_DV_Buf # !F1_isAddr_Zero & (D1_ShiftBits[18]);
+D1_ShiftBits[19] = DFFEAS(D1_ShiftBits[19]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_Shift5Load[20] is ManchEncode:mancho|Shift5Load[20] at LC_X12_Y5_N8
+--operation mode is normal
+
+D1_Shift5Load[20]_lut_out = !D1_DV_Cntr[20];
+D1_Shift5Load[20] = DFFEAS(D1_Shift5Load[20]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L161, , , , );
+
+
+--D1_Shift5Bits[19] is ManchEncode:mancho|Shift5Bits[19] at LC_X12_Y4_N0
+--operation mode is normal
+
+D1_Shift5Bits[19]_lut_out = D1_Shift5Rdy & D1_Shift5Bits[18] # !D1_Shift5Rdy & (D1_Shift5Load[19]);
+D1_Shift5Bits[19] = DFFEAS(D1_Shift5Bits[19]_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--E1_CmdData[20] is PIO_Interface:pio|CmdData[20] at LC_X8_Y7_N6
+--operation mode is normal
+--sload is tied to vcc, which is functionally the same as treating the sdata port as the data input.
+
+E1_CmdData[20]_lut_out = GND;
+E1_CmdData[20] = DFFEAS(E1_CmdData[20]_lut_out, GLOBAL(PIO_nWR), !PIO_Reset, , A1L73, A1L58, , , VCC);
+
+
+--D1_DV_Cntr[19] is ManchEncode:mancho|DV_Cntr[19] at LC_X9_Y5_N3
+--operation mode is arithmetic
+
+D1_DV_Cntr[19]_carry_eqn = (!D1L46 & D1L54) # (D1L46 & D1L55);
+D1_DV_Cntr[19]_lut_out = D1_DV_Cntr[19] $ (D1_DV_Cntr[19]_carry_eqn);
+D1_DV_Cntr[19] = DFFEAS(D1_DV_Cntr[19]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L60, E1_CmdData[19], , , D1L98);
+
+--D1L57 is ManchEncode:mancho|DV_Cntr[19]~736 at LC_X9_Y5_N3
+--operation mode is arithmetic
+
+D1L57_cout_0 = !D1L54 # !D1_DV_Cntr[19];
+D1L57 = CARRY(D1L57_cout_0);
+
+--D1L58 is ManchEncode:mancho|DV_Cntr[19]~736COUT1_831 at LC_X9_Y5_N3
+--operation mode is arithmetic
+
+D1L58_cout_1 = !D1L55 # !D1_DV_Cntr[19];
+D1L58 = CARRY(D1L58_cout_1);
+
+
+--D1_ShiftBits[18] is ManchEncode:mancho|ShiftBits[18] at LC_X11_Y5_N1
+--operation mode is normal
+
+D1_ShiftBits[18]_lut_out = F1_isAddr_Zero & !D1_DV_Cntr[18] & D1_DV_Buf # !F1_isAddr_Zero & (D1_ShiftBits[17]);
+D1_ShiftBits[18] = DFFEAS(D1_ShiftBits[18]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_Shift5Load[19] is ManchEncode:mancho|Shift5Load[19] at LC_X12_Y4_N3
+--operation mode is normal
+
+D1_Shift5Load[19]_lut_out = !D1_DV_Cntr[19];
+D1_Shift5Load[19] = DFFEAS(D1_Shift5Load[19]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L161, , , , );
+
+
+--D1_Shift5Bits[18] is ManchEncode:mancho|Shift5Bits[18] at LC_X12_Y4_N2
+--operation mode is normal
+
+D1_Shift5Bits[18]_lut_out = D1_Shift5Rdy & (D1_Shift5Bits[17]) # !D1_Shift5Rdy & D1_Shift5Load[18];
+D1_Shift5Bits[18] = DFFEAS(D1_Shift5Bits[18]_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_DV_Cntr[18] is ManchEncode:mancho|DV_Cntr[18] at LC_X9_Y5_N2
+--operation mode is arithmetic
+
+D1_DV_Cntr[18]_carry_eqn = (!D1L46 & D1L51) # (D1L46 & D1L52);
+D1_DV_Cntr[18]_lut_out = D1_DV_Cntr[18] $ !D1_DV_Cntr[18]_carry_eqn;
+D1_DV_Cntr[18] = DFFEAS(D1_DV_Cntr[18]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L60, E1_CmdData[18], , , D1L98);
+
+--D1L54 is ManchEncode:mancho|DV_Cntr[18]~740 at LC_X9_Y5_N2
+--operation mode is arithmetic
+
+D1L54_cout_0 = D1_DV_Cntr[18] & !D1L51;
+D1L54 = CARRY(D1L54_cout_0);
+
+--D1L55 is ManchEncode:mancho|DV_Cntr[18]~740COUT1_830 at LC_X9_Y5_N2
+--operation mode is arithmetic
+
+D1L55_cout_1 = D1_DV_Cntr[18] & !D1L52;
+D1L55 = CARRY(D1L55_cout_1);
+
+
+--D1_ShiftBits[17] is ManchEncode:mancho|ShiftBits[17] at LC_X11_Y5_N8
+--operation mode is normal
+
+D1_ShiftBits[17]_lut_out = F1_isAddr_Zero & !D1_DV_Cntr[17] & D1_DV_Buf # !F1_isAddr_Zero & (D1_ShiftBits[16]);
+D1_ShiftBits[17] = DFFEAS(D1_ShiftBits[17]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_Shift5Load[18] is ManchEncode:mancho|Shift5Load[18] at LC_X12_Y4_N5
+--operation mode is normal
+
+D1_Shift5Load[18]_lut_out = !D1_DV_Cntr[18];
+D1_Shift5Load[18] = DFFEAS(D1_Shift5Load[18]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L161, , , , );
+
+
+--D1_Shift5Bits[17] is ManchEncode:mancho|Shift5Bits[17] at LC_X12_Y4_N1
+--operation mode is normal
+
+D1_Shift5Bits[17]_lut_out = D1_Shift5Rdy & (D1_Shift5Bits[16]) # !D1_Shift5Rdy & D1_Shift5Load[17];
+D1_Shift5Bits[17] = DFFEAS(D1_Shift5Bits[17]_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_DV_Cntr[17] is ManchEncode:mancho|DV_Cntr[17] at LC_X9_Y5_N1
+--operation mode is arithmetic
+
+D1_DV_Cntr[17]_carry_eqn = (!D1L46 & D1L48) # (D1L46 & D1L49);
+D1_DV_Cntr[17]_lut_out = D1_DV_Cntr[17] $ D1_DV_Cntr[17]_carry_eqn;
+D1_DV_Cntr[17] = DFFEAS(D1_DV_Cntr[17]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L60, E1_CmdData[17], , , D1L98);
+
+--D1L51 is ManchEncode:mancho|DV_Cntr[17]~744 at LC_X9_Y5_N1
+--operation mode is arithmetic
+
+D1L51_cout_0 = !D1L48 # !D1_DV_Cntr[17];
+D1L51 = CARRY(D1L51_cout_0);
+
+--D1L52 is ManchEncode:mancho|DV_Cntr[17]~744COUT1_829 at LC_X9_Y5_N1
+--operation mode is arithmetic
+
+D1L52_cout_1 = !D1L49 # !D1_DV_Cntr[17];
+D1L52 = CARRY(D1L52_cout_1);
+
+
+--D1_ShiftBits[16] is ManchEncode:mancho|ShiftBits[16] at LC_X9_Y4_N6
+--operation mode is normal
+
+D1_ShiftBits[16]_lut_out = F1_isAddr_Zero & D1_DV_Buf & !D1_DV_Cntr[16] # !F1_isAddr_Zero & (D1_ShiftBits[15]);
+D1_ShiftBits[16] = DFFEAS(D1_ShiftBits[16]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_Shift5Load[17] is ManchEncode:mancho|Shift5Load[17] at LC_X12_Y4_N4
+--operation mode is normal
+
+D1_Shift5Load[17]_lut_out = !D1_DV_Cntr[17];
+D1_Shift5Load[17] = DFFEAS(D1_Shift5Load[17]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L161, , , , );
+
+
+--D1_Shift5Bits[16] is ManchEncode:mancho|Shift5Bits[16] at LC_X12_Y4_N9
+--operation mode is normal
+
+D1_Shift5Bits[16]_lut_out = D1_Shift5Rdy & (D1_Shift5Bits[15]) # !D1_Shift5Rdy & D1_Shift5Load[16];
+D1_Shift5Bits[16] = DFFEAS(D1_Shift5Bits[16]_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_DV_Cntr[16] is ManchEncode:mancho|DV_Cntr[16] at LC_X9_Y5_N0
+--operation mode is arithmetic
+
+D1_DV_Cntr[16]_carry_eqn = D1L46;
+D1_DV_Cntr[16]_lut_out = D1_DV_Cntr[16] $ !D1_DV_Cntr[16]_carry_eqn;
+D1_DV_Cntr[16] = DFFEAS(D1_DV_Cntr[16]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L60, E1_CmdData[16], , , D1L98);
+
+--D1L48 is ManchEncode:mancho|DV_Cntr[16]~748 at LC_X9_Y5_N0
+--operation mode is arithmetic
+
+D1L48_cout_0 = D1_DV_Cntr[16] & !D1L46;
+D1L48 = CARRY(D1L48_cout_0);
+
+--D1L49 is ManchEncode:mancho|DV_Cntr[16]~748COUT1_828 at LC_X9_Y5_N0
+--operation mode is arithmetic
+
+D1L49_cout_1 = D1_DV_Cntr[16] & !D1L46;
+D1L49 = CARRY(D1L49_cout_1);
+
+
+--D1_ShiftBits[15] is ManchEncode:mancho|ShiftBits[15] at LC_X9_Y4_N2
+--operation mode is normal
+
+D1_ShiftBits[15]_lut_out = F1_isAddr_Zero & (D1_DV_Buf & !D1_DV_Cntr[15]) # !F1_isAddr_Zero & D1_ShiftBits[14];
+D1_ShiftBits[15] = DFFEAS(D1_ShiftBits[15]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_Shift5Load[16] is ManchEncode:mancho|Shift5Load[16] at LC_X12_Y4_N6
+--operation mode is normal
+
+D1_Shift5Load[16]_lut_out = !D1_DV_Cntr[16];
+D1_Shift5Load[16] = DFFEAS(D1_Shift5Load[16]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L161, , , , );
+
+
+--D1_Shift5Bits[15] is ManchEncode:mancho|Shift5Bits[15] at LC_X12_Y4_N7
+--operation mode is normal
+
+D1_Shift5Bits[15]_lut_out = D1_Shift5Rdy & D1_Shift5Bits[14] # !D1_Shift5Rdy & (D1_Shift5Load[15]);
+D1_Shift5Bits[15] = DFFEAS(D1_Shift5Bits[15]_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_DV_Cntr[15] is ManchEncode:mancho|DV_Cntr[15] at LC_X8_Y5_N9
+--operation mode is arithmetic
+
+D1_DV_Cntr[15]_carry_eqn = (!D1L32 & D1L43) # (D1L32 & D1L44);
+D1_DV_Cntr[15]_lut_out = D1_DV_Cntr[15] $ D1_DV_Cntr[15]_carry_eqn;
+D1_DV_Cntr[15] = DFFEAS(D1_DV_Cntr[15]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L60, E1_CmdData[15], , , D1L98);
+
+--D1L46 is ManchEncode:mancho|DV_Cntr[15]~752 at LC_X8_Y5_N9
+--operation mode is arithmetic
+
+D1L46 = CARRY(!D1L44 # !D1_DV_Cntr[15]);
+
+
+--D1_ShiftBits[14] is ManchEncode:mancho|ShiftBits[14] at LC_X9_Y4_N4
+--operation mode is normal
+
+D1_ShiftBits[14]_lut_out = F1_isAddr_Zero & !D1_DV_Cntr[14] & D1_DV_Buf # !F1_isAddr_Zero & (D1_ShiftBits[13]);
+D1_ShiftBits[14] = DFFEAS(D1_ShiftBits[14]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_Shift5Load[15] is ManchEncode:mancho|Shift5Load[15] at LC_X12_Y4_N8
+--operation mode is normal
+
+D1_Shift5Load[15]_lut_out = !D1_DV_Cntr[15];
+D1_Shift5Load[15] = DFFEAS(D1_Shift5Load[15]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L161, , , , );
+
+
+--D1_Shift5Bits[14] is ManchEncode:mancho|Shift5Bits[14] at LC_X8_Y4_N8
+--operation mode is normal
+
+D1_Shift5Bits[14]_lut_out = D1_Shift5Rdy & D1_Shift5Bits[13] # !D1_Shift5Rdy & (D1_Shift5Load[14]);
+D1_Shift5Bits[14] = DFFEAS(D1_Shift5Bits[14]_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_DV_Cntr[14] is ManchEncode:mancho|DV_Cntr[14] at LC_X8_Y5_N8
+--operation mode is arithmetic
+
+D1_DV_Cntr[14]_carry_eqn = (!D1L32 & D1L40) # (D1L32 & D1L41);
+D1_DV_Cntr[14]_lut_out = D1_DV_Cntr[14] $ (!D1_DV_Cntr[14]_carry_eqn);
+D1_DV_Cntr[14] = DFFEAS(D1_DV_Cntr[14]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L60, E1_CmdData[14], , , D1L98);
+
+--D1L43 is ManchEncode:mancho|DV_Cntr[14]~756 at LC_X8_Y5_N8
+--operation mode is arithmetic
+
+D1L43_cout_0 = D1_DV_Cntr[14] & (!D1L40);
+D1L43 = CARRY(D1L43_cout_0);
+
+--D1L44 is ManchEncode:mancho|DV_Cntr[14]~756COUT1_827 at LC_X8_Y5_N8
+--operation mode is arithmetic
+
+D1L44_cout_1 = D1_DV_Cntr[14] & (!D1L41);
+D1L44 = CARRY(D1L44_cout_1);
+
+
+--D1_ShiftBits[13] is ManchEncode:mancho|ShiftBits[13] at LC_X9_Y4_N1
+--operation mode is normal
+
+D1_ShiftBits[13]_lut_out = F1_isAddr_Zero & (D1_DV_Buf & !D1_DV_Cntr[13]) # !F1_isAddr_Zero & D1_ShiftBits[12];
+D1_ShiftBits[13] = DFFEAS(D1_ShiftBits[13]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_Shift5Load[14] is ManchEncode:mancho|Shift5Load[14] at LC_X9_Y4_N8
+--operation mode is normal
+
+D1_Shift5Load[14]_lut_out = !D1_DV_Cntr[14];
+D1_Shift5Load[14] = DFFEAS(D1_Shift5Load[14]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L161, , , , );
+
+
+--D1_Shift5Bits[13] is ManchEncode:mancho|Shift5Bits[13] at LC_X8_Y4_N0
+--operation mode is normal
+
+D1_Shift5Bits[13]_lut_out = D1_Shift5Rdy & (D1_Shift5Bits[12]) # !D1_Shift5Rdy & D1_Shift5Load[13];
+D1_Shift5Bits[13] = DFFEAS(D1_Shift5Bits[13]_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_DV_Cntr[13] is ManchEncode:mancho|DV_Cntr[13] at LC_X8_Y5_N7
+--operation mode is arithmetic
+
+D1_DV_Cntr[13]_carry_eqn = (!D1L32 & D1L37) # (D1L32 & D1L38);
+D1_DV_Cntr[13]_lut_out = D1_DV_Cntr[13] $ D1_DV_Cntr[13]_carry_eqn;
+D1_DV_Cntr[13] = DFFEAS(D1_DV_Cntr[13]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L60, E1_CmdData[13], , , D1L98);
+
+--D1L40 is ManchEncode:mancho|DV_Cntr[13]~760 at LC_X8_Y5_N7
+--operation mode is arithmetic
+
+D1L40_cout_0 = !D1L37 # !D1_DV_Cntr[13];
+D1L40 = CARRY(D1L40_cout_0);
+
+--D1L41 is ManchEncode:mancho|DV_Cntr[13]~760COUT1_826 at LC_X8_Y5_N7
+--operation mode is arithmetic
+
+D1L41_cout_1 = !D1L38 # !D1_DV_Cntr[13];
+D1L41 = CARRY(D1L41_cout_1);
+
+
+--D1_ShiftBits[12] is ManchEncode:mancho|ShiftBits[12] at LC_X9_Y4_N7
+--operation mode is normal
+
+D1_ShiftBits[12]_lut_out = F1_isAddr_Zero & D1_DV_Buf & !D1_DV_Cntr[12] # !F1_isAddr_Zero & (D1_ShiftBits[11]);
+D1_ShiftBits[12] = DFFEAS(D1_ShiftBits[12]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_Shift5Load[13] is ManchEncode:mancho|Shift5Load[13] at LC_X11_Y3_N4
+--operation mode is normal
+
+D1_Shift5Load[13]_lut_out = !D1_DV_Cntr[13];
+D1_Shift5Load[13] = DFFEAS(D1_Shift5Load[13]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L161, , , , );
+
+
+--D1_Shift5Bits[12] is ManchEncode:mancho|Shift5Bits[12] at LC_X8_Y4_N9
+--operation mode is normal
+
+D1_Shift5Bits[12]_lut_out = D1_Shift5Rdy & D1_Shift5Bits[11] # !D1_Shift5Rdy & (D1_Shift5Load[12]);
+D1_Shift5Bits[12] = DFFEAS(D1_Shift5Bits[12]_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_DV_Cntr[12] is ManchEncode:mancho|DV_Cntr[12] at LC_X8_Y5_N6
+--operation mode is arithmetic
+
+D1_DV_Cntr[12]_carry_eqn = (!D1L32 & D1L34) # (D1L32 & D1L35);
+D1_DV_Cntr[12]_lut_out = D1_DV_Cntr[12] $ (!D1_DV_Cntr[12]_carry_eqn);
+D1_DV_Cntr[12] = DFFEAS(D1_DV_Cntr[12]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L60, E1_CmdData[12], , , D1L98);
+
+--D1L37 is ManchEncode:mancho|DV_Cntr[12]~764 at LC_X8_Y5_N6
+--operation mode is arithmetic
+
+D1L37_cout_0 = D1_DV_Cntr[12] & (!D1L34);
+D1L37 = CARRY(D1L37_cout_0);
+
+--D1L38 is ManchEncode:mancho|DV_Cntr[12]~764COUT1_825 at LC_X8_Y5_N6
+--operation mode is arithmetic
+
+D1L38_cout_1 = D1_DV_Cntr[12] & (!D1L35);
+D1L38 = CARRY(D1L38_cout_1);
+
+
+--D1_ShiftBits[11] is ManchEncode:mancho|ShiftBits[11] at LC_X9_Y4_N9
+--operation mode is normal
+
+D1_ShiftBits[11]_lut_out = F1_isAddr_Zero & !D1_DV_Cntr[11] & D1_DV_Buf # !F1_isAddr_Zero & (D1_ShiftBits[10]);
+D1_ShiftBits[11] = DFFEAS(D1_ShiftBits[11]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_Shift5Load[12] is ManchEncode:mancho|Shift5Load[12] at LC_X8_Y4_N3
+--operation mode is normal
+
+D1_Shift5Load[12]_lut_out = !D1_DV_Cntr[12];
+D1_Shift5Load[12] = DFFEAS(D1_Shift5Load[12]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L161, , , , );
+
+
+--D1_Shift5Bits[11] is ManchEncode:mancho|Shift5Bits[11] at LC_X8_Y4_N7
+--operation mode is normal
+
+D1_Shift5Bits[11]_lut_out = D1_Shift5Rdy & (D1_Shift5Bits[10]) # !D1_Shift5Rdy & D1_Shift5Load[11];
+D1_Shift5Bits[11] = DFFEAS(D1_Shift5Bits[11]_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_DV_Cntr[11] is ManchEncode:mancho|DV_Cntr[11] at LC_X8_Y5_N5
+--operation mode is arithmetic
+
+D1_DV_Cntr[11]_carry_eqn = D1L32;
+D1_DV_Cntr[11]_lut_out = D1_DV_Cntr[11] $ (D1_DV_Cntr[11]_carry_eqn);
+D1_DV_Cntr[11] = DFFEAS(D1_DV_Cntr[11]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L60, E1_CmdData[11], , , D1L98);
+
+--D1L34 is ManchEncode:mancho|DV_Cntr[11]~768 at LC_X8_Y5_N5
+--operation mode is arithmetic
+
+D1L34_cout_0 = !D1L32 # !D1_DV_Cntr[11];
+D1L34 = CARRY(D1L34_cout_0);
+
+--D1L35 is ManchEncode:mancho|DV_Cntr[11]~768COUT1_824 at LC_X8_Y5_N5
+--operation mode is arithmetic
+
+D1L35_cout_1 = !D1L32 # !D1_DV_Cntr[11];
+D1L35 = CARRY(D1L35_cout_1);
+
+
+--D1_ShiftBits[10] is ManchEncode:mancho|ShiftBits[10] at LC_X9_Y4_N3
+--operation mode is normal
+
+D1_ShiftBits[10]_lut_out = F1_isAddr_Zero & (!D1_DV_Cntr[10] & D1_DV_Buf) # !F1_isAddr_Zero & D1_ShiftBits[9];
+D1_ShiftBits[10] = DFFEAS(D1_ShiftBits[10]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_Shift5Load[11] is ManchEncode:mancho|Shift5Load[11] at LC_X8_Y4_N5
+--operation mode is normal
+
+D1_Shift5Load[11]_lut_out = !D1_DV_Cntr[11];
+D1_Shift5Load[11] = DFFEAS(D1_Shift5Load[11]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L161, , , , );
+
+
+--D1_Shift5Bits[10] is ManchEncode:mancho|Shift5Bits[10] at LC_X8_Y4_N2
+--operation mode is normal
+
+D1_Shift5Bits[10]_lut_out = D1_Shift5Rdy & (D1_Shift5Bits[9]) # !D1_Shift5Rdy & D1_Shift5Load[10];
+D1_Shift5Bits[10] = DFFEAS(D1_Shift5Bits[10]_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_DV_Cntr[10] is ManchEncode:mancho|DV_Cntr[10] at LC_X8_Y5_N4
+--operation mode is arithmetic
+
+D1_DV_Cntr[10]_carry_eqn = (!D1L18 & D1L29) # (D1L18 & D1L30);
+D1_DV_Cntr[10]_lut_out = D1_DV_Cntr[10] $ (!D1_DV_Cntr[10]_carry_eqn);
+D1_DV_Cntr[10] = DFFEAS(D1_DV_Cntr[10]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L60, E1_CmdData[10], , , D1L98);
+
+--D1L32 is ManchEncode:mancho|DV_Cntr[10]~772 at LC_X8_Y5_N4
+--operation mode is arithmetic
+
+D1L32 = CARRY(D1_DV_Cntr[10] & (!D1L30));
+
+
+--D1_ShiftBits[9] is ManchEncode:mancho|ShiftBits[9] at LC_X7_Y4_N3
+--operation mode is normal
+
+D1_ShiftBits[9]_lut_out = F1_isAddr_Zero & !D1_DV_Cntr[9] & (D1_DV_Buf) # !F1_isAddr_Zero & (D1_ShiftBits[8]);
+D1_ShiftBits[9] = DFFEAS(D1_ShiftBits[9]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_Shift5Load[10] is ManchEncode:mancho|Shift5Load[10] at LC_X8_Y4_N4
+--operation mode is normal
+
+D1_Shift5Load[10]_lut_out = !D1_DV_Cntr[10];
+D1_Shift5Load[10] = DFFEAS(D1_Shift5Load[10]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L161, , , , );
+
+
+--D1_Shift5Bits[9] is ManchEncode:mancho|Shift5Bits[9] at LC_X8_Y4_N1
+--operation mode is normal
+
+D1_Shift5Bits[9]_lut_out = D1_Shift5Rdy & (D1_Shift5Bits[8]) # !D1_Shift5Rdy & D1_Shift5Load[9];
+D1_Shift5Bits[9] = DFFEAS(D1_Shift5Bits[9]_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_DV_Cntr[9] is ManchEncode:mancho|DV_Cntr[9] at LC_X8_Y5_N3
+--operation mode is arithmetic
+
+D1_DV_Cntr[9]_carry_eqn = (!D1L18 & D1L26) # (D1L18 & D1L27);
+D1_DV_Cntr[9]_lut_out = D1_DV_Cntr[9] $ (D1_DV_Cntr[9]_carry_eqn);
+D1_DV_Cntr[9] = DFFEAS(D1_DV_Cntr[9]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L60, E1_CmdData[9], , , D1L98);
+
+--D1L29 is ManchEncode:mancho|DV_Cntr[9]~776 at LC_X8_Y5_N3
+--operation mode is arithmetic
+
+D1L29_cout_0 = !D1L26 # !D1_DV_Cntr[9];
+D1L29 = CARRY(D1L29_cout_0);
+
+--D1L30 is ManchEncode:mancho|DV_Cntr[9]~776COUT1_823 at LC_X8_Y5_N3
+--operation mode is arithmetic
+
+D1L30_cout_1 = !D1L27 # !D1_DV_Cntr[9];
+D1L30 = CARRY(D1L30_cout_1);
+
+
+--D1_ShiftBits[8] is ManchEncode:mancho|ShiftBits[8] at LC_X7_Y4_N7
+--operation mode is normal
+
+D1_ShiftBits[8]_lut_out = F1_isAddr_Zero & !D1_DV_Cntr[8] & D1_DV_Buf # !F1_isAddr_Zero & (D1_ShiftBits[7]);
+D1_ShiftBits[8] = DFFEAS(D1_ShiftBits[8]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_Shift5Load[9] is ManchEncode:mancho|Shift5Load[9] at LC_X8_Y4_N6
+--operation mode is normal
+
+D1_Shift5Load[9]_lut_out = !D1_DV_Cntr[9];
+D1_Shift5Load[9] = DFFEAS(D1_Shift5Load[9]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L161, , , , );
+
+
+--D1_Shift5Bits[8] is ManchEncode:mancho|Shift5Bits[8] at LC_X6_Y4_N4
+--operation mode is normal
+
+D1_Shift5Bits[8]_lut_out = D1_Shift5Rdy & D1_Shift5Bits[7] # !D1_Shift5Rdy & (D1_Shift5Load[8]);
+D1_Shift5Bits[8] = DFFEAS(D1_Shift5Bits[8]_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_DV_Cntr[8] is ManchEncode:mancho|DV_Cntr[8] at LC_X8_Y5_N2
+--operation mode is arithmetic
+
+D1_DV_Cntr[8]_carry_eqn = (!D1L18 & D1L23) # (D1L18 & D1L24);
+D1_DV_Cntr[8]_lut_out = D1_DV_Cntr[8] $ !D1_DV_Cntr[8]_carry_eqn;
+D1_DV_Cntr[8] = DFFEAS(D1_DV_Cntr[8]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L60, E1_CmdData[8], , , D1L98);
+
+--D1L26 is ManchEncode:mancho|DV_Cntr[8]~780 at LC_X8_Y5_N2
+--operation mode is arithmetic
+
+D1L26_cout_0 = D1_DV_Cntr[8] & !D1L23;
+D1L26 = CARRY(D1L26_cout_0);
+
+--D1L27 is ManchEncode:mancho|DV_Cntr[8]~780COUT1_822 at LC_X8_Y5_N2
+--operation mode is arithmetic
+
+D1L27_cout_1 = D1_DV_Cntr[8] & !D1L24;
+D1L27 = CARRY(D1L27_cout_1);
+
+
+--D1_ShiftBits[7] is ManchEncode:mancho|ShiftBits[7] at LC_X7_Y4_N2
+--operation mode is normal
+
+D1_ShiftBits[7]_lut_out = F1_isAddr_Zero & !D1_DV_Cntr[7] & D1_DV_Buf # !F1_isAddr_Zero & (D1_ShiftBits[6]);
+D1_ShiftBits[7] = DFFEAS(D1_ShiftBits[7]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_Shift5Load[8] is ManchEncode:mancho|Shift5Load[8] at LC_X7_Y4_N4
+--operation mode is normal
+
+D1_Shift5Load[8]_lut_out = !D1_DV_Cntr[8];
+D1_Shift5Load[8] = DFFEAS(D1_Shift5Load[8]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L161, , , , );
+
+
+--D1_Shift5Bits[7] is ManchEncode:mancho|Shift5Bits[7] at LC_X6_Y4_N1
+--operation mode is normal
+
+D1_Shift5Bits[7]_lut_out = D1_Shift5Rdy & D1_Shift5Bits[6] # !D1_Shift5Rdy & (D1_Shift5Load[7]);
+D1_Shift5Bits[7] = DFFEAS(D1_Shift5Bits[7]_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_DV_Cntr[7] is ManchEncode:mancho|DV_Cntr[7] at LC_X8_Y5_N1
+--operation mode is arithmetic
+
+D1_DV_Cntr[7]_carry_eqn = (!D1L18 & D1L20) # (D1L18 & D1L21);
+D1_DV_Cntr[7]_lut_out = D1_DV_Cntr[7] $ D1_DV_Cntr[7]_carry_eqn;
+D1_DV_Cntr[7] = DFFEAS(D1_DV_Cntr[7]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L60, E1_CmdData[7], , , D1L98);
+
+--D1L23 is ManchEncode:mancho|DV_Cntr[7]~784 at LC_X8_Y5_N1
+--operation mode is arithmetic
+
+D1L23_cout_0 = !D1L20 # !D1_DV_Cntr[7];
+D1L23 = CARRY(D1L23_cout_0);
+
+--D1L24 is ManchEncode:mancho|DV_Cntr[7]~784COUT1_821 at LC_X8_Y5_N1
+--operation mode is arithmetic
+
+D1L24_cout_1 = !D1L21 # !D1_DV_Cntr[7];
+D1L24 = CARRY(D1L24_cout_1);
+
+
+--D1_ShiftBits[6] is ManchEncode:mancho|ShiftBits[6] at LC_X7_Y4_N9
+--operation mode is normal
+
+D1_ShiftBits[6]_lut_out = F1_isAddr_Zero & !D1_DV_Cntr[6] & (D1_DV_Buf) # !F1_isAddr_Zero & (D1_ShiftBits[5]);
+D1_ShiftBits[6] = DFFEAS(D1_ShiftBits[6]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_Shift5Load[7] is ManchEncode:mancho|Shift5Load[7] at LC_X6_Y4_N3
+--operation mode is normal
+
+D1_Shift5Load[7]_lut_out = !D1_DV_Cntr[7];
+D1_Shift5Load[7] = DFFEAS(D1_Shift5Load[7]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L161, , , , );
+
+
+--D1_Shift5Bits[6] is ManchEncode:mancho|Shift5Bits[6] at LC_X6_Y4_N9
+--operation mode is normal
+
+D1_Shift5Bits[6]_lut_out = D1_Shift5Rdy & (D1_Shift5Bits[5]) # !D1_Shift5Rdy & D1_Shift5Load[6];
+D1_Shift5Bits[6] = DFFEAS(D1_Shift5Bits[6]_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_DV_Cntr[6] is ManchEncode:mancho|DV_Cntr[6] at LC_X8_Y5_N0
+--operation mode is arithmetic
+
+D1_DV_Cntr[6]_carry_eqn = D1L18;
+D1_DV_Cntr[6]_lut_out = D1_DV_Cntr[6] $ !D1_DV_Cntr[6]_carry_eqn;
+D1_DV_Cntr[6] = DFFEAS(D1_DV_Cntr[6]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L60, E1_CmdData[6], , , D1L98);
+
+--D1L20 is ManchEncode:mancho|DV_Cntr[6]~788 at LC_X8_Y5_N0
+--operation mode is arithmetic
+
+D1L20_cout_0 = D1_DV_Cntr[6] & !D1L18;
+D1L20 = CARRY(D1L20_cout_0);
+
+--D1L21 is ManchEncode:mancho|DV_Cntr[6]~788COUT1_820 at LC_X8_Y5_N0
+--operation mode is arithmetic
+
+D1L21_cout_1 = D1_DV_Cntr[6] & !D1L18;
+D1L21 = CARRY(D1L21_cout_1);
+
+
+--D1_ShiftBits[5] is ManchEncode:mancho|ShiftBits[5] at LC_X7_Y4_N0
+--operation mode is normal
+
+D1_ShiftBits[5]_lut_out = F1_isAddr_Zero & (!D1_DV_Cntr[5] & D1_DV_Buf) # !F1_isAddr_Zero & D1_ShiftBits[4];
+D1_ShiftBits[5] = DFFEAS(D1_ShiftBits[5]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_Shift5Load[6] is ManchEncode:mancho|Shift5Load[6] at LC_X6_Y4_N6
+--operation mode is normal
+
+D1_Shift5Load[6]_lut_out = !D1_DV_Cntr[6];
+D1_Shift5Load[6] = DFFEAS(D1_Shift5Load[6]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L161, , , , );
+
+
+--D1_Shift5Bits[5] is ManchEncode:mancho|Shift5Bits[5] at LC_X6_Y4_N2
+--operation mode is normal
+
+D1_Shift5Bits[5]_lut_out = D1_Shift5Rdy & (D1_Shift5Bits[4]) # !D1_Shift5Rdy & D1_Shift5Load[5];
+D1_Shift5Bits[5] = DFFEAS(D1_Shift5Bits[5]_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_DV_Cntr[5] is ManchEncode:mancho|DV_Cntr[5] at LC_X7_Y5_N9
+--operation mode is arithmetic
+
+D1_DV_Cntr[5]_carry_eqn = (!D1L4 & D1L15) # (D1L4 & D1L16);
+D1_DV_Cntr[5]_lut_out = D1_DV_Cntr[5] $ D1_DV_Cntr[5]_carry_eqn;
+D1_DV_Cntr[5] = DFFEAS(D1_DV_Cntr[5]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L60, E1_CmdData[5], , , D1L98);
+
+--D1L18 is ManchEncode:mancho|DV_Cntr[5]~792 at LC_X7_Y5_N9
+--operation mode is arithmetic
+
+D1L18 = CARRY(!D1L16 # !D1_DV_Cntr[5]);
+
+
+--D1_ShiftBits[4] is ManchEncode:mancho|ShiftBits[4] at LC_X7_Y4_N8
+--operation mode is normal
+
+D1_ShiftBits[4]_lut_out = F1_isAddr_Zero & (D1_DV_Buf & !D1_DV_Cntr[4]) # !F1_isAddr_Zero & D1_ShiftBits[3];
+D1_ShiftBits[4] = DFFEAS(D1_ShiftBits[4]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_Shift5Load[5] is ManchEncode:mancho|Shift5Load[5] at LC_X6_Y4_N5
+--operation mode is normal
+
+D1_Shift5Load[5]_lut_out = !D1_DV_Cntr[5];
+D1_Shift5Load[5] = DFFEAS(D1_Shift5Load[5]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L161, , , , );
+
+
+--D1_Shift5Bits[4] is ManchEncode:mancho|Shift5Bits[4] at LC_X6_Y4_N0
+--operation mode is normal
+
+D1_Shift5Bits[4]_lut_out = D1_Shift5Rdy & D1_Shift5Bits[3] # !D1_Shift5Rdy & (D1_Shift5Load[4]);
+D1_Shift5Bits[4] = DFFEAS(D1_Shift5Bits[4]_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_DV_Cntr[4] is ManchEncode:mancho|DV_Cntr[4] at LC_X7_Y5_N8
+--operation mode is arithmetic
+
+D1_DV_Cntr[4]_carry_eqn = (!D1L4 & D1L12) # (D1L4 & D1L13);
+D1_DV_Cntr[4]_lut_out = D1_DV_Cntr[4] $ (!D1_DV_Cntr[4]_carry_eqn);
+D1_DV_Cntr[4] = DFFEAS(D1_DV_Cntr[4]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L60, E1_CmdData[4], , , D1L98);
+
+--D1L15 is ManchEncode:mancho|DV_Cntr[4]~796 at LC_X7_Y5_N8
+--operation mode is arithmetic
+
+D1L15_cout_0 = D1_DV_Cntr[4] & (!D1L12);
+D1L15 = CARRY(D1L15_cout_0);
+
+--D1L16 is ManchEncode:mancho|DV_Cntr[4]~796COUT1_819 at LC_X7_Y5_N8
+--operation mode is arithmetic
+
+D1L16_cout_1 = D1_DV_Cntr[4] & (!D1L13);
+D1L16 = CARRY(D1L16_cout_1);
+
+
+--D1_ShiftBits[3] is ManchEncode:mancho|ShiftBits[3] at LC_X7_Y4_N5
+--operation mode is normal
+
+D1_ShiftBits[3]_lut_out = F1_isAddr_Zero & !D1_DV_Cntr[3] & D1_DV_Buf # !F1_isAddr_Zero & (D1_ShiftBits[2]);
+D1_ShiftBits[3] = DFFEAS(D1_ShiftBits[3]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_Shift5Load[4] is ManchEncode:mancho|Shift5Load[4] at LC_X6_Y4_N8
+--operation mode is normal
+
+D1_Shift5Load[4]_lut_out = !D1_DV_Cntr[4];
+D1_Shift5Load[4] = DFFEAS(D1_Shift5Load[4]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L161, , , , );
+
+
+--D1_Shift5Bits[3] is ManchEncode:mancho|Shift5Bits[3] at LC_X6_Y4_N7
+--operation mode is normal
+
+D1_Shift5Bits[3]_lut_out = D1_Shift5Rdy & D1_Shift5Bits[2] # !D1_Shift5Rdy & (D1_Shift5Load[3]);
+D1_Shift5Bits[3] = DFFEAS(D1_Shift5Bits[3]_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_DV_Cntr[3] is ManchEncode:mancho|DV_Cntr[3] at LC_X7_Y5_N7
+--operation mode is arithmetic
+
+D1_DV_Cntr[3]_carry_eqn = (!D1L4 & D1L9) # (D1L4 & D1L10);
+D1_DV_Cntr[3]_lut_out = D1_DV_Cntr[3] $ D1_DV_Cntr[3]_carry_eqn;
+D1_DV_Cntr[3] = DFFEAS(D1_DV_Cntr[3]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L60, E1_CmdData[3], , , D1L98);
+
+--D1L12 is ManchEncode:mancho|DV_Cntr[3]~800 at LC_X7_Y5_N7
+--operation mode is arithmetic
+
+D1L12_cout_0 = !D1L9 # !D1_DV_Cntr[3];
+D1L12 = CARRY(D1L12_cout_0);
+
+--D1L13 is ManchEncode:mancho|DV_Cntr[3]~800COUT1_818 at LC_X7_Y5_N7
+--operation mode is arithmetic
+
+D1L13_cout_1 = !D1L10 # !D1_DV_Cntr[3];
+D1L13 = CARRY(D1L13_cout_1);
+
+
+--D1_ShiftBits[2] is ManchEncode:mancho|ShiftBits[2] at LC_X11_Y5_N4
+--operation mode is normal
+
+D1_ShiftBits[2]_lut_out = F1_isAddr_Zero & (D1_DV_Buf & !D1_DV_Cntr[2]) # !F1_isAddr_Zero & D1_ShiftBits[1];
+D1_ShiftBits[2] = DFFEAS(D1_ShiftBits[2]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_Shift5Load[3] is ManchEncode:mancho|Shift5Load[3] at LC_X7_Y4_N1
+--operation mode is normal
+
+D1_Shift5Load[3]_lut_out = !D1_DV_Cntr[3];
+D1_Shift5Load[3] = DFFEAS(D1_Shift5Load[3]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L161, , , , );
+
+
+--D1_Shift5Bits[2] is ManchEncode:mancho|Shift5Bits[2] at LC_X10_Y6_N1
+--operation mode is normal
+
+D1_Shift5Bits[2]_lut_out = D1_Shift5Rdy & D1_Shift5Bits[1] # !D1_Shift5Rdy & (D1_Shift5Load[2]);
+D1_Shift5Bits[2] = DFFEAS(D1_Shift5Bits[2]_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_DV_Cntr[2] is ManchEncode:mancho|DV_Cntr[2] at LC_X7_Y5_N6
+--operation mode is arithmetic
+
+D1_DV_Cntr[2]_carry_eqn = (!D1L4 & D1L6) # (D1L4 & D1L7);
+D1_DV_Cntr[2]_lut_out = D1_DV_Cntr[2] $ (!D1_DV_Cntr[2]_carry_eqn);
+D1_DV_Cntr[2] = DFFEAS(D1_DV_Cntr[2]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L60, E1_CmdData[2], , , D1L98);
+
+--D1L9 is ManchEncode:mancho|DV_Cntr[2]~804 at LC_X7_Y5_N6
+--operation mode is arithmetic
+
+D1L9_cout_0 = D1_DV_Cntr[2] & (!D1L6);
+D1L9 = CARRY(D1L9_cout_0);
+
+--D1L10 is ManchEncode:mancho|DV_Cntr[2]~804COUT1_817 at LC_X7_Y5_N6
+--operation mode is arithmetic
+
+D1L10_cout_1 = D1_DV_Cntr[2] & (!D1L7);
+D1L10 = CARRY(D1L10_cout_1);
+
+
+--D1_ShiftBits[1] is ManchEncode:mancho|ShiftBits[1] at LC_X11_Y5_N5
+--operation mode is normal
+
+D1_ShiftBits[1]_lut_out = F1_isAddr_Zero & !D1_DV_Cntr[1] & D1_DV_Buf # !F1_isAddr_Zero & (D1_ShiftBits[0]);
+D1_ShiftBits[1] = DFFEAS(D1_ShiftBits[1]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_Shift5Load[2] is ManchEncode:mancho|Shift5Load[2] at LC_X10_Y6_N3
+--operation mode is normal
+
+D1_Shift5Load[2]_lut_out = !D1_DV_Cntr[2];
+D1_Shift5Load[2] = DFFEAS(D1_Shift5Load[2]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L161, , , , );
+
+
+--D1_Shift5Bits[1] is ManchEncode:mancho|Shift5Bits[1] at LC_X10_Y6_N7
+--operation mode is normal
+
+D1_Shift5Bits[1]_lut_out = D1_Shift5Rdy & (D1_Shift5Bits[0]) # !D1_Shift5Rdy & D1_Shift5Load[1];
+D1_Shift5Bits[1] = DFFEAS(D1_Shift5Bits[1]_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_DV_Cntr[1] is ManchEncode:mancho|DV_Cntr[1] at LC_X7_Y5_N5
+--operation mode is arithmetic
+
+D1_DV_Cntr[1]_carry_eqn = D1L4;
+D1_DV_Cntr[1]_lut_out = D1_DV_Cntr[1] $ (D1_DV_Cntr[1]_carry_eqn);
+D1_DV_Cntr[1] = DFFEAS(D1_DV_Cntr[1]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L60, E1_CmdData[1], , , D1L98);
+
+--D1L6 is ManchEncode:mancho|DV_Cntr[1]~808 at LC_X7_Y5_N5
+--operation mode is arithmetic
+
+D1L6_cout_0 = !D1L4 # !D1_DV_Cntr[1];
+D1L6 = CARRY(D1L6_cout_0);
+
+--D1L7 is ManchEncode:mancho|DV_Cntr[1]~808COUT1_816 at LC_X7_Y5_N5
+--operation mode is arithmetic
+
+D1L7_cout_1 = !D1L4 # !D1_DV_Cntr[1];
+D1L7 = CARRY(D1L7_cout_1);
+
+
+--D1_ShiftBits[0] is ManchEncode:mancho|ShiftBits[0] at LC_X11_Y5_N2
+--operation mode is normal
+
+D1_ShiftBits[0]_lut_out = D1_DV_Buf & F1_isAddr_Zero & !D1_DV_Cntr[0];
+D1_ShiftBits[0] = DFFEAS(D1_ShiftBits[0]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_Shift5Load[1] is ManchEncode:mancho|Shift5Load[1] at LC_X10_Y6_N6
+--operation mode is normal
+
+D1_Shift5Load[1]_lut_out = !D1_DV_Cntr[1];
+D1_Shift5Load[1] = DFFEAS(D1_Shift5Load[1]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L161, , , , );
+
+
+--D1_Shift5Bits[0] is ManchEncode:mancho|Shift5Bits[0] at LC_X10_Y6_N9
+--operation mode is normal
+
+D1_Shift5Bits[0]_lut_out = !D1_Shift5Rdy & D1_Shift5Load[0];
+D1_Shift5Bits[0] = DFFEAS(D1_Shift5Bits[0]_lut_out, GLOBAL(B1_Clk5M), !PIO_Reset, , !PIO_nEnable, , , , );
+
+
+--D1_DV_Cntr[0] is ManchEncode:mancho|DV_Cntr[0] at LC_X7_Y5_N4
+--operation mode is arithmetic
+
+D1_DV_Cntr[0]_lut_out = !D1_DV_Cntr[0];
+D1_DV_Cntr[0] = DFFEAS(D1_DV_Cntr[0]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L60, E1_CmdData[0], , , D1L98);
+
+--D1L4 is ManchEncode:mancho|DV_Cntr[0]~812 at LC_X7_Y5_N4
+--operation mode is arithmetic
+
+D1L4 = CARRY(D1_DV_Cntr[0]);
+
+
+--D1_Shift5Load[0] is ManchEncode:mancho|Shift5Load[0] at LC_X10_Y6_N8
+--operation mode is normal
+
+D1_Shift5Load[0]_lut_out = !D1_DV_Cntr[0];
+D1_Shift5Load[0] = DFFEAS(D1_Shift5Load[0]_lut_out, GLOBAL(B1_Clk25M), !PIO_Reset, , D1L161, , , , );
+
+
+--D1L246 is ManchEncode:mancho|stout[6]~231 at LC_X11_Y2_N9
+--operation mode is normal
+
+D1L246 = D1_DV_Buf & F1_isAddr_Zero # !D1L94;
+
+
+--~GND is ~GND at LC_X12_Y2_N2
+--operation mode is normal
+
+~GND = GND;
+
+
+--PIO_ALE is PIO_ALE at PIN_15
+--operation mode is input
+
+PIO_ALE = INPUT();
+
+
+--CLK_EXT is CLK_EXT at PIN_18
+--operation mode is input
+
+CLK_EXT = INPUT();
+
+
+--nRST is nRST at PIN_61
+--operation mode is input
+
+nRST = INPUT();
+
+
+--nPSEN is nPSEN at PIN_28
+--operation mode is input
+
+nPSEN = INPUT();
+
+
+--DV_RTS is DV_RTS at PIN_134
+--operation mode is input
+
+DV_RTS = INPUT();
+
+
+--Clk100M is Clk100M at PIN_20
+--operation mode is input
+
+Clk100M = INPUT();
+
+
+--PIO_Reset is PIO_Reset at PIN_11
+--operation mode is input
+
+PIO_Reset = INPUT();
+
+
+--PIO_nEnable is PIO_nEnable at PIN_12
+--operation mode is input
+
+PIO_nEnable = INPUT();
+
+
+--PIO_nWR is PIO_nWR at PIN_13
+--operation mode is input
+
+PIO_nWR = INPUT();
+
+
+--PIO_ADR[7] is PIO_ADR[7] at PIN_137
+--operation mode is input
+
+PIO_ADR[7] = INPUT();
+
+
+--PIO_ADR[6] is PIO_ADR[6] at PIN_138
+--operation mode is input
+
+PIO_ADR[6] = INPUT();
+
+
+--PIO_ADR[3] is PIO_ADR[3] at PIN_141
+--operation mode is input
+
+PIO_ADR[3] = INPUT();
+
+
+--PIO_ADR[2] is PIO_ADR[2] at PIN_142
+--operation mode is input
+
+PIO_ADR[2] = INPUT();
+
+
+--PIO_ADR[5] is PIO_ADR[5] at PIN_139
+--operation mode is input
+
+PIO_ADR[5] = INPUT();
+
+
+--PIO_ADR[1] is PIO_ADR[1] at PIN_143
+--operation mode is input
+
+PIO_ADR[1] = INPUT();
+
+
+--PIO_ADR[4] is PIO_ADR[4] at PIN_140
+--operation mode is input
+
+PIO_ADR[4] = INPUT();
+
+
+--PIO_ADR[0] is PIO_ADR[0] at PIN_144
+--operation mode is input
+
+PIO_ADR[0] = INPUT();
+
+
+--AuxIn[8] is AuxIn[8] at PIN_85
+--operation mode is input
+
+AuxIn[8] = INPUT();
+
+
+--PIO_nRD is PIO_nRD at PIN_14
+--operation mode is input
+
+PIO_nRD = INPUT();
+
+
+--AuxIn[7] is AuxIn[7] at PIN_86
+--operation mode is input
+
+AuxIn[7] = INPUT();
+
+
+--AuxIn[6] is AuxIn[6] at PIN_87
+--operation mode is input
+
+AuxIn[6] = INPUT();
+
+
+--AuxIn[5] is AuxIn[5] at PIN_88
+--operation mode is input
+
+AuxIn[5] = INPUT();
+
+
+--AuxIn[4] is AuxIn[4] at PIN_93
+--operation mode is input
+
+AuxIn[4] = INPUT();
+
+
+--AuxIn[3] is AuxIn[3] at PIN_94
+--operation mode is input
+
+AuxIn[3] = INPUT();
+
+
+--AuxIn[2] is AuxIn[2] at PIN_95
+--operation mode is input
+
+AuxIn[2] = INPUT();
+
+
+--AuxIn[1] is AuxIn[1] at PIN_96
+--operation mode is input
+
+AuxIn[1] = INPUT();
+
+
+--PIO_INT0 is PIO_INT0 at PIN_32
+--operation mode is output
+
+PIO_INT0 = OUTPUT(OPNDRN(VCC));
+
+
+--PIO_INT1 is PIO_INT1 at PIN_31
+--operation mode is output
+
+PIO_INT1 = OUTPUT(OPNDRN(VCC));
+
+
+--PIO_T0 is PIO_T0 at PIN_30
+--operation mode is output
+
+PIO_T0 = OUTPUT(OPNDRN(VCC));
+
+
+--PIO_T1 is PIO_T1 at PIN_29
+--operation mode is output
+
+PIO_T1 = OUTPUT(OPNDRN(VCC));
+
+
+--ManchOut1 is ManchOut1 at PIN_67
+--operation mode is output
+
+ManchOut1 = OUTPUT(D1_ManchOut1);
+
+
+--ManchOut2 is ManchOut2 at PIN_66
+--operation mode is output
+
+ManchOut2 = OUTPUT(D1_ManchOut1);
+
+
+--Manch_Clk is Manch_Clk at PIN_69
+--operation mode is output
+
+Manch_Clk = OUTPUT(B1_Clk25M);
+
+
+--Manch_NRZ is Manch_NRZ at PIN_70
+--operation mode is output
+
+Manch_NRZ = OUTPUT(!D1_ShiftBits[39]);
+
+
+--DV_OUT_FTS is DV_OUT_FTS at PIN_112
+--operation mode is output
+
+DV_OUT_FTS = OUTPUT(D1_DV_out);
+
+
+--DV_OUT_POL is DV_OUT_POL at PIN_111
+--operation mode is output
+
+DV_OUT_POL = OUTPUT(D1_DV_out);
+
+
+--DV_OUT_SPR1 is DV_OUT_SPR1 at PIN_110
+--operation mode is output
+
+DV_OUT_SPR1 = OUTPUT(B1_Clk5M);
+
+
+--DV_OUT_SPR2 is DV_OUT_SPR2 at PIN_109
+--operation mode is output
+
+DV_OUT_SPR2 = OUTPUT(!D1_Shift5Bits[39]);
+
+
+--TP_SMA is TP_SMA at PIN_72
+--operation mode is output
+
+TP_SMA = OUTPUT(!D1_ShiftBits[39]);
+
+
+--LED2 is LED2 at PIN_118
+--operation mode is output
+
+LED2 = OUTPUT(GND);
+
+
+--LED3 is LED3 at PIN_117
+--operation mode is output
+
+LED3 = OUTPUT(GND);
+
+
+--XX1 is XX1 at PIN_122
+--operation mode is output
+
+XX1 = OUTPUT(GND);
+
+
+--XX2 is XX2 at PIN_123
+--operation mode is output
+
+XX2 = OUTPUT(GND);
+
+
+--XX3 is XX3 at PIN_124
+--operation mode is output
+
+XX3 = OUTPUT(GND);
+
+
+--XX4 is XX4 at PIN_125
+--operation mode is output
+
+XX4 = OUTPUT(GND);
+
+
+--FR_Mode is FR_Mode at PIN_119
+--operation mode is output
+
+FR_Mode = OUTPUT(E1_ModeReg[0]);
+
+
+--TP_isAddr_Zero is TP_isAddr_Zero at PIN_39
+--operation mode is output
+
+TP_isAddr_Zero = OUTPUT(!F1_isAddr_Zero);
+
+
+--TP_DV_Delayed is TP_DV_Delayed at PIN_38
+--operation mode is output
+
+TP_DV_Delayed = OUTPUT(!D1L98);
+
+
+--TP_DV_FreeRun is TP_DV_FreeRun at PIN_37
+--operation mode is output
+
+TP_DV_FreeRun = OUTPUT(!C1_DV_FreeRun);
+
+
+--DV_Error_o is DV_Error_o at PIN_120
+--operation mode is output
+
+DV_Error_o = OUTPUT(D1_sDV_Err);
+
+
+--AuxOut[8] is AuxOut[8] at PIN_101
+--operation mode is output
+
+AuxOut[8] = OUTPUT(E1_AuxOut[8]);
+
+
+--AuxOut[7] is AuxOut[7] at PIN_102
+--operation mode is output
+
+AuxOut[7] = OUTPUT(E1_AuxOut[7]);
+
+
+--AuxOut[6] is AuxOut[6] at PIN_103
+--operation mode is output
+
+AuxOut[6] = OUTPUT(E1_AuxOut[6]);
+
+
+--AuxOut[5] is AuxOut[5] at PIN_104
+--operation mode is output
+
+AuxOut[5] = OUTPUT(E1_AuxOut[5]);
+
+
+--AuxOut[4] is AuxOut[4] at PIN_105
+--operation mode is output
+
+AuxOut[4] = OUTPUT(E1_AuxOut[4]);
+
+
+--AuxOut[3] is AuxOut[3] at PIN_106
+--operation mode is output
+
+AuxOut[3] = OUTPUT(E1_AuxOut[3]);
+
+
+--AuxOut[2] is AuxOut[2] at PIN_107
+--operation mode is output
+
+AuxOut[2] = OUTPUT(E1_AuxOut[2]);
+
+
+--AuxOut[1] is AuxOut[1] at PIN_108
+--operation mode is output
+
+AuxOut[1] = OUTPUT(E1_AuxOut[1]);
+
+
+--TestOut1[8] is TestOut1[8] at PIN_75
+--operation mode is output
+
+TestOut1[8] = OUTPUT(!F1_isAddr_Zero);
+
+
+--TestOut1[7] is TestOut1[7] at PIN_76
+--operation mode is output
+
+TestOut1[7] = OUTPUT(DV_RTS);
+
+
+--TestOut1[6] is TestOut1[6] at PIN_77
+--operation mode is output
+
+TestOut1[6] = OUTPUT(!C1_DV_FreeRun);
+
+
+--TestOut1[5] is TestOut1[5] at PIN_78
+--operation mode is output
+
+TestOut1[5] = OUTPUT(D1_sDV_Err);
+
+
+--TestOut1[4] is TestOut1[4] at PIN_79
+--operation mode is output
+
+TestOut1[4] = OUTPUT(!D1_DV_Buf);
+
+
+--TestOut1[3] is TestOut1[3] at PIN_80
+--operation mode is output
+
+TestOut1[3] = OUTPUT(!D1_DV_Buf);
+
+
+--TestOut1[2] is TestOut1[2] at PIN_81
+--operation mode is output
+
+TestOut1[2] = OUTPUT(D1L95);
+
+
+--TestOut1[1] is TestOut1[1] at PIN_84
+--operation mode is output
+
+TestOut1[1] = OUTPUT(B1_Clk25M);
+
+
+--A1L55 is PIO_DAT~0 at PIN_8
+--operation mode is bidir
+
+A1L55 = PIO_DAT[7];
+
+--PIO_DAT[7] is PIO_DAT[7] at PIN_8
+--operation mode is bidir
+
+PIO_DAT[7]_tri_out = TRI(AuxIn[8], E1L10);
+PIO_DAT[7] = BIDIR(PIO_DAT[7]_tri_out);
+
+
+--A1L56 is PIO_DAT~1 at PIN_7
+--operation mode is bidir
+
+A1L56 = PIO_DAT[6];
+
+--PIO_DAT[6] is PIO_DAT[6] at PIN_7
+--operation mode is bidir
+
+PIO_DAT[6]_tri_out = TRI(AuxIn[7], E1L10);
+PIO_DAT[6] = BIDIR(PIO_DAT[6]_tri_out);
+
+
+--A1L57 is PIO_DAT~2 at PIN_6
+--operation mode is bidir
+
+A1L57 = PIO_DAT[5];
+
+--PIO_DAT[5] is PIO_DAT[5] at PIN_6
+--operation mode is bidir
+
+PIO_DAT[5]_tri_out = TRI(AuxIn[6], E1L10);
+PIO_DAT[5] = BIDIR(PIO_DAT[5]_tri_out);
+
+
+--A1L58 is PIO_DAT~3 at PIN_5
+--operation mode is bidir
+
+A1L58 = PIO_DAT[4];
+
+--PIO_DAT[4] is PIO_DAT[4] at PIN_5
+--operation mode is bidir
+
+PIO_DAT[4]_tri_out = TRI(AuxIn[5], E1L10);
+PIO_DAT[4] = BIDIR(PIO_DAT[4]_tri_out);
+
+
+--A1L59 is PIO_DAT~4 at PIN_4
+--operation mode is bidir
+
+A1L59 = PIO_DAT[3];
+
+--PIO_DAT[3] is PIO_DAT[3] at PIN_4
+--operation mode is bidir
+
+PIO_DAT[3]_tri_out = TRI(AuxIn[4], E1L10);
+PIO_DAT[3] = BIDIR(PIO_DAT[3]_tri_out);
+
+
+--A1L60 is PIO_DAT~5 at PIN_3
+--operation mode is bidir
+
+A1L60 = PIO_DAT[2];
+
+--PIO_DAT[2] is PIO_DAT[2] at PIN_3
+--operation mode is bidir
+
+PIO_DAT[2]_tri_out = TRI(AuxIn[3], E1L10);
+PIO_DAT[2] = BIDIR(PIO_DAT[2]_tri_out);
+
+
+--A1L61 is PIO_DAT~6 at PIN_2
+--operation mode is bidir
+
+A1L61 = PIO_DAT[1];
+
+--PIO_DAT[1] is PIO_DAT[1] at PIN_2
+--operation mode is bidir
+
+PIO_DAT[1]_tri_out = TRI(AuxIn[2], E1L10);
+PIO_DAT[1] = BIDIR(PIO_DAT[1]_tri_out);
+
+
+--A1L62 is PIO_DAT~7 at PIN_1
+--operation mode is bidir
+
+A1L62 = PIO_DAT[0];
+
+--PIO_DAT[0] is PIO_DAT[0] at PIN_1
+--operation mode is bidir
+
+PIO_DAT[0]_tri_out = TRI(AuxIn[1], E1L10);
+PIO_DAT[0] = BIDIR(PIO_DAT[0]_tri_out);
+
+
+--C1L37 is FreeRun:freerun|FRLoadReg[0]~48 at LC_X4_Y6_N9
+--operation mode is normal
+
+C1L37 = !C1_FRLoadReg[0];
+
+
+--C1L39 is FreeRun:freerun|FRLoadReg[1]~49 at LC_X4_Y6_N3
+--operation mode is normal
+
+C1L39 = !C1_FRLoadReg[1];
+
+
+--C1L41 is FreeRun:freerun|FRLoadReg[2]~50 at LC_X5_Y5_N2
+--operation mode is normal
+
+C1L41 = !C1_FRLoadReg[2];
+
+
+--C1L43 is FreeRun:freerun|FRLoadReg[3]~51 at LC_X5_Y5_N4
+--operation mode is normal
+
+C1L43 = !C1_FRLoadReg[3];
+
+
+--C1L46 is FreeRun:freerun|FRLoadReg[5]~52 at LC_X4_Y6_N6
+--operation mode is normal
+
+C1L46 = !C1_FRLoadReg[5];
+
+
+--F1L18 is Sync_Len:synco|SL_LoadReg[11]~80 at LC_X10_Y7_N1
+--operation mode is normal
+
+F1L18 = !F1_SL_LoadReg[11];
+
+
+--F1L11 is Sync_Len:synco|SL_LoadReg[6]~81 at LC_X3_Y7_N4
+--operation mode is normal
+
+F1L11 = !F1_SL_LoadReg[6];
+
+
+--F1L15 is Sync_Len:synco|SL_LoadReg[9]~82 at LC_X3_Y7_N6
+--operation mode is normal
+
+F1L15 = !F1_SL_LoadReg[9];
+
+

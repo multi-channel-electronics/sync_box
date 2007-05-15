@@ -1,0 +1,123 @@
+# Copyright (C) 1991-2005 Altera Corporation
+# Your use of Altera Corporation's design tools, logic functions
+# and other software and tools, and its AMPP partner logic
+# functions, and any output files any of the foregoing
+# (including device programming or simulation files), and any
+# associated documentation or information are expressly subject
+# to the terms and conditions of the Altera Program License
+# Subscription Agreement, Altera MegaCore Function License
+# Agreement, or other applicable license agreement, including,
+# without limitation, that your use is for the sole purpose of
+# programming logic devices manufactured by Altera and sold by
+# Altera or its authorized distributors.  Please refer to the
+# applicable agreement for further details.
+
+
+# The default values for assignments are stored in the file
+#		Synco_assignment_defaults.qdf
+# If this file doesn't exist, and for assignments not listed, see file
+#		assignment_defaults.qdf
+
+# Altera recommends that you do not modify this file. This
+# file is updated automatically by the Quartus II software
+# and any changes you make may be lost or overwritten.
+
+
+set_global_assignment -name FAMILY "MAX II"
+set_global_assignment -name DEVICE EPM570T144C3
+set_global_assignment -name TOP_LEVEL_ENTITY SyncBox
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION 5.1
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "13:39:04  OCTOBER 20, 2006"
+set_global_assignment -name LAST_QUARTUS_VERSION 6.1
+set_global_assignment -name DEVICE_FILTER_PACKAGE TQFP
+set_global_assignment -name DEVICE_FILTER_PIN_COUNT 144
+set_global_assignment -name DEVICE_FILTER_SPEED_GRADE FASTEST
+set_global_assignment -name VECTOR_INPUT_SOURCE "testo-S1.vwf"
+set_location_assignment PIN_84 -to TestOut1[1]
+set_location_assignment PIN_81 -to TestOut1[2]
+set_location_assignment PIN_80 -to TestOut1[3]
+set_location_assignment PIN_79 -to TestOut1[4]
+set_location_assignment PIN_78 -to TestOut1[5]
+set_location_assignment PIN_77 -to TestOut1[6]
+set_location_assignment PIN_76 -to TestOut1[7]
+set_location_assignment PIN_96 -to AuxIn[1]
+set_location_assignment PIN_95 -to AuxIn[2]
+set_location_assignment PIN_94 -to AuxIn[3]
+set_location_assignment PIN_93 -to AuxIn[4]
+set_location_assignment PIN_88 -to AuxIn[5]
+set_location_assignment PIN_87 -to AuxIn[6]
+set_location_assignment PIN_86 -to AuxIn[7]
+set_location_assignment PIN_108 -to AuxOut[1]
+set_location_assignment PIN_107 -to AuxOut[2]
+set_location_assignment PIN_106 -to AuxOut[3]
+set_location_assignment PIN_105 -to AuxOut[4]
+set_location_assignment PIN_104 -to AuxOut[5]
+set_location_assignment PIN_103 -to AuxOut[6]
+set_location_assignment PIN_102 -to AuxOut[7]
+set_location_assignment PIN_20 -to Clk100M
+set_location_assignment PIN_15 -to PIO_ALE
+set_location_assignment PIN_11 -to PIO_Reset
+set_location_assignment PIN_134 -to DV_RTS
+set_location_assignment PIN_12 -to PIO_nEnable
+set_location_assignment PIN_13 -to PIO_nWR
+set_location_assignment PIN_14 -to PIO_nRD
+set_location_assignment PIN_85 -to AuxIn[8]
+set_location_assignment PIN_101 -to AuxOut[8]
+set_location_assignment PIN_29 -to PIO_T1
+set_location_assignment PIN_30 -to PIO_T0
+set_location_assignment PIN_31 -to PIO_INT1
+set_location_assignment PIN_32 -to PIO_INT0
+set_location_assignment PIN_67 -to ManchOut1
+set_location_assignment PIN_66 -to ManchOut2
+set_location_assignment PIN_112 -to DV_OUT_FTS
+set_location_assignment PIN_111 -to DV_OUT_POL
+set_location_assignment PIN_69 -to Manch_Clk
+set_location_assignment PIN_70 -to Manch_NRZ
+set_location_assignment PIN_110 -to DV_OUT_SPR1
+set_location_assignment PIN_109 -to DV_OUT_SPR2
+set_location_assignment PIN_72 -to TP_SMA
+set_location_assignment PIN_118 -to LED2
+set_location_assignment PIN_117 -to LED3
+set_location_assignment PIN_122 -to XX1
+set_location_assignment PIN_123 -to XX2
+set_location_assignment PIN_124 -to XX3
+set_location_assignment PIN_125 -to XX4
+set_location_assignment PIN_119 -to FR_Mode
+set_location_assignment PIN_38 -to TP_DV_Delayed
+set_location_assignment PIN_37 -to TP_DV_FreeRun
+set_location_assignment PIN_39 -to TP_isAddr_Zero
+set_global_assignment -name FMAX_REQUIREMENT "100 MHz"
+set_global_assignment -name FLOW_ENABLE_TIMING_CONSTRAINT_CHECK ON
+set_location_assignment PIN_137 -to PIO_ADR[7]
+set_location_assignment PIN_138 -to PIO_ADR[6]
+set_location_assignment PIN_139 -to PIO_ADR[5]
+set_location_assignment PIN_141 -to PIO_ADR[3]
+set_location_assignment PIN_140 -to PIO_ADR[4]
+set_location_assignment PIN_144 -to PIO_ADR[0]
+set_location_assignment PIN_143 -to PIO_ADR[1]
+set_location_assignment PIN_142 -to PIO_ADR[2]
+set_location_assignment PIN_1 -to PIO_DAT[0]
+set_location_assignment PIN_2 -to PIO_DAT[1]
+set_location_assignment PIN_3 -to PIO_DAT[2]
+set_location_assignment PIN_4 -to PIO_DAT[3]
+set_location_assignment PIN_5 -to PIO_DAT[4]
+set_location_assignment PIN_6 -to PIO_DAT[5]
+set_location_assignment PIN_7 -to PIO_DAT[6]
+set_location_assignment PIN_8 -to PIO_DAT[7]
+set_global_assignment -name FMAX_REQUIREMENT "100 MHz" -section_id Clk100M
+set_instance_assignment -name CLOCK_SETTINGS Clk100M -to Clk100M
+set_location_assignment PIN_75 -to TestOut1[8]
+set_location_assignment PIN_61 -to nRST
+set_location_assignment PIN_18 -to CLK_EXT
+set_location_assignment PIN_28 -to nPSEN
+set_location_assignment PIN_120 -to DV_Error_o
+set_global_assignment -name BDF_FILE SyncBox.bdf
+set_global_assignment -name VHDL_FILE ClkDiv.vhd
+set_global_assignment -name VHDL_FILE PIO_Interface.vhd
+set_global_assignment -name VHDL_FILE FreeRun.vhd
+set_global_assignment -name VHDL_FILE ManchEncode.vhd
+set_global_assignment -name VECTOR_WAVEFORM_FILE "testo-S1.vwf"
+set_global_assignment -name VHDL_FILE TestPnts1.vhd
+set_global_assignment -name VHDL_FILE TestPnts2.vhd
+set_global_assignment -name VECTOR_WAVEFORM_FILE "testo-m1.vwf"
+set_global_assignment -name VHDL_FILE Sync_Len.vhd
