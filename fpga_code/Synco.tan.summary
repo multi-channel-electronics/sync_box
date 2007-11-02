@@ -5,9 +5,9 @@ Timing Analyzer Summary
 Type           : Worst-case tsu
 Slack          : N/A
 Required Time  : None
-Actual Time    : 5.002 ns
-From           : PIO_DAT[6]
-To             : ManchEncode:mancho|DV_Cntr[6]
+Actual Time    : 4.470 ns
+From           : PIO_DAT[3]
+To             : Sync_Len:synco|SL_LoadReg[16]
 From Clock     : --
 To Clock       : Clk100M
 Failed Paths   : 0
@@ -15,9 +15,9 @@ Failed Paths   : 0
 Type           : Worst-case tco
 Slack          : N/A
 Required Time  : None
-Actual Time    : 11.328 ns
-From           : PIO_Interface:pio|AddrReg[3]
-To             : PIO_DAT[0]
+Actual Time    : 10.552 ns
+From           : ManchEncode:mancho|reg[2]
+To             : TestOut1[2]
 From Clock     : Clk100M
 To Clock       : --
 Failed Paths   : 0
@@ -25,9 +25,9 @@ Failed Paths   : 0
 Type           : Worst-case tpd
 Slack          : N/A
 Required Time  : None
-Actual Time    : 6.021 ns
-From           : AuxIn[5]
-To             : PIO_DAT[4]
+Actual Time    : 6.227 ns
+From           : PIO_nRD
+To             : PIO_DAT[0]
 From Clock     : --
 To Clock       : --
 Failed Paths   : 0
@@ -35,7 +35,7 @@ Failed Paths   : 0
 Type           : Worst-case th
 Slack          : N/A
 Required Time  : None
-Actual Time    : 2.118 ns
+Actual Time    : 2.537 ns
 From           : PIO_nWR
 To             : PIO_Interface:pio|rPIO_nWR
 From Clock     : --
@@ -43,9 +43,9 @@ To Clock       : Clk100M
 Failed Paths   : 0
 
 Type           : Clock Setup: 'Clk100M'
-Slack          : 3.046 ns
+Slack          : 2.129 ns
 Required Time  : 100.00 MHz ( period = 10.000 ns )
-Actual Time    : 255.89 MHz ( period = 3.908 ns )
+Actual Time    : 174.16 MHz ( period = 5.742 ns )
 From           : ManchEncode:mancho|ShiftBits[39]
 To             : ManchEncode:mancho|ManchOut1
 From Clock     : Clk100M
@@ -53,7 +53,7 @@ To Clock       : Clk100M
 Failed Paths   : 0
 
 Type           : Clock Setup: 'PIO_nWR'
-Slack          : 8.445 ns
+Slack          : 8.265 ns
 Required Time  : 100.00 MHz ( period = 10.000 ns )
 Actual Time    : Restricted to 304.04 MHz ( period = 3.289 ns )
 From           : PIO_Interface:pio|ModeReg[0]
@@ -63,17 +63,17 @@ To Clock       : PIO_nWR
 Failed Paths   : 0
 
 Type           : Clock Hold: 'Clk100M'
-Slack          : 0.485 ns
+Slack          : 0.886 ns
 Required Time  : 100.00 MHz ( period = 10.000 ns )
 Actual Time    : N/A
-From           : ManchEncode:mancho|Shift5Load[12]
-To             : ManchEncode:mancho|Shift5Bits[12]
+From           : ManchEncode:mancho|rrDV_RTS
+To             : ManchEncode:mancho|reg[9]
 From Clock     : Clk100M
 To Clock       : Clk100M
 Failed Paths   : 0
 
 Type           : Clock Hold: 'PIO_nWR'
-Slack          : 1.209 ns
+Slack          : 1.389 ns
 Required Time  : 100.00 MHz ( period = 10.000 ns )
 Actual Time    : N/A
 From           : PIO_Interface:pio|ModeReg[0]

@@ -121,3 +121,4 @@ set_global_assignment -name VHDL_FILE TestPnts1.vhd
 set_global_assignment -name VHDL_FILE TestPnts2.vhd
 set_global_assignment -name VECTOR_WAVEFORM_FILE "testo-m1.vwf"
 set_global_assignment -name VHDL_FILE Sync_Len.vhd
+set_global_assignment -name FITTER_EFFORT "STANDARD FIT"
