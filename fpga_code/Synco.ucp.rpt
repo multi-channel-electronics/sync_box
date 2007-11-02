@@ -1,5 +1,5 @@
 Classic Timing Analyzer Constraint Check report for Synco
-Thu Nov 01 16:52:02 2007
+Thu Nov 01 18:36:04 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Full Version
 
 
@@ -39,7 +39,7 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------------+
 ; Timing Constraint Check Summary                                                            ;
 +-------------------------------------------------+------------------------------------------+
-; Classic Timing Analyzer Constraint Check Status ; Analyzed - Thu Nov 01 16:51:58 2007      ;
+; Classic Timing Analyzer Constraint Check Status ; Analyzed - Thu Nov 01 18:36:01 2007      ;
 ; Quartus II Version                              ; 6.1 Build 201 11/27/2006 SJ Full Version ;
 ; Revision Name                                   ; Synco                                    ;
 ; Top-level Entity Name                           ; SyncBox                                  ;
@@ -2580,7 +2580,7 @@ Info: Number of unconstrained reg-to-reg paths: 396.
 Info: Number of unconstrained I/O paths: 838.
 Info: Quartus II Classic Timing Analyzer Constraint Check was successful. 0 errors, 0 warnings
     Info: Allocated 101 megabytes of memory during processing
-    Info: Processing ended: Thu Nov 01 16:52:02 2007
+    Info: Processing ended: Thu Nov 01 18:36:04 2007
     Info: Elapsed time: 00:00:04
 
 

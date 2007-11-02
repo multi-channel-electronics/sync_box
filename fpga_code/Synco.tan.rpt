@@ -1,5 +1,5 @@
 Classic Timing Analyzer report for Synco
-Thu Nov 01 16:52:05 2007
+Thu Nov 01 18:36:07 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Full Version
 
 
@@ -1092,7 +1092,7 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II Classic Timing Analyzer
     Info: Version 6.1 Build 201 11/27/2006 SJ Full Version
-    Info: Processing started: Thu Nov 01 16:52:03 2007
+    Info: Processing started: Thu Nov 01 18:36:05 2007
 Info: Command: quartus_tan --read_settings_files=off --write_settings_files=off Synco -c Synco
 Info: Started post-fitting delay annotation
 Info: Delay annotation completed successfully
@@ -1274,7 +1274,7 @@ Info: th for register "PIO_Interface:pio|rPIO_nWR" (data pin = "PIO_nWR", clock 
 Info: All timing requirements were met for slow timing model timing analysis. See Report window for more details.
 Info: Quartus II Classic Timing Analyzer was successful. 0 errors, 2 warnings
     Info: Allocated 99 megabytes of memory during processing
-    Info: Processing ended: Thu Nov 01 16:52:05 2007
+    Info: Processing ended: Thu Nov 01 18:36:07 2007
     Info: Elapsed time: 00:00:02
 
 

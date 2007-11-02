@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Synco
-Thu Nov 01 16:51:45 2007
+Thu Nov 01 18:35:47 2007
 Quartus II Version 6.1 Build 201 11/27/2006 SJ Full Version
 
 
@@ -46,7 +46,7 @@ applicable agreement for further details.
 +------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                           ;
 +-----------------------------+------------------------------------------+
-; Analysis & Synthesis Status ; Successful - Thu Nov 01 16:51:45 2007    ;
+; Analysis & Synthesis Status ; Successful - Thu Nov 01 18:35:47 2007    ;
 ; Quartus II Version          ; 6.1 Build 201 11/27/2006 SJ Full Version ;
 ; Revision Name               ; Synco                                    ;
 ; Top-level Entity Name       ; SyncBox                                  ;
@@ -398,7 +398,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 6.1 Build 201 11/27/2006 SJ Full Version
-    Info: Processing started: Thu Nov 01 16:51:41 2007
+    Info: Processing started: Thu Nov 01 18:35:43 2007
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Synco -c Synco
 Info: Found 1 design units, including 1 entities, in source file SyncBox.bdf
     Info: Found entity 1: SyncBox
@@ -482,7 +482,7 @@ Info: Implemented 438 device resources after synthesis - the final resource coun
     Info: Implemented 364 logic cells
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 14 warnings
     Info: Allocated 139 megabytes of memory during processing
-    Info: Processing ended: Thu Nov 01 16:51:45 2007
+    Info: Processing ended: Thu Nov 01 18:35:47 2007
     Info: Elapsed time: 00:00:04
 
 
