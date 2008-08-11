@@ -343,23 +343,27 @@ BEGIN
    DV_Delayed  <= (NOT isAddr_Zero) AND (NOT DV_Buf); -- narrow version
    DV_OUT_FTS  <= DV_out ;
    DV_OUT_POL  <= DV_out ;
+
    --DV_OUT_SPR1 <= DV_out ;
    --DV_OUT_SPR2 <= DV_out ;
+   DV_OUT_SPR1 <= Clk5M ;              -- Changed in this version for Princeton
+   DV_OUT_SPR2 <= Shift5Bits(39) ;     -- Changed in this version for Princeton
 
-   DV_OUT_SPR1 <= Clk5M ;           -- Changes in this version
-   DV_OUT_SPR2 <= Shift5Bits(39) ;     -- for Princeton.
-   --
    Manch_NRZ   <= ShiftBits(39)  ;
-   Manch_Clk   <= Clk25M ;
-   TP_SMA      <= ShiftBits(39)  ;
+   Manch_Clk   <= Clk25M;
+   TP_SMA      <= Clk50M;
 
+   -- The process below has cascaded too many levels of logic, which causes timing to fail.
+   -- The equivalent logic can be implemented with combinatorial logic
+   ManchOut1 <= Clk25M XOR ShiftBits(39);
+   ManchOut2 <= Clk25M XOR ShiftBits(39);
 
-   GenMancho : PROCESS(Clk50M)
-   BEGIN
-       if rising_edge(Clk50M) then
-         ManchOut1 <= Clk25M XOR ShiftBits(39) ;
-         ManchOut2 <= Clk25M XOR ShiftBits(39) ;
-       end if;
-   END PROCESS GenMancho;
+--   GenMancho : PROCESS(Clk50M)
+--   BEGIN
+--       if rising_edge(Clk50M) then
+--         ManchOut1 <= Clk25M XOR ShiftBits(39) ;
+--         ManchOut2 <= Clk25M XOR ShiftBits(39) ;
+--       end if;
+--   END PROCESS GenMancho;
 
 END P_v5d;

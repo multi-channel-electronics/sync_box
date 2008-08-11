@@ -1,6 +1,6 @@
 Classic Timing Analyzer Constraint Check report for Synco
-Thu Nov 01 18:36:04 2007
-Quartus II Version 6.1 Build 201 11/27/2006 SJ Full Version
+Wed Jun 25 16:38:54 2008
+Quartus II Version 8.0 Build 215 05/29/2008 SJ Full Version
 
 
 ---------------------
@@ -20,7 +20,7 @@ Quartus II Version 6.1 Build 201 11/27/2006 SJ Full Version
 ----------------
 ; Legal Notice ;
 ----------------
-Copyright (C) 1991-2006 Altera Corporation
+Copyright (C) 1991-2008 Altera Corporation
 Your use of Altera Corporation's design tools, logic functions 
 and other software and tools, and its AMPP partner logic 
 functions, and any output files from any of the foregoing 
@@ -39,17 +39,17 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------------+
 ; Timing Constraint Check Summary                                                            ;
 +-------------------------------------------------+------------------------------------------+
-; Classic Timing Analyzer Constraint Check Status ; Analyzed - Thu Nov 01 18:36:01 2007      ;
-; Quartus II Version                              ; 6.1 Build 201 11/27/2006 SJ Full Version ;
+; Classic Timing Analyzer Constraint Check Status ; Analyzed - Wed Jun 25 16:38:50 2008      ;
+; Quartus II Version                              ; 8.0 Build 215 05/29/2008 SJ Full Version ;
 ; Revision Name                                   ; Synco                                    ;
 ; Top-level Entity Name                           ; SyncBox                                  ;
 ; Unconstrained Clocks                            ; 0                                        ;
-; Unconstrained Paths (Setup)                     ; 1234                                     ;
+; Unconstrained Paths (Setup)                     ; 1236                                     ;
 ; Unconstrained Reg-to-Reg Paths (Setup)          ; 396                                      ;
-; Unconstrained I/O Paths (Setup)                 ; 838                                      ;
-; Unconstrained Paths (Hold)                      ; 1234                                     ;
+; Unconstrained I/O Paths (Setup)                 ; 840                                      ;
+; Unconstrained Paths (Hold)                      ; 1236                                     ;
 ; Unconstrained Reg-to-Reg Paths (Hold)           ; 396                                      ;
-; Unconstrained I/O Paths (Hold)                  ; 838                                      ;
+; Unconstrained I/O Paths (Hold)                  ; 840                                      ;
 +-------------------------------------------------+------------------------------------------+
 
 
@@ -474,7 +474,10 @@ applicable agreement for further details.
 +---------------------------------------------------+-----------------------------------+-----------------------------+------------------------------+
 ; ClkDiv:clkd|Clk5M                                 ; DV_OUT_SPR1                       ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
 ; ClkDiv:clkd|Clk25M                                ; Manch_Clk                         ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
+; ClkDiv:clkd|Clk25M                                ; ManchOut1                         ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
+; ClkDiv:clkd|Clk25M                                ; ManchOut2                         ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
 ; ClkDiv:clkd|Clk25M                                ; TestOut1[1]                       ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
+; ClkDiv:clkd|Clk50M                                ; TP_SMA                            ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
 ; FreeRun:freerun|DV_FreeRun                        ; TP_DV_FreeRun                     ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
 ; FreeRun:freerun|DV_FreeRun                        ; TestOut1[6]                       ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
 ; ManchEncode:mancho|DV_Buf                         ; TP_DV_Delayed                     ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
@@ -483,8 +486,6 @@ applicable agreement for further details.
 ; ManchEncode:mancho|DV_out                         ; DV_OUT_FTS                        ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
 ; ManchEncode:mancho|DV_out                         ; DV_OUT_POL                        ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
 ; ManchEncode:mancho|dvp_current_state.wait_for_low ; TestOut1[2]                       ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
-; ManchEncode:mancho|ManchOut1                      ; ManchOut1                         ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
-; ManchEncode:mancho|ManchOut1                      ; ManchOut2                         ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
 ; ManchEncode:mancho|sDV_Err                        ; DV_Error_o                        ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
 ; ManchEncode:mancho|sDV_Err                        ; TestOut1[5]                       ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
 ; Sync_Len:synco|isAddr_Zero                        ; TP_DV_Delayed                     ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
@@ -502,7 +503,8 @@ applicable agreement for further details.
 ; ManchEncode:mancho|reg[9]                         ; TestOut1[2]                       ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
 ; ManchEncode:mancho|Shift5Bits[39]                 ; DV_OUT_SPR2                       ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
 ; ManchEncode:mancho|ShiftBits[39]                  ; Manch_NRZ                         ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
-; ManchEncode:mancho|ShiftBits[39]                  ; TP_SMA                            ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
+; ManchEncode:mancho|ShiftBits[39]                  ; ManchOut1                         ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
+; ManchEncode:mancho|ShiftBits[39]                  ; ManchOut2                         ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
 ; PIO_Interface:pio|AddrReg[0]                      ; PIO_DAT[0]                        ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
 ; PIO_Interface:pio|AddrReg[0]                      ; PIO_DAT[1]                        ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
 ; PIO_Interface:pio|AddrReg[0]                      ; PIO_DAT[2]                        ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
@@ -665,9 +667,9 @@ applicable agreement for further details.
 ; PIO_nEnable                                       ; ManchEncode:mancho|Shift5Load[29] ; (N/A, node is an INPUT PIN) ; Clk100M                      ;
 ; PIO_nEnable                                       ; ManchEncode:mancho|Shift5Load[30] ; (N/A, node is an INPUT PIN) ; Clk100M                      ;
 ; PIO_nEnable                                       ; ManchEncode:mancho|Shift5Load[31] ; (N/A, node is an INPUT PIN) ; Clk100M                      ;
-; PIO_nEnable                                       ; ManchEncode:mancho|Shift5Load[32] ; (N/A, node is an INPUT PIN) ; Clk100M                      ;
 ; PIO_nEnable                                       ; ManchEncode:mancho|Shift5Load[35] ; (N/A, node is an INPUT PIN) ; Clk100M                      ;
 ; PIO_nEnable                                       ; ManchEncode:mancho|Shift5Load[36] ; (N/A, node is an INPUT PIN) ; Clk100M                      ;
+; PIO_nEnable                                       ; ManchEncode:mancho|Shift5Load[37] ; (N/A, node is an INPUT PIN) ; Clk100M                      ;
 ; PIO_nEnable                                       ; ManchEncode:mancho|Shift5Load[38] ; (N/A, node is an INPUT PIN) ; Clk100M                      ;
 ; PIO_nEnable                                       ; ManchEncode:mancho|Shift5Load[39] ; (N/A, node is an INPUT PIN) ; Clk100M                      ;
 ; PIO_nEnable                                       ; ManchEncode:mancho|ShiftBits[0]   ; (N/A, node is an INPUT PIN) ; Clk100M                      ;
@@ -1724,7 +1726,10 @@ applicable agreement for further details.
 +---------------------------------------------------+-----------------------------------+-----------------------------+------------------------------+
 ; ClkDiv:clkd|Clk5M                                 ; DV_OUT_SPR1                       ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
 ; ClkDiv:clkd|Clk25M                                ; Manch_Clk                         ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
+; ClkDiv:clkd|Clk25M                                ; ManchOut1                         ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
+; ClkDiv:clkd|Clk25M                                ; ManchOut2                         ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
 ; ClkDiv:clkd|Clk25M                                ; TestOut1[1]                       ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
+; ClkDiv:clkd|Clk50M                                ; TP_SMA                            ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
 ; FreeRun:freerun|DV_FreeRun                        ; TP_DV_FreeRun                     ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
 ; FreeRun:freerun|DV_FreeRun                        ; TestOut1[6]                       ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
 ; ManchEncode:mancho|DV_Buf                         ; TP_DV_Delayed                     ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
@@ -1733,8 +1738,6 @@ applicable agreement for further details.
 ; ManchEncode:mancho|DV_out                         ; DV_OUT_FTS                        ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
 ; ManchEncode:mancho|DV_out                         ; DV_OUT_POL                        ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
 ; ManchEncode:mancho|dvp_current_state.wait_for_low ; TestOut1[2]                       ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
-; ManchEncode:mancho|ManchOut1                      ; ManchOut1                         ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
-; ManchEncode:mancho|ManchOut1                      ; ManchOut2                         ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
 ; ManchEncode:mancho|sDV_Err                        ; DV_Error_o                        ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
 ; ManchEncode:mancho|sDV_Err                        ; TestOut1[5]                       ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
 ; Sync_Len:synco|isAddr_Zero                        ; TP_DV_Delayed                     ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
@@ -1752,7 +1755,8 @@ applicable agreement for further details.
 ; ManchEncode:mancho|reg[9]                         ; TestOut1[2]                       ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
 ; ManchEncode:mancho|Shift5Bits[39]                 ; DV_OUT_SPR2                       ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
 ; ManchEncode:mancho|ShiftBits[39]                  ; Manch_NRZ                         ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
-; ManchEncode:mancho|ShiftBits[39]                  ; TP_SMA                            ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
+; ManchEncode:mancho|ShiftBits[39]                  ; ManchOut1                         ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
+; ManchEncode:mancho|ShiftBits[39]                  ; ManchOut2                         ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
 ; PIO_Interface:pio|AddrReg[0]                      ; PIO_DAT[0]                        ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
 ; PIO_Interface:pio|AddrReg[0]                      ; PIO_DAT[1]                        ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
 ; PIO_Interface:pio|AddrReg[0]                      ; PIO_DAT[2]                        ; Clk100M                     ; (N/A, node is an OUTPUT PIN) ;
@@ -1915,9 +1919,9 @@ applicable agreement for further details.
 ; PIO_nEnable                                       ; ManchEncode:mancho|Shift5Load[29] ; (N/A, node is an INPUT PIN) ; Clk100M                      ;
 ; PIO_nEnable                                       ; ManchEncode:mancho|Shift5Load[30] ; (N/A, node is an INPUT PIN) ; Clk100M                      ;
 ; PIO_nEnable                                       ; ManchEncode:mancho|Shift5Load[31] ; (N/A, node is an INPUT PIN) ; Clk100M                      ;
-; PIO_nEnable                                       ; ManchEncode:mancho|Shift5Load[32] ; (N/A, node is an INPUT PIN) ; Clk100M                      ;
 ; PIO_nEnable                                       ; ManchEncode:mancho|Shift5Load[35] ; (N/A, node is an INPUT PIN) ; Clk100M                      ;
 ; PIO_nEnable                                       ; ManchEncode:mancho|Shift5Load[36] ; (N/A, node is an INPUT PIN) ; Clk100M                      ;
+; PIO_nEnable                                       ; ManchEncode:mancho|Shift5Load[37] ; (N/A, node is an INPUT PIN) ; Clk100M                      ;
 ; PIO_nEnable                                       ; ManchEncode:mancho|Shift5Load[38] ; (N/A, node is an INPUT PIN) ; Clk100M                      ;
 ; PIO_nEnable                                       ; ManchEncode:mancho|Shift5Load[39] ; (N/A, node is an INPUT PIN) ; Clk100M                      ;
 ; PIO_nEnable                                       ; ManchEncode:mancho|ShiftBits[0]   ; (N/A, node is an INPUT PIN) ; Clk100M                      ;
@@ -2570,17 +2574,18 @@ Info: Started post-fitting delay annotation
 Info: Delay annotation completed successfully
 Info: Design is not fully constrained for setup requirements.
 Info: Number of unconstrained clocks: 0.
-Info: Number of unconstrained paths: 1234.
+Info: Number of unconstrained paths: 1236.
 Info: Number of unconstrained reg-to-reg paths: 396.
-Info: Number of unconstrained I/O paths: 838.
+Info: Number of unconstrained I/O paths: 840.
 Info: Design is not fully constrained for hold requirements.
 Info: Number of unconstrained clocks: 0.
-Info: Number of unconstrained paths: 1234.
+Info: Number of unconstrained paths: 1236.
 Info: Number of unconstrained reg-to-reg paths: 396.
-Info: Number of unconstrained I/O paths: 838.
+Info: Number of unconstrained I/O paths: 840.
 Info: Quartus II Classic Timing Analyzer Constraint Check was successful. 0 errors, 0 warnings
-    Info: Allocated 101 megabytes of memory during processing
-    Info: Processing ended: Thu Nov 01 18:36:04 2007
+    Info: Peak virtual memory: 124 megabytes
+    Info: Processing ended: Wed Jun 25 16:38:54 2008
     Info: Elapsed time: 00:00:04
+    Info: Total CPU time (on all processors): 00:00:04
 
 

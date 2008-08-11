@@ -28,7 +28,7 @@ set_global_assignment -name DEVICE EPM570T144C3
 set_global_assignment -name TOP_LEVEL_ENTITY SyncBox
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 5.1
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "13:39:04  OCTOBER 20, 2006"
-set_global_assignment -name LAST_QUARTUS_VERSION 6.1
+set_global_assignment -name LAST_QUARTUS_VERSION 8.0
 set_global_assignment -name DEVICE_FILTER_PACKAGE TQFP
 set_global_assignment -name DEVICE_FILTER_PIN_COUNT 144
 set_global_assignment -name DEVICE_FILTER_SPEED_GRADE FASTEST
@@ -122,3 +122,5 @@ set_global_assignment -name VHDL_FILE TestPnts2.vhd
 set_global_assignment -name VECTOR_WAVEFORM_FILE "testo-m1.vwf"
 set_global_assignment -name VHDL_FILE Sync_Len.vhd
 set_global_assignment -name FITTER_EFFORT "STANDARD FIT"
+set_global_assignment -name LL_ROOT_REGION ON -section_id "Root Region"
+set_global_assignment -name LL_MEMBER_STATE LOCKED -section_id "Root Region"
