@@ -58,7 +58,8 @@ ENTITY PIO_Interface IS
 			--
 			CMD_SL_LOAD      : STD_LOGIC_VECTOR := X"01";	-- 001
 			CMD_FR_LOAD		 : STD_LOGIC_VECTOR := X"02";	-- 010
-			CMD_DV_CNTR_LOAD : STD_LOGIC_VECTOR := X"04"	-- 100;
+			CMD_DV_CNTR_LOAD : STD_LOGIC_VECTOR := X"04";	-- 100;
+			CMD_CLK_ADJ_DIV_LOAD: STD_LOGIC_VECTOR := X"05" -- 0101 
 			);
 
 	-- {{ALTERA_IO_BEGIN}} DO NOT REMOVE THIS LINE!
@@ -88,7 +89,8 @@ ENTITY PIO_Interface IS
 		FR_Load		: OUT STD_LOGIC;
 		FR_Enable	: OUT STD_LOGIC;
 		SL_Load 	: OUT STD_LOGIC;  -- Sync Length
-		DV_Cntr_Load : OUT STD_LOGIC;
+		DV_Cntr_Load    : OUT STD_LOGIC;
+		clk_adj_div_load: OUT STD_LOGIC; -- clk_adj division ratio
 		--
 		-- the following are not used.
 		PIO_T0		: OUT STD_LOGIC;
@@ -225,9 +227,10 @@ BEGIN
 		CmdWrite <= '0';
 	end if;
 	
-	SL_Load      <= CmdWrite and match(PIO_DAT, CMD_SL_LOAD);	-- 01
-	FR_Load      <= CmdWrite and match(PIO_DAT, CMD_FR_LOAD);	-- 10
-	DV_Cntr_Load <= CmdWrite and match(PIO_DAT, CMD_DV_CNTR_LOAD); 	-- 11;
+	SL_Load      <= CmdWrite and match(PIO_DAT, CMD_SL_LOAD);	-- 001
+	FR_Load      <= CmdWrite and match(PIO_DAT, CMD_FR_LOAD);	-- 010
+	DV_Cntr_Load <= CmdWrite and match(PIO_DAT, CMD_DV_CNTR_LOAD); 	-- 100;
+	clk_adj_div_load  <= CmdWrite and match(PIO_DAT, CMD_CLK_ADJ_DIV_LOAD); -- 101;
 	
 END process Loadex ;
 

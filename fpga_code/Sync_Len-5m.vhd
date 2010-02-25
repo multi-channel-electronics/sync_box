@@ -24,7 +24,7 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
-
+--****************** UNUSED OBSOLETE CODE!***************************
 --  Entity Declaration
 
 ENTITY Sync_Len IS
@@ -40,7 +40,7 @@ ENTITY Sync_Len IS
 	(
 		Reset 		: IN STD_LOGIC;	-- active low input
 		Enable 		: IN STD_LOGIC;	-- active high input
-		Clk5M 		: IN STD_LOGIC;
+		ClkSP 		: IN STD_LOGIC;
 		Clk25M 		: IN STD_LOGIC;
 		SL_Load 	: IN STD_LOGIC;	-- active high input
 		CmdData 	: IN STD_LOGIC_VECTOR(31 downto 0);
@@ -79,12 +79,12 @@ end process loadit;
 		
 -------------------------------------------------------
 -- 
-dwncnt: process (Reset, Clk5M, Enable) 
+dwncnt: process (Reset, ClkSP, Enable) 
 	begin
 	if  (Reset = '0' ) then
 		SLCntr 		<= X"00000";
 		s_AZero <= '1';	
-	elsif (rising_edge(Clk5M)) then	
+	elsif (rising_edge(ClkSP)) then	
 		if (Enable = '1' AND SL_LoadReg /= X"00000") then 
 			if (SLCntr = X"00000" ) then
 				s_AZero <= '0';

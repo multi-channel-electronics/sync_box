@@ -4,10 +4,10 @@ editor if you plan to continue editing the block that represents it in
 the Block Editor! File corruption is VERY likely to occur.
 */
 /*
-Copyright (C) 1991-2005 Altera Corporation
+Copyright (C) 1991-2010 Altera Corporation
 Your use of Altera Corporation's design tools, logic functions 
 and other software and tools, and its AMPP partner logic 
-functions, and any output files any of the foregoing 
+functions, and any output files from any of the foregoing 
 (including device programming or simulation files), and any 
 associated documentation or information are expressly subject 
 to the terms and conditions of the Altera Program License 
@@ -22,9 +22,12 @@ applicable agreement for further details.
 (properties
 	(page_setup "header_footer\n\n%f\n%j  %D\n\n\n\nmargin\n0.7\n0.2\n0.2\n0.2\norientation\n2\npaper_size\n17\npaper_source\n15\n")
 )
-(alias "<<__$DEF_ALIAS177>>""stuf;Clk25M;Reset;DV_RTS;Clk50M;Clk5M")
-(alias "<<__$DEF_ALIAS158>>""stuf;Clk25M;Reset;DV_RTS;Clk50M;Clk5M")
+(alias "<<__$DEF_ALIAS285>>""stuf;Clk25M;Reset;DV_RTS;Clk50M;Clk5M")
 (alias "<<stuf>>""stuf;Clk25M;Reset;DV_RTS;Clk50M;Clk5M")
+(alias "<<__$DEF_ALIAS292>>""stuf;Clk25M;Reset;DV_RTS;Clk50M;Clk5M")
+(alias "<<__$DEF_ALIAS158>>""stuf;Clk25M;Reset;DV_RTS;Clk50M;Clk5M")
+(alias "<<__$DEF_ALIAS177>>""stuf;Clk25M;Reset;DV_RTS;Clk50M;Clk5M")
+(alias "<<__$DEF_ALIAS296>>""stuf;Clk25M;Reset;DV_RTS;Clk50M;Clk5M")
 (pin
 	(input)
 	(rect -16 80 152 96)
@@ -40,7 +43,6 @@ applicable agreement for further details.
 		(line (pt 117 12)(pt 121 8)(line_width 1))
 	)
 	(text "VCC" (rect 136 7 156 17)(font "Arial" (font_size 6)))
-	(annotation_block (location)(rect -128 80 -40 112))
 )
 (pin
 	(input)
@@ -57,7 +59,6 @@ applicable agreement for further details.
 		(line (pt 117 12)(pt 121 8)(line_width 1))
 	)
 	(text "VCC" (rect 136 7 156 17)(font "Arial" (font_size 6)))
-	(annotation_block (location)(rect -128 272 -40 304))
 )
 (pin
 	(input)
@@ -74,7 +75,6 @@ applicable agreement for further details.
 		(line (pt 117 12)(pt 121 8)(line_width 1))
 	)
 	(text "VCC" (rect 136 7 156 17)(font "Arial" (font_size 6)))
-	(annotation_block (location)(rect -128 392 -40 424))
 )
 (pin
 	(input)
@@ -91,7 +91,6 @@ applicable agreement for further details.
 		(line (pt 117 12)(pt 121 8)(line_width 1))
 	)
 	(text "VCC" (rect 136 7 156 17)(font "Arial" (font_size 6)))
-	(annotation_block (location)(rect -128 432 -40 464))
 )
 (pin
 	(input)
@@ -108,7 +107,6 @@ applicable agreement for further details.
 		(line (pt 117 12)(pt 121 8)(line_width 1))
 	)
 	(text "VCC" (rect 136 7 156 17)(font "Arial" (font_size 6)))
-	(annotation_block (location)(rect -128 352 -40 384))
 )
 (pin
 	(input)
@@ -125,7 +123,6 @@ applicable agreement for further details.
 		(line (pt 117 12)(pt 121 8)(line_width 1))
 	)
 	(text "VCC" (rect 136 7 156 17)(font "Arial" (font_size 6)))
-	(annotation_block (location)(rect -128 312 -40 344))
 )
 (pin
 	(input)
@@ -143,13 +140,12 @@ applicable agreement for further details.
 	)
 	(flipy)
 	(text "VCC" (rect 12 7 32 17)(font "Arial" (font_size 6)))
-	(annotation_block (location)(rect 576 480 664 608))
 )
 (pin
 	(input)
 	(rect -16 232 152 248)
 	(text "INPUT" (rect 133 0 161 10)(font "Arial" (font_size 6)))
-	(text "PIO_ADR[7..0]" (rect 5 0 79 12)(font "Arial" ))
+	(text "PIO_ADR[7..0]" (rect 9 0 83 12)(font "Arial" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 92 12)(pt 117 12)(line_width 1))
@@ -160,13 +156,12 @@ applicable agreement for further details.
 		(line (pt 117 12)(pt 121 8)(line_width 1))
 	)
 	(text "VCC" (rect 136 7 156 17)(font "Arial" (font_size 6)))
-	(annotation_block (location)(rect -240 248 -152 376))
 )
 (pin
 	(input)
 	(rect -16 -80 152 -64)
 	(text "INPUT" (rect 133 0 161 10)(font "Arial" (font_size 6)))
-	(text "Clk100M" (rect 5 0 47 12)(font "Arial" ))
+	(text "Clk100M" (rect 9 0 51 12)(font "Arial" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 92 12)(pt 117 12)(line_width 1))
@@ -177,13 +172,12 @@ applicable agreement for further details.
 		(line (pt 117 12)(pt 121 8)(line_width 1))
 	)
 	(text "VCC" (rect 136 7 156 17)(font "Arial" (font_size 6)))
-	(annotation_block (location)(rect -128 -80 -40 -48))
 )
 (pin
 	(input)
 	(rect -16 512 152 528)
 	(text "INPUT" (rect 133 0 161 10)(font "Arial" (font_size 6)))
-	(text "nRST" (rect 5 0 32 12)(font "Arial" ))
+	(text "nRST" (rect 9 0 36 12)(font "Arial" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 92 12)(pt 117 12)(line_width 1))
@@ -194,13 +188,12 @@ applicable agreement for further details.
 		(line (pt 117 12)(pt 121 8)(line_width 1))
 	)
 	(text "VCC" (rect 136 7 156 17)(font "Arial" (font_size 6)))
-	(annotation_block (location)(rect -104 528 -16 560))
 )
 (pin
 	(input)
 	(rect -16 -8 152 8)
 	(text "INPUT" (rect 133 0 161 10)(font "Arial" (font_size 6)))
-	(text "CLK_EXT" (rect 5 0 51 12)(font "Arial" ))
+	(text "CLK_EXT" (rect 9 0 55 12)(font "Arial" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 92 12)(pt 117 12)(line_width 1))
@@ -211,13 +204,12 @@ applicable agreement for further details.
 		(line (pt 117 12)(pt 121 8)(line_width 1))
 	)
 	(text "VCC" (rect 136 7 156 17)(font "Arial" (font_size 6)))
-	(annotation_block (location)(rect -104 8 -16 40))
 )
 (pin
 	(input)
 	(rect -16 552 152 568)
 	(text "INPUT" (rect 133 0 161 10)(font "Arial" (font_size 6)))
-	(text "nPSEN" (rect 5 0 40 12)(font "Arial" ))
+	(text "nPSEN" (rect 9 0 44 12)(font "Arial" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 92 12)(pt 117 12)(line_width 1))
@@ -228,7 +220,6 @@ applicable agreement for further details.
 		(line (pt 117 12)(pt 121 8)(line_width 1))
 	)
 	(text "VCC" (rect 136 7 156 17)(font "Arial" (font_size 6)))
-	(annotation_block (location)(rect -104 568 -16 600))
 )
 (pin
 	(output)
@@ -246,7 +237,6 @@ applicable agreement for further details.
 		(line (pt 98 12)(pt 94 8)(line_width 1))
 	)
 	(flipy)
-	(annotation_block (location)(rect -136 728 -48 760))
 )
 (pin
 	(output)
@@ -264,7 +254,6 @@ applicable agreement for further details.
 		(line (pt 98 12)(pt 94 8)(line_width 1))
 	)
 	(flipy)
-	(annotation_block (location)(rect -136 768 -48 800))
 )
 (pin
 	(output)
@@ -282,7 +271,6 @@ applicable agreement for further details.
 		(line (pt 98 12)(pt 94 8)(line_width 1))
 	)
 	(flipy)
-	(annotation_block (location)(rect -136 648 -48 680))
 )
 (pin
 	(output)
@@ -300,7 +288,6 @@ applicable agreement for further details.
 		(line (pt 98 12)(pt 94 8)(line_width 1))
 	)
 	(flipy)
-	(annotation_block (location)(rect -136 688 -48 720))
 )
 (pin
 	(output)
@@ -317,7 +304,6 @@ applicable agreement for further details.
 		(line (pt 82 8)(pt 78 12)(line_width 1))
 		(line (pt 78 12)(pt 82 8)(line_width 1))
 	)
-	(annotation_block (location)(rect 576 288 664 416))
 )
 (pin
 	(output)
@@ -334,7 +320,6 @@ applicable agreement for further details.
 		(line (pt 82 8)(pt 78 12)(line_width 1))
 		(line (pt 78 12)(pt 82 8)(line_width 1))
 	)
-	(annotation_block (location)(rect 1848 -48 1936 -16))
 )
 (pin
 	(output)
@@ -351,7 +336,6 @@ applicable agreement for further details.
 		(line (pt 82 8)(pt 78 12)(line_width 1))
 		(line (pt 78 12)(pt 82 8)(line_width 1))
 	)
-	(annotation_block (location)(rect 1848 -8 1936 24))
 )
 (pin
 	(output)
@@ -368,7 +352,6 @@ applicable agreement for further details.
 		(line (pt 82 8)(pt 78 12)(line_width 1))
 		(line (pt 78 12)(pt 82 8)(line_width 1))
 	)
-	(annotation_block (location)(rect 1792 296 1880 328))
 )
 (pin
 	(output)
@@ -385,7 +368,6 @@ applicable agreement for further details.
 		(line (pt 82 8)(pt 78 12)(line_width 1))
 		(line (pt 78 12)(pt 82 8)(line_width 1))
 	)
-	(annotation_block (location)(rect 1792 256 1880 288))
 )
 (pin
 	(output)
@@ -402,7 +384,6 @@ applicable agreement for further details.
 		(line (pt 82 8)(pt 78 12)(line_width 1))
 		(line (pt 78 12)(pt 82 8)(line_width 1))
 	)
-	(annotation_block (location)(rect 1848 32 1936 64))
 )
 (pin
 	(output)
@@ -419,7 +400,6 @@ applicable agreement for further details.
 		(line (pt 82 8)(pt 78 12)(line_width 1))
 		(line (pt 78 12)(pt 82 8)(line_width 1))
 	)
-	(annotation_block (location)(rect 1848 72 1936 104))
 )
 (pin
 	(output)
@@ -436,7 +416,6 @@ applicable agreement for further details.
 		(line (pt 82 8)(pt 78 12)(line_width 1))
 		(line (pt 78 12)(pt 82 8)(line_width 1))
 	)
-	(annotation_block (location)(rect 1848 112 1936 144))
 )
 (pin
 	(output)
@@ -453,7 +432,6 @@ applicable agreement for further details.
 		(line (pt 82 8)(pt 78 12)(line_width 1))
 		(line (pt 78 12)(pt 82 8)(line_width 1))
 	)
-	(annotation_block (location)(rect 1848 152 1936 184))
 )
 (pin
 	(output)
@@ -470,7 +448,6 @@ applicable agreement for further details.
 		(line (pt 82 8)(pt 78 12)(line_width 1))
 		(line (pt 78 12)(pt 82 8)(line_width 1))
 	)
-	(annotation_block (location)(rect 1792 336 1880 368))
 )
 (pin
 	(output)
@@ -487,7 +464,6 @@ applicable agreement for further details.
 		(line (pt 82 8)(pt 78 12)(line_width 1))
 		(line (pt 78 12)(pt 82 8)(line_width 1))
 	)
-	(annotation_block (location)(rect 1792 560 1880 592))
 )
 (pin
 	(output)
@@ -504,7 +480,6 @@ applicable agreement for further details.
 		(line (pt 82 8)(pt 78 12)(line_width 1))
 		(line (pt 78 12)(pt 82 8)(line_width 1))
 	)
-	(annotation_block (location)(rect 1792 600 1880 632))
 )
 (pin
 	(output)
@@ -521,7 +496,6 @@ applicable agreement for further details.
 		(line (pt 82 8)(pt 78 12)(line_width 1))
 		(line (pt 78 12)(pt 82 8)(line_width 1))
 	)
-	(annotation_block (location)(rect 1792 640 1880 672))
 )
 (pin
 	(output)
@@ -538,7 +512,6 @@ applicable agreement for further details.
 		(line (pt 82 8)(pt 78 12)(line_width 1))
 		(line (pt 78 12)(pt 82 8)(line_width 1))
 	)
-	(annotation_block (location)(rect 1792 680 1880 712))
 )
 (pin
 	(output)
@@ -555,7 +528,6 @@ applicable agreement for further details.
 		(line (pt 82 8)(pt 78 12)(line_width 1))
 		(line (pt 78 12)(pt 82 8)(line_width 1))
 	)
-	(annotation_block (location)(rect 1792 720 1880 752))
 )
 (pin
 	(output)
@@ -572,7 +544,6 @@ applicable agreement for further details.
 		(line (pt 82 8)(pt 78 12)(line_width 1))
 		(line (pt 78 12)(pt 82 8)(line_width 1))
 	)
-	(annotation_block (location)(rect 1792 760 1880 792))
 )
 (pin
 	(output)
@@ -589,7 +560,6 @@ applicable agreement for further details.
 		(line (pt 82 8)(pt 78 12)(line_width 1))
 		(line (pt 78 12)(pt 82 8)(line_width 1))
 	)
-	(annotation_block (location)(rect 1792 520 1880 552))
 )
 (pin
 	(output)
@@ -606,7 +576,6 @@ applicable agreement for further details.
 		(line (pt 82 8)(pt 78 12)(line_width 1))
 		(line (pt 78 12)(pt 82 8)(line_width 1))
 	)
-	(annotation_block (location)(rect 1792 800 1880 832))
 )
 (pin
 	(output)
@@ -623,11 +592,10 @@ applicable agreement for further details.
 		(line (pt 82 8)(pt 78 12)(line_width 1))
 		(line (pt 78 12)(pt 82 8)(line_width 1))
 	)
-	(annotation_block (location)(rect 1792 880 1880 912))
 )
 (pin
 	(output)
-	(rect 1592 840 1769 856)
+	(rect 1592 840 1768 856)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
 	(text "TP_DV_FreeRun" (rect 90 0 172 12)(font "Arial" ))
 	(pt 0 8)
@@ -640,7 +608,6 @@ applicable agreement for further details.
 		(line (pt 82 8)(pt 78 12)(line_width 1))
 		(line (pt 78 12)(pt 82 8)(line_width 1))
 	)
-	(annotation_block (location)(rect 1792 840 1880 872))
 )
 (pin
 	(output)
@@ -658,7 +625,6 @@ applicable agreement for further details.
 		(line (pt 78 4)(pt 82 8)(line_width 1))
 	)
 	(flipx)
-	(annotation_block (location)(rect 1792 968 1880 1096))
 )
 (pin
 	(output)
@@ -675,13 +641,12 @@ applicable agreement for further details.
 		(line (pt 82 8)(pt 78 12)(line_width 1))
 		(line (pt 78 12)(pt 82 8)(line_width 1))
 	)
-	(annotation_block (location)(rect 1792 480 1880 512))
 )
 (pin
 	(bidir)
 	(rect -16 200 160 216)
 	(text "BIDIR" (rect 151 0 175 10)(font "Arial" (font_size 6)))
-	(text "PIO_DAT[7..0]" (rect 5 0 76 12)(font "Arial" ))
+	(text "PIO_DAT[7..0]" (rect 15 0 86 12)(font "Arial" ))
 	(pt 176 8)
 	(drawing
 		(line (pt 120 4)(pt 98 4)(line_width 1))
@@ -694,7 +659,6 @@ applicable agreement for further details.
 	)
 	(flipy)
 	(text "VCC" (rect 152 7 172 17)(font "Arial" (font_size 6)))
-	(annotation_block (location)(rect -232 72 -152 200))
 )
 (block
 	(rect 888 160 1128 336)
@@ -715,97 +679,6 @@ applicable agreement for further details.
 		)
 	(mapper
 		(pt 0 128)
-		(bidir)
-		)
-)
-(block
-	(rect 248 184 496 808)
-	(text "PIO_Interface" (rect 5 5 81 19)(font "Arial" (font_size 8)))	(text "pio" (rect 5 610 19 622)(font "Arial" ))	(block_io "PIO_ALE" (input))
-	(block_io "PIO_Reset" (input))
-	(block_io "PIO_nRD" (input))
-	(block_io "PIO_nEnable" (input))
-	(block_io "PIO_nWR" (input))
-	(block_io "AuxIn[8..1]" (input))
-	(block_io "Clk25M" (input))
-	(block_io "PIO_ADR[7..0]" (input))
-	(block_io "nRST" (input))
-	(block_io "DV_Error" (input))
-	(block_io "nPSEN" (input))
-	(block_io "PIO_T0" (output))
-	(block_io "PIO_INT0" (output))
-	(block_io "PIO_INT1" (output))
-	(block_io "FR_Load" (output))
-	(block_io "FR_Enable" (output))
-	(block_io "PIO_T1" (output))
-	(block_io "SL_Load" (output))
-	(block_io "Enable" (output))
-	(block_io "AuxOut[8..1]" (output))
-	(block_io "Reset" (output))
-	(block_io "DV_Cntr_Load" (output))
-	(block_io "CmdData[31..0]" (output))
-	(block_io "PIO_DAT[7..0]" (bidir))
-	(mapper
-		(pt 0 56)
-		(input)
-		)
-	(mapper
-		(pt 248 272)
-		(input)
-		)
-	(mapper
-		(pt 0 96)
-		(input)
-		)
-	(mapper
-		(pt 0 136)
-		(input)
-		)
-	(mapper
-		(pt 0 176)
-		(input)
-		)
-	(mapper
-		(pt 0 216)
-		(input)
-		)
-	(mapper
-		(pt 0 256)
-		(input)
-		)
-	(mapper
-		(pt 0 336)
-		(input)
-		)
-	(mapper
-		(pt 0 376)
-		(input)
-		)
-	(mapper
-		(pt 248 80)
-		(output)
-		)
-	(mapper
-		(pt 0 592)
-		(output)
-		)
-	(mapper
-		(pt 0 552)
-		(output)
-		)
-	(mapper
-		(pt 0 512)
-		(output)
-		)
-	(mapper
-		(pt 0 472)
-		(output)
-		)
-	(mapper
-		(pt 0 24)
-		(bidir)
-		)
-	(mapper
-		(pt 248 32)
 		(bidir)
 		)
 )
@@ -898,31 +771,20 @@ applicable agreement for further details.
 		)
 )
 (block
-	(rect 240 -88 488 64)
-	(text "ClkDiv" (rect 5 5 39 19)(font "Arial" (font_size 8)))	(text "clkd" (rect 5 138 25 150)(font "Arial" ))	(block_io "Clk100M" (input))
-	(block_io "CLK_EXT" (input))
-	(block_io "Clk50M" (output))
-	(block_io "Clk25M" (output))
-	(block_io "Clk5M" (output))
+	(rect 888 -80 1128 112)
+	(text "Sync_Len" (rect 5 5 62 19)(font "Arial" (font_size 8)))	(text "synco" (rect 5 178 35 190)(font "Arial" ))	(block_io "Reset" (input))
+	(block_io "Clk25M" (input))
+	(block_io "Enable" (input))
+	(block_io "SL_Load" (input))
+	(block_io "CmdData[31..0]" (input))
+	(block_io "isAddr_Zero" (output))
 	(mapper
-		(pt 0 16)
-		(input)
-		)
-	(mapper
-		(pt 0 88)
-		(input)
-		)
-	(mapper
-		(pt 248 40)
+		(pt 240 32)
 		(output)
 		)
 	(mapper
-		(pt 248 80)
-		(output)
-		)
-	(mapper
-		(pt 248 120)
-		(output)
+		(pt 0 144)
+		(bidir)
 		)
 )
 (block
@@ -937,7 +799,7 @@ applicable agreement for further details.
 	(block_io "DV_Cntr_Load" (input))
 	(block_io "CmdData[31..0]" (input))
 	(block_io "FR_Enable" (input))
-	(block_io "Clk5M" (input))
+	(block_io "clk_adj" (input))
 	(block_io "dv_buf_o" (output))
 	(block_io "DV_Error" (output))
 	(block_io "ManchOut1" (output))
@@ -1001,26 +863,127 @@ applicable agreement for further details.
 		)
 )
 (block
-	(rect 888 -80 1128 112)
-	(text "Sync_Len" (rect 5 5 62 19)(font "Arial" (font_size 8)))	(text "synco" (rect 5 178 35 190)(font "Arial" ))	(block_io "Reset" (input))
+	(rect 248 184 496 808)
+	(text "PIO_Interface" (rect 5 5 81 19)(font "Arial" (font_size 8)))	(text "pio" (rect 5 610 19 622)(font "Arial" ))	(block_io "PIO_ALE" (input))
+	(block_io "PIO_Reset" (input))
+	(block_io "PIO_nRD" (input))
+	(block_io "PIO_nEnable" (input))
+	(block_io "PIO_nWR" (input))
+	(block_io "AuxIn[8..1]" (input))
 	(block_io "Clk25M" (input))
-	(block_io "Enable" (input))
-	(block_io "SL_Load" (input))
-	(block_io "CmdData[31..0]" (input))
-	(block_io "isAddr_Zero" (output))
+	(block_io "PIO_ADR[7..0]" (input))
+	(block_io "nRST" (input))
+	(block_io "DV_Error" (input))
+	(block_io "nPSEN" (input))
+	(block_io "PIO_T0" (output))
+	(block_io "PIO_INT0" (output))
+	(block_io "PIO_INT1" (output))
+	(block_io "FR_Load" (output))
+	(block_io "FR_Enable" (output))
+	(block_io "PIO_T1" (output))
+	(block_io "SL_Load" (output))
+	(block_io "Enable" (output))
+	(block_io "AuxOut[8..1]" (output))
+	(block_io "Reset" (output))
+	(block_io "DV_Cntr_Load" (output))
+	(block_io "CmdData[31..0]" (output))
+	(block_io "clk_adj_div_load" (output))
+	(block_io "PIO_DAT[7..0]" (bidir))
 	(mapper
-		(pt 240 32)
+		(pt 0 56)
+		(input)
+		)
+	(mapper
+		(pt 248 272)
+		(input)
+		)
+	(mapper
+		(pt 0 96)
+		(input)
+		)
+	(mapper
+		(pt 0 136)
+		(input)
+		)
+	(mapper
+		(pt 0 176)
+		(input)
+		)
+	(mapper
+		(pt 0 216)
+		(input)
+		)
+	(mapper
+		(pt 0 256)
+		(input)
+		)
+	(mapper
+		(pt 0 336)
+		(input)
+		)
+	(mapper
+		(pt 0 376)
+		(input)
+		)
+	(mapper
+		(pt 248 80)
 		(output)
 		)
 	(mapper
-		(pt 0 144)
+		(pt 0 592)
+		(output)
+		)
+	(mapper
+		(pt 0 552)
+		(output)
+		)
+	(mapper
+		(pt 0 512)
+		(output)
+		)
+	(mapper
+		(pt 0 472)
+		(output)
+		)
+	(mapper
+		(pt 0 24)
+		(bidir)
+		)
+	(mapper
+		(pt 248 32)
 		(bidir)
 		)
 )
-(connector
-	(text "DV_RTS" (rect 458 72 500 84)(font "Arial" ))
-	(pt 152 88)
-	(pt 832 88)
+(block
+	(rect 240 -88 488 128)
+	(text "ClkDiv" (rect 5 5 39 19)(font "Arial" (font_size 8)))	(text "clkd" (rect 5 202 25 214)(font "Arial" ))	(block_io "Clk100M" (input))
+	(block_io "CLK_EXT" (input))
+	(block_io "clk_adj_div_load" (input))
+	(block_io "CmdData[31..0]" (input))
+	(block_io "Reset" (input))
+	(block_io "Clk50M" (output))
+	(block_io "Clk25M" (output))
+	(block_io "clk_adj" (output))
+	(mapper
+		(pt 0 16)
+		(input)
+		)
+	(mapper
+		(pt 0 88)
+		(input)
+		)
+	(mapper
+		(pt 248 80)
+		(output)
+		)
+	(mapper
+		(pt 248 120)
+		(output)
+		)
+	(mapper
+		(pt 248 40)
+		(bidir)
+		)
 )
 (connector
 	(text "isAddr_Zero" (rect 682 168 741 180)(font "Arial" )(invisible))
@@ -1287,38 +1250,9 @@ applicable agreement for further details.
 	(pt 832 32)
 )
 (connector
-	(text "Clk5M" (rect 554 -64 584 -52)(font "Arial" ))
-	(pt 488 -48)
-	(pt 832 -48)
-)
-(connector
-	(text "<<stuf>>" (rect 816 141 828 184)(font "Arial" )(vertical))
-	(pt 832 88)
-	(pt 832 216)
-	(conduit)
-)
-(connector
-	(text "<<stuf>>" (rect 816 -27 828 16)(font "Arial" )(vertical)(invisible))
-	(pt 832 -48)
-	(pt 832 -8)
-	(conduit)
-)
-(connector
 	(text "<<stuf>>" (rect 816 5 828 48)(font "Arial" )(vertical)(invisible))
 	(pt 832 -8)
 	(pt 832 32)
-	(conduit)
-)
-(connector
-	(text "<<stuf>>" (rect 816 37 828 80)(font "Arial" )(vertical)(invisible))
-	(pt 832 32)
-	(pt 832 64)
-	(conduit)
-)
-(connector
-	(text "<<stuf>>" (rect 816 61 828 104)(font "Arial" )(vertical)(invisible))
-	(pt 832 64)
-	(pt 832 88)
 	(conduit)
 )
 (connector
@@ -1358,12 +1292,6 @@ applicable agreement for further details.
 	(conduit)
 )
 (connector
-	(text "<<stuf>>" (rect 816 -67 828 -24)(font "Arial" )(vertical)(invisible))
-	(pt 832 -80)
-	(pt 832 -48)
-	(conduit)
-)
-(connector
 	(pt 864 184)
 	(pt 864 136)
 )
@@ -1384,8 +1312,56 @@ applicable agreement for further details.
 	(pt 1200 -48)
 	(pt 1240 -48)
 )
+(connector
+	(pt 152 88)
+	(pt 160 88)
+)
+(connector
+	(pt 160 88)
+	(pt 160 160)
+)
+(connector
+	(text "DV_RTS" (rect 458 144 500 156)(font "Arial" ))
+	(pt 832 160)
+	(pt 160 160)
+)
+(connector
+	(text "<<__$DEF_ALIAS285>>" (rect 0 0 118 12)(font "Arial" )(invisible))
+	(pt 832 64)
+	(pt 832 160)
+	(conduit)
+)
+(connector
+	(text "<<stuf>>" (rect 816 141 828 184)(font "Arial" )(vertical))
+	(pt 832 160)
+	(pt 832 216)
+	(conduit)
+)
+(connector
+	(text "<<__$DEF_ALIAS292>>" (rect 0 0 118 12)(font "Arial" )(invisible))
+	(pt 488 -48)
+	(pt 832 -48)
+	(conduit)
+)
+(connector
+	(text "<<__$DEF_ALIAS296>>" (rect 0 0 118 12)(font "Arial" )(invisible))
+	(pt 832 -80)
+	(pt 832 -48)
+	(conduit)
+)
+(connector
+	(text "<<stuf>>" (rect 816 -27 828 16)(font "Arial" )(vertical)(invisible))
+	(pt 832 -48)
+	(pt 832 -8)
+	(conduit)
+)
+(connector
+	(text "<<stuf>>" (rect 816 37 828 80)(font "Arial" )(vertical)(invisible))
+	(pt 832 32)
+	(pt 832 64)
+	(conduit)
+)
 (junction (pt 832 64))
-(junction (pt 832 88))
 (junction (pt 832 360))
 (junction (pt 832 288))
 (junction (pt 832 216))
@@ -1396,6 +1372,7 @@ applicable agreement for further details.
 (junction (pt 832 408))
 (junction (pt 832 32))
 (junction (pt 832 -8))
+(junction (pt 832 160))
 (junction (pt 832 -48))
 (text "To PIO interface" (rect -392 792 -302 806)(font "Arial" (font_size 8)))
 (text "From RTS RS485" (rect -16 56 80 70)(font "Arial" (font_size 8)))

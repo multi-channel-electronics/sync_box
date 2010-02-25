@@ -1,11 +1,11 @@
-Fitter Status : Successful - Wed Jun 25 16:38:46 2008
-Quartus II Version : 8.0 Build 215 05/29/2008 SJ Full Version
+Fitter Status : Successful - Thu Feb 25 10:31:47 2010
+Quartus II Version : 9.1 Build 304 01/25/2010 SP 1 SJ Full Version
 Revision Name : Synco
 Top-level Entity Name : SyncBox
 Family : MAX II
 Device : EPM570T144C3
 Timing Models : Final
-Total logic elements : 346 / 570 ( 61 % )
+Total logic elements : 387 / 570 ( 68 % )
 Total pins : 74 / 116 ( 64 % )
 Total virtual pins : 0
 UFM blocks : 0 / 1 ( 0 % )

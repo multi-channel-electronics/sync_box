@@ -35,14 +35,14 @@ ENTITY ManchEncode IS
       Enable      : IN STD_LOGIC;
       Clk50M      : IN STD_LOGIC;
       Clk25M      : IN STD_LOGIC;
-      Clk5M       : IN STD_LOGIC;
+      clk_adj     : IN STD_LOGIC;
       --
       isAddr_Zero : IN STD_LOGIC;
       DV_RTS      : IN STD_LOGIC;
       DV_FreeRun  : IN STD_LOGIC;
       FR_Enable   : IN STD_LOGIC;      -- 1 = DV_FreeRun, 0 = DV_RTS
       CmdData  : IN STD_LOGIC_VECTOR(31 downto 0);
-      DV_Cntr_Load   : IN STD_LOGIC; -- set frame count reg.
+      DV_Cntr_Load  : IN STD_LOGIC; -- set frame count reg.
       --
       -- Main outputs
       ManchOut1   : OUT STD_LOGIC;
@@ -295,13 +295,14 @@ BEGIN
    END PROCESS shifto;
 
    ------------------------------------------------------
-   --
-   shifto5 : PROCESS(Reset, Clk5M)
+   -- clk_adj originally designed to be 5MHz, is now adjustable, therefore all "5" 
+   -- naming conventions have to be treated accordingly (to clk_adj)
+   shifto5 : PROCESS(Reset, clk_adj)
    BEGIN
       IF (Reset = '0') THEN
          Shift5Bits <= (others=>'1');
          Shift5Got <= '0';
-      ELSIF (rising_edge(Clk5M)) THEN
+      ELSIF (rising_edge(clk_adj)) THEN
          IF (Enable = '1') THEN
             IF(Shift5Rdy = '1') THEN
                Shift5Bits(39 downto 0) <= Shift5Load(39 downto 0);
@@ -346,7 +347,7 @@ BEGIN
 
    --DV_OUT_SPR1 <= DV_out ;
    --DV_OUT_SPR2 <= DV_out ;
-   DV_OUT_SPR1 <= Clk5M ;              -- Changed in this version for Princeton
+   DV_OUT_SPR1 <= clk_adj ;              -- Changed in this version for Princeton
    DV_OUT_SPR2 <= Shift5Bits(39) ;     -- Changed in this version for Princeton
 
    Manch_NRZ   <= ShiftBits(39)  ;

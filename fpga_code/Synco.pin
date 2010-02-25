@@ -1,4 +1,4 @@
- -- Copyright (C) 1991-2008 Altera Corporation
+ -- Copyright (C) 1991-2010 Altera Corporation
  -- Your use of Altera Corporation's design tools, logic functions 
  -- and other software and tools, and its AMPP partner logic 
  -- functions, and any output files from any of the foregoing 
@@ -23,7 +23,6 @@
  ---------------------------------------------------------------------------------
  -- NC            : No Connect. This pin has no internal connection to the device.
  -- DNU           : Do Not Use. This pin MUST NOT be connected.
- -- VCCPGM        : Dedicated power pin for configuration, which MUST be connected to 1.8V, 2.5V or 3.0V depending on the needs of the configuration device.
  -- VCCINT        : Dedicated power pin, which MUST be connected to VCC  (2.5V/3.3V).
  -- VCCIO         : Dedicated power pin, which MUST be connected to VCC
  --                 of its bank.
@@ -43,10 +42,9 @@
  --					This pin should be connected to GND. It may also be connected  to a
  --					valid signal  on the board  (low, high, or toggling)  if that signal
  --					is required for a different revision of the design.
- -- GND*          : Unused  I/O  pin.   For transceiver I/O banks (Bank 13, 14, 15, 16 and 17),
- --           	    connect each pin marked GND* either individually through a 10 kohm resistor
- --           	    to GND or tie all pins together and connect through a single 10 kohm resistor
- --           	    to GND.
+ -- GND*          : Unused  I/O  pin.   For transceiver I/O banks, connect each pin marked GND*
+ --           	    either individually through a 10k Ohm resistor to GND or tie all pins
+ --           	    together and connect through a single 10k Ohm resistor to GND.
  --           	    For non-transceiver I/O banks, connect each pin marked GND* directly to GND
  --           	    or leave it unconnected.
  -- RESERVED      : Unused I/O pin, which MUST be left unconnected.
@@ -62,7 +60,7 @@
  -- Pin directions (input, output or bidir) are based on device operating in user mode.
  ---------------------------------------------------------------------------------
 
-Quartus II Version 8.0 Build 215 05/29/2008 SJ Full Version
+Quartus II Version 9.1 Build 304 01/25/2010 Service Pack 1 SJ Full Version
 CHIP  "Synco"  ASSIGNED TO AN: EPM570T144C3
 
 Pin Name/Usage               : Location  : Dir.   : I/O Standard      : Voltage : I/O Bank  : User Assignment
@@ -85,7 +83,7 @@ PIO_ALE                      : 15        : input  : 3.3-V LVTTL       :         
 GND*                         : 16        :        :                   :         : 1         :                
 GNDINT                       : 17        : gnd    :                   :         :           :                
 CLK_EXT                      : 18        : input  : 3.3-V LVTTL       :         : 1         : Y              
-VCCINT                       : 19        : power  :                   : 3.3V    :           :                
+VCCINT                       : 19        : power  :                   : 2.5V/3.3V :           :                
 Clk100M                      : 20        : input  : 3.3-V LVTTL       :         : 1         : Y              
 GND*                         : 21        :        :                   :         : 1         :                
 GND*                         : 22        :        :                   :         : 1         :                
@@ -122,7 +120,7 @@ GND*                         : 52        :        :                   :         
 GND*                         : 53        :        :                   :         : 1         :                
 GNDINT                       : 54        : gnd    :                   :         :           :                
 GND*                         : 55        :        :                   :         : 1         :                
-VCCINT                       : 56        : power  :                   : 3.3V    :           :                
+VCCINT                       : 56        : power  :                   : 2.5V/3.3V :           :                
 GND*                         : 57        :        :                   :         : 1         :                
 GND*                         : 58        :        :                   :         : 1         :                
 GND*                         : 59        :        :                   :         : 1         :                
@@ -156,7 +154,7 @@ AuxIn[7]                     : 86        : input  : 3.3-V LVTTL       :         
 AuxIn[6]                     : 87        : input  : 3.3-V LVTTL       :         : 2         : Y              
 AuxIn[5]                     : 88        : input  : 3.3-V LVTTL       :         : 2         : Y              
 GND*                         : 89        :        :                   :         : 2         :                
-VCCINT                       : 90        : power  :                   : 3.3V    :           :                
+VCCINT                       : 90        : power  :                   : 2.5V/3.3V :           :                
 GND*                         : 91        :        :                   :         : 2         :                
 GNDINT                       : 92        : gnd    :                   :         :           :                
 AuxIn[4]                     : 93        : input  : 3.3-V LVTTL       :         : 2         : Y              
@@ -192,7 +190,7 @@ XX1                          : 122       : output : 3.3-V LVTTL       :         
 XX2                          : 123       : output : 3.3-V LVTTL       :         : 2         : Y              
 XX3                          : 124       : output : 3.3-V LVTTL       :         : 2         : Y              
 XX4                          : 125       : output : 3.3-V LVTTL       :         : 2         : Y              
-VCCINT                       : 126       : power  :                   : 3.3V    :           :                
+VCCINT                       : 126       : power  :                   : 2.5V/3.3V :           :                
 GND*                         : 127       :        :                   :         : 2         :                
 GNDINT                       : 128       : gnd    :                   :         :           :                
 GND*                         : 129       :        :                   :         : 2         :                
