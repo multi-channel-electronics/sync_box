@@ -1,7 +1,7 @@
-/*==========================================================================* 
- * piolib.c																	* 
- * interface to the Mancho CPLD. 										* 
- *==========================================================================* 
+/*==========================================================================*
+ * piolib.c																	*
+ * interface to the Mancho CPLD. 										*
+ *==========================================================================*
  * First version: RHJ 9-June-06
  *
  *
@@ -19,10 +19,11 @@
 /*---------- Function prototypes */
 void pio_Reset(bit b);
 void pio_nEnable(bit b);
-void pio_SyncLength(unsigned long sl); 
+void pio_SyncLength(unsigned long sl);
 void pio_FrameNum(unsigned long fn);
 void pio_DV_Mode(unsigned char mode);
 void pio_FRun_Count(int frc);
+void pio_clk_adj_div(int clk_adj_div);
 //void pio_RdSwitches();
 void pio_pwr_onoff(unsigned char enbits);
 unsigned char pio_pwr_status(void);
@@ -30,18 +31,18 @@ void pio_Chk_PSCool();
 
 /*=========================================================================================*/
 /*---------- PIO Interface Defines; See also PIO_Interface.vhd */
-/* 
+/*
 P1.0 		= PIO_Reset
 P1.1 		= PIO_nEnable
 P1.2 to P1.5 = switches input [not used]
 P1.6 		=  [not used]
 P1.7 		=  Spare opto-isolated TTL Input. [not used]
 	-----------------
-P3.0 		= RS232_RXD, 
-P3.1 		= RS232_TXD, 
-P3.2 to P3.5 = Interrupts & timers, 
-P3.6 		= PIO_nWR, 
-P3.7 		= PIO_nRD. 
+P3.0 		= RS232_RXD,
+P3.1 		= RS232_TXD,
+P3.2 to P3.5 = Interrupts & timers,
+P3.6 		= PIO_nWR,
+P3.7 		= PIO_nRD.
 */
 
 #define PIO_DAT	P0
@@ -59,10 +60,10 @@ sbit PIO_nINT0	=	P3^2;		// [not used]
 sbit PIO_nINT1	=	P3^2;		// [not used]
 sbit PIO_T0		=	P3^4;		// [not used]
 sbit PIO_T1		=	P3^5;		// [not used]
-sbit PIO_nWR	=	P3^6;		// 
+sbit PIO_nWR	=	P3^6;		//
 sbit PIO_nRD	=	P3^7;		//
 
-// PIO CPLD/Firmware register address definitions. See also PIO_Interface.vhd 
+// PIO CPLD/Firmware register address definitions. See also PIO_Interface.vhd
 #define  ADR_xxx 		00 // -- X"0000"	xxx
 #define  ADR_CMDSEL 	01 // -- X"0001"	Cmd function Select
 #define  ADR_MODEREG	02 // -- X"0002"	Mode Control Register
@@ -77,31 +78,33 @@ sbit PIO_nRD	=	P3^7;		//
 #define  SLEN_LOAD		1	// Load SyncLength counter
 #define  FRUN_LOAD		2	// FreeRun counter
 #define  DVCNTR_LOAD	4	// DV, FrameNumber, counter
+#define  CLK_ADJ_DIV_LOAD   5   // adjustable clock frequency divisor
 //
 // Mode Control Select Reg., RTS_DV or FRUN_DV control bit; 1 = FR_Enable
-#define  MODE_DV		00 
+#define  MODE_DV		00
 
 
 /*-------------------------------------------------------------------------------------------*/
-/* To write to a Mancho-CPLD reg, first write the value bytes into the CmdData reg, 
+/* To write to a Mancho-CPLD reg, first write the value bytes into the CmdData reg,
  * then write the appropriate select byte to the CmdSelect register.
  */
-//	if (LowAddr = ADR_CMDSEL and PIO_A = X"00" and PIO_nWR = '0') then 
+//	if (LowAddr = ADR_CMDSEL and PIO_A = X"00" and PIO_nWR = '0') then
 //		CmdWrite <= '1';
-//	else 
+//	else
 //		CmdWrite <= '0';
 //	end if;
-//	SL_Load      <= CmdWrite and match(PIO_AD, (X"01"));	-- 01
-//	FR_Load      <= CmdWrite and match(PIO_AD, (X"02"));	-- 10
-//	DV_Cntr_Load <= CmdWrite and match(PIO_AD, (X"03")); 	-- 11;
+//	SL_Load      <= CmdWrite and match(PIO_AD, (X"01"));	-- 001
+//	FR_Load      <= CmdWrite and match(PIO_AD, (X"02"));	-- 010
+//	DV_Cntr_Load <= CmdWrite and match(PIO_AD, (X"04")); 	-- 100;
+//	clk_adj_div_load <= CmdWrite and match(PIO_AD, (X"05"));-- 101;
 //
 //  bit 0 of the ModeReg controls whether FreeRun or RTS DV is used.
 //	FR_Enable <= ModeReg(0);
 
 
 /*=========================================================================================*/
-/* The 8051 is big-endian, 
- * the cpld will be addressed as little-endian, 
+/* The 8051 is big-endian,
+ * the cpld will be addressed as little-endian,
  * so the byte order must be reversed when writing to the CPLD CMDDATA.
  *
  * In this version of SyncoCmd, P0 is used for data io, P2 for an 8 bit address
@@ -120,29 +123,29 @@ union
 #define PDB3 piodata.bytes[3]
 
 
- 
+
  /*-------------------------------------------------------------------------------------------*/
 
 /*-----  */
 void
 pio_Reset(bit b)
 {
-PIO_RESET = b;		// 
+PIO_RESET = b;		//
 }
 
 /*-----   */
-void 
+void
 pio_nEnable(bit b)
 {
-if(b==ON) 
+if(b==ON)
 	PIO_nENABLE = 0;		// note that nEnable is active low
-else 
+else
 	PIO_nENABLE = 1;
-} 
- 
+}
+
 /*----- set the sync length count */
 void
-pio_SyncLength(unsigned long sl)  
+pio_SyncLength(unsigned long sl)
 {
 piodata.l_cnt = sl;
 
@@ -232,7 +235,7 @@ PIO_DAT = 0xFF;
 }
 
 
-/*-----  Set the FreeRun count-compare reg. 
+/*-----  Set the FreeRun count-compare reg.
 		[the FR counter increments on AddrZero from SyncLength counter] */
 void
 pio_FRun_Count(int frc)
@@ -260,6 +263,32 @@ PIO_ADR = 0xFF;
 PIO_DAT = 0xFF;
 }
 
+// set the adjustable-clock frequency divisor
+void
+pio_clk_adj_div(int clk_adj_div)
+{
+piodata.i_cnt = clk_adj_div;
+
+// load count to the CmdData reg; only 2 bytes used.
+PIO_ADR = ADR_CMDDATB0;
+PIO_DAT = PDB1;
+_nop_ ();
+PIO_nWR = LOW;
+PIO_nWR = HIGH;
+PIO_ADR = ADR_CMDDATB1;
+PIO_DAT = PDB0;
+_nop_ ();
+PIO_nWR = LOW;
+PIO_nWR = HIGH;
+//
+PIO_ADR = ADR_CMDSEL;	// load the CmdSelect reg
+PIO_DAT = CLK_ADJ_DIV_LOAD;	// select the FreeRun counter load reg
+_nop_ ();
+PIO_nWR = LOW;
+PIO_nWR = HIGH;
+PIO_ADR = 0xFF;
+PIO_DAT = 0xFF;
+}
 
 /*----- Set the ACDCUs on/off control byte   */
 void pio_pwr_onoff(unsigned char enbits)
@@ -311,8 +340,8 @@ sw4 = PIO_SW4;
  */
 
 
-/*----- not used 
-void 
+/*----- not used
+void
 pio_Chk_PSCool()
 {
 bit iscool = PIO_PSCOOL;

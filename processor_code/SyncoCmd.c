@@ -1,14 +1,14 @@
-/*==========================================================================* 
- * SyncoCmd.c																* 
- * main() and  command io routines. 										* 
- *==========================================================================* 
+/*==========================================================================*
+ * SyncoCmd.c																*
+ * main() and  command io routines. 										*
+ *==========================================================================*
  * First Version for SC2: SyncoCmd-V1a RHJ 1-May-06
  * SyncoCmd-V1b RHJ 17-Aug-06	- minor cosmetic changes and additions.
  * 22-Oct-06 RHJ 				- added pwr_status() command function.
  *
  *
  */
- 
+
 #define  SYNCOMAIN
 
 #include <AT89c5131.h>
@@ -34,6 +34,7 @@ void set_Num_Rows(void);
 void set_FR_Mode(void);
 void set_RTS_Mode(void);
 void set_Frame_Num(void);
+void set_clk_adj_div(void);
 void pwr_enable(void);
 void pwr_disable(void);
 void pwr_status(void);
@@ -56,6 +57,7 @@ void pwr_status(void);
 #define  FRUN_COUNT		47	// about 200 Hz DV rate
 #define  ROWLEN			64
 #define  NUMROW			41
+#define  CLKADJDIV      10  // default divisor for adjustable clk frequency clk_adj_div
 
 // min-max values for cmd input
 #define  MINROWLEN		 1	// rowlen setable 50 -> 4095
@@ -65,6 +67,8 @@ void pwr_status(void);
 #define  MINSYNCLEN		250	// rowlen * numrow must be > 250
 #define  MINFRCNT		 1	// DV_FRUN output 1 to 4095 occurances of AddrZero
 #define  MAXFRCNT	  4095
+#define  MINDIV       1     // Minimum 50MHz division ratio for adjustable clk outputs
+#define  MAXDIV       255   // Maximum 50MHz division ratio for adjustable clk outputs
 
 
 /*=============================================================================================*/
@@ -76,13 +80,13 @@ int sc_row_len;					// Default Row_Length
 unsigned char sc_num_row;		// Default SyncLength = (num_row * row_len) - 1
 unsigned char sc_mancho_mode;	// mode control byte; is DV source DV_FreeRun or DV_RTS
 unsigned char sc_ACDCU_onoff = 0;	// all ACDCCU off
+int sc_clk_adj_div;             // Default divisor for the adjustable clock frequency
 
-
-char code version[] =  "\r\tSyncoCmd-V1c\r";
+char code version[] =  "\r\tSyncoCmd-V1f\r";
 char code prompt[] = "\rSynco> ";
 
 /*=============================================================================================*/
-//-------- 
+//--------
 void do_ResetAll(void)
 {
 //sc_mancho_mode = RTS_DV;
@@ -91,20 +95,22 @@ sc_FRun_Count = FRUN_COUNT;
 sc_row_len = ROWLEN;
 sc_num_row = NUMROW;
 sc_mancho_enable = TRUE;	//
+sc_clk_adj_div = CLKADJDIV;
 //
 pio_nEnable(OFF);	//
 pio_Reset((bit)ON);
 pio_Reset((bit)OFF);
-pio_SyncLength((sc_row_len*sc_num_row)-1); 
+pio_SyncLength((sc_row_len*sc_num_row)-1);
 pio_FRun_Count(sc_FRun_Count-1);
+pio_clk_adj_div(sc_clk_adj_div);
 pio_DV_Mode(sc_mancho_mode);
-pio_FrameNum((unsigned long)0); 
+pio_FrameNum((unsigned long)0);
 pio_nEnable(sc_mancho_enable);	//
 }
 
 /*=============================================================================================*/
 
-void main (void) 
+void main (void)
 {
 
 sio_Init_9600();
@@ -119,8 +125,8 @@ do_ResetAll();
 while(1)			// endless
 	{
 //	testxx();		// test & debug stuff.
-		
-	if(sio_rx_gotcl == TRUE) 
+
+	if(sio_rx_gotcl == TRUE)
 		{									// got a cmd line
 		sio_rx_gotcl = FALSE;
 		ES = OFF;							// disable serial interrupt
@@ -132,7 +138,7 @@ while(1)			// endless
 		}
 //	chk_switches();
 	}
-}		
+}
 
 
 /*========== Utility Functions for command variable range errors =====================*/
@@ -181,23 +187,24 @@ code char ena_str[] = "ON";
 code char dis_str[] = "OFF";
 char *is_run;
 
-if(sc_mancho_enable == TRUE) 
+if(sc_mancho_enable == TRUE)
 	is_run = ena_str;
-else 
+else
 	is_run = dis_str;
-	
-if(sc_mancho_mode == FRUN_DV) 
+
+if(sc_mancho_mode == FRUN_DV)
 	dvm = fr_str;
-else 
+else
 	dvm = rt_str;
-	
+
 putchar('\r');
 printf("\tMancho_Enable\t= %s\r", is_run);
 printf("\tDV_Mode\t\t= %s\r", dvm);
-if(sc_mancho_mode == FRUN_DV) 
+if(sc_mancho_mode == FRUN_DV)
 	printf("\tFRun_Count\t= %d\r", sc_FRun_Count);
 printf("\tRow_Len\t\t= %d\r", sc_row_len);
 printf("\tNum_Row\t\t= %d\r", (int)sc_num_row);
+printf("\tAdjustable Clock frequency divisor\t\t=%d\r", sc_clk_adj_div);
 printf("\tACDCU_onoff\t= %#2.2X\r", (int)sc_ACDCU_onoff);
 
 }
@@ -238,7 +245,7 @@ if(sl < MINSYNCLEN ) {prt_minsync(); return;}
 
 sc_num_row = (unsigned char)nr;	//
 pio_nEnable(OFF);				//
-pio_SyncLength(sl - 1); 		// minus 1 because counter includes zero 
+pio_SyncLength(sl - 1); 		// minus 1 because counter includes zero
 pio_nEnable(sc_mancho_enable);	//
 }
 
@@ -249,23 +256,23 @@ int frc;
 
 frc = cd_arg_i();
 //printf("\targ = %d\r", frc);
-if(frc >= 0)	
+if(frc >= 0)
 	{
 	if(frc < MINFRCNT ) {prt_toosmall(frc); return;}
 	if(frc > MAXFRCNT ) {prt_toobig(frc); return;}
 	sc_FRun_Count = frc;
 	}
-	
+
 // if arg = -1 [= not a digit arg], then just ignor
 // if arg = -2 [= no arg], then use previous sc_FRUN_COUNT
-if(frc < 0)	
+if(frc < 0)
 	{
-	if(frc == -1) 
+	if(frc == -1)
 		return;
 	else
 		frc = sc_FRun_Count;
 	}
-	
+
 sc_mancho_mode = FRUN_DV;			//
 pio_nEnable(OFF);					//
 pio_FRun_Count(frc-1);				// minus 1 because counter includes zero
@@ -296,11 +303,27 @@ if(r < 0) return;
 
 //printf("\tfn = %lu", fn);
 pio_nEnable(OFF);				//
-pio_FrameNum(fn); 
+pio_FrameNum(fn);
 pio_nEnable(sc_mancho_enable);	//
 }
+//-------- set the 50MHz/div for DV_SPARE2 output
+void set_clk_adj_div(void)
+{
+int r;
+int clk_adj_div_temp;
 
+clk_adj_div_temp = cd_arg_i();
+if(clk_adj_div_temp >= 0)
+	{
+	if(clk_adj_div_temp < MINDIV ) {prt_toosmall(clk_adj_div_temp); return;}
+	if(clk_adj_div_temp > MAXDIV ) {prt_toobig(clk_adj_div_temp); return;}
+	sc_clk_adj_div = clk_adj_div_temp;
+	}
 
+// pio_nEnable(OFF);				//
+pio_clk_adj_div(sc_clk_adj_div);
+// pio_nEnable(sc_mancho_enable);	//
+}
 //-------- enable a particular ACDCU [sequencing all units on is left up to the user]
 void pwr_enable_unit(void)
 {
@@ -329,7 +352,7 @@ sc_ACDCU_onoff = 0x00;
 pio_pwr_onoff(sc_ACDCU_onoff);
 }
 
-//-------- disable a particular ACDCU 
+//-------- disable a particular ACDCU
 void pwr_disable_unit(void)
 {
 int unit_num;
@@ -388,15 +411,15 @@ pio_RdSwitches();
 }
 */
 
-/* 
-void testxx(void )	// assorted code bits & variables for testing 
+/*
+void testxx(void )	// assorted code bits & variables for testing
 {
 	static unsigned char ub;
 //	static int i;
 //	static unsigned long ul;
-	
+
 	ES = OFF;	// serial interrupts off for speed.
-	
+
 //  pio_Reset((bit)OFF);
 //  pio_Reset((bit)ON);
 //  pio_Reset((bit)OFF);

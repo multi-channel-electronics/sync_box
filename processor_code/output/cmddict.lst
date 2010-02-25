@@ -1,17 +1,17 @@
-C51 COMPILER V8.04   CMDDICT                                                               11/17/2006 13:18:48 PAGE 1   
+C51 COMPILER V8.02   CMDDICT                                                               02/23/2010 09:00:14 PAGE 1   
 
 
-C51 COMPILER V8.04, COMPILATION OF MODULE CMDDICT
+C51 COMPILER V8.02, COMPILATION OF MODULE CMDDICT
 OBJECT MODULE PLACED IN .\output\cmddict.obj
 COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE cmddict.c COMPACT ROM(COMPACT) BROWSE MODP2 DEBUG OBJECTEXTEND PRINT(.\outp
                     -ut\cmddict.lst) OBJECT(.\output\cmddict.obj)
 
 line level    source
 
-   1          /*==========================================================================* 
-   2           * cmddict.c                                                                                                                    * 
-   3           * Command dictionary & command parse routines.                                                         * 
-   4           *==========================================================================* 
+   1          /*==========================================================================*
+   2           * cmddict.c                                                                                                                    *
+   3           * Command dictionary & command parse routines.                                                         *
+   4           *==========================================================================*
    5           * First version for SC2: RHJ 1-May-06
    6           *
    7           */
@@ -29,7 +29,7 @@ line level    source
   19          
   20          
   21          /*========== Support Routines Function prototypes   ========================*/
-  22           
+  22          
   23          int cd_tokenize(char *str);
   24          int cd_parse(CMD_ENTRY cmd_dict[], int dict_size);
   25          char *nxttoken(void);
@@ -40,7 +40,7 @@ line level    source
   30          //code char *prtWHAT[] = "\tWHAT? \"%s\"";
   31          
   32          // parameter hint strings for help. See cd_help() function definition below.
-  33          code char pram[] = " n";        
+  33          code char pram[] = " n";
   34          code char nopr[] = "  ";
   35          
   36          /*========== command dictionary =============================================*/
@@ -50,156 +50,158 @@ line level    source
   40                          { "h",          cd_help,                        nopr,   "help, this stuff" },
   41                          { "?",          get_Status,                     nopr,   "get Mancho Status" },
   42                          { "rl",         set_Row_Len,            pram,   "set Row_Len\tn = 1 to 4095" },
-  43                          { "nr",         set_Num_Rows,           pram,   "set Num_Rows\tn = 1 to 63" }, 
+  43                          { "nr",         set_Num_Rows,           pram,   "set Num_Rows\tn = 1 to 63" },
   44                          { "rt",         set_RTS_Mode,           nopr,   "set RTS_Mode" },
   45                          { "fr",         set_FR_Mode,            pram,   "set FreeRun Mode\tn = 1 to 4095" },
   46                          { "fn",         set_Frame_Num,          pram,   "set Frame Sequence Number\tn = 0 to 2^32-1" },
-  47                          { "st",         set_Disable,            nopr,   "stop, disable Manchout" },
-  48                          { "go",         set_Enable,                     nopr,   "enable Manchout" },
-  49                          { "dpa",        pwr_disable_all,        nopr,   "pwr disable all" },
-  50                          { "dpu",        pwr_disable_unit,       pram,   "pwr disable unit\tn = 0 to 7" },
-  51                          { "epu",        pwr_enable_unit,        pram,   "pwr enable unit \tn = 0 to 7" },
-  52                          { "pof",        pwr_onoff,                      nopr,   "get ACDCU_onoff cntl byte" },
-  53                          { "ps",         pwr_status,                     nopr,   "get ACDCU status" },
-  54                          { "re",         do_ResetAll,            nopr,   "Reset all to defaults" },
-C51 COMPILER V8.04   CMDDICT                                                               11/17/2006 13:18:48 PAGE 2   
+  47                          { "ckd",    set_clk_adj_div,    pram,   "set the divisor for the adjustable clock output (50MHz/ckd)\tn 
+             -= 1 to 255 (default=10)"},
+  48                          { "st",         set_Disable,            nopr,   "stop, disable Manchout" },
+  49                          { "go",         set_Enable,                     nopr,   "enable Manchout" },
+  50                          { "dpa",        pwr_disable_all,        nopr,   "pwr disable all" },
+  51                          { "dpu",        pwr_disable_unit,       pram,   "pwr disable unit\tn = 0 to 7" },
+  52                          { "epu",        pwr_enable_unit,        pram,   "pwr enable unit \tn = 0 to 7" },
+  53                          { "pof",        pwr_onoff,                      nopr,   "get ACDCU_onoff cntl byte" },
+C51 COMPILER V8.02   CMDDICT                                                               02/23/2010 09:00:14 PAGE 2   
 
-  55          //              { "ron",        ResetOn,                        nopr,   "Reset on" },
-  56          //              { "rof",        ResetOff,                       nopr,   "Reset off" },
-  57                  };      
-  58          
-  59          code int dict_size = (sizeof(cmd_dict) / sizeof(CMD_ENTRY));
-  60          
+  54                          { "ps",         pwr_status,                     nopr,   "get ACDCU status" },
+  55                          { "re",         do_ResetAll,            nopr,   "Reset all to defaults" },
+  56          //              { "ron",        ResetOn,                        nopr,   "Reset on" },
+  57          //              { "rof",        ResetOff,                       nopr,   "Reset off" },
+  58                  };
+  59          
+  60          code int dict_size = (sizeof(cmd_dict) / sizeof(CMD_ENTRY));
   61          
-  62          /*========== Parse header definitions =======================================*/
-  63          
-  64          #define MAXTOKEN 12
-  65          
-  66          static char *tokenpbuf[MAXTOKEN];       /* array of pointers to tokens */
-  67          static char **tokenv;                           /* pointer to current token (pointer to token pointer) */
-  68          
+  62          
+  63          /*========== Parse header definitions =======================================*/
+  64          
+  65          #define MAXTOKEN 12
+  66          
+  67          static char *tokenpbuf[MAXTOKEN];       /* array of pointers to tokens */
+  68          static char **tokenv;                           /* pointer to current token (pointer to token pointer) */
   69          
-  70          /*----- chop a command line string into separate word strings (tokens)*/
-  71          int
-  72          cd_tokenize(char *str)
-  73          {
-  74   1              extern char *tokenpbuf[];
-  75   1              extern char **tokenv;
-  76   1              int i=0;                                                                                                        // current token (index)
-  77   1      
-  78   1              tokenpbuf[i++] = strtok(str," \n\r");                                           // setup strtok for the scan
-  79   1              while ((tokenpbuf[i] = strtok(NULL," \n\r")) != NULL)           // scan the rest of the string
-  80   1                      { i++; if(i >= (MAXTOKEN-1))  break; }                                  // if too many tokens, stop the scan
-  81   1                      
-  82   1              tokenpbuf[i] = 00 ;                                                                                     // terminate the list of pointers
-  83   1              tokenv = &tokenpbuf[0];                                                                         // set pointer to first token
-  84   1      }
-  85          
+  70          
+  71          /*----- chop a command line string into separate word strings (tokens)*/
+  72          int
+  73          cd_tokenize(char *str)
+  74          {
+  75   1              extern char *tokenpbuf[];
+  76   1              extern char **tokenv;
+  77   1              int i=0;                                                                                                        // current token (index)
+  78   1      
+  79   1              tokenpbuf[i++] = strtok(str," \n\r");                                           // setup strtok for the scan
+  80   1              while ((tokenpbuf[i] = strtok(NULL," \n\r")) != NULL)           // scan the rest of the string
+  81   1                      { i++; if(i >= (MAXTOKEN-1))  break; }                                  // if too many tokens, stop the scan
+  82   1      
+  83   1              tokenpbuf[i] = 00 ;                                                                                     // terminate the list of pointers
+  84   1              tokenv = &tokenpbuf[0];                                                                         // set pointer to first token
+  85   1      }
   86          
-  87          /*----- parse a command line */
-  88          int 
-  89          cd_parse(CMD_ENTRY cmd_dict[], int dict_size)
-  90          {
-  91   1              int entry=0, n;
-  92   1              char *token;
-  93   1      
-  94   1              while((token = nxttoken()) != 0 ) {
-  95   2                      //if (strncmp(token,"#",1)==0) break;           // 
-  96   2      
-  97   2                      /* look for the current token in the command table */
-  98   2                      for (entry=0; entry < dict_size; entry++ ) {
-  99   3                              n = strlen(cmd_dict[entry].nmem);
- 100   3                              if(strncmp(token, cmd_dict[entry].nmem, n)==0) break;   // if token is found, stop looking  
- 101   3                      }
- 102   2      
- 103   2                      
- 104   2                      if (entry < dict_size) 
- 105   2                              (cmd_dict[entry].fcn)();                        // if token found, execute cmd function 
- 106   2                      else {
- 107   3                              printf("\tWHAT? \"%s\"", token);        // else send error message, 
- 108   3                              break;                                                          //and stop parsing
- 109   3                      }
- 110   2              }
- 111   1      }
- 112          
+  87          
+  88          /*----- parse a command line */
+  89          int
+  90          cd_parse(CMD_ENTRY cmd_dict[], int dict_size)
+  91          {
+  92   1              int entry=0, n;
+  93   1              char *token;
+  94   1      
+  95   1              while((token = nxttoken()) != 0 ) {
+  96   2                      //if (strncmp(token,"#",1)==0) break;           //
+  97   2      
+  98   2                      /* look for the current token in the command table */
+  99   2                      for (entry=0; entry < dict_size; entry++ ) {
+ 100   3                              n = strlen(cmd_dict[entry].nmem);
+ 101   3                              if(strncmp(token, cmd_dict[entry].nmem, n)==0) break;   // if token is found, stop looking
+ 102   3                      }
+ 103   2      
+ 104   2      
+ 105   2                      if (entry < dict_size)
+ 106   2                              (cmd_dict[entry].fcn)();                        // if token found, execute cmd function
+ 107   2                      else {
+ 108   3                              printf("\tWHAT? \"%s\"", token);        // else send error message,
+ 109   3                              break;                                                          //and stop parsing
+ 110   3                      }
+ 111   2              }
+ 112   1      }
  113          
- 114          /*-----  supply pointer to token or 00, & maybe increment the token vector */
- 115          char *
- 116          nxttoken() 
-C51 COMPILER V8.04   CMDDICT                                                               11/17/2006 13:18:48 PAGE 3   
+ 114          
+ 115          /*-----  supply pointer to token or 00, & maybe increment the token vector */
+C51 COMPILER V8.02   CMDDICT                                                               02/23/2010 09:00:14 PAGE 3   
 
- 117          {
- 118   1              extern char **tokenv;
- 119   1      
- 120   1              if(*tokenv != 0) 
- 121   1                      return(*tokenv++);
- 122   1              else
- 123   1                      return(0);
- 124   1      }
- 125          
+ 116          char *
+ 117          nxttoken()
+ 118          {
+ 119   1              extern char **tokenv;
+ 120   1      
+ 121   1              if(*tokenv != 0)
+ 122   1                      return(*tokenv++);
+ 123   1              else
+ 124   1                      return(0);
+ 125   1      }
  126          
- 127          /*----- return an integer arg from the token list */
- 128          int
- 129          cd_arg_i()
- 130          {
- 131   1              char *nxtarg = nxttoken();
- 132   1      
- 133   1              if (nxtarg == NULL )
- 134   1                      { return(-2); }                         // if rtn = -2 [= no arg] 
- 135   1                      
- 136   1              if (isdigit(*nxtarg) == 0)
- 137   1                      { 
- 138   2                      printf("\tWHAT? \"%s\"", nxtarg);
- 139   2                      return(-1);                                     // if rtn = -1 [= not a digit arg]
- 140   2                      }
- 141   1                      
- 142   1              return(atoi(nxtarg));
- 143   1      }
- 144          
+ 127          
+ 128          /*----- return an integer arg from the token list */
+ 129          int
+ 130          cd_arg_i()
+ 131          {
+ 132   1              char *nxtarg = nxttoken();
+ 133   1      
+ 134   1              if (nxtarg == NULL )
+ 135   1                      { return(-2); }                         // if rtn = -2 [= no arg]
+ 136   1      
+ 137   1              if (isdigit(*nxtarg) == 0)
+ 138   1                      {
+ 139   2                      printf("\tWHAT? \"%s\"", nxtarg);
+ 140   2                      return(-1);                                     // if rtn = -1 [= not a digit arg]
+ 141   2                      }
+ 142   1      
+ 143   1              return(atoi(nxtarg));
+ 144   1      }
  145          
- 146          /* return an unsigned long arg from the token list */ 
- 147          int 
- 148          cd_arg_ul(unsigned long *ul)
- 149          {
- 150   1              char *nxtarg = nxttoken();
- 151   1          char *p;
- 152   1              
- 153   1              if (nxtarg == NULL) 
- 154   1                      { return(-2); }
- 155   1                      
- 156   1              if (isdigit(*nxtarg) == 0)
- 157   1                      { 
- 158   2                      printf("\tWHAT? \"%s\"", nxtarg);
- 159   2                      return(-1);
- 160   2                      }
- 161   1                      
- 162   1              *ul = strtoul(nxtarg, &p, 10);          
- 163   1              return(1);
- 164   1      
- 165   1      }
- 166          
- 167          /*----- ouput the command table nmemonics and help strings */
- 168          void
- 169          cd_help()
- 170          {
- 171   1              int entry;
- 172   1      
- 173   1              for (entry=0; entry < dict_size; entry++ ) 
- 174   1                      {
- 175   2                      printf("\r\t %s%s\t\t%s", cmd_dict[entry].nmem, cmd_dict[entry].param, cmd_dict[entry].help );
- 176   2                      }
- 177   1      }
- 178          
-C51 COMPILER V8.04   CMDDICT                                                               11/17/2006 13:18:48 PAGE 4   
+ 146          
+ 147          /* return an unsigned long arg from the token list */
+ 148          int
+ 149          cd_arg_ul(unsigned long *ul)
+ 150          {
+ 151   1              char *nxtarg = nxttoken();
+ 152   1          char *p;
+ 153   1      
+ 154   1              if (nxtarg == NULL)
+ 155   1                      { return(-2); }
+ 156   1      
+ 157   1              if (isdigit(*nxtarg) == 0)
+ 158   1                      {
+ 159   2                      printf("\tWHAT? \"%s\"", nxtarg);
+ 160   2                      return(-1);
+ 161   2                      }
+ 162   1      
+ 163   1              *ul = strtoul(nxtarg, &p, 10);
+ 164   1              return(1);
+ 165   1      
+ 166   1      }
+ 167          
+ 168          /*----- ouput the command table nmemonics and help strings */
+ 169          void
+ 170          cd_help()
+ 171          {
+ 172   1              int entry;
+ 173   1      
+ 174   1              for (entry=0; entry < dict_size; entry++ )
+ 175   1                      {
+ 176   2                      printf("\r\t %s%s\t\t%s", cmd_dict[entry].nmem, cmd_dict[entry].param, cmd_dict[entry].help );
+ 177   2                      }
+C51 COMPILER V8.02   CMDDICT                                                               02/23/2010 09:00:14 PAGE 4   
 
+ 178   1      }
  179          
  180          
- 181          /*==================== End Of File ======================================== */
+ 181          
+ 182          /*==================== End Of File ======================================== */
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
    CODE SIZE        =    868    ----
-   CONSTANT SIZE    =    611    ----
+   CONSTANT SIZE    =    713    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =     39      26
    DATA SIZE        =   ----    ----

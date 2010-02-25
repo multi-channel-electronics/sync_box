@@ -1,8 +1,8 @@
-/*==========================================================================* 
- * Header file for SyncoCmd 												* 
- *==========================================================================* 
+/*==========================================================================*
+ * Header file for SyncoCmd 												*
+ *==========================================================================*
  * First version: RHJ 1-May-06
- * 
+ *
  *
  *
  */
@@ -24,12 +24,12 @@
 #define  RXBUFSIZ	82
 
 /* Parser command table entry structure */
-typedef struct				
+typedef struct
 	{
-	char *nmem;				/* command mnemonic */ 
+	char *nmem;				/* command mnemonic */
 	void  (*fcn)();			/* pointer to associated function */
-	char *param;			/* command help, parameter hint string */ 
-	char *help;				/* command help, function string */ 
+	char *param;			/* command help, parameter hint string */
+	char *help;				/* command help, function string */
 	} CMD_ENTRY;
 
 
@@ -44,7 +44,7 @@ extern char sio_rxbuf[];
 extern char sio_rx_idx;
 extern bit	sio_rx_gotcl;
 //
-extern char putchar(char c);  
+extern char putchar(char c);
 extern void sio_Init_9600(void);
 //
 extern void Timer0_Init(void);
@@ -68,6 +68,7 @@ extern void set_Num_Rows(void);
 extern void set_FR_Mode(void);
 extern void set_RTS_Mode(void);
 extern void set_Frame_Num(void);
+extern void set_clk_adj_div(void);
 extern void pwr_enable_unit(void);
 extern void pwr_disable_unit(void);
 extern void pwr_disable_all(void);
@@ -84,6 +85,7 @@ extern void pio_SyncLength(unsigned long sl);
 extern void pio_FrameNum(unsigned long fn);
 extern void pio_DV_Mode(unsigned char mode);
 extern void pio_FRun_Count(int frc);
+extern void pio_clk_adj_div(int clk_adj_div);
 extern void pio_pwr_onoff(unsigned char enbits);
 extern unsigned char pio_pwr_status(void);
 //extern void pio_RdSwitches();
