@@ -1,7 +1,7 @@
-C51 COMPILER V8.02   PIOLIB                                                                02/23/2010 09:00:14 PAGE 1   
+C51 COMPILER V8.04   PIOLIB                                                                08/22/2013 14:00:45 PAGE 1   
 
 
-C51 COMPILER V8.02, COMPILATION OF MODULE PIOLIB
+C51 COMPILER V8.04, COMPILATION OF MODULE PIOLIB
 OBJECT MODULE PLACED IN .\output\piolib.obj
 COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE piolib.c COMPACT ROM(COMPACT) BROWSE MODP2 DEBUG OBJECTEXTEND PRINT(.\outpu
                     -t\piolib.lst) OBJECT(.\output\piolib.obj)
@@ -62,7 +62,7 @@ line level    source
   52          sbit PIO_nENABLE =      P1^1;           // and clocking disabled.
   53          sbit PIO_SW4    =       P1^2;           // [not used]
   54          sbit PIO_SW3    =       P1^3;           // [not used]
-C51 COMPILER V8.02   PIOLIB                                                                02/23/2010 09:00:14 PAGE 2   
+C51 COMPILER V8.04   PIOLIB                                                                08/22/2013 14:00:45 PAGE 2   
 
   55          sbit PIO_SW2    =       P1^4;           // [not used]
   56          sbit PIO_SW1    =       P1^5;           // [not used]
@@ -126,7 +126,7 @@ line level    source
  114               {
  115               unsigned long l_cnt;
  116               int i_cnt;
-C51 COMPILER V8.02   PIOLIB                                                                02/23/2010 09:00:14 PAGE 3   
+C51 COMPILER V8.04   PIOLIB                                                                08/22/2013 14:00:45 PAGE 3   
 
  117               unsigned char bytes[4];
  118               }  piodata;
@@ -190,7 +190,7 @@ line level    source
  176   1      PIO_ADR = ADR_CMDSEL;   // then load the CmdSelect reg
  177   1      PIO_DAT = SLEN_LOAD;    // select the SyncLength load reg
  178   1      _nop_ ();
-C51 COMPILER V8.02   PIOLIB                                                                02/23/2010 09:00:14 PAGE 4   
+C51 COMPILER V8.04   PIOLIB                                                                08/22/2013 14:00:45 PAGE 4   
 
  179   1      PIO_nWR = LOW;
  180   1      PIO_nWR = HIGH;
@@ -254,7 +254,7 @@ line level    source
  238          /*-----  Set the FreeRun count-compare reg.
  239                          [the FR counter increments on AddrZero from SyncLength counter] */
  240          void
-C51 COMPILER V8.02   PIOLIB                                                                02/23/2010 09:00:14 PAGE 5   
+C51 COMPILER V8.04   PIOLIB                                                                08/22/2013 14:00:45 PAGE 5   
 
  241          pio_FRun_Count(int frc)
  242          {
@@ -281,7 +281,7 @@ line level    source
  263   1      PIO_DAT = 0xFF;
  264   1      }
  265          
- 266          // set the adjustable clock frequency divisor
+ 266          // set the adjustable-clock frequency divisor
  267          void
  268          pio_clk_adj_div(int clk_adj_div)
  269          {
@@ -318,7 +318,7 @@ line level    source
  300   1      PIO_nWR = LOW;
  301   1      PIO_nWR = HIGH;
  302   1      PIO_ADR = 0xFF;
-C51 COMPILER V8.02   PIOLIB                                                                02/23/2010 09:00:14 PAGE 6   
+C51 COMPILER V8.04   PIOLIB                                                                08/22/2013 14:00:45 PAGE 6   
 
  303   1      PIO_DAT = 0xFF;
  304   1      }
@@ -382,7 +382,7 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =      4    ----
    DATA SIZE        =   ----    ----
-C51 COMPILER V8.02   PIOLIB                                                                02/23/2010 09:00:14 PAGE 7   
+C51 COMPILER V8.04   PIOLIB                                                                08/22/2013 14:00:45 PAGE 7   
 
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----       2

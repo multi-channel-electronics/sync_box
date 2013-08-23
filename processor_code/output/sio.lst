@@ -1,7 +1,7 @@
-C51 COMPILER V8.02   SIO                                                                   02/23/2010 09:00:14 PAGE 1   
+C51 COMPILER V8.04   SIO                                                                   08/22/2013 14:00:45 PAGE 1   
 
 
-C51 COMPILER V8.02, COMPILATION OF MODULE SIO
+C51 COMPILER V8.04, COMPILATION OF MODULE SIO
 OBJECT MODULE PLACED IN .\output\sio.obj
 COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE sio.c COMPACT ROM(COMPACT) BROWSE MODP2 DEBUG OBJECTEXTEND PRINT(.\output\s
                     -io.lst) OBJECT(.\output\sio.obj)
@@ -62,7 +62,7 @@ line level    source
   52   3                      SBUF = sio_rx_data;                                             // echo rx data on tx
   53   3                      sio_rxbuf[sio_rx_idx++] = sio_rx_data;  // add it to the buffer
   54   3                      }
-C51 COMPILER V8.02   SIO                                                                   02/23/2010 09:00:14 PAGE 2   
+C51 COMPILER V8.04   SIO                                                                   08/22/2013 14:00:45 PAGE 2   
 
   55   2                      
   56   2              if (sio_rx_idx >= (RXBUFSIZ-1))                         // prevent buffer overrun
@@ -126,7 +126,7 @@ line level    source
  114          
  115          /*----- Timer0 Service Routine 
  116          // Interrupt occurs every 25 ms when enabled
-C51 COMPILER V8.02   SIO                                                                   02/23/2010 09:00:14 PAGE 3   
+C51 COMPILER V8.04   SIO                                                                   08/22/2013 14:00:45 PAGE 3   
 
  117          void 
  118          Timer0_isr (void) interrupt 1 using 3

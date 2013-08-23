@@ -1,7 +1,7 @@
-C51 COMPILER V8.02   CMDDICT                                                               02/23/2010 09:00:14 PAGE 1   
+C51 COMPILER V8.04   CMDDICT                                                               08/22/2013 14:00:45 PAGE 1   
 
 
-C51 COMPILER V8.02, COMPILATION OF MODULE CMDDICT
+C51 COMPILER V8.04, COMPILATION OF MODULE CMDDICT
 OBJECT MODULE PLACED IN .\output\cmddict.obj
 COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE cmddict.c COMPACT ROM(COMPACT) BROWSE MODP2 DEBUG OBJECTEXTEND PRINT(.\outp
                     -ut\cmddict.lst) OBJECT(.\output\cmddict.obj)
@@ -62,7 +62,7 @@ line level    source
   51                          { "dpu",        pwr_disable_unit,       pram,   "pwr disable unit\tn = 0 to 7" },
   52                          { "epu",        pwr_enable_unit,        pram,   "pwr enable unit \tn = 0 to 7" },
   53                          { "pof",        pwr_onoff,                      nopr,   "get ACDCU_onoff cntl byte" },
-C51 COMPILER V8.02   CMDDICT                                                               02/23/2010 09:00:14 PAGE 2   
+C51 COMPILER V8.04   CMDDICT                                                               08/22/2013 14:00:45 PAGE 2   
 
   54                          { "ps",         pwr_status,                     nopr,   "get ACDCU status" },
   55                          { "re",         do_ResetAll,            nopr,   "Reset all to defaults" },
@@ -126,7 +126,7 @@ line level    source
  113          
  114          
  115          /*-----  supply pointer to token or 00, & maybe increment the token vector */
-C51 COMPILER V8.02   CMDDICT                                                               02/23/2010 09:00:14 PAGE 3   
+C51 COMPILER V8.04   CMDDICT                                                               08/22/2013 14:00:45 PAGE 3   
 
  116          char *
  117          nxttoken()
@@ -190,7 +190,7 @@ line level    source
  175   1                      {
  176   2                      printf("\r\t %s%s\t\t%s", cmd_dict[entry].nmem, cmd_dict[entry].param, cmd_dict[entry].help );
  177   2                      }
-C51 COMPILER V8.02   CMDDICT                                                               02/23/2010 09:00:14 PAGE 4   
+C51 COMPILER V8.04   CMDDICT                                                               08/22/2013 14:00:45 PAGE 4   
 
  178   1      }
  179          

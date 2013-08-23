@@ -35,7 +35,7 @@ Options 1,0,0  // Target 'Target 1'
  EnvLib ()
  EnvReg (ÿAtmel\)
  OrgReg (ÿAtmel\)
- TgStat=27
+ TgStat=16
  OutDir (.\output\)
  OutName (SyncoCmd-1c)
  GenApp=1

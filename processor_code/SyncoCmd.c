@@ -5,8 +5,11 @@
  * First Version for SC2: SyncoCmd-V1a RHJ 1-May-06
  * SyncoCmd-V1b RHJ 17-Aug-06	- minor cosmetic changes and additions.
  * 22-Oct-06 RHJ 				- added pwr_status() command function.
- *
- *
+ * 2010-Feb-25 MA               - adds ckd command to specify a 50MHz divisor
+ *                              - (1 to 255) to generate frequencies for
+ *                              - DV_Spare1 and DV_Spare2 outputs.
+ * 2013-Aug-22 MA               - hard-code Spider values for fr=120,
+ *                              - row_len=53, num_rows=33
  */
 
 #define  SYNCOMAIN
@@ -54,9 +57,14 @@ void pwr_status(void);
 //#define  ROWLEN			50  // 100 cycles of 50MHz
 //#define  NUMROW			41
 //
-#define  FRUN_COUNT		47	// about 200 Hz DV rate
-#define  ROWLEN			64
-#define  NUMROW			41
+
+#define  FRUN_COUNT		120	// Spider specific
+#define  ROWLEN			53  // Spider specific
+#define  NUMROW			33  // Spider specific
+
+//#define  FRUN_COUNT		47	// about 200 Hz DV rate
+//#define  ROWLEN			64
+//#define  NUMROW			41
 #define  CLKADJDIV      10  // default divisor for adjustable clk frequency clk_adj_div
 
 // min-max values for cmd input
@@ -82,7 +90,7 @@ unsigned char sc_mancho_mode;	// mode control byte; is DV source DV_FreeRun or D
 unsigned char sc_ACDCU_onoff = 0;	// all ACDCCU off
 int sc_clk_adj_div;             // Default divisor for the adjustable clock frequency
 
-char code version[] =  "\r\tSyncoCmd-V1f\r";
+char code version[] =  "\r\tSyncoCmd-V20\r";
 char code prompt[] = "\rSynco> ";
 
 /*=============================================================================================*/
