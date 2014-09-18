@@ -342,8 +342,8 @@ BEGIN
    END PROCESS DVoutputs;
 
    DV_Delayed  <= (NOT isAddr_Zero) AND (NOT DV_Buf); -- narrow version
-   DV_OUT_FTS  <= DV_out ;
-   DV_OUT_POL  <= DV_out ;
+   DV_OUT_FTS  <= clk_adj ;           -- duplicates DV_OUT_SPR1 output as per ACT request to work with MSB 
+   DV_OUT_POL  <= Shift5Bits(39) ;    -- duplicates DV_OUT_SPR1 output as per ACT request to work with MSB 
 
    --DV_OUT_SPR1 <= DV_out ;
    --DV_OUT_SPR2 <= DV_out ;

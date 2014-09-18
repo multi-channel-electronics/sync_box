@@ -1,6 +1,6 @@
 Fitter report for Synco
-Thu Feb 25 10:31:47 2010
-Quartus II Version 9.1 Build 304 01/25/2010 Service Pack 1 SJ Full Version
+Tue Sep 02 15:06:40 2014
+Quartus II 64-Bit Version 11.1 Build 259 01/25/2012 Service Pack 2 SJ Full Version
 
 
 ---------------------
@@ -30,16 +30,15 @@ Quartus II Version 9.1 Build 304 01/25/2010 Service Pack 1 SJ Full Version
  22. LAB Signals Sourced Out
  23. LAB Distinct Inputs
  24. Fitter Device Options
- 25. Estimated Delay Added for Hold Timing
- 26. Fitter Messages
- 27. Fitter Suppressed Messages
+ 25. Fitter Messages
+ 26. Fitter Suppressed Messages
 
 
 
 ----------------
 ; Legal Notice ;
 ----------------
-Copyright (C) 1991-2010 Altera Corporation
+Copyright (C) 1991-2011 Altera Corporation
 Your use of Altera Corporation's design tools, logic functions 
 and other software and tools, and its AMPP partner logic 
 functions, and any output files from any of the foregoing 
@@ -55,21 +54,21 @@ applicable agreement for further details.
 
 
 
-+-----------------------------------------------------------------------+
-; Fitter Summary                                                        ;
-+-----------------------+-----------------------------------------------+
-; Fitter Status         ; Successful - Thu Feb 25 10:31:47 2010         ;
-; Quartus II Version    ; 9.1 Build 304 01/25/2010 SP 1 SJ Full Version ;
-; Revision Name         ; Synco                                         ;
-; Top-level Entity Name ; SyncBox                                       ;
-; Family                ; MAX II                                        ;
-; Device                ; EPM570T144C3                                  ;
-; Timing Models         ; Final                                         ;
-; Total logic elements  ; 387 / 570 ( 68 % )                            ;
-; Total pins            ; 74 / 116 ( 64 % )                             ;
-; Total virtual pins    ; 0                                             ;
-; UFM blocks            ; 0 / 1 ( 0 % )                                 ;
-+-----------------------+-----------------------------------------------+
++----------------------------------------------------------------------------+
+; Fitter Summary                                                             ;
++---------------------------+------------------------------------------------+
+; Fitter Status             ; Successful - Tue Sep 02 15:06:40 2014          ;
+; Quartus II 64-Bit Version ; 11.1 Build 259 01/25/2012 SP 2 SJ Full Version ;
+; Revision Name             ; Synco                                          ;
+; Top-level Entity Name     ; SyncBox                                        ;
+; Family                    ; MAX II                                         ;
+; Device                    ; EPM570T144C3                                   ;
+; Timing Models             ; Final                                          ;
+; Total logic elements      ; 375 / 570 ( 66 % )                             ;
+; Total pins                ; 74 / 116 ( 64 % )                              ;
+; Total virtual pins        ; 0                                              ;
+; UFM blocks                ; 0 / 1 ( 0 % )                                  ;
++---------------------------+------------------------------------------------+
 
 
 +----------------------------------------------------------------------------------------------------------------------------------------------+
@@ -84,7 +83,6 @@ applicable agreement for further details.
 ; Use smart compilation                                                      ; Off                            ; Off                            ;
 ; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                             ; On                             ;
 ; Enable compact report table                                                ; Off                            ; Off                            ;
-; Use TimeQuest Timing Analyzer                                              ; Off                            ; Off                            ;
 ; Router Timing Optimization Level                                           ; Normal                         ; Normal                         ;
 ; Placement Effort Multiplier                                                ; 1.0                            ; 1.0                            ;
 ; Router Effort Multiplier                                                   ; 1.0                            ; 1.0                            ;
@@ -96,7 +94,7 @@ applicable agreement for further details.
 ; Optimize Timing                                                            ; Normal compilation             ; Normal compilation             ;
 ; Optimize Timing for ECOs                                                   ; Off                            ; Off                            ;
 ; Regenerate full fit report during ECO compiles                             ; Off                            ; Off                            ;
-; Optimize IOC Register Placement for Timing                                 ; On                             ; On                             ;
+; Optimize IOC Register Placement for Timing                                 ; Normal                         ; Normal                         ;
 ; Limit to One Fitting Attempt                                               ; Off                            ; Off                            ;
 ; Final Placement Optimizations                                              ; Automatically                  ; Automatically                  ;
 ; Fitter Aggressive Routability Optimizations                                ; Automatically                  ; Automatically                  ;
@@ -115,10 +113,7 @@ applicable agreement for further details.
 ; Auto Register Duplication                                                  ; Auto                           ; Auto                           ;
 ; Auto Global Clock                                                          ; On                             ; On                             ;
 ; Auto Global Register Control Signals                                       ; On                             ; On                             ;
-; Stop After Congestion Map Generation                                       ; Off                            ; Off                            ;
-; Save Intermediate Fitting Results                                          ; Off                            ; Off                            ;
 ; Force Fitter to Avoid Periphery Placement Warnings                         ; Off                            ; Off                            ;
-; Use Best Effort Settings for Compilation                                   ; Off                            ; Off                            ;
 +----------------------------------------------------------------------------+--------------------------------+--------------------------------+
 
 
@@ -128,7 +123,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------+--------+
 ; Processors                 ; Number ;
 +----------------------------+--------+
-; Number detected on machine ; 2      ;
+; Number detected on machine ; 4      ;
 ; Maximum allowed            ; 1      ;
 +----------------------------+--------+
 
@@ -144,29 +139,29 @@ The pin-out file can be found in C:/mce/sync_box/fpga_code/Synco.pin.
 +---------------------------------------------+--------------------+
 ; Resource                                    ; Usage              ;
 +---------------------------------------------+--------------------+
-; Total logic elements                        ; 387 / 570 ( 68 % ) ;
-;     -- Combinational with no register       ; 72                 ;
+; Total logic elements                        ; 375 / 570 ( 66 % ) ;
+;     -- Combinational with no register       ; 68                 ;
 ;     -- Register only                        ; 76                 ;
-;     -- Combinational with a register        ; 239                ;
+;     -- Combinational with a register        ; 231                ;
 ;                                             ;                    ;
 ; Logic element usage by number of LUT inputs ;                    ;
-;     -- 4 input functions                    ; 74                 ;
-;     -- 3 input functions                    ; 73                 ;
-;     -- 2 input functions                    ; 95                 ;
-;     -- 1 input functions                    ; 66                 ;
-;     -- 0 input functions                    ; 3                  ;
+;     -- 4 input functions                    ; 71                 ;
+;     -- 3 input functions                    ; 72                 ;
+;     -- 2 input functions                    ; 89                 ;
+;     -- 1 input functions                    ; 65                 ;
+;     -- 0 input functions                    ; 2                  ;
 ;                                             ;                    ;
 ; Logic elements by mode                      ;                    ;
-;     -- normal mode                          ; 289                ;
-;     -- arithmetic mode                      ; 98                 ;
+;     -- normal mode                          ; 283                ;
+;     -- arithmetic mode                      ; 92                 ;
 ;     -- qfbk mode                            ; 18                 ;
 ;     -- register cascade mode                ; 0                  ;
-;     -- synchronous clear/load mode          ; 154                ;
-;     -- asynchronous clear/load mode         ; 299                ;
+;     -- synchronous clear/load mode          ; 132                ;
+;     -- asynchronous clear/load mode         ; 291                ;
 ;                                             ;                    ;
-; Total registers                             ; 315 / 570 ( 55 % ) ;
+; Total registers                             ; 307 / 570 ( 54 % ) ;
 ; Total LABs                                  ; 43 / 57 ( 75 % )   ;
-; Logic elements in carry chains              ; 106                ;
+; Logic elements in carry chains              ; 99                 ;
 ; User inserted logic elements                ; 0                  ;
 ; Virtual pins                                ; 0                  ;
 ; I/O pins                                    ; 74 / 116 ( 64 % )  ;
@@ -175,14 +170,14 @@ The pin-out file can be found in C:/mce/sync_box/fpga_code/Synco.pin.
 ; UFM blocks                                  ; 0 / 1 ( 0 % )      ;
 ; Global clocks                               ; 4 / 4 ( 100 % )    ;
 ; JTAGs                                       ; 0 / 1 ( 0 % )      ;
-; Average interconnect usage (total/H/V)      ; 22% / 25% / 19%    ;
-; Peak interconnect usage (total/H/V)         ; 22% / 25% / 19%    ;
+; Average interconnect usage (total/H/V)      ; 25% / 30% / 21%    ;
+; Peak interconnect usage (total/H/V)         ; 25% / 30% / 21%    ;
 ; Maximum fan-out node                        ; PIO_Reset          ;
-; Maximum fan-out                             ; 300                ;
+; Maximum fan-out                             ; 292                ;
 ; Highest non-global fan-out signal           ; PIO_Reset          ;
-; Highest non-global fan-out                  ; 300                ;
-; Total fan-out                               ; 1979               ;
-; Average fan-out                             ; 4.29               ;
+; Highest non-global fan-out                  ; 292                ;
+; Total fan-out                               ; 1915               ;
+; Average fan-out                             ; 4.27               ;
 +---------------------------------------------+--------------------+
 
 
@@ -211,7 +206,7 @@ The pin-out file can be found in C:/mce/sync_box/fpga_code/Synco.pin.
 ; PIO_ADR[6]  ; 138   ; 2        ; 5            ; 8            ; 1           ; 1                     ; 0                  ; no     ; no              ; no       ; Off          ; 3.3-V LVTTL  ; User                 ;
 ; PIO_ADR[7]  ; 137   ; 2        ; 5            ; 8            ; 0           ; 1                     ; 0                  ; no     ; no              ; no       ; Off          ; 3.3-V LVTTL  ; User                 ;
 ; PIO_ALE     ; 15    ; 1        ; 0            ; 6            ; 5           ; 0                     ; 0                  ; no     ; no              ; no       ; Off          ; 3.3-V LVTTL  ; User                 ;
-; PIO_Reset   ; 11    ; 1        ; 0            ; 6            ; 1           ; 300                   ; 0                  ; no     ; no              ; no       ; Off          ; 3.3-V LVTTL  ; User                 ;
+; PIO_Reset   ; 11    ; 1        ; 0            ; 6            ; 1           ; 292                   ; 0                  ; no     ; no              ; no       ; Off          ; 3.3-V LVTTL  ; User                 ;
 ; PIO_nEnable ; 12    ; 1        ; 0            ; 6            ; 2           ; 85                    ; 0                  ; no     ; no              ; no       ; Off          ; 3.3-V LVTTL  ; User                 ;
 ; PIO_nRD     ; 14    ; 1        ; 0            ; 6            ; 4           ; 1                     ; 0                  ; no     ; no              ; no       ; Off          ; 3.3-V LVTTL  ; User                 ;
 ; PIO_nWR     ; 13    ; 1        ; 0            ; 6            ; 3           ; 42                    ; 0                  ; yes    ; no              ; no       ; Off          ; 3.3-V LVTTL  ; User                 ;
@@ -238,7 +233,7 @@ The pin-out file can be found in C:/mce/sync_box/fpga_code/Synco.pin.
 ; DV_OUT_POL     ; 111   ; 2        ; 12           ; 8            ; 3           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; DV_OUT_SPR1    ; 110   ; 2        ; 12           ; 8            ; 2           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; DV_OUT_SPR2    ; 109   ; 2        ; 12           ; 8            ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
-; FR_Mode        ; 119   ; 2        ; 9            ; 8            ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; yes                    ; User                 ; 10 pF ; -                    ; -                   ;
+; FR_Mode        ; 119   ; 2        ; 9            ; 8            ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; LED2           ; 118   ; 2        ; 9            ; 8            ; 0           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; LED3           ; 117   ; 2        ; 10           ; 8            ; 3           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 ; ManchOut1      ; 67    ; 1        ; 10           ; 0            ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
@@ -468,10 +463,10 @@ Note: User assignments will override these defaults. The user specified values a
 +----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+-----------------------------+--------------+
 ; Compilation Hierarchy Node ; Logic Cells ; LC Registers ; UFM Blocks ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name         ; Library Name ;
 +----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+-----------------------------+--------------+
-; |SyncBox                   ; 387 (1)     ; 315          ; 0          ; 74   ; 0            ; 72 (1)       ; 76 (0)            ; 239 (0)          ; 106 (0)         ; 18 (0)     ; |SyncBox                    ; work         ;
+; |SyncBox                   ; 375 (0)     ; 307          ; 0          ; 74   ; 0            ; 68 (0)       ; 76 (0)            ; 231 (0)          ; 99 (0)          ; 18 (0)     ; |SyncBox                    ; work         ;
 ;    |ClkDiv:clkd|           ; 50 (50)     ; 23           ; 0          ; 0    ; 0            ; 27 (27)      ; 8 (8)             ; 15 (15)          ; 35 (35)         ; 0 (0)      ; |SyncBox|ClkDiv:clkd        ; work         ;
 ;    |FreeRun:freerun|       ; 35 (35)     ; 25           ; 0          ; 0    ; 0            ; 10 (10)      ; 7 (7)             ; 18 (18)          ; 12 (12)         ; 0 (0)      ; |SyncBox|FreeRun:freerun    ; work         ;
-;    |ManchEncode:mancho|    ; 184 (184)   ; 175          ; 0          ; 0    ; 0            ; 9 (9)        ; 6 (6)             ; 169 (169)        ; 39 (39)         ; 8 (8)      ; |SyncBox|ManchEncode:mancho ; work         ;
+;    |ManchEncode:mancho|    ; 173 (173)   ; 167          ; 0          ; 0    ; 0            ; 6 (6)        ; 6 (6)             ; 161 (161)        ; 32 (32)         ; 8 (8)      ; |SyncBox|ManchEncode:mancho ; work         ;
 ;    |PIO_Interface:pio|     ; 64 (64)     ; 51           ; 0          ; 0    ; 0            ; 13 (13)      ; 43 (43)           ; 8 (8)            ; 0 (0)           ; 5 (5)      ; |SyncBox|PIO_Interface:pio  ; work         ;
 ;    |Sync_Len:synco|        ; 53 (53)     ; 41           ; 0          ; 0    ; 0            ; 12 (12)      ; 12 (12)           ; 29 (29)          ; 20 (20)         ; 5 (5)      ; |SyncBox|Sync_Len:synco     ; work         ;
 +----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+-----------------------------+--------------+
@@ -566,30 +561,29 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Name                               ; Location     ; Fan-Out ; Usage                      ; Global ; Global Resource Used ; Global Line Name ;
 +------------------------------------+--------------+---------+----------------------------+--------+----------------------+------------------+
 ; Clk100M                            ; PIN_20       ; 15      ; Clock                      ; yes    ; Global Clock         ; GCLK1            ;
-; ClkDiv:clkd|Clk25M                 ; LC_X10_Y3_N2 ; 212     ; Clock                      ; yes    ; Global Clock         ; GCLK0            ;
-; ClkDiv:clkd|LessThan0~5            ; LC_X8_Y7_N9  ; 9       ; Sync. clear                ; no     ; --                   ; --               ;
-; ClkDiv:clkd|clk25m_internal        ; LC_X5_Y7_N1  ; 8       ; Clock                      ; no     ; --                   ; --               ;
-; ClkDiv:clkd|clk_adj                ; LC_X10_Y3_N5 ; 42      ; Clock                      ; yes    ; Global Clock         ; GCLK3            ;
-; FreeRun:freerun|Equal0~3           ; LC_X12_Y3_N9 ; 12      ; Sync. load                 ; no     ; --                   ; --               ;
-; FreeRun:freerun|dwncnt~0           ; LC_X9_Y4_N3  ; 16      ; Clock enable               ; no     ; --                   ; --               ;
-; ManchEncode:mancho|DV_Cntr[0]~2    ; LC_X8_Y5_N8  ; 32      ; Clock enable               ; no     ; --                   ; --               ;
-; ManchEncode:mancho|DV_Delayed      ; LC_X10_Y5_N1 ; 41      ; Sync. load                 ; no     ; --                   ; --               ;
-; ManchEncode:mancho|Shift5Load[0]~0 ; LC_X5_Y6_N0  ; 35      ; Clock enable               ; no     ; --                   ; --               ;
-; ManchEncode:mancho|stout[0]~16     ; LC_X12_Y7_N9 ; 7       ; Clock enable               ; no     ; --                   ; --               ;
-; PIO_Interface:pio|AuxInGet~0       ; LC_X3_Y7_N8  ; 8       ; Output enable              ; no     ; --                   ; --               ;
-; PIO_Interface:pio|Equal0~1         ; LC_X4_Y7_N1  ; 8       ; Clock enable               ; no     ; --                   ; --               ;
-; PIO_Interface:pio|Equal11~1        ; LC_X3_Y7_N6  ; 8       ; Clock enable               ; no     ; --                   ; --               ;
-; PIO_Interface:pio|Equal1~0         ; LC_X4_Y7_N7  ; 8       ; Clock enable               ; no     ; --                   ; --               ;
-; PIO_Interface:pio|Equal2~0         ; LC_X4_Y7_N5  ; 8       ; Clock enable               ; no     ; --                   ; --               ;
-; PIO_Interface:pio|Equal3~0         ; LC_X4_Y7_N6  ; 8       ; Clock enable               ; no     ; --                   ; --               ;
-; PIO_Interface:pio|FR_Load          ; LC_X8_Y5_N6  ; 12      ; Clock enable               ; no     ; --                   ; --               ;
-; PIO_Interface:pio|SL_Load          ; LC_X3_Y7_N1  ; 20      ; Clock enable               ; no     ; --                   ; --               ;
-; PIO_Interface:pio|clk_adj_div_load ; LC_X5_Y7_N8  ; 8       ; Clock enable               ; no     ; --                   ; --               ;
-; PIO_Reset                          ; PIN_11       ; 300     ; Async. clear, Clock enable ; no     ; --                   ; --               ;
+; ClkDiv:clkd|Clk25M                 ; LC_X10_Y3_N5 ; 204     ; Clock                      ; yes    ; Global Clock         ; GCLK3            ;
+; ClkDiv:clkd|LessThan0~5            ; LC_X1_Y5_N9  ; 9       ; Sync. clear                ; no     ; --                   ; --               ;
+; ClkDiv:clkd|clk25m_internal        ; LC_X10_Y3_N3 ; 8       ; Clock                      ; no     ; --                   ; --               ;
+; ClkDiv:clkd|clk_adj                ; LC_X4_Y7_N9  ; 43      ; Clock                      ; yes    ; Global Clock         ; GCLK0            ;
+; FreeRun:freerun|Equal0~3           ; LC_X6_Y7_N8  ; 12      ; Sync. load                 ; no     ; --                   ; --               ;
+; FreeRun:freerun|dwncnt~0           ; LC_X7_Y4_N8  ; 16      ; Clock enable               ; no     ; --                   ; --               ;
+; ManchEncode:mancho|DV_Cntr[30]~2   ; LC_X9_Y5_N6  ; 32      ; Clock enable               ; no     ; --                   ; --               ;
+; ManchEncode:mancho|DV_Delayed      ; LC_X11_Y6_N6 ; 34      ; Sync. load                 ; no     ; --                   ; --               ;
+; ManchEncode:mancho|Shift5Load[0]~0 ; LC_X11_Y3_N7 ; 35      ; Clock enable               ; no     ; --                   ; --               ;
+; PIO_Interface:pio|AuxInGet~0       ; LC_X10_Y7_N7 ; 8       ; Output enable              ; no     ; --                   ; --               ;
+; PIO_Interface:pio|Equal0~1         ; LC_X9_Y6_N8  ; 8       ; Clock enable               ; no     ; --                   ; --               ;
+; PIO_Interface:pio|Equal11~1        ; LC_X10_Y7_N1 ; 8       ; Clock enable               ; no     ; --                   ; --               ;
+; PIO_Interface:pio|Equal1~0         ; LC_X8_Y6_N6  ; 8       ; Clock enable               ; no     ; --                   ; --               ;
+; PIO_Interface:pio|Equal2~0         ; LC_X9_Y6_N6  ; 8       ; Clock enable               ; no     ; --                   ; --               ;
+; PIO_Interface:pio|Equal3~0         ; LC_X10_Y5_N7 ; 8       ; Clock enable               ; no     ; --                   ; --               ;
+; PIO_Interface:pio|FR_Load          ; LC_X9_Y5_N9  ; 12      ; Clock enable               ; no     ; --                   ; --               ;
+; PIO_Interface:pio|SL_Load          ; LC_X4_Y6_N0  ; 20      ; Clock enable               ; no     ; --                   ; --               ;
+; PIO_Interface:pio|clk_adj_div_load ; LC_X4_Y6_N5  ; 8       ; Clock enable               ; no     ; --                   ; --               ;
+; PIO_Reset                          ; PIN_11       ; 292     ; Async. clear, Clock enable ; no     ; --                   ; --               ;
 ; PIO_nEnable                        ; PIN_12       ; 85      ; Clock enable               ; no     ; --                   ; --               ;
 ; PIO_nWR                            ; PIN_13       ; 42      ; Clock                      ; yes    ; Global Clock         ; GCLK2            ;
-; Sync_Len:synco|Equal1~6            ; LC_X12_Y5_N6 ; 21      ; Sync. load                 ; no     ; --                   ; --               ;
-; Sync_Len:synco|dwncnt~0            ; LC_X10_Y5_N0 ; 21      ; Clock enable               ; no     ; --                   ; --               ;
+; Sync_Len:synco|Equal1~6            ; LC_X4_Y4_N2  ; 21      ; Sync. load                 ; no     ; --                   ; --               ;
+; Sync_Len:synco|dwncnt~0            ; LC_X7_Y4_N3  ; 21      ; Clock enable               ; no     ; --                   ; --               ;
 +------------------------------------+--------------+---------+----------------------------+--------+----------------------+------------------+
 
 
@@ -599,68 +593,586 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Name                ; Location     ; Fan-Out ; Global Resource Used ; Global Line Name ;
 +---------------------+--------------+---------+----------------------+------------------+
 ; Clk100M             ; PIN_20       ; 15      ; Global Clock         ; GCLK1            ;
-; ClkDiv:clkd|Clk25M  ; LC_X10_Y3_N2 ; 212     ; Global Clock         ; GCLK0            ;
-; ClkDiv:clkd|clk_adj ; LC_X10_Y3_N5 ; 42      ; Global Clock         ; GCLK3            ;
+; ClkDiv:clkd|Clk25M  ; LC_X10_Y3_N5 ; 204     ; Global Clock         ; GCLK3            ;
+; ClkDiv:clkd|clk_adj ; LC_X4_Y7_N9  ; 43      ; Global Clock         ; GCLK0            ;
 ; PIO_nWR             ; PIN_13       ; 42      ; Global Clock         ; GCLK2            ;
 +---------------------+--------------+---------+----------------------+------------------+
 
 
-+----------------------------------------------+
-; Non-Global High Fan-Out Signals              ;
-+------------------------------------+---------+
-; Name                               ; Fan-Out ;
-+------------------------------------+---------+
-; PIO_Reset                          ; 300     ;
-; PIO_nEnable                        ; 85      ;
-; Sync_Len:synco|isAddr_Zero         ; 51      ;
-; ManchEncode:mancho|DV_Buf          ; 49      ;
-; ManchEncode:mancho|Shift5Rdy       ; 42      ;
-; ManchEncode:mancho|DV_Delayed      ; 41      ;
-; ManchEncode:mancho|Shift5Load[0]~0 ; 35      ;
-; ManchEncode:mancho|DV_Cntr[0]~2    ; 32      ;
-; Sync_Len:synco|Equal1~6            ; 21      ;
-; Sync_Len:synco|dwncnt~0            ; 21      ;
-; PIO_Interface:pio|SL_Load          ; 20      ;
-; FreeRun:freerun|dwncnt~0           ; 16      ;
-; PIO_Interface:pio|FR_Load          ; 12      ;
-; FreeRun:freerun|Equal0~3           ; 12      ;
-; PIO_DAT~7                          ; 9       ;
-; PIO_DAT~6                          ; 9       ;
-; PIO_DAT~5                          ; 9       ;
-; ClkDiv:clkd|LessThan0~5            ; 9       ;
-; PIO_Interface:pio|Equal3~0         ; 8       ;
-; PIO_Interface:pio|Equal1~0         ; 8       ;
-; PIO_Interface:pio|Equal2~0         ; 8       ;
-; PIO_Interface:pio|Equal0~1         ; 8       ;
-; PIO_Interface:pio|clk_adj_div_load ; 8       ;
-; ClkDiv:clkd|clk25m_internal        ; 8       ;
-; PIO_Interface:pio|AuxInGet~0       ; 8       ;
-; PIO_Interface:pio|Equal11~1        ; 8       ;
-; ManchEncode:mancho|stout[0]~16     ; 7       ;
-; PIO_Interface:pio|AddrReg[0]       ; 7       ;
-; PIO_DAT~4                          ; 6       ;
-; PIO_DAT~3                          ; 6       ;
-; PIO_DAT~2                          ; 6       ;
-; PIO_DAT~1                          ; 6       ;
-; PIO_DAT~0                          ; 6       ;
-; ManchEncode:mancho|DV_Cntr[0]~64   ; 5       ;
-; ManchEncode:mancho|DV_Cntr[5]~54   ; 5       ;
-; ManchEncode:mancho|DV_Cntr[10]~44  ; 5       ;
-; ManchEncode:mancho|DV_Cntr[15]~34  ; 5       ;
-; ManchEncode:mancho|DV_Cntr[20]~24  ; 5       ;
-; ManchEncode:mancho|DV_Cntr[25]~14  ; 5       ;
-; PIO_Interface:pio|AddrReg[4]       ; 5       ;
-; FreeRun:freerun|FRCntr[5]~11       ; 5       ;
-; FreeRun:freerun|FRCntr[0]~1        ; 5       ;
-; Sync_Len:synco|SLCntr[14]~37       ; 5       ;
-; Sync_Len:synco|SLCntr[9]~27        ; 5       ;
-; Sync_Len:synco|SLCntr[4]~13        ; 5       ;
-; PIO_Interface:pio|AddrReg[1]       ; 5       ;
-; PIO_Interface:pio|Equal9~0         ; 5       ;
-; ManchEncode:mancho|sDV_Err         ; 5       ;
-; PIO_Interface:pio|ModeReg[0]       ; 5       ;
-; ~GND                               ; 4       ;
-+------------------------------------+---------+
++--------------------------------------------------------------+
+; Non-Global High Fan-Out Signals                              ;
++----------------------------------------------------+---------+
+; Name                                               ; Fan-Out ;
++----------------------------------------------------+---------+
+; PIO_Reset                                          ; 292     ;
+; PIO_nEnable                                        ; 85      ;
+; Sync_Len:synco|isAddr_Zero                         ; 49      ;
+; ManchEncode:mancho|DV_Buf                          ; 47      ;
+; ManchEncode:mancho|Shift5Rdy                       ; 42      ;
+; ManchEncode:mancho|Shift5Load[0]~0                 ; 35      ;
+; ManchEncode:mancho|DV_Delayed                      ; 34      ;
+; ManchEncode:mancho|DV_Cntr[30]~2                   ; 32      ;
+; Sync_Len:synco|Equal1~6                            ; 21      ;
+; Sync_Len:synco|dwncnt~0                            ; 21      ;
+; PIO_Interface:pio|SL_Load                          ; 20      ;
+; FreeRun:freerun|dwncnt~0                           ; 16      ;
+; PIO_Interface:pio|FR_Load                          ; 12      ;
+; FreeRun:freerun|Equal0~3                           ; 12      ;
+; PIO_DAT~7                                          ; 9       ;
+; PIO_DAT~6                                          ; 9       ;
+; PIO_DAT~5                                          ; 9       ;
+; ClkDiv:clkd|LessThan0~5                            ; 9       ;
+; PIO_Interface:pio|Equal3~0                         ; 8       ;
+; PIO_Interface:pio|Equal1~0                         ; 8       ;
+; PIO_Interface:pio|Equal2~0                         ; 8       ;
+; PIO_Interface:pio|Equal0~1                         ; 8       ;
+; PIO_Interface:pio|clk_adj_div_load                 ; 8       ;
+; ClkDiv:clkd|clk25m_internal                        ; 8       ;
+; PIO_Interface:pio|AuxInGet~0                       ; 8       ;
+; PIO_Interface:pio|Equal11~1                        ; 8       ;
+; PIO_Interface:pio|AddrReg[0]                       ; 7       ;
+; PIO_DAT~4                                          ; 6       ;
+; PIO_DAT~3                                          ; 6       ;
+; PIO_DAT~2                                          ; 6       ;
+; PIO_DAT~1                                          ; 6       ;
+; PIO_DAT~0                                          ; 6       ;
+; ManchEncode:mancho|DV_Cntr[0]~64                   ; 5       ;
+; ManchEncode:mancho|DV_Cntr[5]~54                   ; 5       ;
+; ManchEncode:mancho|DV_Cntr[10]~44                  ; 5       ;
+; ManchEncode:mancho|DV_Cntr[15]~34                  ; 5       ;
+; ManchEncode:mancho|DV_Cntr[20]~24                  ; 5       ;
+; ManchEncode:mancho|DV_Cntr[25]~14                  ; 5       ;
+; PIO_Interface:pio|AddrReg[1]                       ; 5       ;
+; PIO_Interface:pio|AddrReg[4]                       ; 5       ;
+; FreeRun:freerun|FRCntr[5]~11                       ; 5       ;
+; FreeRun:freerun|FRCntr[0]~1                        ; 5       ;
+; Sync_Len:synco|SLCntr[14]~37                       ; 5       ;
+; Sync_Len:synco|SLCntr[9]~27                        ; 5       ;
+; Sync_Len:synco|SLCntr[4]~13                        ; 5       ;
+; PIO_Interface:pio|Equal9~0                         ; 5       ;
+; ManchEncode:mancho|sDV_Err                         ; 5       ;
+; PIO_Interface:pio|ModeReg[0]                       ; 5       ;
+; ClkDiv:clkd|LessThan0~23                           ; 4       ;
+; ClkDiv:clkd|Add1~22                                ; 4       ;
+; ClkDiv:clkd|clk_cntr2[4]~9                         ; 4       ;
+; ManchEncode:mancho|Shift5Load[32]                  ; 4       ;
+; PIO_Interface:pio|CmdData[4]                       ; 4       ;
+; PIO_Interface:pio|CmdData[5]                       ; 4       ;
+; PIO_Interface:pio|CmdData[7]                       ; 4       ;
+; PIO_Interface:pio|CmdData[6]                       ; 4       ;
+; PIO_Interface:pio|CmdData[0]                       ; 4       ;
+; PIO_Interface:pio|CmdData[1]                       ; 4       ;
+; PIO_Interface:pio|CmdData[2]                       ; 4       ;
+; PIO_Interface:pio|CmdData[3]                       ; 4       ;
+; PIO_Interface:pio|Equal11~0                        ; 4       ;
+; ManchEncode:mancho|DV_Cntr[0]                      ; 3       ;
+; ManchEncode:mancho|DV_Cntr[1]                      ; 3       ;
+; ManchEncode:mancho|DV_Cntr[2]                      ; 3       ;
+; ManchEncode:mancho|DV_Cntr[3]                      ; 3       ;
+; ManchEncode:mancho|DV_Cntr[4]                      ; 3       ;
+; ManchEncode:mancho|DV_Cntr[5]                      ; 3       ;
+; ManchEncode:mancho|DV_Cntr[6]                      ; 3       ;
+; ManchEncode:mancho|DV_Cntr[7]                      ; 3       ;
+; ManchEncode:mancho|DV_Cntr[8]                      ; 3       ;
+; ManchEncode:mancho|DV_Cntr[9]                      ; 3       ;
+; ManchEncode:mancho|DV_Cntr[10]                     ; 3       ;
+; ManchEncode:mancho|DV_Cntr[11]                     ; 3       ;
+; ManchEncode:mancho|DV_Cntr[12]                     ; 3       ;
+; ManchEncode:mancho|DV_Cntr[13]                     ; 3       ;
+; ManchEncode:mancho|DV_Cntr[14]                     ; 3       ;
+; ManchEncode:mancho|DV_Cntr[15]                     ; 3       ;
+; ManchEncode:mancho|DV_Cntr[16]                     ; 3       ;
+; ManchEncode:mancho|DV_Cntr[17]                     ; 3       ;
+; ManchEncode:mancho|DV_Cntr[18]                     ; 3       ;
+; ManchEncode:mancho|DV_Cntr[19]                     ; 3       ;
+; ManchEncode:mancho|DV_Cntr[20]                     ; 3       ;
+; ManchEncode:mancho|DV_Cntr[21]                     ; 3       ;
+; ManchEncode:mancho|DV_Cntr[22]                     ; 3       ;
+; ManchEncode:mancho|DV_Cntr[23]                     ; 3       ;
+; ManchEncode:mancho|DV_Cntr[24]                     ; 3       ;
+; ManchEncode:mancho|DV_Cntr[25]                     ; 3       ;
+; ManchEncode:mancho|DV_Cntr[26]                     ; 3       ;
+; ManchEncode:mancho|DV_Cntr[27]                     ; 3       ;
+; ManchEncode:mancho|DV_Cntr[28]                     ; 3       ;
+; ManchEncode:mancho|DV_Cntr[29]                     ; 3       ;
+; ManchEncode:mancho|DV_Cntr[30]                     ; 3       ;
+; ClkDiv:clkd|clk_adj_div[0]                         ; 3       ;
+; ClkDiv:clkd|clk_cntr2[0]                           ; 3       ;
+; ManchEncode:mancho|DV_Cntr[31]                     ; 3       ;
+; ClkDiv:clkd|clk_cntr2[1]                           ; 3       ;
+; ClkDiv:clkd|clk_cntr2[2]                           ; 3       ;
+; ClkDiv:clkd|clk_cntr2[3]                           ; 3       ;
+; ClkDiv:clkd|clk_cntr2[4]                           ; 3       ;
+; ClkDiv:clkd|LessThan1~18                           ; 3       ;
+; ClkDiv:clkd|clk_cntr2[5]                           ; 3       ;
+; ClkDiv:clkd|clk_cntr2[6]                           ; 3       ;
+; PIO_Interface:pio|CmdData[8]                       ; 3       ;
+; PIO_Interface:pio|CmdData[10]                      ; 3       ;
+; PIO_Interface:pio|CmdData[9]                       ; 3       ;
+; PIO_Interface:pio|CmdData[11]                      ; 3       ;
+; ClkDiv:clkd|clk_cntr2[7]                           ; 3       ;
+; PIO_Interface:pio|AddrReg[5]                       ; 3       ;
+; ClkDiv:clkd|clk_cntr1[0]                           ; 3       ;
+; ClkDiv:clkd|clk_cntr2[8]                           ; 3       ;
+; ClkDiv:clkd|clk_cntr1[1]                           ; 3       ;
+; ManchEncode:mancho|xxdv_o~3                        ; 3       ;
+; ManchEncode:mancho|reg[2]                          ; 3       ;
+; ManchEncode:mancho|reg[3]                          ; 3       ;
+; ManchEncode:mancho|reg[6]                          ; 3       ;
+; ManchEncode:mancho|reg[7]                          ; 3       ;
+; FreeRun:freerun|DV_FreeRun                         ; 3       ;
+; DV_RTS                                             ; 2       ;
+; ClkDiv:clkd|clk_adj_div[1]                         ; 2       ;
+; ClkDiv:clkd|clk_adj_div[2]                         ; 2       ;
+; ClkDiv:clkd|clk_adj_div[3]                         ; 2       ;
+; ClkDiv:clkd|clk_adj_div[4]                         ; 2       ;
+; ClkDiv:clkd|clk_adj_div[5]                         ; 2       ;
+; PIO_Interface:pio|FR_Load~0                        ; 2       ;
+; ClkDiv:clkd|clk_adj_div[6]                         ; 2       ;
+; PIO_Interface:pio|CmdData[12]                      ; 2       ;
+; PIO_Interface:pio|CmdData[13]                      ; 2       ;
+; PIO_Interface:pio|CmdData[14]                      ; 2       ;
+; PIO_Interface:pio|CmdData[15]                      ; 2       ;
+; PIO_Interface:pio|CmdData[16]                      ; 2       ;
+; PIO_Interface:pio|CmdData[17]                      ; 2       ;
+; PIO_Interface:pio|CmdData[18]                      ; 2       ;
+; PIO_Interface:pio|CmdData[19]                      ; 2       ;
+; PIO_Interface:pio|SL_Load~2                        ; 2       ;
+; PIO_Interface:pio|rrPIO_nWR                        ; 2       ;
+; PIO_Interface:pio|SL_Load~1                        ; 2       ;
+; PIO_Interface:pio|rPIO_nWR                         ; 2       ;
+; PIO_Interface:pio|SL_Load~0                        ; 2       ;
+; ClkDiv:clkd|clk_adj_div[7]                         ; 2       ;
+; ManchEncode:mancho|Selector3~3                     ; 2       ;
+; ManchEncode:mancho|reg[4]                          ; 2       ;
+; ManchEncode:mancho|reg[8]                          ; 2       ;
+; FreeRun:freerun|Equal0~2                           ; 2       ;
+; FreeRun:freerun|FRCntr[11]                         ; 2       ;
+; FreeRun:freerun|FRCntr[10]                         ; 2       ;
+; FreeRun:freerun|FRCntr[9]                          ; 2       ;
+; FreeRun:freerun|FRCntr[8]                          ; 2       ;
+; FreeRun:freerun|Equal0~1                           ; 2       ;
+; FreeRun:freerun|FRCntr[7]                          ; 2       ;
+; FreeRun:freerun|FRCntr[6]                          ; 2       ;
+; FreeRun:freerun|FRCntr[5]                          ; 2       ;
+; FreeRun:freerun|FRCntr[4]                          ; 2       ;
+; FreeRun:freerun|Equal0~0                           ; 2       ;
+; FreeRun:freerun|FRCntr[3]                          ; 2       ;
+; FreeRun:freerun|FRCntr[2]                          ; 2       ;
+; FreeRun:freerun|FRCntr[1]                          ; 2       ;
+; FreeRun:freerun|FRCntr[0]                          ; 2       ;
+; ManchEncode:mancho|DV_in~0                         ; 2       ;
+; Sync_Len:synco|SLCntr[15]                          ; 2       ;
+; Sync_Len:synco|SLCntr[14]                          ; 2       ;
+; Sync_Len:synco|SLCntr[13]                          ; 2       ;
+; Sync_Len:synco|SLCntr[12]                          ; 2       ;
+; Sync_Len:synco|SLCntr[11]                          ; 2       ;
+; Sync_Len:synco|SLCntr[10]                          ; 2       ;
+; Sync_Len:synco|SLCntr[9]                           ; 2       ;
+; Sync_Len:synco|SLCntr[8]                           ; 2       ;
+; Sync_Len:synco|SLCntr[3]                           ; 2       ;
+; Sync_Len:synco|SLCntr[2]                           ; 2       ;
+; Sync_Len:synco|SLCntr[7]                           ; 2       ;
+; Sync_Len:synco|SLCntr[6]                           ; 2       ;
+; Sync_Len:synco|SLCntr[5]                           ; 2       ;
+; Sync_Len:synco|SLCntr[4]                           ; 2       ;
+; Sync_Len:synco|SLCntr[1]                           ; 2       ;
+; Sync_Len:synco|SLCntr[0]                           ; 2       ;
+; Sync_Len:synco|SLCntr[19]                          ; 2       ;
+; Sync_Len:synco|SLCntr[18]                          ; 2       ;
+; Sync_Len:synco|SLCntr[17]                          ; 2       ;
+; Sync_Len:synco|SLCntr[16]                          ; 2       ;
+; Sync_Len:synco|SL_LoadReg[4]                       ; 2       ;
+; Sync_Len:synco|SL_LoadReg[5]                       ; 2       ;
+; Sync_Len:synco|SL_LoadReg[6]                       ; 2       ;
+; Sync_Len:synco|SL_LoadReg[8]                       ; 2       ;
+; Sync_Len:synco|SL_LoadReg[9]                       ; 2       ;
+; Sync_Len:synco|SL_LoadReg[11]                      ; 2       ;
+; Sync_Len:synco|SL_LoadReg[12]                      ; 2       ;
+; Sync_Len:synco|SL_LoadReg[13]                      ; 2       ;
+; Sync_Len:synco|SL_LoadReg[14]                      ; 2       ;
+; Sync_Len:synco|SL_LoadReg[16]                      ; 2       ;
+; Sync_Len:synco|SL_LoadReg[17]                      ; 2       ;
+; Sync_Len:synco|SL_LoadReg[18]                      ; 2       ;
+; Sync_Len:synco|SL_LoadReg[0]                       ; 2       ;
+; Sync_Len:synco|SL_LoadReg[1]                       ; 2       ;
+; Sync_Len:synco|SL_LoadReg[2]                       ; 2       ;
+; PIO_Interface:pio|Equal0~0                         ; 2       ;
+; ManchEncode:mancho|reg[1]                          ; 2       ;
+; ManchEncode:mancho|reg[5]                          ; 2       ;
+; ManchEncode:mancho|reg[9]                          ; 2       ;
+; ManchEncode:mancho|Shift5Bits[39]                  ; 2       ;
+; ManchEncode:mancho|ManchOut1                       ; 2       ;
+; ManchEncode:mancho|ShiftBits[39]                   ; 2       ;
+; Sync_Len:synco|SL_LoadReg[9]~_wirecell             ; 1       ;
+; Sync_Len:synco|SL_LoadReg[6]~_wirecell             ; 1       ;
+; Sync_Len:synco|SL_LoadReg[11]~_wirecell            ; 1       ;
+; FreeRun:freerun|FRLoadReg[5]~_wirecell             ; 1       ;
+; FreeRun:freerun|FRLoadReg[3]~_wirecell             ; 1       ;
+; FreeRun:freerun|FRLoadReg[2]~_wirecell             ; 1       ;
+; FreeRun:freerun|FRLoadReg[1]~_wirecell             ; 1       ;
+; FreeRun:freerun|FRLoadReg[0]~_wirecell             ; 1       ;
+; AuxIn[1]                                           ; 1       ;
+; AuxIn[2]                                           ; 1       ;
+; AuxIn[3]                                           ; 1       ;
+; AuxIn[4]                                           ; 1       ;
+; AuxIn[5]                                           ; 1       ;
+; AuxIn[6]                                           ; 1       ;
+; AuxIn[7]                                           ; 1       ;
+; PIO_nRD                                            ; 1       ;
+; AuxIn[8]                                           ; 1       ;
+; PIO_ADR[0]                                         ; 1       ;
+; PIO_ADR[4]                                         ; 1       ;
+; PIO_ADR[1]                                         ; 1       ;
+; PIO_ADR[5]                                         ; 1       ;
+; PIO_ADR[2]                                         ; 1       ;
+; PIO_ADR[3]                                         ; 1       ;
+; PIO_ADR[6]                                         ; 1       ;
+; PIO_ADR[7]                                         ; 1       ;
+; ClkDiv:clkd|LessThan0~41COUT1_54                   ; 1       ;
+; ClkDiv:clkd|LessThan0~41COUT0_53                   ; 1       ;
+; ManchEncode:mancho|Shift5Load[0]                   ; 1       ;
+; ManchEncode:mancho|Shift5Bits[0]                   ; 1       ;
+; ManchEncode:mancho|Shift5Load[1]                   ; 1       ;
+; ManchEncode:mancho|ShiftBits[0]                    ; 1       ;
+; ManchEncode:mancho|DV_Cntr[1]~62COUT1_91           ; 1       ;
+; ManchEncode:mancho|DV_Cntr[1]~62                   ; 1       ;
+; ManchEncode:mancho|Shift5Bits[1]                   ; 1       ;
+; ManchEncode:mancho|Shift5Load[2]                   ; 1       ;
+; ManchEncode:mancho|ShiftBits[1]                    ; 1       ;
+; ManchEncode:mancho|DV_Cntr[2]~60COUT1_93           ; 1       ;
+; ManchEncode:mancho|DV_Cntr[2]~60                   ; 1       ;
+; ManchEncode:mancho|Shift5Bits[2]                   ; 1       ;
+; ManchEncode:mancho|Shift5Load[3]                   ; 1       ;
+; ManchEncode:mancho|ShiftBits[2]                    ; 1       ;
+; ManchEncode:mancho|DV_Cntr[3]~58COUT1_95           ; 1       ;
+; ManchEncode:mancho|DV_Cntr[3]~58                   ; 1       ;
+; ManchEncode:mancho|Shift5Bits[3]                   ; 1       ;
+; ManchEncode:mancho|Shift5Load[4]                   ; 1       ;
+; ManchEncode:mancho|ShiftBits[3]                    ; 1       ;
+; ManchEncode:mancho|DV_Cntr[4]~56COUT1_97           ; 1       ;
+; ManchEncode:mancho|DV_Cntr[4]~56                   ; 1       ;
+; ManchEncode:mancho|Shift5Bits[4]                   ; 1       ;
+; ManchEncode:mancho|Shift5Load[5]                   ; 1       ;
+; ManchEncode:mancho|ShiftBits[4]                    ; 1       ;
+; ManchEncode:mancho|Shift5Bits[5]                   ; 1       ;
+; ManchEncode:mancho|Shift5Load[6]                   ; 1       ;
+; ManchEncode:mancho|ShiftBits[5]                    ; 1       ;
+; ManchEncode:mancho|DV_Cntr[6]~52COUT1_99           ; 1       ;
+; ManchEncode:mancho|DV_Cntr[6]~52                   ; 1       ;
+; ManchEncode:mancho|Shift5Bits[6]                   ; 1       ;
+; ManchEncode:mancho|Shift5Load[7]                   ; 1       ;
+; ManchEncode:mancho|ShiftBits[6]                    ; 1       ;
+; ManchEncode:mancho|DV_Cntr[7]~50COUT1_101          ; 1       ;
+; ManchEncode:mancho|DV_Cntr[7]~50                   ; 1       ;
+; ManchEncode:mancho|Shift5Bits[7]                   ; 1       ;
+; ManchEncode:mancho|Shift5Load[8]                   ; 1       ;
+; ManchEncode:mancho|ShiftBits[7]                    ; 1       ;
+; ManchEncode:mancho|DV_Cntr[8]~48COUT1_103          ; 1       ;
+; ManchEncode:mancho|DV_Cntr[8]~48                   ; 1       ;
+; ManchEncode:mancho|Shift5Bits[8]                   ; 1       ;
+; ManchEncode:mancho|Shift5Load[9]                   ; 1       ;
+; ManchEncode:mancho|ShiftBits[8]                    ; 1       ;
+; ManchEncode:mancho|DV_Cntr[9]~46COUT1_105          ; 1       ;
+; ManchEncode:mancho|DV_Cntr[9]~46                   ; 1       ;
+; ManchEncode:mancho|Shift5Bits[9]                   ; 1       ;
+; ManchEncode:mancho|Shift5Load[10]                  ; 1       ;
+; ManchEncode:mancho|ShiftBits[9]                    ; 1       ;
+; ManchEncode:mancho|Shift5Bits[10]                  ; 1       ;
+; ManchEncode:mancho|Shift5Load[11]                  ; 1       ;
+; ManchEncode:mancho|ShiftBits[10]                   ; 1       ;
+; ManchEncode:mancho|DV_Cntr[11]~42COUT1_107         ; 1       ;
+; ManchEncode:mancho|DV_Cntr[11]~42                  ; 1       ;
+; ManchEncode:mancho|Shift5Bits[11]                  ; 1       ;
+; ManchEncode:mancho|Shift5Load[12]                  ; 1       ;
+; ManchEncode:mancho|ShiftBits[11]                   ; 1       ;
+; ManchEncode:mancho|DV_Cntr[12]~40COUT1_109         ; 1       ;
+; ManchEncode:mancho|DV_Cntr[12]~40                  ; 1       ;
+; ManchEncode:mancho|Shift5Bits[12]                  ; 1       ;
+; ManchEncode:mancho|Shift5Load[13]                  ; 1       ;
+; ManchEncode:mancho|ShiftBits[12]                   ; 1       ;
+; ManchEncode:mancho|DV_Cntr[13]~38COUT1_111         ; 1       ;
+; ManchEncode:mancho|DV_Cntr[13]~38                  ; 1       ;
+; ManchEncode:mancho|Shift5Bits[13]                  ; 1       ;
+; ManchEncode:mancho|Shift5Load[14]                  ; 1       ;
+; ManchEncode:mancho|ShiftBits[13]                   ; 1       ;
+; ManchEncode:mancho|DV_Cntr[14]~36COUT1_113         ; 1       ;
+; ManchEncode:mancho|DV_Cntr[14]~36                  ; 1       ;
+; ManchEncode:mancho|Shift5Bits[14]                  ; 1       ;
+; ManchEncode:mancho|Shift5Load[15]                  ; 1       ;
+; ManchEncode:mancho|ShiftBits[14]                   ; 1       ;
+; ManchEncode:mancho|Shift5Bits[15]                  ; 1       ;
+; ManchEncode:mancho|Shift5Load[16]                  ; 1       ;
+; ManchEncode:mancho|ShiftBits[15]                   ; 1       ;
+; ManchEncode:mancho|DV_Cntr[16]~32COUT1_115         ; 1       ;
+; ManchEncode:mancho|DV_Cntr[16]~32                  ; 1       ;
+; ManchEncode:mancho|Shift5Bits[16]                  ; 1       ;
+; ManchEncode:mancho|Shift5Load[17]                  ; 1       ;
+; ManchEncode:mancho|ShiftBits[16]                   ; 1       ;
+; ManchEncode:mancho|DV_Cntr[17]~30COUT1_117         ; 1       ;
+; ManchEncode:mancho|DV_Cntr[17]~30                  ; 1       ;
+; ManchEncode:mancho|Shift5Bits[17]                  ; 1       ;
+; ManchEncode:mancho|Shift5Load[18]                  ; 1       ;
+; ManchEncode:mancho|ShiftBits[17]                   ; 1       ;
+; ManchEncode:mancho|DV_Cntr[18]~28COUT1_119         ; 1       ;
+; ManchEncode:mancho|DV_Cntr[18]~28                  ; 1       ;
+; ManchEncode:mancho|Shift5Bits[18]                  ; 1       ;
+; ManchEncode:mancho|Shift5Load[19]                  ; 1       ;
+; ManchEncode:mancho|ShiftBits[18]                   ; 1       ;
+; ManchEncode:mancho|DV_Cntr[19]~26COUT1_121         ; 1       ;
+; ManchEncode:mancho|DV_Cntr[19]~26                  ; 1       ;
+; PIO_Interface:pio|CmdData[20]                      ; 1       ;
+; ManchEncode:mancho|Shift5Bits[19]                  ; 1       ;
+; ManchEncode:mancho|Shift5Load[20]                  ; 1       ;
+; ManchEncode:mancho|ShiftBits[19]                   ; 1       ;
+; PIO_Interface:pio|CmdData[21]                      ; 1       ;
+; ManchEncode:mancho|Shift5Bits[20]                  ; 1       ;
+; ManchEncode:mancho|Shift5Load[21]                  ; 1       ;
+; ManchEncode:mancho|ShiftBits[20]                   ; 1       ;
+; ManchEncode:mancho|DV_Cntr[21]~22COUT1_123         ; 1       ;
+; ManchEncode:mancho|DV_Cntr[21]~22                  ; 1       ;
+; PIO_Interface:pio|CmdData[22]                      ; 1       ;
+; ManchEncode:mancho|Shift5Bits[21]                  ; 1       ;
+; ManchEncode:mancho|Shift5Load[22]                  ; 1       ;
+; ManchEncode:mancho|ShiftBits[21]                   ; 1       ;
+; ManchEncode:mancho|DV_Cntr[22]~20COUT1_125         ; 1       ;
+; ManchEncode:mancho|DV_Cntr[22]~20                  ; 1       ;
+; PIO_Interface:pio|CmdData[23]                      ; 1       ;
+; ManchEncode:mancho|Shift5Bits[22]                  ; 1       ;
+; ManchEncode:mancho|Shift5Load[23]                  ; 1       ;
+; ManchEncode:mancho|ShiftBits[22]                   ; 1       ;
+; ManchEncode:mancho|DV_Cntr[23]~18COUT1_127         ; 1       ;
+; ManchEncode:mancho|DV_Cntr[23]~18                  ; 1       ;
+; PIO_Interface:pio|CmdData[24]                      ; 1       ;
+; ManchEncode:mancho|Shift5Bits[23]                  ; 1       ;
+; ManchEncode:mancho|Shift5Load[24]                  ; 1       ;
+; ManchEncode:mancho|ShiftBits[23]                   ; 1       ;
+; ManchEncode:mancho|DV_Cntr[24]~16COUT1_129         ; 1       ;
+; ManchEncode:mancho|DV_Cntr[24]~16                  ; 1       ;
+; PIO_Interface:pio|CmdData[25]                      ; 1       ;
+; ManchEncode:mancho|Shift5Bits[24]                  ; 1       ;
+; ManchEncode:mancho|Shift5Load[25]                  ; 1       ;
+; ManchEncode:mancho|ShiftBits[24]                   ; 1       ;
+; PIO_Interface:pio|CmdData[26]                      ; 1       ;
+; ManchEncode:mancho|Shift5Bits[25]                  ; 1       ;
+; ManchEncode:mancho|Shift5Load[26]                  ; 1       ;
+; ManchEncode:mancho|ShiftBits[25]                   ; 1       ;
+; ManchEncode:mancho|DV_Cntr[26]~12COUT1_131         ; 1       ;
+; ManchEncode:mancho|DV_Cntr[26]~12                  ; 1       ;
+; PIO_Interface:pio|CmdData[27]                      ; 1       ;
+; ManchEncode:mancho|Shift5Bits[26]                  ; 1       ;
+; ManchEncode:mancho|Shift5Load[27]                  ; 1       ;
+; ManchEncode:mancho|ShiftBits[26]                   ; 1       ;
+; ManchEncode:mancho|DV_Cntr[27]~10COUT1_133         ; 1       ;
+; ManchEncode:mancho|DV_Cntr[27]~10                  ; 1       ;
+; PIO_Interface:pio|CmdData[28]                      ; 1       ;
+; ManchEncode:mancho|Shift5Bits[27]                  ; 1       ;
+; ManchEncode:mancho|Shift5Load[28]                  ; 1       ;
+; ManchEncode:mancho|ShiftBits[27]                   ; 1       ;
+; ManchEncode:mancho|DV_Cntr[28]~8COUT1_135          ; 1       ;
+; ManchEncode:mancho|DV_Cntr[28]~8                   ; 1       ;
+; PIO_Interface:pio|CmdData[29]                      ; 1       ;
+; ManchEncode:mancho|Shift5Bits[28]                  ; 1       ;
+; ManchEncode:mancho|Shift5Load[29]                  ; 1       ;
+; ManchEncode:mancho|ShiftBits[28]                   ; 1       ;
+; ManchEncode:mancho|DV_Cntr[29]~6COUT1_137          ; 1       ;
+; ManchEncode:mancho|DV_Cntr[29]~6                   ; 1       ;
+; PIO_Interface:pio|CmdData[30]                      ; 1       ;
+; ManchEncode:mancho|Shift5Bits[29]                  ; 1       ;
+; ManchEncode:mancho|Shift5Load[30]                  ; 1       ;
+; ClkDiv:clkd|Add1~42COUT1_54                        ; 1       ;
+; ClkDiv:clkd|Add1~42                                ; 1       ;
+; ManchEncode:mancho|ShiftBits[29]                   ; 1       ;
+; ManchEncode:mancho|DV_Cntr[30]~4                   ; 1       ;
+; PIO_Interface:pio|CmdData[31]                      ; 1       ;
+; ManchEncode:mancho|Shift5Bits[30]                  ; 1       ;
+; ManchEncode:mancho|Shift5Load[31]                  ; 1       ;
+; ClkDiv:clkd|LessThan0~38COUT1_56                   ; 1       ;
+; ClkDiv:clkd|LessThan0~38                           ; 1       ;
+; ClkDiv:clkd|Add1~37COUT1_56                        ; 1       ;
+; ClkDiv:clkd|Add1~37                                ; 1       ;
+; ClkDiv:clkd|Add1~35                                ; 1       ;
+; ClkDiv:clkd|clk_cntr2[0]~17COUT1_27                ; 1       ;
+; ClkDiv:clkd|clk_cntr2[0]~17                        ; 1       ;
+; ManchEncode:mancho|ShiftBits[30]                   ; 1       ;
+; ManchEncode:mancho|Shift5Bits[31]                  ; 1       ;
+; ClkDiv:clkd|LessThan0~33COUT1_58                   ; 1       ;
+; ClkDiv:clkd|LessThan0~33                           ; 1       ;
+; ClkDiv:clkd|Add1~32COUT1_58                        ; 1       ;
+; ClkDiv:clkd|Add1~32                                ; 1       ;
+; ClkDiv:clkd|Add1~30                                ; 1       ;
+; ClkDiv:clkd|LessThan1~38COUT1_49                   ; 1       ;
+; ClkDiv:clkd|LessThan1~38                           ; 1       ;
+; ClkDiv:clkd|clk_cntr2[1]~15COUT1_29                ; 1       ;
+; ClkDiv:clkd|clk_cntr2[1]~15                        ; 1       ;
+; ManchEncode:mancho|ShiftBits[31]                   ; 1       ;
+; ManchEncode:mancho|Shift5Bits[32]                  ; 1       ;
+; ClkDiv:clkd|LessThan0~28COUT1_60                   ; 1       ;
+; ClkDiv:clkd|LessThan0~28                           ; 1       ;
+; ClkDiv:clkd|Add1~27COUT1_60                        ; 1       ;
+; ClkDiv:clkd|Add1~27                                ; 1       ;
+; ClkDiv:clkd|Add1~25                                ; 1       ;
+; ClkDiv:clkd|LessThan1~33COUT1_51                   ; 1       ;
+; ClkDiv:clkd|LessThan1~33                           ; 1       ;
+; ClkDiv:clkd|clk_cntr2[2]~13COUT1_31                ; 1       ;
+; ClkDiv:clkd|clk_cntr2[2]~13                        ; 1       ;
+; ManchEncode:mancho|ShiftBits[32]                   ; 1       ;
+; ManchEncode:mancho|Shift5Bits[33]                  ; 1       ;
+; ClkDiv:clkd|Add1~20                                ; 1       ;
+; ClkDiv:clkd|LessThan1~28COUT1_53                   ; 1       ;
+; ClkDiv:clkd|LessThan1~28                           ; 1       ;
+; ClkDiv:clkd|clk_cntr2[3]~11COUT1_33                ; 1       ;
+; ClkDiv:clkd|clk_cntr2[3]~11                        ; 1       ;
+; ManchEncode:mancho|ShiftBits[33]                   ; 1       ;
+; ManchEncode:mancho|Shift5Bits[34]                  ; 1       ;
+; ManchEncode:mancho|Shift5Load[35]                  ; 1       ;
+; ClkDiv:clkd|LessThan0~18COUT1_62                   ; 1       ;
+; ClkDiv:clkd|LessThan0~18                           ; 1       ;
+; ClkDiv:clkd|Add1~17COUT1_62                        ; 1       ;
+; ClkDiv:clkd|Add1~17                                ; 1       ;
+; ClkDiv:clkd|Add1~15                                ; 1       ;
+; ClkDiv:clkd|LessThan1~23COUT1_55                   ; 1       ;
+; ClkDiv:clkd|LessThan1~23                           ; 1       ;
+; ManchEncode:mancho|ShiftBits[34]                   ; 1       ;
+; ManchEncode:mancho|Shift5Bits[35]                  ; 1       ;
+; ManchEncode:mancho|Shift5Load[36]                  ; 1       ;
+; ClkDiv:clkd|LessThan0~13COUT1_64                   ; 1       ;
+; ClkDiv:clkd|LessThan0~13                           ; 1       ;
+; ClkDiv:clkd|Add1~12COUT1_64                        ; 1       ;
+; ClkDiv:clkd|Add1~12                                ; 1       ;
+; ClkDiv:clkd|Add1~10                                ; 1       ;
+; ClkDiv:clkd|clk_cntr2[5]~7COUT1_35                 ; 1       ;
+; ClkDiv:clkd|clk_cntr2[5]~7                         ; 1       ;
+; ManchEncode:mancho|ShiftBits[35]                   ; 1       ;
+; PIO_Interface:pio|SL_Load~3                        ; 1       ;
+; ManchEncode:mancho|Shift5Bits[36]                  ; 1       ;
+; ClkDiv:clkd|LessThan0~8COUT1_66                    ; 1       ;
+; ClkDiv:clkd|LessThan0~8                            ; 1       ;
+; ClkDiv:clkd|Add1~7COUT1_66                         ; 1       ;
+; ClkDiv:clkd|Add1~7                                 ; 1       ;
+; ClkDiv:clkd|Add1~5                                 ; 1       ;
+; ClkDiv:clkd|LessThan1~13COUT1_57                   ; 1       ;
+; ClkDiv:clkd|LessThan1~13                           ; 1       ;
+; ClkDiv:clkd|clk_cntr2[6]~5COUT1_37                 ; 1       ;
+; ClkDiv:clkd|clk_cntr2[6]~5                         ; 1       ;
+; ManchEncode:mancho|ShiftBits[36]                   ; 1       ;
+; ManchEncode:mancho|rDV_RTS                         ; 1       ;
+; FreeRun:freerun|FRLoadReg[11]                      ; 1       ;
+; FreeRun:freerun|FRLoadReg[10]                      ; 1       ;
+; FreeRun:freerun|FRLoadReg[9]                       ; 1       ;
+; FreeRun:freerun|FRLoadReg[8]                       ; 1       ;
+; FreeRun:freerun|FRLoadReg[7]                       ; 1       ;
+; FreeRun:freerun|FRLoadReg[6]                       ; 1       ;
+; FreeRun:freerun|FRLoadReg[5]                       ; 1       ;
+; FreeRun:freerun|FRLoadReg[4]                       ; 1       ;
+; FreeRun:freerun|FRLoadReg[3]                       ; 1       ;
+; FreeRun:freerun|FRLoadReg[2]                       ; 1       ;
+; FreeRun:freerun|FRLoadReg[1]                       ; 1       ;
+; FreeRun:freerun|FRLoadReg[0]                       ; 1       ;
+; ManchEncode:mancho|Shift5Bits[37]                  ; 1       ;
+; ManchEncode:mancho|Shift5Load[38]                  ; 1       ;
+; ManchEncode:mancho|Shift5Rdy~0                     ; 1       ;
+; ManchEncode:mancho|Shift5Got                       ; 1       ;
+; ClkDiv:clkd|Add1~0                                 ; 1       ;
+; ClkDiv:clkd|LessThan0~0                            ; 1       ;
+; ClkDiv:clkd|LessThan1~8COUT1_59                    ; 1       ;
+; ClkDiv:clkd|LessThan1~8                            ; 1       ;
+; ClkDiv:clkd|clk_cntr2[7]~3COUT1_39                 ; 1       ;
+; ClkDiv:clkd|clk_cntr2[7]~3                         ; 1       ;
+; ManchEncode:mancho|ShiftBits[37]                   ; 1       ;
+; ManchEncode:mancho|dvp_current_state.WAIT_FOR_HIGH ; 1       ;
+; ManchEncode:mancho|reg[0]                          ; 1       ;
+; ManchEncode:mancho|Selector3~2                     ; 1       ;
+; ManchEncode:mancho|Selector3~1                     ; 1       ;
+; ManchEncode:mancho|Selector3~0                     ; 1       ;
+; ManchEncode:mancho|rrDV_RTS                        ; 1       ;
+; FreeRun:freerun|FRCntr[10]~21                      ; 1       ;
+; FreeRun:freerun|FRCntr[9]~19COUT1_48               ; 1       ;
+; FreeRun:freerun|FRCntr[9]~19                       ; 1       ;
+; FreeRun:freerun|FRCntr[8]~17COUT1_46               ; 1       ;
+; FreeRun:freerun|FRCntr[8]~17                       ; 1       ;
+; FreeRun:freerun|FRCntr[7]~15COUT1_44               ; 1       ;
+; FreeRun:freerun|FRCntr[7]~15                       ; 1       ;
+; FreeRun:freerun|FRCntr[6]~13COUT1_42               ; 1       ;
+; FreeRun:freerun|FRCntr[6]~13                       ; 1       ;
+; FreeRun:freerun|FRCntr[4]~9COUT1_40                ; 1       ;
+; FreeRun:freerun|FRCntr[4]~9                        ; 1       ;
+; FreeRun:freerun|FRCntr[3]~7COUT1_38                ; 1       ;
+; FreeRun:freerun|FRCntr[3]~7                        ; 1       ;
+; FreeRun:freerun|FRCntr[2]~5COUT1_36                ; 1       ;
+; FreeRun:freerun|FRCntr[2]~5                        ; 1       ;
+; FreeRun:freerun|FRCntr[1]~3COUT1_34                ; 1       ;
+; FreeRun:freerun|FRCntr[1]~3                        ; 1       ;
+; Sync_Len:synco|Equal1~5                            ; 1       ;
+; Sync_Len:synco|SLCntr[15]~39COUT1_82               ; 1       ;
+; Sync_Len:synco|SLCntr[15]~39                       ; 1       ;
+; Sync_Len:synco|SLCntr[13]~35COUT1_80               ; 1       ;
+; Sync_Len:synco|SLCntr[13]~35                       ; 1       ;
+; Sync_Len:synco|SLCntr[12]~33COUT1_78               ; 1       ;
+; Sync_Len:synco|SLCntr[12]~33                       ; 1       ;
+; Sync_Len:synco|Equal1~4                            ; 1       ;
+; Sync_Len:synco|SLCntr[11]~31COUT1_76               ; 1       ;
+; Sync_Len:synco|SLCntr[11]~31                       ; 1       ;
+; Sync_Len:synco|SLCntr[10]~29COUT1_74               ; 1       ;
+; Sync_Len:synco|SLCntr[10]~29                       ; 1       ;
+; Sync_Len:synco|SLCntr[8]~25COUT1_72                ; 1       ;
+; Sync_Len:synco|SLCntr[8]~25                        ; 1       ;
+; Sync_Len:synco|Equal1~3                            ; 1       ;
+; Sync_Len:synco|SLCntr[3]~23COUT1_64                ; 1       ;
+; Sync_Len:synco|SLCntr[3]~23                        ; 1       ;
+; Sync_Len:synco|SLCntr[2]~21COUT1_62                ; 1       ;
+; Sync_Len:synco|SLCntr[2]~21                        ; 1       ;
+; Sync_Len:synco|Equal1~2                            ; 1       ;
+; Sync_Len:synco|SLCntr[7]~19COUT1_70                ; 1       ;
+; Sync_Len:synco|SLCntr[7]~19                        ; 1       ;
+; Sync_Len:synco|SLCntr[6]~17COUT1_68                ; 1       ;
+; Sync_Len:synco|SLCntr[6]~17                        ; 1       ;
+; Sync_Len:synco|SLCntr[5]~15COUT1_66                ; 1       ;
+; Sync_Len:synco|SLCntr[5]~15                        ; 1       ;
+; Sync_Len:synco|Equal1~1                            ; 1       ;
+; Sync_Len:synco|SLCntr[1]~11COUT1_60                ; 1       ;
+; Sync_Len:synco|SLCntr[1]~11                        ; 1       ;
+; Sync_Len:synco|SLCntr[0]~9COUT1_58                 ; 1       ;
+; Sync_Len:synco|SLCntr[0]~9                         ; 1       ;
+; Sync_Len:synco|Equal1~0                            ; 1       ;
+; Sync_Len:synco|SLCntr[18]~5COUT1_88                ; 1       ;
+; Sync_Len:synco|SLCntr[18]~5                        ; 1       ;
+; Sync_Len:synco|SLCntr[17]~3COUT1_86                ; 1       ;
+; Sync_Len:synco|SLCntr[17]~3                        ; 1       ;
+; Sync_Len:synco|SLCntr[16]~1COUT1_84                ; 1       ;
+; Sync_Len:synco|SLCntr[16]~1                        ; 1       ;
+; Sync_Len:synco|Equal0~5                            ; 1       ;
+; Sync_Len:synco|SL_LoadReg[7]                       ; 1       ;
+; Sync_Len:synco|Equal0~4                            ; 1       ;
+; Sync_Len:synco|SL_LoadReg[10]                      ; 1       ;
+; Sync_Len:synco|Equal0~3                            ; 1       ;
+; Sync_Len:synco|SL_LoadReg[15]                      ; 1       ;
+; Sync_Len:synco|Equal0~2                            ; 1       ;
+; Sync_Len:synco|SL_LoadReg[19]                      ; 1       ;
+; Sync_Len:synco|Equal0~1                            ; 1       ;
+; Sync_Len:synco|SL_LoadReg[3]                       ; 1       ;
+; Sync_Len:synco|Equal0~0                            ; 1       ;
+; PIO_Interface:pio|Equal9~1                         ; 1       ;
+; PIO_Interface:pio|AddrReg[2]                       ; 1       ;
+; PIO_Interface:pio|AddrReg[3]                       ; 1       ;
+; PIO_Interface:pio|AddrReg[6]                       ; 1       ;
+; ManchEncode:mancho|Shift5Bits[38]                  ; 1       ;
+; ManchEncode:mancho|Shift5Load[39]                  ; 1       ;
+; ClkDiv:clkd|LessThan1~0                            ; 1       ;
+; ManchEncode:mancho|ShiftBits[38]                   ; 1       ;
+; ManchEncode:mancho|xxdv_o~2                        ; 1       ;
+; ManchEncode:mancho|xxdv_o~1                        ; 1       ;
+; ManchEncode:mancho|xxdv_o~0                        ; 1       ;
+; PIO_Interface:pio|AuxOut[1]                        ; 1       ;
+; PIO_Interface:pio|AuxOut[2]                        ; 1       ;
+; PIO_Interface:pio|AuxOut[3]                        ; 1       ;
+; PIO_Interface:pio|AuxOut[4]                        ; 1       ;
+; PIO_Interface:pio|AuxOut[5]                        ; 1       ;
+; PIO_Interface:pio|AuxOut[6]                        ; 1       ;
+; PIO_Interface:pio|AuxOut[7]                        ; 1       ;
+; PIO_Interface:pio|AuxOut[8]                        ; 1       ;
+; ClkDiv:clkd|Clk50M                                 ; 1       ;
++----------------------------------------------------+---------+
 
 
 +---------------------------------------------------+
@@ -668,31 +1180,31 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------+----------------------+
 ; Interconnect Resource Type ; Usage                ;
 +----------------------------+----------------------+
-; C4s                        ; 257 / 1,624 ( 16 % ) ;
-; Direct links               ; 68 / 1,930 ( 4 % )   ;
+; C4s                        ; 289 / 1,624 ( 18 % ) ;
+; Direct links               ; 95 / 1,930 ( 5 % )   ;
 ; Global clocks              ; 4 / 4 ( 100 % )      ;
-; LAB clocks                 ; 22 / 56 ( 39 % )     ;
-; LUT chains                 ; 6 / 513 ( 1 % )      ;
-; Local interconnects        ; 508 / 1,930 ( 26 % ) ;
-; R4s                        ; 309 / 1,472 ( 21 % ) ;
+; LAB clocks                 ; 23 / 56 ( 41 % )     ;
+; LUT chains                 ; 10 / 513 ( 2 % )     ;
+; Local interconnects        ; 557 / 1,930 ( 29 % ) ;
+; R4s                        ; 357 / 1,472 ( 24 % ) ;
 +----------------------------+----------------------+
 
 
 +---------------------------------------------------------------------------+
 ; LAB Logic Elements                                                        ;
 +--------------------------------------------+------------------------------+
-; Number of Logic Elements  (Average = 9.00) ; Number of LABs  (Total = 43) ;
+; Number of Logic Elements  (Average = 8.72) ; Number of LABs  (Total = 43) ;
 +--------------------------------------------+------------------------------+
 ; 1                                          ; 0                            ;
 ; 2                                          ; 1                            ;
 ; 3                                          ; 0                            ;
 ; 4                                          ; 1                            ;
-; 5                                          ; 2                            ;
-; 6                                          ; 2                            ;
-; 7                                          ; 0                            ;
-; 8                                          ; 3                            ;
-; 9                                          ; 5                            ;
-; 10                                         ; 29                           ;
+; 5                                          ; 0                            ;
+; 6                                          ; 4                            ;
+; 7                                          ; 3                            ;
+; 8                                          ; 4                            ;
+; 9                                          ; 8                            ;
+; 10                                         ; 22                           ;
 +--------------------------------------------+------------------------------+
 
 
@@ -701,84 +1213,83 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +------------------------------------+------------------------------+
 ; LAB-wide Signals  (Average = 2.65) ; Number of LABs  (Total = 43) ;
 +------------------------------------+------------------------------+
-; 1 Async. clear                     ; 38                           ;
-; 1 Clock                            ; 29                           ;
-; 1 Clock enable                     ; 14                           ;
-; 1 Sync. load                       ; 8                            ;
-; 2 Clock enables                    ; 14                           ;
-; 2 Clocks                           ; 11                           ;
+; 1 Async. clear                     ; 37                           ;
+; 1 Clock                            ; 25                           ;
+; 1 Clock enable                     ; 12                           ;
+; 1 Sync. load                       ; 7                            ;
+; 2 Clock enables                    ; 18                           ;
+; 2 Clocks                           ; 15                           ;
 +------------------------------------+------------------------------+
 
 
 +----------------------------------------------------------------------------+
 ; LAB Signals Sourced                                                        ;
 +---------------------------------------------+------------------------------+
-; Number of Signals Sourced  (Average = 9.00) ; Number of LABs  (Total = 43) ;
+; Number of Signals Sourced  (Average = 8.72) ; Number of LABs  (Total = 43) ;
 +---------------------------------------------+------------------------------+
 ; 0                                           ; 0                            ;
-; 1                                           ; 2                            ;
-; 2                                           ; 1                            ;
+; 1                                           ; 1                            ;
+; 2                                           ; 2                            ;
 ; 3                                           ; 0                            ;
 ; 4                                           ; 1                            ;
-; 5                                           ; 1                            ;
+; 5                                           ; 0                            ;
 ; 6                                           ; 2                            ;
-; 7                                           ; 0                            ;
-; 8                                           ; 3                            ;
-; 9                                           ; 3                            ;
-; 10                                          ; 24                           ;
-; 11                                          ; 3                            ;
-; 12                                          ; 1                            ;
+; 7                                           ; 4                            ;
+; 8                                           ; 5                            ;
+; 9                                           ; 4                            ;
+; 10                                          ; 21                           ;
+; 11                                          ; 0                            ;
+; 12                                          ; 0                            ;
 ; 13                                          ; 2                            ;
+; 14                                          ; 1                            ;
 +---------------------------------------------+------------------------------+
 
 
 +--------------------------------------------------------------------------------+
 ; LAB Signals Sourced Out                                                        ;
 +-------------------------------------------------+------------------------------+
-; Number of Signals Sourced Out  (Average = 5.26) ; Number of LABs  (Total = 43) ;
+; Number of Signals Sourced Out  (Average = 5.88) ; Number of LABs  (Total = 43) ;
 +-------------------------------------------------+------------------------------+
 ; 0                                               ; 0                            ;
-; 1                                               ; 8                            ;
-; 2                                               ; 7                            ;
+; 1                                               ; 5                            ;
+; 2                                               ; 3                            ;
 ; 3                                               ; 5                            ;
-; 4                                               ; 3                            ;
-; 5                                               ; 1                            ;
-; 6                                               ; 1                            ;
-; 7                                               ; 0                            ;
-; 8                                               ; 5                            ;
-; 9                                               ; 5                            ;
-; 10                                              ; 7                            ;
-; 11                                              ; 1                            ;
+; 4                                               ; 5                            ;
+; 5                                               ; 2                            ;
+; 6                                               ; 3                            ;
+; 7                                               ; 3                            ;
+; 8                                               ; 4                            ;
+; 9                                               ; 4                            ;
+; 10                                              ; 9                            ;
 +-------------------------------------------------+------------------------------+
 
 
 +-----------------------------------------------------------------------------+
 ; LAB Distinct Inputs                                                         ;
 +----------------------------------------------+------------------------------+
-; Number of Distinct Inputs  (Average = 11.65) ; Number of LABs  (Total = 43) ;
+; Number of Distinct Inputs  (Average = 12.63) ; Number of LABs  (Total = 43) ;
 +----------------------------------------------+------------------------------+
 ; 0                                            ; 0                            ;
 ; 1                                            ; 0                            ;
 ; 2                                            ; 0                            ;
 ; 3                                            ; 2                            ;
-; 4                                            ; 2                            ;
-; 5                                            ; 2                            ;
-; 6                                            ; 0                            ;
-; 7                                            ; 0                            ;
+; 4                                            ; 0                            ;
+; 5                                            ; 1                            ;
+; 6                                            ; 2                            ;
+; 7                                            ; 1                            ;
 ; 8                                            ; 2                            ;
 ; 9                                            ; 1                            ;
-; 10                                           ; 5                            ;
-; 11                                           ; 7                            ;
-; 12                                           ; 2                            ;
-; 13                                           ; 4                            ;
-; 14                                           ; 6                            ;
-; 15                                           ; 4                            ;
-; 16                                           ; 3                            ;
-; 17                                           ; 1                            ;
-; 18                                           ; 0                            ;
-; 19                                           ; 1                            ;
-; 20                                           ; 0                            ;
-; 21                                           ; 1                            ;
+; 10                                           ; 3                            ;
+; 11                                           ; 3                            ;
+; 12                                           ; 5                            ;
+; 13                                           ; 3                            ;
+; 14                                           ; 2                            ;
+; 15                                           ; 8                            ;
+; 16                                           ; 2                            ;
+; 17                                           ; 4                            ;
+; 18                                           ; 1                            ;
+; 19                                           ; 0                            ;
+; 20                                           ; 3                            ;
 +----------------------------------------------+------------------------------+
 
 
@@ -797,76 +1308,65 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+--------------------------+
 
 
-+------------------------------------------------------------+
-; Estimated Delay Added for Hold Timing                      ;
-+-----------------+----------------------+-------------------+
-; Source Clock(s) ; Destination Clock(s) ; Delay Added in ns ;
-+-----------------+----------------------+-------------------+
-
-
 +-----------------+
 ; Fitter Messages ;
 +-----------------+
 Info: *******************************************************************
-Info: Running Quartus II Fitter
-    Info: Version 9.1 Build 304 01/25/2010 Service Pack 1 SJ Full Version
-    Info: Processing started: Thu Feb 25 10:31:45 2010
+Info: Running Quartus II 64-Bit Fitter
+    Info: Version 11.1 Build 259 01/25/2012 Service Pack 2 SJ Full Version
+    Info: Processing started: Tue Sep 02 15:06:32 2014
 Info: Command: quartus_fit --read_settings_files=off --write_settings_files=off Synco -c Synco
-Info: Selected device EPM570T144C3 for design "Synco"
-Info: Fitter is performing a Standard Fit compilation using maximum Fitter effort to optimize design performance
-Info: Device migration not selected. If you intend to use device migration later, you may need to change the pin assignments as they may be incompatible with other devices
-    Info: Device EPM1270T144C3 is compatible
-Info: Timing-driven compilation is using the Classic Timing Analyzer
-Info: Detected fmax, tsu, tco, and/or tpd requirements -- optimizing circuit to achieve only the specified requirements
-Info: Completed User Assigned Global Signals Promotion Operation
-Info: Automatically promoted signal "Clk100M" to use Global clock in PIN 20
-Info: Automatically promoted some destinations of signal "ClkDiv:clkd|Clk25M" to use Global clock
-    Info: Destination "Manch_Clk" may be non-global or may not use global clock
-    Info: Destination "TestOut1[1]" may be non-global or may not use global clock
-    Info: Destination "ManchEncode:mancho|ManchOut1" may be non-global or may not use global clock
-Info: Automatically promoted some destinations of signal "ClkDiv:clkd|clk_adj" to use Global clock
-    Info: Destination "DV_OUT_SPR1" may be non-global or may not use global clock
-Info: Automatically promoted some destinations of signal "PIO_nWR" to use Global clock
-    Info: Destination "PIO_Interface:pio|rPIO_nWR" may be non-global or may not use global clock
-Info: Pin "PIO_nWR" drives global clock, but is not placed in a dedicated clock pin position
-Info: Completed Auto Global Promotion Operation
-Info: Starting register packing
-Info: Fitter is using Normal packing mode for logic elements with Auto setting for Auto Packed Registers logic option
-Info: Started processing fast register assignments
-Info: Finished processing fast register assignments
-Info: Finished register packing
-Info: Fitter preparation operations ending: elapsed time is 00:00:01
-Info: Fitter placement preparation operations beginning
-Info: Fitter placement preparation operations ending: elapsed time is 00:00:00
-Info: Fitter placement operations beginning
-Info: Fitter placement was successful
-Info: Fitter placement operations ending: elapsed time is 00:00:01
-Info: Estimated most critical path is register to register delay of 6.929 ns
-    Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LAB_X6_Y7; Fanout = 6; REG Node = 'ClkDiv:clkd|clk_adj_div[0]'
-    Info: 2: + IC(0.594 ns) + CELL(0.611 ns) = 1.205 ns; Loc. = LAB_X6_Y7; Fanout = 2; COMB Node = 'ClkDiv:clkd|Add1~42'
-    Info: 3: + IC(0.000 ns) + CELL(0.077 ns) = 1.282 ns; Loc. = LAB_X6_Y7; Fanout = 2; COMB Node = 'ClkDiv:clkd|Add1~37'
-    Info: 4: + IC(0.000 ns) + CELL(0.077 ns) = 1.359 ns; Loc. = LAB_X6_Y7; Fanout = 2; COMB Node = 'ClkDiv:clkd|Add1~32'
-    Info: 5: + IC(0.000 ns) + CELL(0.077 ns) = 1.436 ns; Loc. = LAB_X6_Y7; Fanout = 2; COMB Node = 'ClkDiv:clkd|Add1~27'
-    Info: 6: + IC(0.000 ns) + CELL(0.249 ns) = 1.685 ns; Loc. = LAB_X6_Y7; Fanout = 4; COMB Node = 'ClkDiv:clkd|Add1~22'
-    Info: 7: + IC(0.000 ns) + CELL(0.771 ns) = 2.456 ns; Loc. = LAB_X6_Y7; Fanout = 2; COMB Node = 'ClkDiv:clkd|Add1~15'
-    Info: 8: + IC(0.842 ns) + CELL(0.467 ns) = 3.765 ns; Loc. = LAB_X7_Y7; Fanout = 1; COMB Node = 'ClkDiv:clkd|LessThan0~13'
-    Info: 9: + IC(0.000 ns) + CELL(0.077 ns) = 3.842 ns; Loc. = LAB_X7_Y7; Fanout = 1; COMB Node = 'ClkDiv:clkd|LessThan0~8'
-    Info: 10: + IC(0.000 ns) + CELL(0.509 ns) = 4.351 ns; Loc. = LAB_X7_Y7; Fanout = 1; COMB Node = 'ClkDiv:clkd|LessThan0~0'
-    Info: 11: + IC(0.418 ns) + CELL(0.571 ns) = 5.340 ns; Loc. = LAB_X8_Y7; Fanout = 9; COMB Node = 'ClkDiv:clkd|LessThan0~5'
-    Info: 12: + IC(0.489 ns) + CELL(1.100 ns) = 6.929 ns; Loc. = LAB_X8_Y7; Fanout = 3; REG Node = 'ClkDiv:clkd|clk_cntr2[8]'
-    Info: Total cell delay = 4.586 ns ( 66.19 % )
-    Info: Total interconnect delay = 2.343 ns ( 33.81 % )
-Info: Fitter routing operations beginning
-Info: Average interconnect usage is 20% of the available device resources
-    Info: Peak interconnect usage is 20% of the available device resources in the region that extends from location X0_Y0 to location X13_Y8
-Info: Fitter routing operations ending: elapsed time is 00:00:00
-Warning: The Reserve All Unused Pins setting has not been specified, and will default to 'As output driving ground'.
-Info: Generated suppressed messages file C:/mce/sync_box/fpga_code/Synco.fit.smsg
-Info: Quartus II Fitter was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 183 megabytes
-    Info: Processing ended: Thu Feb 25 10:31:47 2010
-    Info: Elapsed time: 00:00:02
-    Info: Total CPU time (on all processors): 00:00:02
+Info (119006): Selected device EPM570T144C3 for design "Synco"
+Info (171004): Fitter is performing a Standard Fit compilation using maximum Fitter effort to optimize design performance
+Info (176444): Device migration not selected. If you intend to use device migration later, you may need to change the pin assignments as they may be incompatible with other devices
+    Info (176445): Device EPM1270T144C3 is compatible
+Critical Warning (332012): Synopsys Design Constraints File file not found: 'Synco.sdc'. A Synopsys Design Constraints File is required by the TimeQuest Timing Analyzer to get proper timing constraints. Without it, the Compiler will not properly optimize the design.
+Info (336004): TimeQuest will use the Classic Timing Analyzer's FMAX_REQUIREMENT assignment (or --fmax command-line argument) as default timing requirement. Any other Classic Timing Analyzer assignment will be ignored.
+Info (332144): No user constrained base clocks found in the design
+Info (332129): Detected timing requirements -- optimizing circuit to achieve only the specified requirements
+Info (332111): Found 5 clocks
+    Info (332111):   Period   Clock Name
+    Info (332111): ======== ============
+    Info (332111):    1.000      Clk100M
+    Info (332111):    1.000 ClkDiv:clkd|Clk25M
+    Info (332111):    1.000 ClkDiv:clkd|clk25m_internal
+    Info (332111):    1.000 ClkDiv:clkd|clk_adj
+    Info (332111):    1.000      PIO_nWR
+Info (186079): Completed User Assigned Global Signals Promotion Operation
+Info (186215): Automatically promoted signal "Clk100M" to use Global clock in PIN 20
+Info (186216): Automatically promoted some destinations of signal "ClkDiv:clkd|Clk25M" to use Global clock
+    Info (186217): Destination "Manch_Clk" may be non-global or may not use global clock
+    Info (186217): Destination "TestOut1[1]" may be non-global or may not use global clock
+    Info (186217): Destination "ManchEncode:mancho|ManchOut1" may be non-global or may not use global clock
+Info (186216): Automatically promoted some destinations of signal "ClkDiv:clkd|clk_adj" to use Global clock
+    Info (186217): Destination "DV_OUT_FTS" may be non-global or may not use global clock
+    Info (186217): Destination "DV_OUT_SPR1" may be non-global or may not use global clock
+Info (186216): Automatically promoted some destinations of signal "PIO_nWR" to use Global clock
+    Info (186217): Destination "PIO_Interface:pio|rPIO_nWR" may be non-global or may not use global clock
+Info (186228): Pin "PIO_nWR" drives global clock, but is not placed in a dedicated clock pin position
+Info (186079): Completed Auto Global Promotion Operation
+Info (176234): Starting register packing
+Info (186391): Fitter is using Normal packing mode for logic elements with Auto setting for Auto Packed Registers logic option
+Info (186468): Started processing fast register assignments
+Info (186469): Finished processing fast register assignments
+Info (176235): Finished register packing
+Info (171121): Fitter preparation operations ending: elapsed time is 00:00:02
+Info (170189): Fitter placement preparation operations beginning
+Info (170190): Fitter placement preparation operations ending: elapsed time is 00:00:01
+Info (170191): Fitter placement operations beginning
+Info (170137): Fitter placement was successful
+Info (170192): Fitter placement operations ending: elapsed time is 00:00:01
+Info (170193): Fitter routing operations beginning
+Info (170195): Router estimated average interconnect usage is 21% of the available device resources
+    Info (170196): Router estimated peak interconnect usage is 21% of the available device resources in the region that extends from location X0_Y0 to location X13_Y8
+Info (170194): Fitter routing operations ending: elapsed time is 00:00:01
+Warning (169174): The Reserve All Unused Pins setting has not been specified, and will default to 'As output driving ground'.
+Info (144001): Generated suppressed messages file C:/mce/sync_box/fpga_code/Synco.fit.smsg
+Info: Quartus II 64-Bit Fitter was successful. 0 errors, 2 warnings
+    Info: Peak virtual memory: 417 megabytes
+    Info: Processing ended: Tue Sep 02 15:06:40 2014
+    Info: Elapsed time: 00:00:08
+    Info: Total CPU time (on all processors): 00:00:04
 
 
 +----------------------------+
