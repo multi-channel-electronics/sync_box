@@ -1,12 +1,14 @@
-C51 COMPILER V8.04   SIO                                                                   08/22/2013 14:00:45 PAGE 1   
+C51 COMPILER V8.04   SIO                                                                   09/26/2014 14:38:03 PAGE 1   
 
 
 C51 COMPILER V8.04, COMPILATION OF MODULE SIO
-OBJECT MODULE PLACED IN .\output\sio.obj
+NO OBJECT MODULE REQUESTED
 COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE sio.c COMPACT ROM(COMPACT) BROWSE MODP2 DEBUG OBJECTEXTEND PRINT(.\output\s
                     -io.lst) OBJECT(.\output\sio.obj)
 
 line level    source
+
+*** WARNING C500 IN LINE 1 OF SIO.C: LICENSE ERROR (R215: CURRENTLY NO LICENSE AVAILABLE)
 
    1          /*******************************************************************************
    2           * RS232 serial IO routines
@@ -61,9 +63,9 @@ line level    source
   51   3                      TI = 0;                                                                 // clear tx flag for next emission 
   52   3                      SBUF = sio_rx_data;                                             // echo rx data on tx
   53   3                      sio_rxbuf[sio_rx_idx++] = sio_rx_data;  // add it to the buffer
-  54   3                      }
-C51 COMPILER V8.04   SIO                                                                   08/22/2013 14:00:45 PAGE 2   
+C51 COMPILER V8.04   SIO                                                                   09/26/2014 14:38:03 PAGE 2   
 
+  54   3                      }
   55   2                      
   56   2              if (sio_rx_idx >= (RXBUFSIZ-1))                         // prevent buffer overrun
   57   2                      {       --sio_rx_idx; }
@@ -125,9 +127,9 @@ line level    source
  113          //sbit PIO_TST =        P1^6;                   // output for testing
  114          
  115          /*----- Timer0 Service Routine 
- 116          // Interrupt occurs every 25 ms when enabled
-C51 COMPILER V8.04   SIO                                                                   08/22/2013 14:00:45 PAGE 3   
+C51 COMPILER V8.04   SIO                                                                   09/26/2014 14:38:03 PAGE 3   
 
+ 116          // Interrupt occurs every 25 ms when enabled
  117          void 
  118          Timer0_isr (void) interrupt 1 using 3
  119          {
@@ -157,4 +159,4 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
 END OF MODULE INFORMATION.
 
 
-C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

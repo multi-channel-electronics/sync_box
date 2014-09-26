@@ -1,12 +1,14 @@
-C51 COMPILER V8.04   CMDDICT                                                               08/22/2013 14:00:45 PAGE 1   
+C51 COMPILER V8.04   CMDDICT                                                               09/26/2014 14:38:04 PAGE 1   
 
 
 C51 COMPILER V8.04, COMPILATION OF MODULE CMDDICT
-OBJECT MODULE PLACED IN .\output\cmddict.obj
+NO OBJECT MODULE REQUESTED
 COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE cmddict.c COMPACT ROM(COMPACT) BROWSE MODP2 DEBUG OBJECTEXTEND PRINT(.\outp
                     -ut\cmddict.lst) OBJECT(.\output\cmddict.obj)
 
 line level    source
+
+*** WARNING C500 IN LINE 1 OF CMDDICT.C: LICENSE ERROR (R215: CURRENTLY NO LICENSE AVAILABLE)
 
    1          /*==========================================================================*
    2           * cmddict.c                                                                                                                    *
@@ -61,9 +63,9 @@ line level    source
   50                          { "dpa",        pwr_disable_all,        nopr,   "pwr disable all" },
   51                          { "dpu",        pwr_disable_unit,       pram,   "pwr disable unit\tn = 0 to 7" },
   52                          { "epu",        pwr_enable_unit,        pram,   "pwr enable unit \tn = 0 to 7" },
-  53                          { "pof",        pwr_onoff,                      nopr,   "get ACDCU_onoff cntl byte" },
-C51 COMPILER V8.04   CMDDICT                                                               08/22/2013 14:00:45 PAGE 2   
+C51 COMPILER V8.04   CMDDICT                                                               09/26/2014 14:38:04 PAGE 2   
 
+  53                          { "pof",        pwr_onoff,                      nopr,   "get ACDCU_onoff cntl byte" },
   54                          { "ps",         pwr_status,                     nopr,   "get ACDCU status" },
   55                          { "re",         do_ResetAll,            nopr,   "Reset all to defaults" },
   56          //              { "ron",        ResetOn,                        nopr,   "Reset on" },
@@ -125,9 +127,9 @@ line level    source
  112   1      }
  113          
  114          
- 115          /*-----  supply pointer to token or 00, & maybe increment the token vector */
-C51 COMPILER V8.04   CMDDICT                                                               08/22/2013 14:00:45 PAGE 3   
+C51 COMPILER V8.04   CMDDICT                                                               09/26/2014 14:38:04 PAGE 3   
 
+ 115          /*-----  supply pointer to token or 00, & maybe increment the token vector */
  116          char *
  117          nxttoken()
  118          {
@@ -189,9 +191,9 @@ line level    source
  174   1              for (entry=0; entry < dict_size; entry++ )
  175   1                      {
  176   2                      printf("\r\t %s%s\t\t%s", cmd_dict[entry].nmem, cmd_dict[entry].param, cmd_dict[entry].help );
- 177   2                      }
-C51 COMPILER V8.04   CMDDICT                                                               08/22/2013 14:00:45 PAGE 4   
+C51 COMPILER V8.04   CMDDICT                                                               09/26/2014 14:38:04 PAGE 4   
 
+ 177   2                      }
  178   1      }
  179          
  180          
@@ -210,4 +212,4 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
 END OF MODULE INFORMATION.
 
 
-C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

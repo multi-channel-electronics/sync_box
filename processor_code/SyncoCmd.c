@@ -53,14 +53,10 @@ void pwr_status(void);
 //#define  ROWLEN			64
 //#define  NUMROW			2
 //
-//#define  FRUN_COUNT		30	// This group for Princeton.
-//#define  ROWLEN			50  // 100 cycles of 50MHz
-//#define  NUMROW			41
-//
 
-#define  FRUN_COUNT		120	// Spider specific
-#define  ROWLEN			53  // Spider specific
-#define  NUMROW			33  // Spider specific
+#define  FRUN_COUNT		38	// ACT specific
+#define  ROWLEN			50  // ACT specific
+#define  NUMROW			33  // ACT specific
 
 //#define  FRUN_COUNT		47	// about 200 Hz DV rate
 //#define  ROWLEN			64
@@ -90,7 +86,7 @@ unsigned char sc_mancho_mode;	// mode control byte; is DV source DV_FreeRun or D
 unsigned char sc_ACDCU_onoff = 0;	// all ACDCCU off
 int sc_clk_adj_div;             // Default divisor for the adjustable clock frequency
 
-char code version[] =  "\r\tSyncoCmd-V20\r";
+char code version[] =  "\r\tSyncoCmd-V22\r";
 char code prompt[] = "\rSynco> ";
 
 /*=============================================================================================*/

@@ -1,12 +1,14 @@
-C51 COMPILER V8.04   PIOLIB                                                                08/22/2013 14:00:45 PAGE 1   
+C51 COMPILER V8.04   PIOLIB                                                                09/26/2014 14:38:04 PAGE 1   
 
 
 C51 COMPILER V8.04, COMPILATION OF MODULE PIOLIB
-OBJECT MODULE PLACED IN .\output\piolib.obj
+NO OBJECT MODULE REQUESTED
 COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE piolib.c COMPACT ROM(COMPACT) BROWSE MODP2 DEBUG OBJECTEXTEND PRINT(.\outpu
                     -t\piolib.lst) OBJECT(.\output\piolib.obj)
 
 line level    source
+
+*** WARNING C500 IN LINE 1 OF PIOLIB.C: LICENSE ERROR (R215: CURRENTLY NO LICENSE AVAILABLE)
 
    1          /*==========================================================================*
    2           * piolib.c                                                                                                                                     *
@@ -61,9 +63,9 @@ line level    source
   51          sbit PIO_RESET  =       P1^0;           // outputs init high, so initial state is reset,
   52          sbit PIO_nENABLE =      P1^1;           // and clocking disabled.
   53          sbit PIO_SW4    =       P1^2;           // [not used]
-  54          sbit PIO_SW3    =       P1^3;           // [not used]
-C51 COMPILER V8.04   PIOLIB                                                                08/22/2013 14:00:45 PAGE 2   
+C51 COMPILER V8.04   PIOLIB                                                                09/26/2014 14:38:04 PAGE 2   
 
+  54          sbit PIO_SW3    =       P1^3;           // [not used]
   55          sbit PIO_SW2    =       P1^4;           // [not used]
   56          sbit PIO_SW1    =       P1^5;           // [not used]
   57          sbit PIO_PSCOOL =       P1^7;           // [not used] [was 'cooling interlock', is now 'spare opto-TTL input']
@@ -125,9 +127,9 @@ line level    source
  113          union
  114               {
  115               unsigned long l_cnt;
- 116               int i_cnt;
-C51 COMPILER V8.04   PIOLIB                                                                08/22/2013 14:00:45 PAGE 3   
+C51 COMPILER V8.04   PIOLIB                                                                09/26/2014 14:38:04 PAGE 3   
 
+ 116               int i_cnt;
  117               unsigned char bytes[4];
  118               }  piodata;
  119          
@@ -189,9 +191,9 @@ line level    source
  175   1      //
  176   1      PIO_ADR = ADR_CMDSEL;   // then load the CmdSelect reg
  177   1      PIO_DAT = SLEN_LOAD;    // select the SyncLength load reg
- 178   1      _nop_ ();
-C51 COMPILER V8.04   PIOLIB                                                                08/22/2013 14:00:45 PAGE 4   
+C51 COMPILER V8.04   PIOLIB                                                                09/26/2014 14:38:04 PAGE 4   
 
+ 178   1      _nop_ ();
  179   1      PIO_nWR = LOW;
  180   1      PIO_nWR = HIGH;
  181   1      PIO_ADR = 0xFF;                 // put back to high impedance.
@@ -253,9 +255,9 @@ line level    source
  237          
  238          /*-----  Set the FreeRun count-compare reg.
  239                          [the FR counter increments on AddrZero from SyncLength counter] */
- 240          void
-C51 COMPILER V8.04   PIOLIB                                                                08/22/2013 14:00:45 PAGE 5   
+C51 COMPILER V8.04   PIOLIB                                                                09/26/2014 14:38:04 PAGE 5   
 
+ 240          void
  241          pio_FRun_Count(int frc)
  242          {
  243   1      piodata.i_cnt = frc;
@@ -317,9 +319,9 @@ line level    source
  299   1      _nop_ ();                       // give some extra time for things to propagate thru the CPLD to the external reg.
  300   1      PIO_nWR = LOW;
  301   1      PIO_nWR = HIGH;
- 302   1      PIO_ADR = 0xFF;
-C51 COMPILER V8.04   PIOLIB                                                                08/22/2013 14:00:45 PAGE 6   
+C51 COMPILER V8.04   PIOLIB                                                                09/26/2014 14:38:04 PAGE 6   
 
+ 302   1      PIO_ADR = 0xFF;
  303   1      PIO_DAT = 0xFF;
  304   1      }
  305          
@@ -381,12 +383,12 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =      4    ----
-   DATA SIZE        =   ----    ----
-C51 COMPILER V8.04   PIOLIB                                                                08/22/2013 14:00:45 PAGE 7   
+C51 COMPILER V8.04   PIOLIB                                                                09/26/2014 14:38:04 PAGE 7   
 
+   DATA SIZE        =   ----    ----
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----       2
 END OF MODULE INFORMATION.
 
 
-C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)
