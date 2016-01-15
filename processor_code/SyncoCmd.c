@@ -10,13 +10,12 @@
  *                              - DV_Spare1 and DV_Spare2 outputs.
  * 2013-Aug-22 MA               - hard-code Spider values for fr=120,
  *                              - row_len=53, num_rows=33
+ * 2015-Nov-05 MFH              - Port source code for sdcc compiler.  Start of v30 series.
  */
 
 #define  SYNCOMAIN
 
-#include <AT89c5131.h>
 #include <stdio.h>
-#include <intrins.h>
 #include "SyncoCmd.h"
 
 
@@ -83,13 +82,20 @@ int sc_FRun_Count;				// AddrZero count for output of a DV_FreeRun
 int sc_row_len;					// Default Row_Length
 unsigned char sc_num_row;		// Default SyncLength = (num_row * row_len) - 1
 unsigned char sc_mancho_mode;	// mode control byte; is DV source DV_FreeRun or DV_RTS
-unsigned char sc_ACDCU_onoff = 0;	// all ACDCCU off
-int sc_clk_adj_div;             // Default divisor for the adjustable clock frequency
+unsigned char sc_ACDCU_onoff;   // ACDC unit power control bits.
+int sc_clk_adj_div;             // Divisor for the adjustable clock frequency
 
-char code version[] =  "\r\tSyncoCmd-V22\r";
+char code version[] =  "\r\tSyncoCmd-V30\r";
 char code prompt[] = "\rSynco> ";
 
 /*=============================================================================================*/
+
+inline unsigned long get_sync_length(int rl, unsigned char nr)
+{
+    // Always promote to 32-bit ints before multiply.
+    return (unsigned long)rl * (unsigned long)nr;
+}
+
 //--------
 void do_ResetAll(void)
 {
@@ -99,12 +105,14 @@ sc_FRun_Count = FRUN_COUNT;
 sc_row_len = ROWLEN;
 sc_num_row = NUMROW;
 sc_mancho_enable = TRUE;	//
+sc_ACDCU_onoff = 0;
 sc_clk_adj_div = CLKADJDIV;
+
 //
 pio_nEnable(OFF);	//
 pio_Reset((bit)ON);
 pio_Reset((bit)OFF);
-pio_SyncLength((sc_row_len*sc_num_row)-1);
+pio_SyncLength(get_sync_length(sc_row_len, sc_num_row)-1);
 pio_FRun_Count(sc_FRun_Count-1);
 pio_clk_adj_div(sc_clk_adj_div);
 pio_DV_Mode(sc_mancho_mode);
@@ -121,7 +129,6 @@ sio_Init_9600();
 TI = 1 ;
 //Timer0_Init();	// not used. code is in sio.c
 //
-printf("%s", version);
 cd_help();
 printf("%s", prompt);
 do_ResetAll();
@@ -209,7 +216,7 @@ if(sc_mancho_mode == FRUN_DV)
 printf("\tRow_Len\t\t= %d\r", sc_row_len);
 printf("\tNum_Row\t\t= %d\r", (int)sc_num_row);
 printf("\tAdjustable Clock frequency divisor\t\t=%d\r", sc_clk_adj_div);
-printf("\tACDCU_onoff\t= %#2.2X\r", (int)sc_ACDCU_onoff);
+printf("\tACDCU_onoff\t= 0X%02x\r", (int)sc_ACDCU_onoff);
 
 }
 
@@ -224,7 +231,8 @@ if(rl == -2 ) {prt_needarg(); return;}	// if rl = -2 [= no arg], then error msg
 if(rl < 0 ) {return;}					// if rl = -1 [= not a digit arg], then just ignor
 if(rl < MINROWLEN ) {prt_toosmall(rl); return;}
 if(rl > MAXROWLEN ) {prt_toobig(rl); return;}
-sl = (long)rl * (long)sc_num_row;
+
+sl = get_sync_length(rl, sc_num_row);
 if(sl < MINSYNCLEN ) {prt_minsync(); return;}
 
 sc_row_len = rl;					// everything ok, set as the new row_len
@@ -244,7 +252,8 @@ if(nr == -2 ) {prt_needarg(); return;}
 if(nr < 0 ) {return;}
 if(nr < MINNUMROW ) {prt_toosmall(nr); return;}
 if(nr > MAXNUMROW ) {prt_toobig(nr); return;}
-sl = (long)nr * (long)sc_row_len;
+
+sl = get_sync_length(sc_row_len, (unsigned char)nr);
 if(sl < MINSYNCLEN ) {prt_minsync(); return;}
 
 sc_num_row = (unsigned char)nr;	//
@@ -313,7 +322,6 @@ pio_nEnable(sc_mancho_enable);	//
 //-------- set the 50MHz/div for DV_SPARE2 output
 void set_clk_adj_div(void)
 {
-int r;
 int clk_adj_div_temp;
 
 clk_adj_div_temp = cd_arg_i();
@@ -379,7 +387,7 @@ pio_pwr_onoff(sc_ACDCU_onoff);
 //-------- output the current ACDCU onoff control byte.
 void pwr_onoff(void)
 {
-printf("\r\tACDCU_onoff\t= %#2.2X\r", (int)sc_ACDCU_onoff);
+printf("\r\tACDCU_onoff\t= 0X%02x\r", (int)sc_ACDCU_onoff);
 }
 
 //-------- read and output the ACDCU status byte.
@@ -388,7 +396,7 @@ void pwr_status(void)
 unsigned char pwr_stat;
 
 pwr_stat = pio_pwr_status();
-printf("\r\tACDCU_Status = %#2.2X\r", (int)pwr_stat);
+printf("\r\tACDCU_Status = 0X%02x\r", (int)pwr_stat);
 }
 
 /*====Unused and test code ============================================================*/

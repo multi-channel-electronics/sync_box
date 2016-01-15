@@ -7,6 +7,38 @@
  *
  */
 
+
+#include <8052.h>
+
+/* The lines below provide some translation from Keil to sdcc directives. */
+
+#define bit __bit
+#define code __code
+
+/* Add some special registers particular to this microprocessor. */
+__sfr __at(0x9A) BRL;
+__sfr __at(0x9B) BDRCON;
+__sfr __at(0x8F) CKCON0;
+__sfr __at(0xAF) CKCON1;
+
+/* These are pulled out of sdcc's include file mcs51/at89c51ed2.h. */
+
+__sfr __at (0x8F) CKCON0;   //Clock control Register 0
+__sfr __at (0xAF) CKCON1;   //Clock control Register 1
+__sfr __at (0x9B) BDRCON;       //Baud Rate Control
+__sfr __at (0x9A) BRL;      //Baud Rate Reload
+
+
+static inline void _nop_()
+{
+    __asm
+    nop
+    __endasm;
+}
+
+unsigned long strtoul(const char *nptr, const char **endptr, register int base);
+
+
 #define  OK    		0
 #define  ABORT 	   -1
 
@@ -38,23 +70,27 @@ typedef struct
 /*     Function definitions                            */
 /*============================================================================*/
 
-#ifndef SIO
+
+/* Defined in sio.c */
+extern char code version[];
 extern char sio_rx_data;
 extern char sio_rxbuf[];
 extern char sio_rx_idx;
 extern bit	sio_rx_gotcl;
+
+/* Note all interrupt handlers must be visible in main(). */
+void serial_IT(void) __interrupt(4);
+
 //
-extern char putchar(char c);
+extern void putchar(char c);
 extern void sio_Init_9600(void);
 //
 extern void Timer0_Init(void);
 //
 //externvoid tst_putchar (void);
 //externvoid tst_printf (void);
-#endif
 
-#ifndef SYNCOMAIN
-
+/* Defined in SyncoCmd.c */
 extern int sc_row_len ;
 extern unsigned char sc_num_row;
 extern unsigned char sc_mancho_mode;
@@ -76,9 +112,8 @@ extern void pwr_onoff(void);
 extern void pwr_status(void);
 extern void ResetOn(void);
 extern void ResetOff(void);
-#endif
 
-#ifndef PIOLIB
+/* Defined in piolib.c */
 extern void pio_Reset(bit b);
 extern void pio_nEnable(bit b);
 extern void pio_SyncLength(unsigned long sl);
@@ -90,16 +125,14 @@ extern void pio_pwr_onoff(unsigned char enbits);
 extern unsigned char pio_pwr_status(void);
 //extern void pio_RdSwitches();
 //extern void pio_Chk_PSCool();
-#endif
 
-#ifndef CMDDICT
+/* Defined in cmddict.c */
 extern code CMD_ENTRY cmd_dict[];
 extern code int dict_size;
 //
-extern int cd_tokenize(char *str);
-extern int cd_parse(CMD_ENTRY cmd_dict[], int dict_size);
+extern void cd_tokenize(char *str);
+extern void cd_parse(CMD_ENTRY cmd_dict[], int dict_size);
 extern int cd_arg_i(void);
 extern int cd_arg_ul(unsigned long *ul);
 extern void cd_help(void);
-#endif
 

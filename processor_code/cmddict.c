@@ -20,8 +20,8 @@
 
 /*========== Support Routines Function prototypes   ========================*/
 
-int cd_tokenize(char *str);
-int cd_parse(CMD_ENTRY cmd_dict[], int dict_size);
+void cd_tokenize(char *str);
+void cd_parse(CMD_ENTRY cmd_dict[], int dict_size);
 char *nxttoken(void);
 int cd_arg_i(void);
 int cd_arg_ul(unsigned long *ul);
@@ -69,11 +69,9 @@ static char **tokenv;				/* pointer to current token (pointer to token pointer) 
 
 
 /*----- chop a command line string into separate word strings (tokens)*/
-int
+void
 cd_tokenize(char *str)
 {
-	extern char *tokenpbuf[];
-	extern char **tokenv;
 	int i=0;													// current token (index)
 
 	tokenpbuf[i++] = strtok(str," \n\r");						// setup strtok for the scan
@@ -86,7 +84,7 @@ cd_tokenize(char *str)
 
 
 /*----- parse a command line */
-int
+void
 cd_parse(CMD_ENTRY cmd_dict[], int dict_size)
 {
 	int entry=0, n;
@@ -170,7 +168,7 @@ void
 cd_help()
 {
 	int entry;
-
+        printf("%s", version);
 	for (entry=0; entry < dict_size; entry++ )
 		{
 		printf("\r\t %s%s\t\t%s", cmd_dict[entry].nmem, cmd_dict[entry].param, cmd_dict[entry].help );

@@ -9,10 +9,7 @@
 
 #define  PIOLIB
 
-#include <AT89c5131.h>
 #include <stdio.h>
-#include <intrins.h>
-
 #include "SyncoCmd.h"
 
 
@@ -48,31 +45,37 @@ P3.7 		= PIO_nRD.
 #define PIO_DAT	P0
 #define PIO_ADR	P2
 
-sbit PIO_RESET	=	P1^0;		// outputs init high, so initial state is reset,
-sbit PIO_nENABLE =	P1^1;		// and clocking disabled.
-sbit PIO_SW4	=	P1^2;		// [not used]
-sbit PIO_SW3	=	P1^3;		// [not used]
-sbit PIO_SW2	=	P1^4;		// [not used]
-sbit PIO_SW1	=	P1^5;		// [not used]
-sbit PIO_PSCOOL =	P1^7;		// [not used] [was 'cooling interlock', is now 'spare opto-TTL input']
-//
-sbit PIO_nINT0	=	P3^2;		// [not used]
-sbit PIO_nINT1	=	P3^2;		// [not used]
-sbit PIO_T0		=	P3^4;		// [not used]
-sbit PIO_T1		=	P3^5;		// [not used]
-sbit PIO_nWR	=	P3^6;		//
-sbit PIO_nRD	=	P3^7;		//
+/* Assign names to particular I/O register bits.
+   In sdcc, the bits of P1 are called P1_0, etc. */
+
+#define PIO_RESET       P1_0  /* outputs init high, so
+                                                initial state is reset... */
+#define PIO_nENABLE     P1_1  /* ...and clocking disabled. */
+#define PIO_SW4         P1_2  /* [not used] */
+#define PIO_SW3         P1_3  /* [not used] */
+#define PIO_SW2         P1_4  /* [not used] */
+#define PIO_SW1         P1_5  /* [not used] */
+#define PIO_PSCOOL      P1_7  /* [not used] [was 'cooling
+                                 interlock', is now  spare
+                                 opto-TTL input'] */
+#define PIO_nINT0       P3_2 /* [not used] */
+#define PIO_nINT1       P3_3 /* [not used] */
+#define PIO_T0          P3_4 /* [not used] */
+#define PIO_T1          P3_5 /* [not used] */
+#define PIO_nWR         P3_6
+#define PIO_nRD         P3_7
+
 
 // PIO CPLD/Firmware register address definitions. See also PIO_Interface.vhd
-#define  ADR_xxx 		00 // -- X"0000"	xxx
+#define  ADR_xxx 	00 // -- X"0000"	xxx
 #define  ADR_CMDSEL 	01 // -- X"0001"	Cmd function Select
 #define  ADR_MODEREG	02 // -- X"0002"	Mode Control Register
 #define  ADR_CMDDATB0	16 // -- X"0010"	CmdData[7..0]
 #define  ADR_CMDDATB1	17 // -- X"0011"	CmdData[15..8]
 #define  ADR_CMDDATB2	18 // -- X"0012"	CmdData[23..16]
 #define  ADR_CMDDATB3	19 // -- X"0013"	CmdData[31..24]
-#define  ADR_AUXO		32 // -- X"0020"	AuxOut
-#define  ADR_AUXI		33 // -- X"0021"	AuxIn
+#define  ADR_AUXO	32 // -- X"0020"	AuxOut
+#define  ADR_AUXI	33 // -- X"0021"	AuxIn
 //
 // CmdSelect reg control vaules
 #define  SLEN_LOAD		1	// Load SyncLength counter
@@ -103,10 +106,11 @@ sbit PIO_nRD	=	P3^7;		//
 
 
 /*=========================================================================================*/
-/* The 8051 is big-endian,
- * the cpld will be addressed as little-endian,
- * so the byte order must be reversed when writing to the CPLD CMDDATA.
- *
+/* The CPLD will be addressed as little-endian.  The 8051 is an 8-bit
+ * processor and has no preference for big vs little.  The Keil
+ * compiler produced big-endian storage of int and long, but the sdcc
+ * compiler produces little-endian storage.
+ * 
  * In this version of SyncoCmd, P0 is used for data io, P2 for an 8 bit address
  */
 
@@ -153,22 +157,22 @@ piodata.l_cnt = sl;
 
 // first load the count to the CmdData reg.
 PIO_ADR = ADR_CMDDATB0;
-PIO_DAT = PDB3;
+PIO_DAT = PDB0;
 _nop_ ();
 PIO_nWR = LOW;
 PIO_nWR = HIGH;
 PIO_ADR = ADR_CMDDATB1;
-PIO_DAT = PDB2;
-_nop_ ();
-PIO_nWR = LOW;
-PIO_nWR = HIGH;
-PIO_ADR = ADR_CMDDATB2;
 PIO_DAT = PDB1;
 _nop_ ();
 PIO_nWR = LOW;
 PIO_nWR = HIGH;
+PIO_ADR = ADR_CMDDATB2;
+PIO_DAT = PDB2;
+_nop_ ();
+PIO_nWR = LOW;
+PIO_nWR = HIGH;
 PIO_ADR = ADR_CMDDATB3;
-PIO_DAT = PDB0;
+PIO_DAT = PDB3;
 _nop_ ();
 PIO_nWR = LOW;
 PIO_nWR = HIGH;
@@ -190,22 +194,22 @@ pio_FrameNum(unsigned long fn)
 piodata.l_cnt = fn;
 
 PIO_ADR = ADR_CMDDATB0;
-PIO_DAT = PDB3;
+PIO_DAT = PDB0;
 _nop_ ();
 PIO_nWR = LOW;
 PIO_nWR = HIGH;
 PIO_ADR = ADR_CMDDATB1;
-PIO_DAT = PDB2;
-_nop_ ();
-PIO_nWR = LOW;
-PIO_nWR = HIGH;
-PIO_ADR = ADR_CMDDATB2;
 PIO_DAT = PDB1;
 _nop_ ();
 PIO_nWR = LOW;
 PIO_nWR = HIGH;
+PIO_ADR = ADR_CMDDATB2;
+PIO_DAT = PDB2;
+_nop_ ();
+PIO_nWR = LOW;
+PIO_nWR = HIGH;
 PIO_ADR = ADR_CMDDATB3;
-PIO_DAT = PDB0;
+PIO_DAT = PDB3;
 _nop_ ();
 PIO_nWR = LOW;
 PIO_nWR = HIGH;
@@ -244,12 +248,12 @@ piodata.i_cnt = frc;
 
 // load count to the CmdData reg; only 2 bytes used.
 PIO_ADR = ADR_CMDDATB0;
-PIO_DAT = PDB1;
+PIO_DAT = PDB0;
 _nop_ ();
 PIO_nWR = LOW;
 PIO_nWR = HIGH;
 PIO_ADR = ADR_CMDDATB1;
-PIO_DAT = PDB0;
+PIO_DAT = PDB1;
 _nop_ ();
 PIO_nWR = LOW;
 PIO_nWR = HIGH;
@@ -271,12 +275,12 @@ piodata.i_cnt = clk_adj_div;
 
 // load count to the CmdData reg; only 2 bytes used.
 PIO_ADR = ADR_CMDDATB0;
-PIO_DAT = PDB1;
+PIO_DAT = PDB0;
 _nop_ ();
 PIO_nWR = LOW;
 PIO_nWR = HIGH;
 PIO_ADR = ADR_CMDDATB1;
-PIO_DAT = PDB0;
+PIO_DAT = PDB1;
 _nop_ ();
 PIO_nWR = LOW;
 PIO_nWR = HIGH;

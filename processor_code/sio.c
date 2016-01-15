@@ -8,11 +8,8 @@
 
 #define  SIO
 
-#include <AT89c5131.h>
 #include <stdio.h>
 #include <ctype.h>
-#include <intrins.h>
-
 #include "SyncoCmd.h"
 
 
@@ -25,12 +22,12 @@ bit	 sio_rx_gotcl = 0;
 /*------------------------------------------------------------------------*/
 
 /*----- putchar (mini version): outputs charcter only */
-char 
+void 
 putchar(char c)  
 {
 	while (!TI); 		// wait for any current tx to end; until TI goes high
 	TI = 0;
-	return (SBUF = c);
+	SBUF = c;
 }
 
 
@@ -38,8 +35,12 @@ putchar(char c)
  * FUNCTION_PURPOSE: serial interrupt, echo received data.
  * FUNCTION_INPUTS: P3.0(RXD) serial input
  * FUNCTION_OUTPUTS: P3.1(TXD) serial output
+ *
+ * sdcc note: the prototype for the interrupt handler has to be
+ * visible in the .c file where main() lives, or the handler won't get
+ * registered in the interrupt vector table.
  */
-void serial_IT(void) interrupt 4 
+void serial_IT(void) __interrupt(4)
 {
 if ( RI == 1 ) 
 	{
