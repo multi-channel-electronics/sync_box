@@ -1,12 +1,11 @@
-/*******************************************************************************
- * RS232 serial IO routines
- ******************************************************************************
- * original version: RHJ 1-May-06
- *
- *
+/* -*- mode: C; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *      vim: sw=4 ts=4 et tw=80
  */
-
-#define  SIO
+/****************************************************************************
+ * RS232 serial IO routines
+ ****************************************************************************
+ * original version: RHJ 1-May-06
+ */
 
 #include <stdio.h>
 #include <ctype.h>
@@ -17,17 +16,17 @@
 char sio_rx_data = 'r';
 char sio_rxbuf[RXBUFSIZ];
 char sio_rx_idx = 0;
-bit	 sio_rx_gotcl = 0;
+bit  sio_rx_gotcl = 0;
 
-/*------------------------------------------------------------------------*/
+/*==========================================================================*/
 
 /*----- putchar (mini version): outputs charcter only */
 void 
 putchar(char c)  
 {
-	while (!TI); 		// wait for any current tx to end; until TI goes high
-	TI = 0;
-	SBUF = c;
+    while (!TI);        // wait for any current tx to end; until TI goes high
+    TI = 0;
+    SBUF = c;
 }
 
 
@@ -42,38 +41,33 @@ putchar(char c)
  */
 void serial_IT(void) __interrupt(4)
 {
-if ( RI == 1 ) 
-	{
-	RI = 0;										// Clears RI Interrupts
-	sio_rx_data = SBUF;							// Read receive data
-	
-	if ( isprint(sio_rx_data) )
-		{
-		TI = 0;									// clear tx flag for next emission 
-		SBUF = sio_rx_data;						// echo rx data on tx
-		sio_rxbuf[sio_rx_idx++] = sio_rx_data;	// add it to the buffer
-		}
-		
-	if (sio_rx_idx >= (RXBUFSIZ-1))				// prevent buffer overrun
-		{	--sio_rx_idx; }
-	if (sio_rx_data == '\b' && sio_rx_idx > 0)	// if 'backspace' go back 1
-		{ 
-		TI = 0;									// clear tx flag for next emission 
-		SBUF = sio_rx_data;						// echo the backspace	
-		sio_rxbuf[sio_rx_idx] = 0;				// delete previous char from buffer
-		sio_rx_idx -= 1; 						// and change the index
-		}
-	else if (sio_rx_data == '\r') 				// if EOL
-		{
-		sio_rxbuf[sio_rx_idx] = 0;				// reset stuff
-		sio_rx_idx = 0;
-		sio_rx_gotcl = 1;						// set flag that we have a cmd line
-		}
-	}   
-	else	// if Tx interrupt
-		{
-		;
-		}								
+    if (RI != 1)
+        return;
+
+    RI = 0;                                     // Clears RI Interrupts
+    sio_rx_data = SBUF;                         // Read receive data
+    
+    if ( isprint(sio_rx_data) ) {
+        TI = 0;                                 // clear tx flag for next emission 
+        SBUF = sio_rx_data;                     // echo rx data on tx
+        sio_rxbuf[sio_rx_idx++] = sio_rx_data;  // add it to the buffer
+    }
+        
+    if (sio_rx_idx >= (RXBUFSIZ-1))             // prevent buffer overrun
+        --sio_rx_idx;
+
+    if (sio_rx_data == '\b' && sio_rx_idx > 0) {// if 'backspace' go back 1
+        TI = 0;                                 // clear tx flag for next emission 
+        SBUF = sio_rx_data;                     // echo the backspace   
+        sio_rxbuf[sio_rx_idx] = 0;              // delete previous char from buffer
+        sio_rx_idx -= 1;                        // and change the index
+
+    } else if (sio_rx_data == '\r') {           // if EOL
+        sio_rxbuf[sio_rx_idx] = 0;              // reset stuff
+        sio_rx_idx = 0;
+        sio_rx_gotcl = 1;                       // set flag that we have a cmd line
+    }
+
 }
 
 
@@ -82,22 +76,21 @@ if ( RI == 1 )
 /* FUNCTION_PURPOSE: This file set up uart in mode 1 (8 bits uart) with
  * internal baud rate generator.
  */
-void 
-sio_Init_9600(void)
+void sio_Init_9600(void)
 {
-	SCON    = 0x50;				// uart in mode 1 (8 bit), REN=1
-	BDRCON &= 0xEC;				// BRR=0; SRC=0;
-	BDRCON |= 0x0e;				// TBCK=1; RBCK=1; SPD=1
-	PCON   |= 0x80;				// SMOD1 = 1, double baud rate
-	BRL	= 0x64;					// 9600 Bds at 24.00MHz
-	CKCON0 = 0x7f;
-	ES = 1;						// Enable serial interrupt
-	EA = 1;						// Enable global interrupt
-	BDRCON |= 0x10;				// BRR=1; Baud rate generator run
-	TI = 1 ;
+    SCON    = 0x50;             // uart in mode 1 (8 bit), REN=1
+    BDRCON &= 0xEC;             // BRR=0; SRC=0;
+    BDRCON |= 0x0e;             // TBCK=1; RBCK=1; SPD=1
+    PCON   |= 0x80;             // SMOD1 = 1, double baud rate
+    BRL = 0x64;                 // 9600 Bds at 24.00MHz
+    CKCON0 = 0x7f;
+    ES = 1;                     // Enable serial interrupt
+    EA = 1;                     // Enable global interrupt
+    BDRCON |= 0x10;             // BRR=1; Baud rate generator run
+    TI = 1 ;
 }
 
-/*======================================================================================*/
+/*==========================================================================*/
 
 
 /*----- Timer0 Setup 
@@ -105,13 +98,13 @@ sio_Init_9600(void)
 void 
 Timer0_Init(void)
 {
-	TMOD = 0x01;
-	ET0 = ON;          			// Enable Timer0 Interrupts
-	TR0 = ON;					// Timer0 Run
+    TMOD = 0x01;
+    ET0 = ON;                   // Enable Timer0 Interrupts
+    TR0 = ON;                   // Timer0 Run
 }
 */
 
-//sbit PIO_TST =	P1^6;			// output for testing
+//sbit PIO_TST =    P1^6;           // output for testing
 
 /*----- Timer0 Service Routine 
 // Interrupt occurs every 25 ms when enabled
@@ -129,5 +122,4 @@ PIO_TST = (bit)1;
 }
 */
 
-/************************** EOF **********************************************/
-
+/*========================= EOF ============================================*/
