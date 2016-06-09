@@ -70,53 +70,91 @@ extern bit  sio_rx_gotcl;
 
 /* Note all interrupt handlers must be visible in main(). */
 void serial_IT(void) __interrupt(4);
-extern void putchar(char c);
-extern void sio_Init_9600(void);
-extern void Timer0_Init(void);
+void putchar(char c);
+void sio_Init_9600(void);
 
 /* Defined in SyncoCmd.c */
+extern unsigned char code version_num;
 extern char code version[];
 
-extern void do_ResetAll(void);
-extern void set_Enable(void);
-extern void set_Disable(void);
-extern void get_Status(void);
-extern void set_Row_Len(void);
-extern void set_Num_Rows(void);
-extern void set_FR_Mode(void);
-extern void set_RTS_Mode(void);
-extern void set_Frame_Num(void);
-extern void set_clk_adj_div(void);
-extern void pwr_enable_unit(void);
-extern void pwr_disable_unit(void);
-extern void pwr_disable_all(void);
-extern void pwr_onoff(void);
-extern void pwr_status(void);
-extern void ResetOn(void);
-extern void ResetOff(void);
-extern void do_eep(void);
+void do_ResetAll(void);
+void set_Enable(void);
+void set_Disable(void);
+void get_Status(void);
+void set_Row_Len(void);
+void set_Num_Rows(void);
+void set_FR_Mode(void);
+void set_RTS_Mode(void);
+void set_Frame_Num(void);
+void set_clk_adj_div(void);
+void pwr_enable_unit(void);
+void pwr_disable_unit(void);
+void pwr_disable_all(void);
+void pwr_onoff(void);
+void pwr_status(void);
+void ResetOn(void);
+void ResetOff(void);
+void do_Select_Bank(void);
 
 /* Defined in piolib.c */
-extern void pio_Reset(bit b);
-extern void pio_nEnable(bit b);
-extern void pio_SyncLength(unsigned long sl);
-extern void pio_FrameNum(unsigned long fn);
-extern void pio_DV_Mode(unsigned char mode);
-extern void pio_FRun_Count(int frc);
-extern void pio_clk_adj_div(int clk_adj_div);
-extern void pio_pwr_onoff(unsigned char enbits);
-extern unsigned char pio_pwr_status(void);
+void pio_Reset(bit b);
+void pio_nEnable(bit b);
+void pio_SyncLength(unsigned long sl);
+void pio_FrameNum(unsigned long fn);
+void pio_DV_Mode(unsigned char mode);
+void pio_FRun_Count(int frc);
+void pio_clk_adj_div(int clk_adj_div);
+void pio_pwr_onoff(unsigned char enbits);
+unsigned char pio_pwr_status(void);
 
 /* Defined in cmddict.c */
-extern code CMD_ENTRY cmd_dict[];
-extern code int dict_size;
+extern code CMD_ENTRY main_cmd_dict[];
+extern code CMD_ENTRY eeprom_cmd_dict[];
 
-extern void cd_tokenize(char *str);
-extern void cd_parse(CMD_ENTRY cmd_dict[], int dict_size);
-extern int cd_arg_i(void);
-extern int cd_arg_ul(unsigned long *ul);
-extern void cd_help(void);
+void cd_tokenize(char *str);
+void cd_parse(CMD_ENTRY cmd_dict[]);
+int cd_arg_i(void);
+int cd_arg_ul(unsigned long *ul);
+void cd_help(CMD_ENTRY cmd_dict[]);
 
 /* Defined in strtoul.c -- this was a lib func in Keil. */
 unsigned long strtoul(const char *nptr, const char **endptr, register int base);
 
+/* For eeprom.c */
+
+/* Address map for EEPROM -- byte offsets. */
+#define EE_ADDR_SYNCO_VER           0x00 /* Version of synco that last
+                                            wrote to EEPROM. */
+#define EE_ADDR_STATUS              0x01 /* Config byte, bits defined
+                                            below as EE_CFG_* */
+#define EE_ADDR_SYNC_CFG            0x10 /* Start of bank configurations */
+
+/* The status byte contains flag bits.  The top two bits are used to
+   indicate whether the last EEPROM update was successful.  They are
+   set to _INCONSISTENT while the EEPROM is being updated, then set to
+   _OK when the write is complete.  Lower bits may be used for other
+   stuff. */
+#define EE_CFG_CHECK_MASK           0xc0
+#define EE_CFG_CHECK_INCONSISTENT   0x80
+#define EE_CFG_CHECK_OK             0x40
+#define EE_CFG_LOAD_ON_STARTUP      0x01  /* If set, causes bank info
+                                             to be loaded from EEPROM
+                                             when sync box starts up
+                                             or is reset. */
+
+char eeprom_get_byte(unsigned char addr);
+bit eeprom_set_byte(unsigned char addr, unsigned char value);
+unsigned char eeprom_get_bytes(char *dest, unsigned char addr,
+                               unsigned char count);
+unsigned char eeprom_set_bytes(unsigned char addr, char *source,
+                               unsigned char count);
+
+void do_MODE();
+void do_help();
+void do_EEPROM_mode();
+void exit_EEPROM_mode();
+void do_EEPROM_dump();
+void do_EEPROM_load();
+void do_EEPROM_save();
+void do_EEPROM_boot_enable();
+void do_EEPROM_boot_disable();

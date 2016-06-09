@@ -6,7 +6,7 @@ LDFLAGS = --out-fmt-ihx --xram-size 0x400 --xram-loc 0 \
 BUILD = build
 OUTPUT_HEX = $(BUILD)/SyncoCmd.hex
 HEADERS = SyncoCmd.h
-SRCS = SyncoCmd.c cmddict.c piolib.c sio.c strtoul.c
+SRCS = SyncoCmd.c cmddict.c piolib.c sio.c strtoul.c eeprom.c
 OBJECTS = $(patsubst %.c, %.rel, $(SRCS))
 OBJECTS_BUILD = $(patsubst %, $(BUILD)/%, $(OBJECTS))
 

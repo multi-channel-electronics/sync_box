@@ -30,9 +30,9 @@ code char nopr[] = "  ";
 
 /*========== command dictionary =============================================*/
 
-code CMD_ENTRY cmd_dict[] =
+code CMD_ENTRY main_cmd_dict[] =
     {
-        { "h",      cd_help,            nopr,   "help, this stuff" },
+        { "h",      do_help,            nopr,   "help, this stuff" },
         { "?",      get_Status,         nopr,   "get Mancho Status" },
         { "rl",     set_Row_Len,        pram,   "set Row_Len\tn = 1 to 4095" },
         { "nr",     set_Num_Rows,       pram,   "set Num_Rows\tn = 1 to 63" },
@@ -47,13 +47,32 @@ code CMD_ENTRY cmd_dict[] =
         { "epu",    pwr_enable_unit,    pram,   "pwr enable unit \tn = 0 to 7" },
         { "pof",    pwr_onoff,          nopr,   "get ACDCU_onoff cntl byte" },
         { "ps",     pwr_status,         nopr,   "get ACDCU status" },
+        { "bank",   do_Select_Bank,     pram,   "Change target bank for params" },
+        { "eeprom", do_EEPROM_mode,     nopr,   "Enter EEPROM manipulation mode" },
         { "re",     do_ResetAll,        nopr,   "Reset all to defaults" },
 //      { "ron",    ResetOn,            nopr,   "Reset on" },
 //      { "rof",    ResetOff,           nopr,   "Reset off" },
+        { NULL,     NULL,               NULL,   NULL}
     };
 
-code int dict_size = (sizeof(cmd_dict) / sizeof(CMD_ENTRY));
-
+code CMD_ENTRY eeprom_cmd_dict[] =
+    {
+        { "h",            do_help,                nopr,
+          "help, this stuff" },
+        { "exit",         exit_EEPROM_mode,       nopr,
+          "return to main menu" },
+        { "dump",         do_EEPROM_dump,         nopr,
+          "Print current contents of EEPROM." },
+        { "load",         do_EEPROM_load,         nopr,
+          "Load configuration from EEPROM." },
+        { "save",         do_EEPROM_save,         nopr,
+          "Save current configuration to EEPROM." },
+        { "enable_boot",  do_EEPROM_boot_enable,  nopr,
+          "Set system to load EEPROM parameters on start-up."},
+        { "disable_boot", do_EEPROM_boot_disable, nopr,
+          "Set system to NOT load EEPROM parameters on start-up."},
+        { NULL,     NULL,               NULL,   NULL}
+    };
 
 /*========== Parse header definitions =======================================*/
 
@@ -81,26 +100,26 @@ void cd_tokenize(char *str)
 
 
 /*----- parse a command line */
-void cd_parse(CMD_ENTRY cmd_dict[], int dict_size)
+void cd_parse(CMD_ENTRY cmd_dict[])
 {
-    int entry=0, n;
+    int entry, n;
+    char found;
     char *token;
 
     while((token = nxttoken()) != 0 ) {
         //if (strncmp(token,"#",1)==0) break;       //
-
         /* look for the current token in the command table */
-        for (entry=0; entry < dict_size; entry++ ) {
+        found = 0;
+        for (entry=0; cmd_dict[entry].nmem!=NULL; entry++ ) {
             n = strlen(cmd_dict[entry].nmem);
-            // if token is found, stop looking
-            if(strncmp(token, cmd_dict[entry].nmem, n)==0)
+            // if token is found, execute cmd function
+            if(strncmp(token, cmd_dict[entry].nmem, n)==0) {
+                found = 1;
+                (cmd_dict[entry].fcn)();
                 break;
+            }
         }
-
-
-        if (entry < dict_size)
-            (cmd_dict[entry].fcn)();            // if token found, execute cmd function
-        else {
+        if (!found) {
             printf("\tWHAT? \"%s\"", token);    // else send error message,
             break;                              //and stop parsing
         }
@@ -156,13 +175,31 @@ int cd_arg_ul(unsigned long *ul)
     return(1);
 }
 
+char putstr(char *c)
+{
+    char i = 0;
+    while (*c != 0) {
+        putchar(*(c++));
+        i++;
+    }
+    return i;
+}
+
 /*----- ouput the command table nmemonics and help strings */
-void cd_help()
+void cd_help(CMD_ENTRY cmd_dict[])
 {
     int entry;
-    for (entry=0; entry < dict_size; entry++) {
-        printf("\r\t %s%s\t\t%s", cmd_dict[entry].nmem, cmd_dict[entry].param,
-               cmd_dict[entry].help);
+    const code char preamble[] = "\r\t ";
+    for (entry=0; cmd_dict[entry].nmem!=NULL; entry++) {
+        char field_width = 16;
+        putstr(preamble);
+        field_width -= putstr(cmd_dict[entry].nmem);
+        field_width -= putstr(cmd_dict[entry].param);
+        while (field_width > 0) {
+            putchar('\t');
+            field_width -= 8;
+        }
+        putstr(cmd_dict[entry].help);
     }
 }
 
