@@ -1,9 +1,9 @@
-Analysis & Synthesis Status : Successful - Tue Sep 02 15:06:31 2014
-Quartus II 64-Bit Version : 11.1 Build 259 01/25/2012 SP 2 SJ Full Version
+Analysis & Synthesis Status : Successful - Fri May 13 16:15:00 2016
+Quartus Prime Version : 15.1.0 Build 185 10/21/2015 SJ Lite Edition
 Revision Name : Synco
 Top-level Entity Name : SyncBox
 Family : MAX II
-Total logic elements : 393
+Total logic elements : 577
 Total pins : 74
 Total virtual pins : 0
 UFM blocks : 0 / 1 ( 0 % )

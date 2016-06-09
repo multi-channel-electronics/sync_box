@@ -1,6 +1,6 @@
 Analysis & Synthesis report for Synco
-Tue Sep 02 15:06:31 2014
-Quartus II 64-Bit Version 11.1 Build 259 01/25/2012 Service Pack 2 SJ Full Version
+Fri May 13 16:15:00 2016
+Quartus Prime Version 15.1.0 Build 185 10/21/2015 SJ Lite Edition
 
 
 ---------------------
@@ -13,50 +13,54 @@ Quartus II 64-Bit Version 11.1 Build 259 01/25/2012 Service Pack 2 SJ Full Versi
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. State Machine - |SyncBox|ManchEncode:mancho|dvp_current_state
-  9. Registers Removed During Synthesis
- 10. General Register Statistics
- 11. Inverted Register Statistics
- 12. Multiplexer Restructuring Statistics (Restructuring Performed)
- 13. Parameter Settings for User Entity Instance: PIO_Interface:pio
- 14. Parameter Settings for User Entity Instance: FreeRun:freerun
- 15. Parameter Settings for User Entity Instance: Sync_Len:synco
- 16. Analysis & Synthesis Messages
+  8. State Machine - |SyncBox|ManchEncode:mancho1|dvp_current_state
+  9. State Machine - |SyncBox|ManchEncode:mancho2|dvp_current_state
+ 10. Registers Removed During Synthesis
+ 11. General Register Statistics
+ 12. Inverted Register Statistics
+ 13. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 14. Parameter Settings for User Entity Instance: PIO_Interface:pio
+ 15. Parameter Settings for User Entity Instance: FreeRun:freerun2
+ 16. Parameter Settings for User Entity Instance: Sync_Len:synco2
+ 17. Parameter Settings for User Entity Instance: FreeRun:freerun1
+ 18. Parameter Settings for User Entity Instance: Sync_Len:synco1
+ 19. Analysis & Synthesis Messages
 
 
 
 ----------------
 ; Legal Notice ;
 ----------------
-Copyright (C) 1991-2011 Altera Corporation
+Copyright (C) 1991-2015 Altera Corporation. All rights reserved.
 Your use of Altera Corporation's design tools, logic functions 
 and other software and tools, and its AMPP partner logic 
 functions, and any output files from any of the foregoing 
 (including device programming or simulation files), and any 
 associated documentation or information are expressly subject 
 to the terms and conditions of the Altera Program License 
-Subscription Agreement, Altera MegaCore Function License 
-Agreement, or other applicable license agreement, including, 
-without limitation, that your use is for the sole purpose of 
-programming logic devices manufactured by Altera and sold by 
-Altera or its authorized distributors.  Please refer to the 
-applicable agreement for further details.
+Subscription Agreement, the Altera Quartus Prime License Agreement,
+the Altera MegaCore Function License Agreement, or other 
+applicable license agreement, including, without limitation, 
+that your use is for the sole purpose of programming logic 
+devices manufactured by Altera and sold by Altera or its 
+authorized distributors.  Please refer to the applicable 
+agreement for further details.
 
 
 
-+------------------------------------------------------------------------------+
-; Analysis & Synthesis Summary                                                 ;
-+-----------------------------+------------------------------------------------+
-; Analysis & Synthesis Status ; Successful - Tue Sep 02 15:06:31 2014          ;
-; Quartus II 64-Bit Version   ; 11.1 Build 259 01/25/2012 SP 2 SJ Full Version ;
-; Revision Name               ; Synco                                          ;
-; Top-level Entity Name       ; SyncBox                                        ;
-; Family                      ; MAX II                                         ;
-; Total logic elements        ; 393                                            ;
-; Total pins                  ; 74                                             ;
-; Total virtual pins          ; 0                                              ;
-; UFM blocks                  ; 0 / 1 ( 0 % )                                  ;
-+-----------------------------+------------------------------------------------+
++---------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                              ;
++-----------------------------+---------------------------------------------+
+; Analysis & Synthesis Status ; Successful - Fri May 13 16:15:00 2016       ;
+; Quartus Prime Version       ; 15.1.0 Build 185 10/21/2015 SJ Lite Edition ;
+; Revision Name               ; Synco                                       ;
+; Top-level Entity Name       ; SyncBox                                     ;
+; Family                      ; MAX II                                      ;
+; Total logic elements        ; 577                                         ;
+; Total pins                  ; 74                                          ;
+; Total virtual pins          ; 0                                           ;
+; UFM blocks                  ; 0 / 1 ( 0 % )                               ;
++-----------------------------+---------------------------------------------+
 
 
 +----------------------------------------------------------------------------------------------------------------------+
@@ -67,8 +71,8 @@ applicable agreement for further details.
 ; Device                                                                     ; EPM570T144C3       ;                    ;
 ; Top-level entity name                                                      ; SyncBox            ; Synco              ;
 ; Family name                                                                ; MAX II             ; Stratix            ;
+; Maximum processors allowed for parallel compilation                        ; 3                  ; 1                  ;
 ; Use smart compilation                                                      ; Off                ; Off                ;
-; Maximum processors allowed for parallel compilation                        ; 1                  ; 1                  ;
 ; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
 ; Enable compact report table                                                ; Off                ; Off                ;
 ; Restructure Multiplexers                                                   ; Auto               ; Auto               ;
@@ -111,7 +115,7 @@ applicable agreement for further details.
 ; Auto Resource Sharing                                                      ; Off                ; Off                ;
 ; Use LogicLock Constraints during Resource Balancing                        ; On                 ; On                 ;
 ; Maximum Number of M512 Memory Blocks                                       ; -1                 ; -1                 ;
-; Maximum Number of M4K/M9K/M20K Memory Blocks                               ; -1                 ; -1                 ;
+; Maximum Number of M4K/M9K/M20K/M10K Memory Blocks                          ; -1                 ; -1                 ;
 ; Maximum Number of M-RAM/M144K Memory Blocks                                ; -1                 ; -1                 ;
 ; Ignore translate_off and synthesis_off directives                          ; Off                ; Off                ;
 ; Report Parameter Settings                                                  ; On                 ; On                 ;
@@ -119,10 +123,11 @@ applicable agreement for further details.
 ; Report Connectivity Checks                                                 ; On                 ; On                 ;
 ; Ignore Maximum Fan-Out Assignments                                         ; Off                ; Off                ;
 ; Synchronization Register Chain Length                                      ; 2                  ; 2                  ;
-; PowerPlay Power Optimization                                               ; Normal compilation ; Normal compilation ;
+; PowerPlay Power Optimization During Synthesis                              ; Normal compilation ; Normal compilation ;
 ; HDL message level                                                          ; Level2             ; Level2             ;
 ; Suppress Register Optimization Related Messages                            ; Off                ; Off                ;
 ; Number of Removed Registers Reported in Synthesis Report                   ; 100                ; 100                ;
+; Number of Swept Nodes Reported in Synthesis Report                         ; 5000               ; 5000               ;
 ; Number of Inverted Registers Reported in Synthesis Report                  ; 100                ; 100                ;
 ; Clock MUX Protection                                                       ; On                 ; On                 ;
 ; Block Design Naming                                                        ; Auto               ; Auto               ;
@@ -134,31 +139,36 @@ applicable agreement for further details.
 +----------------------------------------------------------------------------+--------------------+--------------------+
 
 
-Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
-+-------------------------------------+
-; Parallel Compilation                ;
-+----------------------------+--------+
-; Processors                 ; Number ;
-+----------------------------+--------+
-; Number detected on machine ; 4      ;
-; Maximum allowed            ; 1      ;
-+----------------------------+--------+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 4           ;
+; Maximum allowed            ; 3           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 1           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
++----------------------------+-------------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                ;
-+----------------------------------+-----------------+------------------------------------+---------------------------------------------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type                          ; File Name with Absolute Path                ;
-+----------------------------------+-----------------+------------------------------------+---------------------------------------------+
-; SyncBox.bdf                      ; yes             ; User Block Diagram/Schematic File  ; C:/mce/sync_box/fpga_code/SyncBox.bdf       ;
-; ClkDiv.vhd                       ; yes             ; User VHDL File                     ; C:/mce/sync_box/fpga_code/ClkDiv.vhd        ;
-; PIO_Interface.vhd                ; yes             ; User VHDL File                     ; C:/mce/sync_box/fpga_code/PIO_Interface.vhd ;
-; FreeRun.vhd                      ; yes             ; User VHDL File                     ; C:/mce/sync_box/fpga_code/FreeRun.vhd       ;
-; ManchEncode.vhd                  ; yes             ; User VHDL File                     ; C:/mce/sync_box/fpga_code/ManchEncode.vhd   ;
-; TestPnts1.vhd                    ; yes             ; User VHDL File                     ; C:/mce/sync_box/fpga_code/TestPnts1.vhd     ;
-; TestPnts2.vhd                    ; yes             ; User VHDL File                     ; C:/mce/sync_box/fpga_code/TestPnts2.vhd     ;
-; Sync_Len.vhd                     ; yes             ; User VHDL File                     ; C:/mce/sync_box/fpga_code/Sync_Len.vhd      ;
-+----------------------------------+-----------------+------------------------------------+---------------------------------------------+
++------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                               ;
++----------------------------------+-----------------+------------------------------------+--------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                          ; File Name with Absolute Path                     ; Library ;
++----------------------------------+-----------------+------------------------------------+--------------------------------------------------+---------+
+; SyncBox.bdf                      ; yes             ; User Block Diagram/Schematic File  ; /home/mhasse/code/altera/synco/SyncBox.bdf       ;         ;
+; ClkDiv.vhd                       ; yes             ; User VHDL File                     ; /home/mhasse/code/altera/synco/ClkDiv.vhd        ;         ;
+; PIO_Interface.vhd                ; yes             ; User VHDL File                     ; /home/mhasse/code/altera/synco/PIO_Interface.vhd ;         ;
+; FreeRun.vhd                      ; yes             ; User VHDL File                     ; /home/mhasse/code/altera/synco/FreeRun.vhd       ;         ;
+; ManchEncode.vhd                  ; yes             ; User VHDL File                     ; /home/mhasse/code/altera/synco/ManchEncode.vhd   ;         ;
+; TestPnts1.vhd                    ; yes             ; User VHDL File                     ; /home/mhasse/code/altera/synco/TestPnts1.vhd     ;         ;
+; TestPnts2.vhd                    ; yes             ; User VHDL File                     ; /home/mhasse/code/altera/synco/TestPnts2.vhd     ;         ;
+; Sync_Len.vhd                     ; yes             ; User VHDL File                     ; /home/mhasse/code/altera/synco/Sync_Len.vhd      ;         ;
++----------------------------------+-----------------+------------------------------------+--------------------------------------------------+---------+
 
 
 +---------------------------------------------------------+
@@ -166,54 +176,57 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +---------------------------------------------+-----------+
 ; Resource                                    ; Usage     ;
 +---------------------------------------------+-----------+
-; Total logic elements                        ; 393       ;
-;     -- Combinational with no register       ; 86        ;
-;     -- Register only                        ; 94        ;
-;     -- Combinational with a register        ; 213       ;
+; Total logic elements                        ; 577       ;
+;     -- Combinational with no register       ; 122       ;
+;     -- Register only                        ; 123       ;
+;     -- Combinational with a register        ; 332       ;
 ;                                             ;           ;
 ; Logic element usage by number of LUT inputs ;           ;
-;     -- 4 input functions                    ; 71        ;
-;     -- 3 input functions                    ; 72        ;
-;     -- 2 input functions                    ; 89        ;
-;     -- 1 input functions                    ; 65        ;
+;     -- 4 input functions                    ; 124       ;
+;     -- 3 input functions                    ; 81        ;
+;     -- 2 input functions                    ; 159       ;
+;     -- 1 input functions                    ; 88        ;
 ;     -- 0 input functions                    ; 2         ;
 ;                                             ;           ;
 ; Logic elements by mode                      ;           ;
-;     -- normal mode                          ; 301       ;
-;     -- arithmetic mode                      ; 92        ;
+;     -- normal mode                          ; 424       ;
+;     -- arithmetic mode                      ; 153       ;
 ;     -- qfbk mode                            ; 0         ;
 ;     -- register cascade mode                ; 0         ;
-;     -- synchronous clear/load mode          ; 73        ;
-;     -- asynchronous clear/load mode         ; 291       ;
+;     -- synchronous clear/load mode          ; 137       ;
+;     -- asynchronous clear/load mode         ; 433       ;
 ;                                             ;           ;
-; Total registers                             ; 307       ;
-; Total logic cells in carry chains           ; 99        ;
+; Total registers                             ; 455       ;
+; Total logic cells in carry chains           ; 163       ;
 ; I/O pins                                    ; 74        ;
 ; Maximum fan-out node                        ; PIO_Reset ;
-; Maximum fan-out                             ; 292       ;
-; Total fan-out                               ; 1881      ;
-; Average fan-out                             ; 4.03      ;
+; Maximum fan-out                             ; 434       ;
+; Total fan-out                               ; 2867      ;
+; Average fan-out                             ; 4.40      ;
 +---------------------------------------------+-----------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                          ;
-+----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+-----------------------------+--------------+
-; Compilation Hierarchy Node ; Logic Cells ; LC Registers ; UFM Blocks ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name         ; Library Name ;
-+----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+-----------------------------+--------------+
-; |SyncBox                   ; 393 (0)     ; 307          ; 0          ; 74   ; 0            ; 86 (0)       ; 94 (0)            ; 213 (0)          ; 99 (0)          ; 0 (0)      ; |SyncBox                    ; work         ;
-;    |ClkDiv:clkd|           ; 50 (50)     ; 23           ; 0          ; 0    ; 0            ; 27 (27)      ; 9 (9)             ; 14 (14)          ; 35 (35)         ; 0 (0)      ; |SyncBox|ClkDiv:clkd        ; work         ;
-;    |FreeRun:freerun|       ; 35 (35)     ; 25           ; 0          ; 0    ; 0            ; 10 (10)      ; 7 (7)             ; 18 (18)          ; 12 (12)         ; 0 (0)      ; |SyncBox|FreeRun:freerun    ; work         ;
-;    |ManchEncode:mancho|    ; 181 (181)   ; 167          ; 0          ; 0    ; 0            ; 14 (14)      ; 13 (13)           ; 154 (154)        ; 32 (32)         ; 0 (0)      ; |SyncBox|ManchEncode:mancho ; work         ;
-;    |PIO_Interface:pio|     ; 69 (69)     ; 51           ; 0          ; 0    ; 0            ; 18 (18)      ; 48 (48)           ; 3 (3)            ; 0 (0)           ; 0 (0)      ; |SyncBox|PIO_Interface:pio  ; work         ;
-;    |Sync_Len:synco|        ; 58 (58)     ; 41           ; 0          ; 0    ; 0            ; 17 (17)      ; 17 (17)           ; 24 (24)          ; 20 (20)         ; 0 (0)      ; |SyncBox|Sync_Len:synco     ; work         ;
-+----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+-----------------------------+--------------+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                           ;
++----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+------------------------------+--------------+
+; Compilation Hierarchy Node ; Logic Cells ; LC Registers ; UFM Blocks ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name          ; Library Name ;
++----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+------------------------------+--------------+
+; |SyncBox                   ; 577 (0)     ; 455          ; 0          ; 74   ; 0            ; 122 (0)      ; 123 (0)           ; 332 (0)          ; 163 (0)         ; 0 (0)      ; |SyncBox                     ; work         ;
+;    |ClkDiv:clkd|           ; 50 (50)     ; 23           ; 0          ; 0    ; 0            ; 27 (27)      ; 9 (9)             ; 14 (14)          ; 35 (35)         ; 0 (0)      ; |SyncBox|ClkDiv:clkd         ; work         ;
+;    |FreeRun:freerun1|      ; 35 (35)     ; 25           ; 0          ; 0    ; 0            ; 10 (10)      ; 7 (7)             ; 18 (18)          ; 12 (12)         ; 0 (0)      ; |SyncBox|FreeRun:freerun1    ; work         ;
+;    |FreeRun:freerun2|      ; 35 (35)     ; 25           ; 0          ; 0    ; 0            ; 10 (10)      ; 7 (7)             ; 18 (18)          ; 12 (12)         ; 0 (0)      ; |SyncBox|FreeRun:freerun2    ; work         ;
+;    |ManchEncode:mancho1|   ; 185 (185)   ; 170          ; 0          ; 0    ; 0            ; 15 (15)      ; 15 (15)           ; 155 (155)        ; 32 (32)         ; 0 (0)      ; |SyncBox|ManchEncode:mancho1 ; work         ;
+;    |ManchEncode:mancho2|   ; 80 (80)     ; 77           ; 0          ; 0    ; 0            ; 3 (3)        ; 2 (2)             ; 75 (75)          ; 32 (32)         ; 0 (0)      ; |SyncBox|ManchEncode:mancho2 ; work         ;
+;    |PIO_Interface:pio|     ; 76 (76)     ; 53           ; 0          ; 0    ; 0            ; 23 (23)      ; 49 (49)           ; 4 (4)            ; 0 (0)           ; 0 (0)      ; |SyncBox|PIO_Interface:pio   ; work         ;
+;    |Sync_Len:synco1|       ; 58 (58)     ; 41           ; 0          ; 0    ; 0            ; 17 (17)      ; 17 (17)           ; 24 (24)          ; 20 (20)         ; 0 (0)      ; |SyncBox|Sync_Len:synco1     ; work         ;
+;    |Sync_Len:synco2|       ; 58 (58)     ; 41           ; 0          ; 0    ; 0            ; 17 (17)      ; 17 (17)           ; 24 (24)          ; 20 (20)         ; 0 (0)      ; |SyncBox|Sync_Len:synco2     ; work         ;
++----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
 Encoding Type:  One-Hot
 +-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; State Machine - |SyncBox|ManchEncode:mancho|dvp_current_state                                                                                                                     ;
+; State Machine - |SyncBox|ManchEncode:mancho1|dvp_current_state                                                                                                                    ;
 +---------------------------------+---------------------------------+--------------------------------+--------------------------+--------------------------+------------------------+
 ; Name                            ; dvp_current_state.WAIT_FOR_HIGH ; dvp_current_state.WAIT_FOR_LOW ; dvp_current_state.PAUSE2 ; dvp_current_state.PAUSE1 ; dvp_current_state.IDLE ;
 +---------------------------------+---------------------------------+--------------------------------+--------------------------+--------------------------+------------------------+
@@ -225,17 +238,48 @@ Encoding Type:  One-Hot
 +---------------------------------+---------------------------------+--------------------------------+--------------------------+--------------------------+------------------------+
 
 
-+---------------------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                                          ;
-+---------------------------------------------+-----------------------------------------------+
-; Register name                               ; Reason for Removal                            ;
-+---------------------------------------------+-----------------------------------------------+
-; ManchEncode:mancho|Shift5Load[33,34,37]     ; Merged with ManchEncode:mancho|Shift5Load[32] ;
-; ManchEncode:mancho|dvp_current_state.IDLE   ; Lost fanout                                   ;
-; ManchEncode:mancho|dvp_current_state.PAUSE1 ; Lost fanout                                   ;
-; ManchEncode:mancho|dvp_current_state.PAUSE2 ; Lost fanout                                   ;
-; Total Number of Removed Registers = 6       ;                                               ;
-+---------------------------------------------+-----------------------------------------------+
+Encoding Type:  One-Hot
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |SyncBox|ManchEncode:mancho2|dvp_current_state                                                                                                                    ;
++---------------------------------+---------------------------------+--------------------------------+--------------------------+--------------------------+------------------------+
+; Name                            ; dvp_current_state.WAIT_FOR_HIGH ; dvp_current_state.WAIT_FOR_LOW ; dvp_current_state.PAUSE2 ; dvp_current_state.PAUSE1 ; dvp_current_state.IDLE ;
++---------------------------------+---------------------------------+--------------------------------+--------------------------+--------------------------+------------------------+
+; dvp_current_state.IDLE          ; 0                               ; 0                              ; 0                        ; 0                        ; 0                      ;
+; dvp_current_state.PAUSE1        ; 0                               ; 0                              ; 0                        ; 1                        ; 1                      ;
+; dvp_current_state.PAUSE2        ; 0                               ; 0                              ; 1                        ; 0                        ; 1                      ;
+; dvp_current_state.WAIT_FOR_LOW  ; 0                               ; 1                              ; 0                        ; 0                        ; 1                      ;
+; dvp_current_state.WAIT_FOR_HIGH ; 1                               ; 0                              ; 0                        ; 0                        ; 1                      ;
++---------------------------------+---------------------------------+--------------------------------+--------------------------+--------------------------+------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                                    ;
++-----------------------------------------------------+-----------------------------------------------------------------+
+; Register name                                       ; Reason for Removal                                              ;
++-----------------------------------------------------+-----------------------------------------------------------------+
+; ManchEncode:mancho2|rDV_RTS                         ; Merged with ManchEncode:mancho1|rDV_RTS                         ;
+; ManchEncode:mancho2|rrDV_RTS                        ; Merged with ManchEncode:mancho1|rrDV_RTS                        ;
+; ManchEncode:mancho2|reg[9]                          ; Merged with ManchEncode:mancho1|reg[9]                          ;
+; ManchEncode:mancho2|reg[8]                          ; Merged with ManchEncode:mancho1|reg[8]                          ;
+; ManchEncode:mancho2|reg[7]                          ; Merged with ManchEncode:mancho1|reg[7]                          ;
+; ManchEncode:mancho2|reg[6]                          ; Merged with ManchEncode:mancho1|reg[6]                          ;
+; ManchEncode:mancho2|reg[5]                          ; Merged with ManchEncode:mancho1|reg[5]                          ;
+; ManchEncode:mancho2|reg[4]                          ; Merged with ManchEncode:mancho1|reg[4]                          ;
+; ManchEncode:mancho2|reg[3]                          ; Merged with ManchEncode:mancho1|reg[3]                          ;
+; ManchEncode:mancho2|reg[2]                          ; Merged with ManchEncode:mancho1|reg[2]                          ;
+; ManchEncode:mancho2|reg[1]                          ; Merged with ManchEncode:mancho1|reg[1]                          ;
+; ManchEncode:mancho2|reg[0]                          ; Merged with ManchEncode:mancho1|reg[0]                          ;
+; ManchEncode:mancho1|Shift5Load[33,34,37]            ; Merged with ManchEncode:mancho1|Shift5Load[32]                  ;
+; ManchEncode:mancho1|dvp_current_state.IDLE          ; Lost fanout                                                     ;
+; ManchEncode:mancho1|dvp_current_state.PAUSE1        ; Lost fanout                                                     ;
+; ManchEncode:mancho1|dvp_current_state.PAUSE2        ; Lost fanout                                                     ;
+; ManchEncode:mancho2|dvp_current_state.IDLE          ; Lost fanout                                                     ;
+; ManchEncode:mancho2|dvp_current_state.PAUSE1        ; Lost fanout                                                     ;
+; ManchEncode:mancho2|dvp_current_state.PAUSE2        ; Lost fanout                                                     ;
+; ManchEncode:mancho2|dvp_current_state.WAIT_FOR_LOW  ; Merged with ManchEncode:mancho1|dvp_current_state.WAIT_FOR_LOW  ;
+; ManchEncode:mancho2|dvp_current_state.WAIT_FOR_HIGH ; Merged with ManchEncode:mancho1|dvp_current_state.WAIT_FOR_HIGH ;
+; Total Number of Removed Registers = 23              ;                                                                 ;
++-----------------------------------------------------+-----------------------------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -243,12 +287,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 307   ;
+; Total registers                              ; 455   ;
 ; Number of registers using Synchronous Clear  ; 9     ;
-; Number of registers using Synchronous Load   ; 64    ;
-; Number of registers using Asynchronous Clear ; 291   ;
+; Number of registers using Synchronous Load   ; 128   ;
+; Number of registers using Asynchronous Clear ; 433   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 263   ;
+; Number of registers using Clock Enable       ; 402   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -258,119 +302,121 @@ Encoding Type:  One-Hot
 +-------------------------------------------+---------+
 ; Inverted Register                         ; Fan out ;
 +-------------------------------------------+---------+
-; ManchEncode:mancho|ShiftBits[39]          ; 2       ;
-; ManchEncode:mancho|Shift5Bits[39]         ; 2       ;
-; Sync_Len:synco|isAddr_Zero                ; 49      ;
-; ManchEncode:mancho|DV_Buf                 ; 47      ;
-; FreeRun:freerun|DV_FreeRun                ; 3       ;
-; ManchEncode:mancho|reg[9]                 ; 3       ;
-; ManchEncode:mancho|reg[8]                 ; 3       ;
-; ManchEncode:mancho|reg[7]                 ; 3       ;
-; ManchEncode:mancho|reg[6]                 ; 3       ;
-; ManchEncode:mancho|reg[5]                 ; 3       ;
-; ManchEncode:mancho|reg[4]                 ; 3       ;
-; ManchEncode:mancho|reg[3]                 ; 3       ;
-; ManchEncode:mancho|reg[2]                 ; 3       ;
-; ManchEncode:mancho|reg[0]                 ; 2       ;
-; ManchEncode:mancho|reg[1]                 ; 3       ;
-; ManchEncode:mancho|ShiftBits[38]          ; 1       ;
-; ManchEncode:mancho|Shift5Rdy              ; 42      ;
-; ManchEncode:mancho|Shift5Load[39]         ; 1       ;
-; ManchEncode:mancho|Shift5Bits[38]         ; 1       ;
-; Sync_Len:synco|SL_LoadReg[11]             ; 2       ;
-; Sync_Len:synco|SL_LoadReg[9]              ; 2       ;
-; Sync_Len:synco|SL_LoadReg[6]              ; 2       ;
-; ManchEncode:mancho|rrDV_RTS               ; 1       ;
-; ManchEncode:mancho|ShiftBits[37]          ; 1       ;
-; ManchEncode:mancho|Shift5Load[38]         ; 1       ;
-; ManchEncode:mancho|Shift5Bits[37]         ; 1       ;
+; ManchEncode:mancho1|ShiftBits[39]         ; 2       ;
+; ManchEncode:mancho2|ShiftBits[39]         ; 1       ;
+; ManchEncode:mancho1|Shift5Bits[39]        ; 2       ;
+; Sync_Len:synco1|isAddr_Zero               ; 5       ;
+; ManchEncode:mancho1|DV_Buf                ; 47      ;
+; ManchEncode:mancho1|reg[9]                ; 3       ;
+; ManchEncode:mancho1|reg[8]                ; 3       ;
+; ManchEncode:mancho1|reg[7]                ; 3       ;
+; ManchEncode:mancho1|reg[6]                ; 3       ;
+; ManchEncode:mancho1|reg[5]                ; 3       ;
+; ManchEncode:mancho1|reg[4]                ; 3       ;
+; ManchEncode:mancho1|reg[3]                ; 3       ;
+; ManchEncode:mancho1|reg[2]                ; 3       ;
+; ManchEncode:mancho1|reg[0]                ; 2       ;
+; ManchEncode:mancho1|reg[1]                ; 3       ;
+; ManchEncode:mancho1|ShiftBits[38]         ; 1       ;
+; ManchEncode:mancho2|ShiftBits[38]         ; 1       ;
+; ManchEncode:mancho1|Shift5Rdy             ; 42      ;
+; ManchEncode:mancho1|Shift5Load[39]        ; 1       ;
+; ManchEncode:mancho1|Shift5Bits[38]        ; 1       ;
+; Sync_Len:synco1|SL_LoadReg[11]            ; 2       ;
+; Sync_Len:synco1|SL_LoadReg[9]             ; 2       ;
+; Sync_Len:synco1|SL_LoadReg[6]             ; 2       ;
+; FreeRun:freerun1|DV_FreeRun               ; 1       ;
+; ManchEncode:mancho1|rrDV_RTS              ; 1       ;
+; ManchEncode:mancho1|ShiftBits[37]         ; 1       ;
+; ManchEncode:mancho2|DV_Buf                ; 42      ;
+; ManchEncode:mancho2|ShiftBits[37]         ; 1       ;
+; ManchEncode:mancho1|Shift5Load[38]        ; 1       ;
+; ManchEncode:mancho1|Shift5Bits[37]        ; 1       ;
 ; PIO_Interface:pio|rPIO_nWR                ; 2       ;
-; FreeRun:freerun|FRLoadReg[0]              ; 1       ;
-; FreeRun:freerun|FRLoadReg[1]              ; 1       ;
-; FreeRun:freerun|FRLoadReg[2]              ; 1       ;
-; FreeRun:freerun|FRLoadReg[3]              ; 1       ;
-; FreeRun:freerun|FRLoadReg[5]              ; 1       ;
-; ManchEncode:mancho|rDV_RTS                ; 1       ;
-; ManchEncode:mancho|ShiftBits[36]          ; 1       ;
-; ManchEncode:mancho|Shift5Load[32]         ; 4       ;
-; ManchEncode:mancho|Shift5Bits[36]         ; 1       ;
-; ManchEncode:mancho|ShiftBits[35]          ; 1       ;
-; ManchEncode:mancho|Shift5Load[36]         ; 1       ;
-; ManchEncode:mancho|Shift5Bits[35]         ; 1       ;
-; ManchEncode:mancho|ShiftBits[34]          ; 1       ;
-; ManchEncode:mancho|Shift5Load[35]         ; 1       ;
-; ManchEncode:mancho|Shift5Bits[34]         ; 1       ;
-; ManchEncode:mancho|ShiftBits[33]          ; 1       ;
+; PIO_Interface:pio|ModeReg[1]              ; 2       ;
+; ManchEncode:mancho1|rDV_RTS               ; 1       ;
+; ManchEncode:mancho1|ShiftBits[36]         ; 1       ;
+; FreeRun:freerun2|DV_FreeRun               ; 1       ;
+; ManchEncode:mancho2|ShiftBits[36]         ; 1       ;
+; ManchEncode:mancho1|Shift5Load[32]        ; 4       ;
+; ManchEncode:mancho1|Shift5Bits[36]        ; 1       ;
+; FreeRun:freerun1|FRLoadReg[0]             ; 1       ;
+; FreeRun:freerun1|FRLoadReg[1]             ; 1       ;
+; FreeRun:freerun1|FRLoadReg[2]             ; 1       ;
+; FreeRun:freerun1|FRLoadReg[3]             ; 1       ;
+; FreeRun:freerun1|FRLoadReg[5]             ; 1       ;
+; ManchEncode:mancho1|ShiftBits[35]         ; 1       ;
+; Sync_Len:synco2|isAddr_Zero               ; 3       ;
+; ManchEncode:mancho2|ShiftBits[35]         ; 1       ;
+; ManchEncode:mancho1|Shift5Load[36]        ; 1       ;
+; ManchEncode:mancho1|Shift5Bits[35]        ; 1       ;
+; ManchEncode:mancho1|ShiftBits[34]         ; 1       ;
+; Sync_Len:synco2|SL_LoadReg[11]            ; 2       ;
+; Sync_Len:synco2|SL_LoadReg[9]             ; 2       ;
+; Sync_Len:synco2|SL_LoadReg[6]             ; 2       ;
+; FreeRun:freerun2|FRLoadReg[0]             ; 1       ;
+; FreeRun:freerun2|FRLoadReg[1]             ; 1       ;
+; FreeRun:freerun2|FRLoadReg[2]             ; 1       ;
+; FreeRun:freerun2|FRLoadReg[3]             ; 1       ;
+; FreeRun:freerun2|FRLoadReg[5]             ; 1       ;
+; ManchEncode:mancho2|ShiftBits[34]         ; 1       ;
+; ManchEncode:mancho1|Shift5Load[35]        ; 1       ;
+; ManchEncode:mancho1|Shift5Bits[34]        ; 1       ;
+; ManchEncode:mancho1|ShiftBits[33]         ; 1       ;
+; PIO_Interface:pio|ModeReg[2]              ; 2       ;
+; ManchEncode:mancho2|ShiftBits[33]         ; 1       ;
 ; ClkDiv:clkd|clk_adj_div[3]                ; 2       ;
-; ManchEncode:mancho|Shift5Bits[33]         ; 1       ;
-; ManchEncode:mancho|ShiftBits[32]          ; 1       ;
-; ManchEncode:mancho|Shift5Bits[32]         ; 1       ;
-; ManchEncode:mancho|ShiftBits[31]          ; 1       ;
+; ManchEncode:mancho1|Shift5Bits[33]        ; 1       ;
+; ManchEncode:mancho1|ShiftBits[32]         ; 1       ;
+; ManchEncode:mancho2|ShiftBits[32]         ; 1       ;
+; ManchEncode:mancho1|Shift5Bits[32]        ; 1       ;
+; ManchEncode:mancho1|ShiftBits[31]         ; 1       ;
+; ManchEncode:mancho2|ShiftBits[31]         ; 1       ;
 ; ClkDiv:clkd|clk_adj_div[1]                ; 2       ;
-; ManchEncode:mancho|Shift5Bits[31]         ; 1       ;
-; ManchEncode:mancho|ShiftBits[30]          ; 1       ;
-; ManchEncode:mancho|Shift5Load[31]         ; 1       ;
-; ManchEncode:mancho|Shift5Bits[30]         ; 1       ;
-; ManchEncode:mancho|ShiftBits[29]          ; 1       ;
-; ManchEncode:mancho|Shift5Load[30]         ; 1       ;
-; ManchEncode:mancho|Shift5Bits[29]         ; 1       ;
-; ManchEncode:mancho|ShiftBits[28]          ; 1       ;
-; ManchEncode:mancho|Shift5Load[29]         ; 1       ;
-; ManchEncode:mancho|Shift5Bits[28]         ; 1       ;
-; ManchEncode:mancho|ShiftBits[27]          ; 1       ;
-; ManchEncode:mancho|Shift5Load[28]         ; 1       ;
-; ManchEncode:mancho|Shift5Bits[27]         ; 1       ;
-; ManchEncode:mancho|ShiftBits[26]          ; 1       ;
-; ManchEncode:mancho|Shift5Load[27]         ; 1       ;
-; ManchEncode:mancho|Shift5Bits[26]         ; 1       ;
-; ManchEncode:mancho|ShiftBits[25]          ; 1       ;
-; ManchEncode:mancho|Shift5Load[26]         ; 1       ;
-; ManchEncode:mancho|Shift5Bits[25]         ; 1       ;
-; ManchEncode:mancho|ShiftBits[24]          ; 1       ;
-; ManchEncode:mancho|Shift5Load[25]         ; 1       ;
-; ManchEncode:mancho|Shift5Bits[24]         ; 1       ;
-; ManchEncode:mancho|ShiftBits[23]          ; 1       ;
-; ManchEncode:mancho|Shift5Load[24]         ; 1       ;
-; ManchEncode:mancho|Shift5Bits[23]         ; 1       ;
-; ManchEncode:mancho|ShiftBits[22]          ; 1       ;
-; ManchEncode:mancho|Shift5Load[23]         ; 1       ;
-; ManchEncode:mancho|Shift5Bits[22]         ; 1       ;
-; ManchEncode:mancho|ShiftBits[21]          ; 1       ;
-; ManchEncode:mancho|Shift5Load[22]         ; 1       ;
-; ManchEncode:mancho|Shift5Bits[21]         ; 1       ;
-; ManchEncode:mancho|ShiftBits[20]          ; 1       ;
-; ManchEncode:mancho|Shift5Load[21]         ; 1       ;
-; ManchEncode:mancho|Shift5Bits[20]         ; 1       ;
-; ManchEncode:mancho|ShiftBits[19]          ; 1       ;
-; ManchEncode:mancho|Shift5Load[20]         ; 1       ;
-; ManchEncode:mancho|Shift5Bits[19]         ; 1       ;
-; ManchEncode:mancho|ShiftBits[18]          ; 1       ;
-; ManchEncode:mancho|Shift5Load[19]         ; 1       ;
-; ManchEncode:mancho|Shift5Bits[18]         ; 1       ;
-; ManchEncode:mancho|ShiftBits[17]          ; 1       ;
-; ManchEncode:mancho|Shift5Load[18]         ; 1       ;
-; ManchEncode:mancho|Shift5Bits[17]         ; 1       ;
-; ManchEncode:mancho|ShiftBits[16]          ; 1       ;
-; ManchEncode:mancho|Shift5Load[17]         ; 1       ;
-; ManchEncode:mancho|Shift5Bits[16]         ; 1       ;
-; ManchEncode:mancho|ShiftBits[15]          ; 1       ;
-; ManchEncode:mancho|Shift5Load[16]         ; 1       ;
-; ManchEncode:mancho|Shift5Bits[15]         ; 1       ;
-; ManchEncode:mancho|ShiftBits[14]          ; 1       ;
-; ManchEncode:mancho|Shift5Load[15]         ; 1       ;
-; Total number of inverted registers = 144* ;         ;
+; ManchEncode:mancho1|Shift5Bits[31]        ; 1       ;
+; ManchEncode:mancho1|ShiftBits[30]         ; 1       ;
+; ManchEncode:mancho2|ShiftBits[30]         ; 1       ;
+; ManchEncode:mancho1|Shift5Load[31]        ; 1       ;
+; ManchEncode:mancho1|Shift5Bits[30]        ; 1       ;
+; ManchEncode:mancho1|ShiftBits[29]         ; 1       ;
+; ManchEncode:mancho2|ShiftBits[29]         ; 1       ;
+; ManchEncode:mancho1|Shift5Load[30]        ; 1       ;
+; ManchEncode:mancho1|Shift5Bits[29]        ; 1       ;
+; ManchEncode:mancho1|ShiftBits[28]         ; 1       ;
+; ManchEncode:mancho2|ShiftBits[28]         ; 1       ;
+; ManchEncode:mancho1|Shift5Load[29]        ; 1       ;
+; ManchEncode:mancho1|Shift5Bits[28]        ; 1       ;
+; ManchEncode:mancho1|ShiftBits[27]         ; 1       ;
+; ManchEncode:mancho2|ShiftBits[27]         ; 1       ;
+; ManchEncode:mancho1|Shift5Load[28]        ; 1       ;
+; ManchEncode:mancho1|Shift5Bits[27]        ; 1       ;
+; ManchEncode:mancho1|ShiftBits[26]         ; 1       ;
+; ManchEncode:mancho2|ShiftBits[26]         ; 1       ;
+; ManchEncode:mancho1|Shift5Load[27]        ; 1       ;
+; ManchEncode:mancho1|Shift5Bits[26]        ; 1       ;
+; ManchEncode:mancho1|ShiftBits[25]         ; 1       ;
+; ManchEncode:mancho2|ShiftBits[25]         ; 1       ;
+; ManchEncode:mancho1|Shift5Load[26]        ; 1       ;
+; ManchEncode:mancho1|Shift5Bits[25]        ; 1       ;
+; ManchEncode:mancho1|ShiftBits[24]         ; 1       ;
+; ManchEncode:mancho2|ShiftBits[24]         ; 1       ;
+; ManchEncode:mancho1|Shift5Load[25]        ; 1       ;
+; ManchEncode:mancho1|Shift5Bits[24]        ; 1       ;
+; Total number of inverted registers = 197* ;         ;
 +-------------------------------------------+---------+
 * Table truncated at 100 items. To change the number of inverted registers reported, set the "Number of Inverted Registers Reported" option under Assignments->Settings->Analysis and Synthesis Settings->More Settings
 
 
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                          ;
-+--------------------+-----------+---------------+----------------------+------------------------+-------------------------------------------+----------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered                                ; Example Multiplexer Output ;
-+--------------------+-----------+---------------+----------------------+------------------------+-------------------------------------------+----------------------------+
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; |SyncBox|ManchEncode:mancho|DV_Cntr[30]   ;                            ;
-; 3:1                ; 33 bits   ; 66 LEs        ; 66 LEs               ; 0 LEs                  ; |SyncBox|ManchEncode:mancho|ShiftBits[20] ;                            ;
-+--------------------+-----------+---------------+----------------------+------------------------+-------------------------------------------+----------------------------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                           ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                 ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------+
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |SyncBox|ManchEncode:mancho1|DV_Cntr[29]   ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |SyncBox|ManchEncode:mancho2|DV_Cntr[27]   ;
+; 3:1                ; 33 bits   ; 66 LEs        ; 66 LEs               ; 0 LEs                  ; Yes        ; |SyncBox|ManchEncode:mancho1|ShiftBits[21] ;
+; 3:1                ; 33 bits   ; 66 LEs        ; 66 LEs               ; 0 LEs                  ; Yes        ; |SyncBox|ManchEncode:mancho2|ShiftBits[12] ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------+
 
 
 +----------------------------------------------------------------+
@@ -395,23 +441,43 @@ Encoding Type:  One-Hot
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+--------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: FreeRun:freerun ;
-+----------------+--------------+------------------------------+
-; Parameter Name ; Value        ; Type                         ;
-+----------------+--------------+------------------------------+
-; FR_CNT         ; 000000101111 ; Unsigned Binary              ;
-+----------------+--------------+------------------------------+
++---------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: FreeRun:freerun2 ;
++----------------+--------------+-------------------------------+
+; Parameter Name ; Value        ; Type                          ;
++----------------+--------------+-------------------------------+
+; FR_CNT         ; 000000101111 ; Unsigned Binary               ;
++----------------+--------------+-------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+-------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: Sync_Len:synco ;
-+----------------+----------------------+---------------------+
-; Parameter Name ; Value                ; Type                ;
-+----------------+----------------------+---------------------+
-; SL_CNT         ; 00000000101001000000 ; Unsigned Binary     ;
-+----------------+----------------------+---------------------+
++--------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Sync_Len:synco2 ;
++----------------+----------------------+----------------------+
+; Parameter Name ; Value                ; Type                 ;
++----------------+----------------------+----------------------+
+; SL_CNT         ; 00000000101001000000 ; Unsigned Binary      ;
++----------------+----------------------+----------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: FreeRun:freerun1 ;
++----------------+--------------+-------------------------------+
+; Parameter Name ; Value        ; Type                          ;
++----------------+--------------+-------------------------------+
+; FR_CNT         ; 000000101111 ; Unsigned Binary               ;
++----------------+--------------+-------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Sync_Len:synco1 ;
++----------------+----------------------+----------------------+
+; Parameter Name ; Value                ; Type                 ;
++----------------+----------------------+----------------------+
+; SL_CNT         ; 00000000101001000000 ; Unsigned Binary      ;
++----------------+----------------------+----------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -419,51 +485,51 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Analysis & Synthesis Messages ;
 +-------------------------------+
 Info: *******************************************************************
-Info: Running Quartus II 64-Bit Analysis & Synthesis
-    Info: Version 11.1 Build 259 01/25/2012 Service Pack 2 SJ Full Version
-    Info: Processing started: Tue Sep 02 15:06:24 2014
+Info: Running Quartus Prime Analysis & Synthesis
+    Info: Version 15.1.0 Build 185 10/21/2015 SJ Lite Edition
+    Info: Processing started: Fri May 13 16:14:40 2016
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Synco -c Synco
-Info (12021): Found 1 design units, including 1 entities, in source file syncbox.bdf
+Info (20032): Parallel compilation is enabled and will use up to 3 processors
+Info (12021): Found 1 design units, including 1 entities, in source file SyncBox.bdf
     Info (12023): Found entity 1: SyncBox
-Info (12021): Found 2 design units, including 1 entities, in source file clkdiv.vhd
-    Info (12022): Found design unit 1: ClkDiv-rtl
-    Info (12023): Found entity 1: ClkDiv
-Info (12021): Found 2 design units, including 1 entities, in source file pio_interface.vhd
-    Info (12022): Found design unit 1: PIO_Interface-PIO_V3b
-    Info (12023): Found entity 1: PIO_Interface
-Info (12021): Found 2 design units, including 1 entities, in source file freerun.vhd
-    Info (12022): Found design unit 1: FreeRun-V4c
-    Info (12023): Found entity 1: FreeRun
-Info (12021): Found 2 design units, including 1 entities, in source file manchencode.vhd
-    Info (12022): Found design unit 1: ManchEncode-P_v5d
-    Info (12023): Found entity 1: ManchEncode
-Info (12021): Found 2 design units, including 1 entities, in source file testpnts1.vhd
-    Info (12022): Found design unit 1: TestPnts1-T1a
-    Info (12023): Found entity 1: TestPnts1
-Info (12021): Found 2 design units, including 1 entities, in source file testpnts2.vhd
-    Info (12022): Found design unit 1: TestPnts2-T2
-    Info (12023): Found entity 1: TestPnts2
-Info (12021): Found 2 design units, including 1 entities, in source file sync_len.vhd
-    Info (12022): Found design unit 1: Sync_Len-V3c
-    Info (12023): Found entity 1: Sync_Len
+Info (12021): Found 2 design units, including 1 entities, in source file ClkDiv.vhd
+    Info (12022): Found design unit 1: ClkDiv-rtl File: /home/mhasse/code/altera/synco/ClkDiv.vhd Line: 27
+    Info (12023): Found entity 1: ClkDiv File: /home/mhasse/code/altera/synco/ClkDiv.vhd Line: 11
+Info (12021): Found 2 design units, including 1 entities, in source file PIO_Interface.vhd
+    Info (12022): Found design unit 1: PIO_Interface-PIO_V3b File: /home/mhasse/code/altera/synco/PIO_Interface.vhd Line: 110
+    Info (12023): Found entity 1: PIO_Interface File: /home/mhasse/code/altera/synco/PIO_Interface.vhd Line: 45
+Info (12021): Found 2 design units, including 1 entities, in source file FreeRun.vhd
+    Info (12022): Found design unit 1: FreeRun-V4c File: /home/mhasse/code/altera/synco/FreeRun.vhd Line: 27
+    Info (12023): Found entity 1: FreeRun File: /home/mhasse/code/altera/synco/FreeRun.vhd Line: 6
+Info (12021): Found 2 design units, including 1 entities, in source file ManchEncode.vhd
+    Info (12022): Found design unit 1: ManchEncode-P_v5d File: /home/mhasse/code/altera/synco/ManchEncode.vhd Line: 65
+    Info (12023): Found entity 1: ManchEncode File: /home/mhasse/code/altera/synco/ManchEncode.vhd Line: 30
+Info (12021): Found 2 design units, including 1 entities, in source file TestPnts1.vhd
+    Info (12022): Found design unit 1: TestPnts1-T1a File: /home/mhasse/code/altera/synco/TestPnts1.vhd Line: 35
+    Info (12023): Found entity 1: TestPnts1 File: /home/mhasse/code/altera/synco/TestPnts1.vhd Line: 15
+Info (12021): Found 2 design units, including 1 entities, in source file TestPnts2.vhd
+    Info (12022): Found design unit 1: TestPnts2-T2 File: /home/mhasse/code/altera/synco/TestPnts2.vhd Line: 61
+    Info (12023): Found entity 1: TestPnts2 File: /home/mhasse/code/altera/synco/TestPnts2.vhd Line: 29
+Info (12021): Found 2 design units, including 1 entities, in source file Sync_Len.vhd
+    Info (12022): Found design unit 1: Sync_Len-V3c File: /home/mhasse/code/altera/synco/Sync_Len.vhd Line: 55
+    Info (12023): Found entity 1: Sync_Len File: /home/mhasse/code/altera/synco/Sync_Len.vhd Line: 30
 Info (12127): Elaborating entity "SyncBox" for the top level hierarchy
 Info (12128): Elaborating entity "PIO_Interface" for hierarchy "PIO_Interface:pio"
 Info (12128): Elaborating entity "ClkDiv" for hierarchy "ClkDiv:clkd"
-Warning (10631): VHDL Process Statement warning at ClkDiv.vhd(59): inferring latch(es) for signal or variable "clk_adj_div", which holds its previous value in one or more paths through the process
-Info (10041): Inferred latch for "clk_adj_div[8]" at ClkDiv.vhd(59)
-Info (12128): Elaborating entity "ManchEncode" for hierarchy "ManchEncode:mancho"
-Warning (10036): Verilog HDL or VHDL warning at ManchEncode.vhd(83): object "rrrrDV_RTS" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at ManchEncode.vhd(94): object "DV_out" assigned a value but never read
-Warning (10631): VHDL Process Statement warning at ManchEncode.vhd(214): inferring latch(es) for signal or variable "StatusBits", which holds its previous value in one or more paths through the process
-Info (10041): Inferred latch for "StatusBits[0]" at ManchEncode.vhd(214)
-Info (10041): Inferred latch for "StatusBits[1]" at ManchEncode.vhd(214)
-Info (10041): Inferred latch for "StatusBits[2]" at ManchEncode.vhd(214)
-Info (10041): Inferred latch for "StatusBits[5]" at ManchEncode.vhd(214)
-Info (12128): Elaborating entity "FreeRun" for hierarchy "FreeRun:freerun"
-Info (12128): Elaborating entity "Sync_Len" for hierarchy "Sync_Len:synco"
+Warning (10631): VHDL Process Statement warning at ClkDiv.vhd(59): inferring latch(es) for signal or variable "clk_adj_div", which holds its previous value in one or more paths through the process File: /home/mhasse/code/altera/synco/ClkDiv.vhd Line: 59
+Info (10041): Inferred latch for "clk_adj_div[8]" at ClkDiv.vhd(59) File: /home/mhasse/code/altera/synco/ClkDiv.vhd Line: 59
+Info (12128): Elaborating entity "ManchEncode" for hierarchy "ManchEncode:mancho2"
+Warning (10036): Verilog HDL or VHDL warning at ManchEncode.vhd(73): object "rrrrDV_RTS" assigned a value but never read File: /home/mhasse/code/altera/synco/ManchEncode.vhd Line: 73
+Warning (10036): Verilog HDL or VHDL warning at ManchEncode.vhd(84): object "DV_out" assigned a value but never read File: /home/mhasse/code/altera/synco/ManchEncode.vhd Line: 84
+Warning (10631): VHDL Process Statement warning at ManchEncode.vhd(215): inferring latch(es) for signal or variable "StatusBits", which holds its previous value in one or more paths through the process File: /home/mhasse/code/altera/synco/ManchEncode.vhd Line: 215
+Info (10041): Inferred latch for "StatusBits[0]" at ManchEncode.vhd(215) File: /home/mhasse/code/altera/synco/ManchEncode.vhd Line: 215
+Info (10041): Inferred latch for "StatusBits[1]" at ManchEncode.vhd(215) File: /home/mhasse/code/altera/synco/ManchEncode.vhd Line: 215
+Info (10041): Inferred latch for "StatusBits[2]" at ManchEncode.vhd(215) File: /home/mhasse/code/altera/synco/ManchEncode.vhd Line: 215
+Info (10041): Inferred latch for "StatusBits[5]" at ManchEncode.vhd(215) File: /home/mhasse/code/altera/synco/ManchEncode.vhd Line: 215
+Info (12128): Elaborating entity "FreeRun" for hierarchy "FreeRun:freerun2"
+Info (12128): Elaborating entity "Sync_Len" for hierarchy "Sync_Len:synco2"
 Info (12128): Elaborating entity "TestPnts2" for hierarchy "TestPnts2:testo2"
 Info (12128): Elaborating entity "TestPnts1" for hierarchy "TestPnts1:testo1"
-Info (13005): Duplicate registers merged to single register
 Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "LED2" is stuck at GND
     Warning (13410): Pin "LED3" is stuck at GND
@@ -471,25 +537,24 @@ Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "XX2" is stuck at GND
     Warning (13410): Pin "XX3" is stuck at GND
     Warning (13410): Pin "XX4" is stuck at GND
-Info (18000): Registers with preset signals will power-up high
-Info (17049): 3 registers lost all their fanouts during netlist optimizations. The first 3 are displayed below.
-    Info (17050): Register "ManchEncode:mancho|dvp_current_state.IDLE" lost all its fanouts during netlist optimizations.
-    Info (17050): Register "ManchEncode:mancho|dvp_current_state.PAUSE1" lost all its fanouts during netlist optimizations.
-    Info (17050): Register "ManchEncode:mancho|dvp_current_state.PAUSE2" lost all its fanouts during netlist optimizations.
+    Warning (13410): Pin "TP_DV_FreeRun" is stuck at GND
+    Warning (13410): Pin "TestOut1[6]" is stuck at GND
+Info (18000): Registers with preset signals will power-up high File: /home/mhasse/code/altera/synco/ManchEncode.vhd Line: 262
+Info (17049): 6 registers lost all their fanouts during netlist optimizations.
 Warning (21074): Design contains 4 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "PIO_ALE"
     Warning (15610): No output dependent on input pin "CLK_EXT"
     Warning (15610): No output dependent on input pin "nRST"
     Warning (15610): No output dependent on input pin "nPSEN"
-Info (21057): Implemented 467 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 651 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 26 input pins
     Info (21059): Implemented 40 output pins
     Info (21060): Implemented 8 bidirectional pins
-    Info (21061): Implemented 393 logic cells
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 16 warnings
-    Info: Peak virtual memory: 410 megabytes
-    Info: Processing ended: Tue Sep 02 15:06:31 2014
-    Info: Elapsed time: 00:00:07
-    Info: Total CPU time (on all processors): 00:00:03
+    Info (21061): Implemented 577 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 18 warnings
+    Info: Peak virtual memory: 1181 megabytes
+    Info: Processing ended: Fri May 13 16:15:00 2016
+    Info: Elapsed time: 00:00:20
+    Info: Total CPU time (on all processors): 00:00:44
 
 

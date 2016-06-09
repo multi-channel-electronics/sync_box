@@ -28,44 +28,34 @@ USE IEEE.STD_LOGIC_UNSIGNED.ALL;
 --  Entity Declaration
 
 ENTITY ManchEncode IS
-   -- {{ALTERA_IO_BEGIN}} DO NOT REMOVE THIS LINE!
-   PORT
-   (
-      Reset       : IN STD_LOGIC;
-      Enable      : IN STD_LOGIC;
-      Clk50M      : IN STD_LOGIC;
-      Clk25M      : IN STD_LOGIC;
-      clk_adj     : IN STD_LOGIC;
-      --
-      isAddr_Zero : IN STD_LOGIC;
-      DV_RTS      : IN STD_LOGIC;
-      DV_FreeRun  : IN STD_LOGIC;
-      FR_Enable   : IN STD_LOGIC;      -- 1 = DV_FreeRun, 0 = DV_RTS
-      CmdData  : IN STD_LOGIC_VECTOR(31 downto 0);
-      DV_Cntr_Load  : IN STD_LOGIC; -- set frame count reg.
-      --
-      -- Main outputs
-      ManchOut1   : OUT STD_LOGIC;
-      ManchOut2   : OUT STD_LOGIC;
-      DV_OUT_FTS  : OUT STD_LOGIC;
-      DV_OUT_POL  : OUT STD_LOGIC;
-      DV_OUT_SPR1 : OUT STD_LOGIC;
-      DV_OUT_SPR2 : OUT STD_LOGIC;
-      --
-      -- Assorted Test-Point & LED outputs.
-      DV_Delayed  : OUT STD_LOGIC;
-      DV_Error    : OUT STD_LOGIC;
-      Manch_NRZ   : OUT STD_LOGIC;
-      Manch_Clk   : OUT STD_LOGIC;
-      TP_SMA      : OUT STD_LOGIC
-      ;
-      -- sim & test o/p
-      dv_buf_o    : out std_logic;
-      xxdv_o      : out std_logic
---    shift_bits_o : out std_logic_vector(39 downto 0)
-
-   );
-   -- {{ALTERA_IO_END}} DO NOT REMOVE THIS LINE!
+	-- {{ALTERA_IO_BEGIN}} DO NOT REMOVE THIS LINE!
+	PORT
+	(
+		Clk25M : IN STD_LOGIC;
+		DV_RTS : IN STD_LOGIC;
+		DV_FreeRun : IN STD_LOGIC;
+		Reset : IN STD_LOGIC;
+		Enable : IN STD_LOGIC;
+		isAddr_Zero : IN STD_LOGIC;
+		Clk50M : IN STD_LOGIC;
+		DV_Cntr_Load : IN STD_LOGIC;
+		CmdData : IN STD_LOGIC_VECTOR(31 downto 0);
+		FR_Enable : IN STD_LOGIC;
+		clk_adj : IN STD_LOGIC;
+		dv_buf_o : OUT STD_LOGIC;
+		DV_Error : OUT STD_LOGIC;
+		ManchOut : OUT STD_LOGIC;
+		DV_OUT_FTS : OUT STD_LOGIC;
+		DV_OUT_POL : OUT STD_LOGIC;
+		Manch_NRZ : OUT STD_LOGIC;
+		Manch_Clk : OUT STD_LOGIC;
+		DV_OUT_SPR1 : OUT STD_LOGIC;
+		DV_OUT_SPR2 : OUT STD_LOGIC;
+		TP_SMA : OUT STD_LOGIC;
+		DV_Delayed : OUT STD_LOGIC;
+		xxdv_o : OUT STD_LOGIC
+	);
+	-- {{ALTERA_IO_END}} DO NOT REMOVE THIS LINE!
 
 END ManchEncode;
 
@@ -105,6 +95,9 @@ ARCHITECTURE P_v5d OF ManchEncode IS
    signal dvp_next_state      : dvp_states;
 
    signal reg : std_logic_vector(9 downto 0);
+	
+	signal ARZ_buffer : std_logic_vector(2 downto 0);
+	alias  isAddr_Zero_buf : std_logic is ARZ_buffer(0);
 
 BEGIN
 
@@ -141,6 +134,14 @@ BEGIN
       end if;
    end process shiftreg;
 
+	shift_arz: process(Clk25M, isAddr_Zero)
+	begin
+		if (rising_Edge(Clk25M)) then
+			-- push ARZ into the MSB of ARZ_buffer.
+			ARZ_buffer <= isAddr_Zero & ARZ_buffer(2 downto 1);
+		end if;
+	end process shift_arz;
+		
    --------------------------------------------------------------------------------------------
    -- Notes (Bryce Burger):
    -- If rDV_RTS is sample n of DV_IN, then at the same time rrDV_RTS is sample n-1.
@@ -226,23 +227,23 @@ BEGIN
          if(DV_in = '0') then
             DV_Buf <= '0';
          -- If there is an ARZ and no DV, clear the DV_Buf
-         elsif(isAddr_Zero = '0') then
+         elsif(isAddr_Zero_buf = '0') then
             DV_Buf <= '1';
          else
             DV_Buf <= DV_Buf;
          end if;
 
-         if(isAddr_Zero = '0' AND DV_Buf = '0') then  -- count DV
-            DV_Cntr <= DV_Cntr + 1;
-         elsif (DV_Cntr_Load = '1') then  -- change the DV_Count
+			if (DV_Cntr_Load = '1') then  -- change the DV_Count
             DV_Cntr <= CmdData(31 downto 0);
+			elsif (isAddr_Zero_buf = '0' AND DV_Buf = '0') then  -- count DV
+            DV_Cntr <= DV_Cntr + 1;
          else
             DV_Cntr <= DV_Cntr;
          end if;
 
          if (DV_in = '0' and DV_Buf = '0') THEN    -- if 2 DV occur between AddrZeros
             sDV_Err <= '1';                     -- flag it as an error
-         elsif (isAddr_Zero = '0' AND DV_Buf = '1') THEN
+         elsif (isAddr_Zero_buf = '0' AND DV_Buf = '1') THEN
             sDV_Err <= '0';                     -- reset the DV_error flag at the next Addr_Zero
          end if;
       END IF;
@@ -264,7 +265,7 @@ BEGIN
          Shift5Rdy <= '1';
       ELSIF (rising_edge(Clk25M)) THEN
          IF (Enable = '1') THEN
-            IF (isAddr_Zero = '0') THEN
+            IF (isAddr_Zero_buf = '0') THEN
                ShiftBits(39) <= '0';                  -- sync bit
                ShiftBits(38) <= DV_Buf;               -- maybe a DV bit [if = '0']
                Shift5Load(39) <= '0';
@@ -320,7 +321,7 @@ BEGIN
 
    ------------------------------------------------------
    --
-   DV_thin <= (NOT isAddr_Zero) AND (NOT DV_Buf);  -- delayed version of DV
+   DV_thin <= (NOT isAddr_Zero_buf) AND (NOT DV_Buf);  -- delayed version of DV
    --DV_thin <= NOT DV_in;                   -- when-it-happens version of DV
 
    DVoutputs : PROCESS(Clk25M, Reset)
@@ -341,7 +342,7 @@ BEGIN
       end if;
    END PROCESS DVoutputs;
 
-   DV_Delayed  <= (NOT isAddr_Zero) AND (NOT DV_Buf); -- narrow version
+   DV_Delayed  <= (NOT isAddr_Zero_buf) AND (NOT DV_Buf); -- narrow version
    DV_OUT_FTS  <= clk_adj ;           -- duplicates DV_OUT_SPR1 output as per ACT request to work with MSB 
    DV_OUT_POL  <= Shift5Bits(39) ;    -- duplicates DV_OUT_SPR1 output as per ACT request to work with MSB 
 
@@ -356,8 +357,7 @@ BEGIN
 
    -- The process below has cascaded too many levels of logic, which causes timing to fail.
    -- The equivalent logic can be implemented with combinatorial logic
-   ManchOut1 <= Clk25M XOR ShiftBits(39);
-   ManchOut2 <= Clk25M XOR ShiftBits(39);
+   ManchOut <= Clk25M XOR ShiftBits(39);
 
 --   GenMancho : PROCESS(Clk50M)
 --   BEGIN

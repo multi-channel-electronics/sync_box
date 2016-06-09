@@ -59,53 +59,39 @@ ENTITY PIO_Interface IS
 			CMD_SL_LOAD      : STD_LOGIC_VECTOR := X"01";	-- 001
 			CMD_FR_LOAD		 : STD_LOGIC_VECTOR := X"02";	-- 010
 			CMD_DV_CNTR_LOAD : STD_LOGIC_VECTOR := X"04";	-- 100;
-			CMD_CLK_ADJ_DIV_LOAD: STD_LOGIC_VECTOR := X"05" -- 0101 
+			CMD_CLK_ADJ_DIV_LOAD: STD_LOGIC_VECTOR := X"05" -- 0101
 			);
 
 	-- {{ALTERA_IO_BEGIN}} DO NOT REMOVE THIS LINE!
 	PORT
 	(
-		Clk25M 		: IN STD_LOGIC;
-		PIO_Reset	: IN STD_LOGIC;
-		PIO_nEnable	: IN STD_LOGIC;
-		--
-		Reset		: OUT STD_LOGIC;
-		Enable		: OUT STD_LOGIC;
-		--
-		PIO_DAT		: INOUT STD_LOGIC_VECTOR(7 downto 0);
-		PIO_ADR		: IN STD_LOGIC_VECTOR(7 downto 0);
-		PIO_ALE    	: IN STD_LOGIC;
-		PIO_nWR     : IN STD_LOGIC;
-		PIO_nRD     : IN STD_LOGIC;
-		--
-		DV_Error    : IN STD_LOGIC;
-		PIO_INT0	: OUT STD_LOGIC;	-- connects DV_Error to CmdProccessor
-
-		CmdData    	: OUT STD_LOGIC_VECTOR(31 downto 0); -- Byte Addresses X"0002" to X"0004"
-		
-		AuxOut		: OUT STD_LOGIC_VECTOR(8 downto 1);
-		AuxIn		: IN  STD_LOGIC_VECTOR(8 downto 1);
-		
-		FR_Load		: OUT STD_LOGIC;
-		FR_Enable	: OUT STD_LOGIC;
-		SL_Load 	: OUT STD_LOGIC;  -- Sync Length
-		DV_Cntr_Load    : OUT STD_LOGIC;
-		clk_adj_div_load: OUT STD_LOGIC; -- clk_adj division ratio
-		--
-		-- the following are not used.
-		PIO_T0		: OUT STD_LOGIC;
-		PIO_T1		: OUT STD_LOGIC;
-		PIO_INT1	: OUT STD_LOGIC;
-		nRST		: IN STD_LOGIC;		-- optional reset input from pcb button.
-		nPSEN		: IN STD_LOGIC		-- 
-		--
-		-- for simulation & test
---	 	ModeReg_o		: OUT STD_LOGIC_VECTOR(7 downto 0); 
---	 	rPIO_nWR_o		: OUT STD_LOGIC;
---	 	rrPIO_nWR_o		: OUT STD_LOGIC;
---	 	ePIO_WR_o		: OUT STD_LOGIC;
---		CmdWrite_o   	: OUT STD_LOGIC
-		
+		PIO_ALE : IN STD_LOGIC;
+		PIO_Reset : IN STD_LOGIC;
+		PIO_nRD : IN STD_LOGIC;
+		PIO_nEnable : IN STD_LOGIC;
+		PIO_nWR : IN STD_LOGIC;
+		AuxIn : IN STD_LOGIC_VECTOR(8 downto 1);
+		Clk25M : IN STD_LOGIC;
+		PIO_ADR : IN STD_LOGIC_VECTOR(7 downto 0);
+		nRST : IN STD_LOGIC;
+		DV_Error : IN STD_LOGIC;
+		nPSEN : IN STD_LOGIC;
+		PIO_T0 : OUT STD_LOGIC;
+		PIO_INT0 : OUT STD_LOGIC;
+		PIO_INT1 : OUT STD_LOGIC;
+		FR1_Load : OUT STD_LOGIC;
+		FR2_Load : OUT STD_LOGIC;
+		FR_Enable : OUT STD_LOGIC;
+		PIO_T1 : OUT STD_LOGIC;
+		SL1_Load : OUT STD_LOGIC;
+		SL2_Load : OUT STD_LOGIC;
+		Enable : OUT STD_LOGIC;
+		AuxOut : OUT STD_LOGIC_VECTOR(8 downto 1);
+		Reset : OUT STD_LOGIC;
+		DV_Cntr_Load : OUT STD_LOGIC;
+		CmdData : OUT STD_LOGIC_VECTOR(31 downto 0);
+		clk_adj_div_load : OUT STD_LOGIC;
+		PIO_DAT : INOUT STD_LOGIC_VECTOR(7 downto 0)
 	);
 	-- {{ALTERA_IO_END}} DO NOT REMOVE THIS LINE!
 	
@@ -140,6 +126,10 @@ ARCHITECTURE PIO_V3b OF PIO_Interface IS
 	signal ePIO_WR		: STD_LOGIC;
 	signal CmdWrite   	: STD_LOGIC;
 
+	alias Mode_FR_Enable    : STD_LOGIC is ModeReg(0);
+	alias Mode_Config_Bank1 : STD_LOGIC is ModeReg(1);
+	alias Mode_Config_Bank2 : STD_LOGIC is ModeReg(2);
+	
 BEGIN
 
 -- unused stuff...
@@ -227,8 +217,10 @@ BEGIN
 		CmdWrite <= '0';
 	end if;
 	
-	SL_Load      <= CmdWrite and match(PIO_DAT, CMD_SL_LOAD);	-- 001
-	FR_Load      <= CmdWrite and match(PIO_DAT, CMD_FR_LOAD);	-- 010
+	SL1_Load      <= CmdWrite and match(PIO_DAT, CMD_SL_LOAD) and Mode_Config_Bank1;	-- 001
+	SL2_Load      <= CmdWrite and match(PIO_DAT, CMD_SL_LOAD) and Mode_Config_Bank2;	-- 001
+	FR1_Load      <= CmdWrite and match(PIO_DAT, CMD_FR_LOAD) and Mode_Config_Bank1;	-- 010
+	FR2_Load      <= CmdWrite and match(PIO_DAT, CMD_FR_LOAD) and Mode_Config_Bank2;	-- 010
 	DV_Cntr_Load <= CmdWrite and match(PIO_DAT, CMD_DV_CNTR_LOAD); 	-- 100;
 	clk_adj_div_load  <= CmdWrite and match(PIO_DAT, CMD_CLK_ADJ_DIV_LOAD); -- 101;
 	
@@ -238,15 +230,16 @@ END process Loadex ;
 ModeFlags: process (sReset, PIO_nWR, AddrReg)
 BEGIN
 	if (sReset = '0' )then 
-    	ModeReg <= X"00" ;
---    	ModeReg <= X"01" ;	-- for test, start in FreeRun_Mode
+		Mode_FR_Enable <= '0';
+		Mode_Config_Bank1 <= '1';
+		Mode_Config_Bank2 <= '1';
 	elsif (rising_edge(PIO_nWR) and (AddrReg = ADR_MODEREG)) then 
 		ModeReg(7 downto 0) <= PIO_DAT(7 downto 0); 
 	end if;
 	
 END process ModeFlags;
 
-FR_Enable <= ModeReg(0);
+FR_Enable <= Mode_FR_Enable;
 
 
 ---------------------------------------------------------------------------------

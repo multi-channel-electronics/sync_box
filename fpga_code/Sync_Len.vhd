@@ -38,16 +38,12 @@ ENTITY Sync_Len IS
 	-- {{ALTERA_IO_BEGIN}} DO NOT REMOVE THIS LINE!
 	PORT
 	(
-		Clk25M 		: IN STD_LOGIC;
-		SL_Load 	: IN STD_LOGIC;	-- active high input
-		CmdData 	: IN STD_LOGIC_VECTOR(31 downto 0);
-		Reset 		: IN STD_LOGIC;	-- active low input
-		Enable 		: IN STD_LOGIC;	-- active high input
-		DV_Error 	: IN STD_LOGIC;	-- active high input, not used 
-		isAddr_Zero : OUT STD_LOGIC	-- active low output
-		
-		-- sim & test o/p; else comment out
---		SLCntr_o	: OUT STD_LOGIC_VECTOR(19 DOWNTO 0) 
+		Reset : IN STD_LOGIC;
+		Clk25M : IN STD_LOGIC;
+		Enable : IN STD_LOGIC;
+		SL_Load : IN STD_LOGIC;
+		CmdData : IN STD_LOGIC_VECTOR(31 downto 0);
+		isAddr_Zero : OUT STD_LOGIC
 	);
 	-- {{ALTERA_IO_END}} DO NOT REMOVE THIS LINE!
 	

@@ -28,7 +28,7 @@ set_global_assignment -name DEVICE EPM570T144C3
 set_global_assignment -name TOP_LEVEL_ENTITY SyncBox
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 5.1
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "13:39:04  OCTOBER 20, 2006"
-set_global_assignment -name LAST_QUARTUS_VERSION "11.1 SP2"
+set_global_assignment -name LAST_QUARTUS_VERSION 15.1.0
 set_global_assignment -name DEVICE_FILTER_PACKAGE TQFP
 set_global_assignment -name DEVICE_FILTER_PIN_COUNT 144
 set_global_assignment -name DEVICE_FILTER_SPEED_GRADE FASTEST
@@ -111,6 +111,15 @@ set_location_assignment PIN_61 -to nRST
 set_location_assignment PIN_18 -to CLK_EXT
 set_location_assignment PIN_28 -to nPSEN
 set_location_assignment PIN_120 -to DV_Error_o
+set_global_assignment -name FITTER_EFFORT "STANDARD FIT"
+set_global_assignment -name LL_ROOT_REGION ON -section_id "Root Region"
+set_global_assignment -name LL_MEMBER_STATE LOCKED -section_id "Root Region"
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "NO HEAT SINK WITH STILL AIR"
+set_global_assignment -name TIMEQUEST_MULTICORNER_ANALYSIS OFF
+set_global_assignment -name NUM_PARALLEL_PROCESSORS 3
+set_global_assignment -name SDC_FILE Synco.out.sdc
 set_global_assignment -name BDF_FILE SyncBox.bdf
 set_global_assignment -name VHDL_FILE ClkDiv.vhd
 set_global_assignment -name VHDL_FILE PIO_Interface.vhd
@@ -121,7 +130,6 @@ set_global_assignment -name VHDL_FILE TestPnts1.vhd
 set_global_assignment -name VHDL_FILE TestPnts2.vhd
 set_global_assignment -name VECTOR_WAVEFORM_FILE "testo-m1.vwf"
 set_global_assignment -name VHDL_FILE Sync_Len.vhd
-set_global_assignment -name FITTER_EFFORT "STANDARD FIT"
-set_global_assignment -name LL_ROOT_REGION ON -section_id "Root Region"
-set_global_assignment -name LL_MEMBER_STATE LOCKED -section_id "Root Region"
 set_global_assignment -name SIGNALTAP_FILE stp1.stp
+set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (VHDL)"
+set_global_assignment -name EDA_OUTPUT_DATA_FORMAT VHDL -section_id eda_simulation
