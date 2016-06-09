@@ -88,6 +88,10 @@ void sio_Init_9600(void)
     EA = 1;                     // Enable global interrupt
     BDRCON |= 0x10;             // BRR=1; Baud rate generator run
     TI = 1 ;
+
+    /* Also reset buffer... because sdcc does not init globals. */
+    sio_rx_idx = 0;
+    sio_rx_gotcl = 0;
 }
 
 /*==========================================================================*/
