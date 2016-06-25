@@ -92,8 +92,8 @@ syncbank_config_t config_bank2;    // Settings specific to bank2.
  *  initialized in main() or do_ResetAll(). */
 
 /* Code version and its string representation. */
-const unsigned char code version_num = 31;
-const char code version[] =  "\r\tSyncoCmd-V31\r";
+const unsigned char code version_num = 32;
+const char code version_string[] =  "SyncoCmd-V32-candidate";
 
 /* Pointer to active command dictionary. */
 CMD_ENTRY code *active_cmd_dict;
@@ -298,7 +298,7 @@ void set_Disable(void)
 //--------
 void get_Status(void)
 {
-    printf("\r System config:\r");
+    printf("\r %s\r System config:\r", version_string);
     print_syncbox_config(&sc);
 
     if (sc.active_bank == 0) {
