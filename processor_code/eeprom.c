@@ -90,27 +90,27 @@ void ee_read_asm()
 {
     /* Read value from EEPROM, store in eedata. */
     __asm__(
-            "        ; Save things                                                  \n"
-            "        push DPH                                                       \n"
-            "        push DPL                                                       \n"
-            "        push A                                                         \n"
-            "        ; Put the address into A for a minute                          \n"
-            "        mov DPTR,#_eeaddr                                              \n"
-            "        movx A,@DPTR                                                   \n"
-            "        ; Go to EEPROM access                                          \n"
-            "        mov _EECON,#0x02                                               \n"
-            "        mov DPL,A                                                      \n"
-            "        clr A                                                          \n"
-            "        mov DPH,A                                                      \n"
-            "        movx A,@DPTR                                                   \n"
-            "        ; Come back from EEPROM access                                 \n"
-            "        mov _EECON,#0x00                                               \n"
-            "        mov DPTR,#_eedata                                              \n"
-            "        movx @DPTR,A                                                   \n"
-            "        ; Restore things                                               \n"
-            "        pop  A                                                         \n"
-            "        pop  DPL                                                       \n"
-            "        pop  DPH                                                       \n"
+            /* Save things */
+            "        push DPH                                                \n"
+            "        push DPL                                                \n"
+            "        push A                                                  \n"
+            /* Put the address into A for a minute */
+            "        mov DPTR,#_eeaddr                                       \n"
+            "        movx A,@DPTR                                            \n"
+            /* Go to EEPROM access */
+            "        mov _EECON,#0x02                                        \n"
+            "        mov DPL,A                                               \n"
+            "        clr A                                                   \n"
+            "        mov DPH,A                                               \n"
+            "        movx A,@DPTR                                            \n"
+            /* Come back from EEPROM access */
+            "        mov _EECON,#0x00                                        \n"
+            "        mov DPTR,#_eedata                                       \n"
+            "        movx @DPTR,A                                            \n"
+            /* Restore things */
+            "        pop  A                                                  \n"
+            "        pop  DPL                                                \n"
+            "        pop  DPH                                                \n"
             );
 }
 
@@ -118,33 +118,33 @@ void ee_write_asm()
 {
     /* Write value, stored in eedata, to EEPROM[eeaddr]. */
     __asm__(
-            "        ; Save things                                                  \n"
-            "        push DPH                                                       \n"
-            "        push DPL                                                       \n"
-            "        push A                                                         \n"
-            "        push B                                                         \n"
-            "        ; Put the data into B  and the address into A for a minute     \n"
-            "        mov DPTR,#_eedata                                              \n"
-            "        movx A,@DPTR                                                   \n"
-            "        mov B,A                                                        \n"
-            "        mov DPTR,#_eeaddr                                              \n"
-            "        movx A,@DPTR                                                   \n"
-            "        ; Go to EEPROM access                                          \n"
-            "        mov _EECON,#0x02                                               \n"
-            "        mov DPL,A                                                      \n"
-            "        clr A                                                          \n"
-            "        mov DPH,A                                                      \n"
-            "        mov A,B                                                        \n"
-            "        movx @DPTR,A                                                   \n"
-            "        ; Start the burn                                               \n"
-            "        mov _EECON,#0x52                                               \n"
-            "        mov _EECON,#0xA2                                               \n"
-            "        ; Restore movx                                                 \n"
-            "        mov _EECON,#0x00                                               \n"
-            "        pop  B                                                         \n"
-            "        pop  A                                                         \n"
-            "        pop  DPL                                                       \n"
-            "        pop  DPH                                                       \n"
+            /* Save things */
+            "        push DPH                                                \n"
+            "        push DPL                                                \n"
+            "        push A                                                  \n"
+            "        push B                                                  \n"
+            /* Put the data into B  and the address into A for a minute */
+            "        mov DPTR,#_eedata                                       \n"
+            "        movx A,@DPTR                                            \n"
+            "        mov B,A                                                 \n"
+            "        mov DPTR,#_eeaddr                                       \n"
+            "        movx A,@DPTR                                            \n"
+            /* Go to EEPROM access */
+            "        mov _EECON,#0x02                                        \n"
+            "        mov DPL,A                                               \n"
+            "        clr A                                                   \n"
+            "        mov DPH,A                                               \n"
+            "        mov A,B                                                 \n"
+            "        movx @DPTR,A                                            \n"
+            /* Start the burn */
+            "        mov _EECON,#0x52                                        \n"
+            "        mov _EECON,#0xA2                                        \n"
+            /* Restore movx */
+            "        mov _EECON,#0x00                                        \n"
+            "        pop  B                                                  \n"
+            "        pop  A                                                  \n"
+            "        pop  DPL                                                \n"
+            "        pop  DPH                                                \n"
             );
 }
 
