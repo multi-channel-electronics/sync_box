@@ -15,11 +15,11 @@ default: $(OUTPUT_HEX)
 $(OUTPUT_HEX): $(OBJECTS_BUILD)
 	sdcc $(LDFLAGS) $(OBJECTS_BUILD) -o $(OUTPUT_HEX)
 
-$(BUILD)/%.rel: %.c $(HEADERS) $(BUILD)
+$(BUILD)/%.rel: %.c $(HEADERS) | $(BUILD)
 	sdcc $(CFLAGS) $< -c -o $@
 
 $(BUILD):
-	-mkdir $(BUILD)
+	mkdir $(BUILD)
 
 clean:
 	rm -r $(BUILD)
